@@ -273,7 +273,7 @@ public class ${className} {
   private parseJavaOutput(output: string): any {
     try {
       // Look for JSON in the output
-      const jsonMatch = output.match(/\{.*\}/gs);
+      const jsonMatch = output.match(/\{.*\}/g);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }

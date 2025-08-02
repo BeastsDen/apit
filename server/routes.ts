@@ -208,7 +208,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Generate sample parameters
-      const sampleParams = endpoint.parameters ? endpoint.parameters.map((p: any) => p.example || `sample_${p.name}`) : [];
+      const sampleParams = (endpoint.parameters && endpoint.parameters.length > 0) ? endpoint.parameters.map((p: any) => p.example || `sample_${p.name}`) : [];
       
       const apiCall = {
         functionName,

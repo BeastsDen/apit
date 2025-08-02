@@ -327,7 +327,17 @@ export default function MarkitWireApiPage() {
                       </Button>
                     </>
                   ) : (
-                    <p className="text-muted-foreground">No parameters required for this function</p>
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground">No parameters required for this function</p>
+                      <Button 
+                        onClick={() => executeApiMutation.mutate()}
+                        disabled={executeApiMutation.isPending}
+                        className="w-full"
+                      >
+                        <Play className="h-4 w-4 mr-2" />
+                        Execute API Call
+                      </Button>
+                    </div>
                   )}
                 </TabsContent>
 
