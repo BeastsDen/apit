@@ -9,15 +9,14 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
 });
 
-export const apiEndpoints = pgTable("api_endpoints", {
+export const markitWireApiEndpoints = pgTable("markitwire_api_endpoints", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   category: text("category").notNull(),
-  method: text("method").notNull(),
-  url: text("url").notNull(),
+  functionName: text("function_name").notNull(),
   description: text("description"),
   parameters: jsonb("parameters"),
-  headers: jsonb("headers"),
+  sampleCode: text("sample_code"),
   isActive: boolean("is_active").default(true),
 });
 
@@ -30,19 +29,18 @@ export const testSessions = pgTable("test_sessions", {
   endedAt: timestamp("ended_at"),
 });
 
-export const apiRequests = pgTable("api_requests", {
+export const markitWireApiCalls = pgTable("markitwire_api_calls", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   sessionId: varchar("session_id").references(() => testSessions.id),
-  endpointId: varchar("endpoint_id").references(() => apiEndpoints.id),
-  method: text("method").notNull(),
-  url: text("url").notNull(),
-  headers: jsonb("headers"),
-  body: text("body"),
-  responseStatus: integer("response_status"),
-  responseHeaders: jsonb("response_headers"),
-  responseBody: text("response_body"),
+  endpointId: varchar("endpoint_id").references(() => markitWireApiEndpoints.id),
+  functionName: text("function_name").notNull(),
+  host: text("host").notNull(),
+  username: text("username").notNull(),
+  parameters: jsonb("parameters"),
+  javaCode: text("java_code"),
+  response: jsonb("response"),
   responseTime: integer("response_time"),
-  securityFindings: jsonb("security_findings"),
+  errorMessage: text("error_message"),
   timestamp: timestamp("timestamp").defaultNow(),
 });
 
@@ -61,7 +59,7 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
 });
 
-export const insertApiEndpointSchema = createInsertSchema(apiEndpoints).omit({
+export const insertMarkitWireApiEndpointSchema = createInsertSchema(markitWireApiEndpoints).omit({
   id: true,
 });
 
@@ -70,7 +68,7 @@ export const insertTestSessionSchema = createInsertSchema(testSessions).omit({
   createdAt: true,
 });
 
-export const insertApiRequestSchema = createInsertSchema(apiRequests).omit({
+export const insertMarkitWireApiCallSchema = createInsertSchema(markitWireApiCalls).omit({
   id: true,
   timestamp: true,
 });
@@ -83,11 +81,11 @@ export const insertLibraryFileSchema = createInsertSchema(libraryFiles).omit({
 // Types
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
-export type ApiEndpoint = typeof apiEndpoints.$inferSelect;
-export type InsertApiEndpoint = z.infer<typeof insertApiEndpointSchema>;
+export type MarkitWireApiEndpoint = typeof markitWireApiEndpoints.$inferSelect;
+export type InsertMarkitWireApiEndpoint = z.infer<typeof insertMarkitWireApiEndpointSchema>;
 export type TestSession = typeof testSessions.$inferSelect;
 export type InsertTestSession = z.infer<typeof insertTestSessionSchema>;
-export type ApiRequest = typeof apiRequests.$inferSelect;
-export type InsertApiRequest = z.infer<typeof insertApiRequestSchema>;
+export type MarkitWireApiCall = typeof markitWireApiCalls.$inferSelect;
+export type InsertMarkitWireApiCall = z.infer<typeof insertMarkitWireApiCallSchema>;
 export type LibraryFile = typeof libraryFiles.$inferSelect;
 export type InsertLibraryFile = z.infer<typeof insertLibraryFileSchema>;

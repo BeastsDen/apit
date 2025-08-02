@@ -1,22 +1,26 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertApiRequestSchema, insertTestSessionSchema, insertLibraryFileSchema } from "@shared/schema";
+import { insertMarkitWireApiCallSchema, insertTestSessionSchema, insertLibraryFileSchema } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
 import { extractZipFile } from "./services/zip-extractor";
-import { makeApiRequest } from "./services/markitwire-api";
-import { markitWireNativeAPI } from "./services/markitwire-native";
+import { markitWireJavaService } from "./services/markitwire-java";
+import { markitWireApiEndpoints } from "./services/markitwire-endpoints";
+
+interface MulterRequest extends Request {
+  file?: Express.Multer.File;
+}
 
 const upload = multer({ dest: 'uploads/' });
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
-  // API Endpoints
+  // MarkitWire API Endpoints
   app.get("/api/endpoints", async (req, res) => {
     try {
-      const endpoints = await storage.getApiEndpoints();
-      res.json(endpoints);
+      // Return the predefined MarkitWire API endpoints
+      res.json(markitWireApiEndpoints);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch endpoints" });
     }
@@ -25,7 +29,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/endpoints/category/:category", async (req, res) => {
     try {
       const { category } = req.params;
-      const endpoints = await storage.getApiEndpointsByCategory(category);
+      const endpoints = markitWireApiEndpoints.filter(ep => 
+        ep.category.toLowerCase() === category.toLowerCase()
+      );
       res.json(endpoints);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch endpoints by category" });
@@ -72,64 +78,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // API Requests
-  app.get("/api/requests/:sessionId", async (req, res) => {
+  // MarkitWire API Calls
+  app.get("/api/calls/:sessionId", async (req, res) => {
     try {
       const { sessionId } = req.params;
-      const requests = await storage.getApiRequests(sessionId);
-      res.json(requests);
+      // Note: storage.getMarkitWireApiCalls would need to be implemented
+      res.json([]); // Placeholder for now
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch requests" });
+      res.status(500).json({ error: "Failed to fetch API calls" });
     }
   });
 
-  app.post("/api/requests/execute", async (req, res) => {
+  app.post("/api/markitwire/execute", async (req, res) => {
     try {
-      const { endpointId, method, url, headers, body, sessionId, securityOptions } = req.body;
+      const { 
+        functionName, 
+        host, 
+        username, 
+        password, 
+        parameters = [], 
+        apiType = 'dealer',
+        sessionId 
+      } = req.body;
       
-      const startTime = Date.now();
-      
-      // Execute the API request
-      const response = await makeApiRequest({
-        method,
-        url,
-        headers,
-        body,
-        securityOptions
-      });
+      if (!functionName || !host || !username || !password) {
+        return res.status(400).json({ 
+          error: "Function name, host, username, and password are required" 
+        });
+      }
 
-      const responseTime = Date.now() - startTime;
+      const apiCall = {
+        functionName,
+        host,
+        username,
+        password,
+        parameters
+      };
 
-      // Store the request and response
-      const requestData = insertApiRequestSchema.parse({
-        sessionId,
-        endpointId,
-        method,
-        url,
-        headers,
-        body: typeof body === 'string' ? body : JSON.stringify(body),
-        responseStatus: response.status,
-        responseHeaders: response.headers,
-        responseBody: response.data,
-        responseTime,
-        securityFindings: response.securityFindings || {}
-      });
+      let result;
+      if (apiType === 'dealsink') {
+        result = await markitWireJavaService.executeDealsinkCommand(apiCall);
+      } else {
+        result = await markitWireJavaService.executeDealerCommand(apiCall);
+      }
 
-      const savedRequest = await storage.createApiRequest(requestData);
+      // Generate Java code for this call
+      const javaCode = markitWireJavaService.generateJavaCode(apiCall, apiType);
+
       res.json({
-        request: savedRequest,
-        response: {
-          status: response.status,
-          headers: response.headers,
-          data: response.data,
-          responseTime,
-          securityFindings: response.securityFindings
-        }
+        ...result,
+        javaCode,
+        apiCall
       });
     } catch (error) {
-      console.error("API request execution failed:", error);
+      console.error("MarkitWire API execution failed:", error);
       res.status(500).json({ 
-        error: "Failed to execute API request", 
+        error: "Failed to execute MarkitWire API call", 
         details: error instanceof Error ? error.message : "Unknown error"
       });
     }
@@ -145,7 +149,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/libraries/upload", upload.single('library'), async (req, res) => {
+  app.post("/api/libraries/upload", upload.single('library'), async (req: MulterRequest, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
@@ -174,121 +178,84 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Security Testing Payloads
-  app.get("/api/payloads/:type", async (req, res) => {
+  // Available Commands
+  app.get("/api/markitwire/commands", async (req, res) => {
     try {
-      const { type } = req.params;
+      const { apiType = 'dealer' } = req.query;
       
-      const payloadSets: Record<string, string[]> = {
-        'sql-injection': [
-          "' OR '1'='1",
-          "'; DROP TABLE users; --",
-          "' UNION SELECT null, username, password FROM users --",
-          "1' AND (SELECT COUNT(*) FROM users) > 0 --"
-        ],
-        'xss': [
-          "<script>alert('XSS')</script>",
-          "javascript:alert('XSS')",
-          "<img src=x onerror=alert('XSS')>",
-          "';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//--></SCRIPT>\">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>"
-        ],
-        'authentication-bypass': [
-          '{"username": "admin", "password": ""}',
-          '{"username": "admin\\"--", "password": "anything"}',
-          '{"username": {"$ne": null}, "password": {"$ne": null}}',
-          '{"username": "admin", "password": {"$regex": ".*"}}'
-        ],
-        'parameter-pollution': [
-          'param=value1&param=value2',
-          'array[0]=value1&array[1]=value2&array[0]=overwrite',
-          'user[name]=admin&user[role]=user&user[role]=admin'
-        ],
-        'buffer-overflow': [
-          'A'.repeat(1000),
-          'A'.repeat(10000),
-          '%s%s%s%s%s%s%s%s%s%s',
-          '\x00'.repeat(100)
-        ]
-      };
-
-      const payloads = payloadSets[type] || [];
-      res.json({ type, payloads });
+      let commands;
+      if (apiType === 'dealsink') {
+        commands = await markitWireJavaService.getDealsinkCommands();
+      } else {
+        commands = await markitWireJavaService.getDealerCommands();
+      }
+      
+      res.json({ commands, apiType });
     } catch (error) {
-      res.status(500).json({ error: "Failed to fetch payloads" });
+      res.status(500).json({ error: "Failed to fetch available commands" });
     }
   });
 
-  // MarkitWire Native API Integration
-  app.post("/api/markitwire/connect", async (req, res) => {
+  app.get("/api/markitwire/java-code/:functionName", async (req, res) => {
+    try {
+      const { functionName } = req.params;
+      const { apiType = 'dealer', host = 'example.com:9009', username = 'USERNAME', password = 'PASSWORD' } = req.query;
+      
+      // Find the endpoint definition
+      const endpoint = markitWireApiEndpoints.find(ep => ep.functionName === functionName);
+      if (!endpoint) {
+        return res.status(404).json({ error: "Function not found" });
+      }
+
+      // Generate sample parameters
+      const sampleParams = endpoint.parameters?.map((p: any) => p.example || `sample_${p.name}`) || [];
+      
+      const apiCall = {
+        functionName,
+        host: String(host),
+        username: String(username), 
+        password: String(password),
+        parameters: sampleParams
+      };
+
+      const javaCode = markitWireJavaService.generateJavaCode(apiCall, apiType as 'dealer' | 'dealsink');
+      
+      res.json({ 
+        functionName, 
+        javaCode, 
+        endpoint,
+        sampleParameters: sampleParams
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to generate Java code" });
+    }
+  });
+
+  // Connection Test
+  app.post("/api/markitwire/test-connection", async (req, res) => {
     try {
       const { host, username, password } = req.body;
       if (!host || !username || !password) {
         return res.status(400).json({ error: "Host, username, and password are required" });
       }
 
-      const result = await markitWireNativeAPI.testConnection(host, username, password);
-      res.json(result);
+      // Test connection using SW_Connect and SW_Login
+      const connectCall = {
+        functionName: 'SW_Connect',
+        host,
+        username,
+        password,
+        parameters: [host, '120']
+      };
+
+      const result = await markitWireJavaService.executeDealerCommand(connectCall);
+      res.json({
+        success: result.success,
+        message: result.success ? 'Connection successful' : 'Connection failed',
+        details: result
+      });
     } catch (error) {
       res.status(500).json({ error: "Connection test failed", details: error?.toString() });
-    }
-  });
-
-  app.get("/api/markitwire/commands", async (req, res) => {
-    try {
-      const commands = await markitWireNativeAPI.getAvailableCommands();
-      res.json({ commands });
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch available commands" });
-    }
-  });
-
-  app.get("/api/markitwire/info", async (req, res) => {
-    try {
-      const info = await markitWireNativeAPI.getAPIInfo();
-      res.json(info);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch API information" });
-    }
-  });
-
-  app.post("/api/markitwire/execute", async (req, res) => {
-    try {
-      const { host, username, password, command, params, apiType = 'dealer' } = req.body;
-      
-      if (!host || !username || !password || !command) {
-        return res.status(400).json({ error: "Host, username, password, and command are required" });
-      }
-
-      let result;
-      if (apiType === 'dealsink') {
-        result = await markitWireNativeAPI.executeDealsinkCommand(host, username, password, command, params || []);
-      } else {
-        result = await markitWireNativeAPI.executeCommand(host, username, password, command, params || []);
-      }
-
-      res.json(result);
-    } catch (error) {
-      res.status(500).json({ error: "Command execution failed", details: error?.toString() });
-    }
-  });
-
-  app.post("/api/markitwire/pentest", async (req, res) => {
-    try {
-      const { host, username, password, command, payload, testType } = req.body;
-      
-      if (!host || !username || !password || !command || !payload || !testType) {
-        return res.status(400).json({ 
-          error: "Host, username, password, command, payload, and testType are required" 
-        });
-      }
-
-      const result = await markitWireNativeAPI.executePentestPayload(
-        host, username, password, command, payload, testType
-      );
-
-      res.json(result);
-    } catch (error) {
-      res.status(500).json({ error: "Penetration test failed", details: error?.toString() });
     }
   });
 

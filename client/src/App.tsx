@@ -3,14 +3,14 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import PenetrationTesting from "@/pages/penetration-testing";
+import MarkitWireApiPage from "@/pages/markitwire-api";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={PenetrationTesting} />
-      <Route path="/pentest" component={PenetrationTesting} />
+      <Route path="/" component={MarkitWireApiPage} />
+      <Route path="/api" component={MarkitWireApiPage} />
       <Route component={NotFound} />
     </Switch>
   );
