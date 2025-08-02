@@ -1,0 +1,125 @@
+TRC-HTTP-API|4455|13:49:45.169444|transport.cpp[55] - Resetting transport factory to N2mw7HttpApi6Client20CurlTransportFactoryE (0x1e7a1e0)
+TRC-HTTP-API|4455|13:49:45.169997|transport.cpp[57] - Reset
+TRC-HTTP-API|4455|13:49:45.179030|sw_connect.cpp[26] - SW_Connect SW_20_1_460930
+TRC-HTTP-API|4455|13:49:45.179133|api.cpp[275] - API::API()
+TRC-CFG|4455|13:49:45.179300|comn_config.cpp[198] - Searching for configuration file - initial location: "/home/runner/workspace/linux_libraries/lib/sw_client_api.ini"
+TRC-CFG|4455|13:49:45.179977|comn_config.cpp[215] - Failed to read configuration file sw_client_api
+INF|4455|13:49:45.180300|api.cpp[292] - [Env]
+IniPathname=
+remap=
+
+
+TRC-HTTP-API|4455|13:49:45.181897|api.cpp[296] - INFO - Environment var "HTTPS_PROXY"=EMPTY
+TRC-HTTP-API|4455|13:49:45.181899|api.cpp[297] - INFO - Environment var "https_proxy"=EMPTY
+TRC-HTTP-API|4455|13:49:45.181902|endpoint.cpp[82] - Creating endpoint https://training.swapswire.com
+TRC-HTTP-API|4455|13:49:45.181904|transport.cpp[62] - Returning transport factory: N2mw7HttpApi6Client20CurlTransportFactoryE (0x1e7a1e0)
+TRC-HTTP-API|4455|13:49:45.181908|transport.cpp[32] - GetTransport: N2mw7HttpApi6Client20CurlTransportFactoryE returned new N2mw7HttpApi6Client13CurlTransportE
+TRC-HTTP-API|4455|13:49:45.181909|endpoint.cpp[114] - Constructing an new endpoint from factory: N2mw7HttpApi6Client13CurlTransportE (0x1e9a000)
+TRC-HTTP-API|4455|13:49:45.181911|endpoint.cpp[147] - POST SW_InitialiseStr to https://training.swapswire.com with 27 byte ini file content
+TRC-HTTP-API-CURL|4455|13:49:45.181992|curltransport.cpp[297] - Created Curl Session 0x1e9bd00
+TRC-HTTP-API-CURL|4455|13:49:45.181994|curltransport.cpp[360] - Pop New Curl Session 0x1e9bd00
+TRC-COMN|4455|13:49:45.182121|comn_guid.cpp[292] - Extracting (8) Network Devices for Machine
+TRC-COMN|4455|13:49:45.182176|comn_guid.cpp[301] - Detected 2 Network Interfaces
+TRC-COMN|4455|13:49:45.182178|comn_guid.cpp[312] - Fetching interface information for Interface lo
+TRC-COMN|4455|13:49:45.182180|comn_guid.cpp[316] - Found IP Address 127.0.0.1
+TRC-COMN|4455|13:49:45.182181|comn_guid.cpp[320] - Discarding localhost interface lo
+TRC-COMN|4455|13:49:45.182182|comn_guid.cpp[312] - Fetching interface information for Interface eth0
+TRC-COMN|4455|13:49:45.182183|comn_guid.cpp[316] - Found IP Address 172.31.110.66
+TRC-COMN|4455|13:49:45.182246|comn_guid.cpp[365] - Unique Identifier MAC address is 02:42:AC:1F:6E:42
+TRC-HTTP-API|4455|13:49:45.182379|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:45.182384|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:45.182386|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:45.182387|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:45.182388|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:45.182389|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:45.182390|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:45.182392|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:45.182393|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:45.911942|curltransport.cpp[997] - End calling SW_InitialiseStr in 729 ms
+TRC-HTTP-API|4455|13:49:45.911956|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:45.912154|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:45.912173|endpoint.cpp[205] - Backing off 50 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:45.962352|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:45.962384|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:45.962388|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:45.962390|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:45.962391|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:45.962393|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:45.962394|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:45.962397|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:45.962400|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:45.962401|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:46.684750|curltransport.cpp[997] - End calling SW_InitialiseStr in 722 ms
+TRC-HTTP-API|4455|13:49:46.684762|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:46.684785|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:46.684790|endpoint.cpp[205] - Backing off 100 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:46.784960|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:46.784989|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:46.784995|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:46.784997|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:46.784999|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:46.785001|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:46.785003|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:46.785005|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:46.785008|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:46.785010|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:47.511414|curltransport.cpp[997] - End calling SW_InitialiseStr in 726 ms
+TRC-HTTP-API|4455|13:49:47.511427|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:47.511451|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:47.511457|endpoint.cpp[205] - Backing off 200 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:47.711646|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:47.711674|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:47.711680|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:47.711682|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:47.711685|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:47.711686|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:47.711688|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:47.711690|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:47.711693|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:47.711695|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:48.439842|curltransport.cpp[997] - End calling SW_InitialiseStr in 728 ms
+TRC-HTTP-API|4455|13:49:48.439855|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:48.439880|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:48.439885|endpoint.cpp[205] - Backing off 400 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:48.840109|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:48.840137|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:48.840144|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:48.840146|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:48.840157|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:48.840159|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:48.840161|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:48.840163|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:48.840168|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:48.840169|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:49.689431|curltransport.cpp[997] - End calling SW_InitialiseStr in 849 ms
+TRC-HTTP-API|4455|13:49:49.689445|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:49.689470|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:49.689475|endpoint.cpp[205] - Backing off 800 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:50.489760|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:50.489787|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:50.489792|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:50.489793|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:50.489795|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:50.489796|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:50.489797|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:50.489798|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:50.489802|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:50.489803|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:51.196662|curltransport.cpp[997] - End calling SW_InitialiseStr in 707 ms
+TRC-HTTP-API|4455|13:49:51.196674|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:51.196696|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:51.196699|endpoint.cpp[205] - Backing off 1600 milliseconds
+TRC-HTTP-API-CURL|4455|13:49:52.796869|curltransport.cpp[356] - Pop Existing Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:52.796899|curltransport.cpp[888] - CurlTransport::ProcessRequest url='https://training.swapswire.com/2/SW_InitialiseStr' timeout=10 curlTimeout=15
+TRC-HTTP-API|4455|13:49:52.796904|curltransport.cpp[934] - message_id: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:52.796907|curltransport.cpp[479] - Set header Mw-MId: -8C41B3AC6FA711F0E7800242AC1F6E42
+TRC-HTTP-API|4455|13:49:52.796909|curltransport.cpp[944] - Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:52.796911|curltransport.cpp[479] - Set header Range: bytes=0-5242879
+TRC-HTTP-API|4455|13:49:52.796913|curltransport.cpp[479] - Set header Mw-Timeout: 10
+TRC-HTTP-API-PARAMS|4455|13:49:52.796915|curltransport.cpp[981] - Adding form data for post: iniFileContent '[Env] IniPathname= remap=  '
+TRC-HTTP-API-PARAMS|4455|13:49:52.796918|curltransport.cpp[981] - Adding form data for post: version 'SW_20_1_460930'
+TRC-HTTP-API|4455|13:49:52.796919|curltransport.cpp[993] - Start calling SW_InitialiseStr
+TRC-HTTP-API|4455|13:49:53.653208|curltransport.cpp[997] - End calling SW_InitialiseStr in 857 ms
+TRC-HTTP-API|4455|13:49:53.653221|curltransport.cpp[1001] - curl error(6): Couldn't resolve host name
+TRC-HTTP-API-CURL|4455|13:49:53.653245|curltransport.cpp[345] - Put Curl Session 0x1e9bd00
+TRC-HTTP-API|4455|13:49:53.653250|endpoint.cpp[205] - Backing off 2000 milliseconds
