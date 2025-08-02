@@ -1,0 +1,591 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarkitWire API Penetration Testing Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'Consolas', 'monospace'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        'slate': {
+                            750: '#293548',
+                            850: '#1a202c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .syntax-highlight {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        .json-key { color: #60a5fa; }
+        .json-string { color: #34d399; }
+        .json-number { color: #f59e0b; }
+        .json-boolean { color: #f87171; }
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-slate-800 border-b border-slate-700 px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-blue-500 text-xl"></i>
+                    <h1 class="text-xl font-semibold text-white">MarkitWire API PenTest Suite</h1>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-gray-400">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>Connected to UAT Environment</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-download mr-2"></i>Export Session
+                </button>
+                <button class="px-3 py-1 bg-slate-700 text-gray-300 rounded text-sm hover:bg-slate-600 transition-colors">
+                    <i class="fas fa-cog mr-2"></i>Settings
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-80 bg-slate-800 border-r border-slate-700 flex flex-col">
+            <!-- Library Loader Section -->
+            <div class="p-4 border-b border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">
+                    <i class="fas fa-box mr-2"></i>API Libraries
+                </h3>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-slate-750 rounded">
+                        <span class="text-sm text-green-400">
+                            <i class="fas fa-check-circle mr-2"></i>MarkitWire.dll
+                        </span>
+                        <span class="text-xs text-gray-500">v20.1</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-slate-750 rounded">
+                        <span class="text-sm text-green-400">
+                            <i class="fas fa-check-circle mr-2"></i>DealSink.lib
+                        </span>
+                        <span class="text-xs text-gray-500">v20.1</span>
+                    </div>
+                    <button class="w-full p-2 border-2 border-dashed border-slate-600 rounded text-sm text-gray-400 hover:border-slate-500 hover:text-gray-300 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Load Additional Libraries
+                    </button>
+                </div>
+            </div>
+
+            <!-- API Endpoints Section -->
+            <div class="flex-1 p-4 overflow-y-auto scrollbar-thin">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">
+                    <i class="fas fa-sitemap mr-2"></i>API Endpoints
+                </h3>
+                
+                <!-- @COMPONENT: APIEndpointTree -->
+                <div class="space-y-1">
+                    <!-- Session Management -->
+                    <div class="mb-3">
+                        <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors">
+                            <i class="fas fa-chevron-down text-xs text-gray-400 mr-2"></i>
+                            <i class="fas fa-user-circle text-blue-400 mr-2"></i>
+                            <span class="text-sm font-medium">Session Management</span>
+                        </button>
+                        <div class="ml-6 space-y-1 mt-1">
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_Connect">
+                                <i class="fas fa-plug text-green-500 mr-2"></i>SW_Connect
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_Login">
+                                <i class="fas fa-sign-in-alt text-blue-500 mr-2"></i>SW_Login
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_Logout">
+                                <i class="fas fa-sign-out-alt text-red-500 mr-2"></i>SW_Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Deal Management -->
+                    <div class="mb-3">
+                        <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors">
+                            <i class="fas fa-chevron-down text-xs text-gray-400 mr-2"></i>
+                            <i class="fas fa-handshake text-emerald-400 mr-2"></i>
+                            <span class="text-sm font-medium">Deal Management</span>
+                        </button>
+                        <div class="ml-6 space-y-1 mt-1">
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_SubmitDeal">
+                                <i class="fas fa-paper-plane text-blue-500 mr-2"></i>SW_SubmitDeal
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_AffirmDeal">
+                                <i class="fas fa-check text-green-500 mr-2"></i>SW_AffirmDeal
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_ReleaseDeal">
+                                <i class="fas fa-unlock text-yellow-500 mr-2"></i>SW_ReleaseDeal
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_WithdrawDeal">
+                                <i class="fas fa-times text-red-500 mr-2"></i>SW_WithdrawDeal
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="mb-3">
+                        <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors">
+                            <i class="fas fa-chevron-down text-xs text-gray-400 mr-2"></i>
+                            <i class="fas fa-bell text-orange-400 mr-2"></i>
+                            <span class="text-sm font-medium">Notifications</span>
+                        </button>
+                        <div class="ml-6 space-y-1 mt-1">
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_Poll">
+                                <i class="fas fa-sync text-blue-500 mr-2"></i>SW_Poll
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_GetNotification">
+                                <i class="fas fa-envelope text-yellow-500 mr-2"></i>SW_GetNotification
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Data Retrieval -->
+                    <div class="mb-3">
+                        <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors">
+                            <i class="fas fa-chevron-down text-xs text-gray-400 mr-2"></i>
+                            <i class="fas fa-database text-purple-400 mr-2"></i>
+                            <span class="text-sm font-medium">Data Retrieval</span>
+                        </button>
+                        <div class="ml-6 space-y-1 mt-1">
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_GetDealByID">
+                                <i class="fas fa-search text-blue-500 mr-2"></i>SW_GetDealByID
+                            </button>
+                            <button class="flex items-center w-full text-left p-2 hover:bg-slate-750 rounded transition-colors text-sm text-gray-300" data-endpoint="SW_GetDealsForBook">
+                                <i class="fas fa-book text-green-500 mr-2"></i>SW_GetDealsForBook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: APIEndpointTree -->
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="p-4 border-t border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-300 mb-3">Quick Actions</h3>
+                <div class="space-y-2">
+                    <button class="w-full p-2 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-rocket mr-2"></i>New Pentest Session
+                    </button>
+                    <button class="w-full p-2 bg-slate-700 text-gray-300 rounded text-sm hover:bg-slate-600 transition-colors">
+                        <i class="fas fa-history mr-2"></i>Load Test History
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Tab Navigation -->
+            <div class="bg-slate-800 border-b border-slate-700">
+                <div class="flex space-x-0">
+                    <button class="px-4 py-3 text-sm font-medium bg-slate-750 text-white border-b-2 border-blue-500">
+                        <i class="fas fa-cog mr-2"></i>Request Builder
+                    </button>
+                    <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-slate-750 transition-colors">
+                        <i class="fas fa-chart-line mr-2"></i>Response Analyzer
+                    </button>
+                    <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-slate-750 transition-colors">
+                        <i class="fas fa-history mr-2"></i>Test History
+                    </button>
+                    <button class="px-4 py-3 text-sm font-medium text-gray-400 hover:text-white hover:bg-slate-750 transition-colors">
+                        <i class="fas fa-file-alt mr-2"></i>Reports
+                    </button>
+                </div>
+            </div>
+
+            <!-- Request Builder Content -->
+            <div class="flex-1 flex">
+                <!-- Request Configuration -->
+                <div class="flex-1 p-6 overflow-y-auto scrollbar-thin">
+                    <!-- @COMPONENT: RequestBuilder -->
+                    <div class="space-y-6">
+                        <!-- API Method and URL -->
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold mb-4">
+                                <i class="fas fa-wrench mr-2 text-blue-500"></i>Request Configuration
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <!-- Method Selection -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">HTTP Method</label>
+                                    <div class="flex space-x-2">
+                                        <button class="px-3 py-2 bg-green-600 text-white rounded text-sm font-medium">GET</button>
+                                        <button class="px-3 py-2 bg-slate-700 text-gray-300 rounded text-sm font-medium hover:bg-slate-600">POST</button>
+                                        <button class="px-3 py-2 bg-slate-700 text-gray-300 rounded text-sm font-medium hover:bg-slate-600">PUT</button>
+                                        <button class="px-3 py-2 bg-slate-700 text-gray-300 rounded text-sm font-medium hover:bg-slate-600">DELETE</button>
+                                        <button class="px-3 py-2 bg-slate-700 text-gray-300 rounded text-sm font-medium hover:bg-slate-600">PATCH</button>
+                                    </div>
+                                </div>
+
+                                <!-- Endpoint URL -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">API Endpoint</label>
+                                    <div class="flex">
+                                        <input type="text" 
+                                               value="https://mw.uat.api.markit.com/v1/session/connect"
+                                               class="flex-1 px-3 py-2 bg-slate-900 border border-slate-600 rounded-l text-gray-100 font-mono text-sm focus:outline-none focus:border-blue-500"
+                                               data-bind="selectedEndpoint">
+                                        <button class="px-4 py-2 bg-blue-600 text-white rounded-r hover:bg-blue-700 transition-colors">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Authentication -->
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold mb-4">
+                                <i class="fas fa-key mr-2 text-yellow-500"></i>Authentication
+                            </h3>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                                    <input type="text" 
+                                           placeholder="Enter username"
+                                           class="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                                    <input type="password" 
+                                           placeholder="Enter password"
+                                           class="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Session Handle</label>
+                                <input type="text" 
+                                       placeholder="Auto-generated after connection"
+                                       class="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 font-mono text-sm focus:outline-none focus:border-blue-500"
+                                       readonly>
+                            </div>
+                        </div>
+
+                        <!-- Headers -->
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">
+                                    <i class="fas fa-list mr-2 text-purple-500"></i>Headers
+                                </h3>
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">
+                                    <i class="fas fa-plus mr-1"></i>Add Header
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-2">
+                                <div class="grid grid-cols-5 gap-2 items-center">
+                                    <input type="text" placeholder="Content-Type" 
+                                           class="col-span-2 px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                    <input type="text" placeholder="application/json" 
+                                           class="col-span-2 px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                    <button class="px-2 py-2 text-red-400 hover:text-red-300">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="grid grid-cols-5 gap-2 items-center">
+                                    <input type="text" placeholder="Authorization" 
+                                           class="col-span-2 px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                    <input type="text" placeholder="Bearer token..." 
+                                           class="col-span-2 px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                    <button class="px-2 py-2 text-red-400 hover:text-red-300">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Request Body -->
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold">
+                                    <i class="fas fa-code mr-2 text-green-500"></i>Request Body
+                                </h3>
+                                <div class="flex space-x-2">
+                                    <select class="px-3 py-1 bg-slate-700 text-gray-300 rounded text-sm border border-slate-600 focus:outline-none focus:border-blue-500">
+                                        <option>JSON</option>
+                                        <option>XML</option>
+                                        <option>Form Data</option>
+                                        <option>Raw</option>
+                                    </select>
+                                    <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">
+                                        <i class="fas fa-magic mr-1"></i>Format
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <textarea class="w-full h-48 px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 font-mono text-sm focus:outline-none focus:border-blue-500 resize-none"
+                                      placeholder="Enter request body...">{
+  "server": "mw.uat.api.markit.com",
+  "timeout": 120,
+  "credentials": {
+    "username": "testuser",
+    "password": "testpass"
+  },
+  "parameters": {
+    "sessionHandle": null,
+    "loginHandle": null
+  }
+}</textarea>
+                        </div>
+
+                        <!-- Penetration Testing Options -->
+                        <div class="bg-slate-800 rounded-lg p-4">
+                            <h3 class="text-lg font-semibold mb-4">
+                                <i class="fas fa-bug mr-2 text-red-500"></i>Penetration Testing Options
+                            </h3>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-3">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">SQL Injection Testing</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">Parameter Fuzzing</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">Authentication Bypass</span>
+                                    </label>
+                                </div>
+                                <div class="space-y-3">
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">Rate Limit Testing</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">Data Exposure Analysis</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2">
+                                        <input type="checkbox" class="rounded bg-slate-700 border-slate-600 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-sm text-gray-300">Session Management</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Custom Payload Templates</label>
+                                <select class="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-gray-100 text-sm focus:outline-none focus:border-blue-500">
+                                    <option>Select a payload template...</option>
+                                    <option>OWASP Top 10 - Injection</option>
+                                    <option>Authorization Bypass</option>
+                                    <option>Buffer Overflow</option>
+                                    <option>Cross-Site Scripting (XSS)</option>
+                                    <option>Custom Fuzzing Payloads</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: RequestBuilder -->
+                </div>
+
+                <!-- Response Panel -->
+                <div class="w-1/2 border-l border-slate-700 flex flex-col">
+                    <!-- Response Header -->
+                    <div class="bg-slate-800 p-4 border-b border-slate-700">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold">
+                                <i class="fas fa-terminal mr-2 text-green-500"></i>Response
+                            </h3>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="text-gray-400">Status:</span>
+                                    <span class="px-2 py-1 bg-green-600 text-white rounded text-xs font-medium">200 OK</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="text-gray-400">Time:</span>
+                                    <span class="text-green-400 font-mono">245ms</span>
+                                </div>
+                                <button class="px-3 py-1 bg-slate-700 text-gray-300 rounded text-sm hover:bg-slate-600">
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Response Tabs -->
+                    <div class="bg-slate-850 border-b border-slate-700">
+                        <div class="flex space-x-0">
+                            <button class="px-4 py-2 text-sm font-medium bg-slate-750 text-white">Body</button>
+                            <button class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-slate-750">Headers</button>
+                            <button class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white hover:bg-slate-750">Security</button>
+                        </div>
+                    </div>
+
+                    <!-- Response Content -->
+                    <div class="flex-1 p-4 overflow-y-auto scrollbar-thin">
+                        <!-- @COMPONENT: ResponseViewer -->
+                        <div class="syntax-highlight rounded-lg p-4 font-mono text-sm h-full">
+                            <pre class="whitespace-pre-wrap"><span class="json-key">"sessionHandle"</span>: <span class="json-number">123456789</span>,
+<span class="json-key">"loginHandle"</span>: <span class="json-number">987654321</span>,
+<span class="json-key">"status"</span>: <span class="json-string">"SWERR_Success"</span>,
+<span class="json-key">"timestamp"</span>: <span class="json-string">"2024-01-15T14:30:25.123Z"</span>,
+<span class="json-key">"serverInfo"</span>: {
+  <span class="json-key">"version"</span>: <span class="json-string">"20.1.460930"</span>,
+  <span class="json-key">"environment"</span>: <span class="json-string">"UAT"</span>,
+  <span class="json-key">"capabilities"</span>: [
+    <span class="json-string">"DealSink"</span>,
+    <span class="json-string">"Notifications"</span>,
+    <span class="json-string">"SessionManagement"</span>
+  ]
+},
+<span class="json-key">"user"</span>: {
+  <span class="json-key">"id"</span>: <span class="json-string">"testuser"</span>,
+  <span class="json-key">"organization"</span>: <span class="json-string">"TestOrg"</span>,
+  <span class="json-key">"permissions"</span>: [
+    <span class="json-string">"READ_DEALS"</span>,
+    <span class="json-string">"SUBMIT_DEALS"</span>,
+    <span class="json-string">"MODIFY_DEALS"</span>
+  ]
+}</pre>
+                        </div>
+                        <!-- @END_COMPONENT: ResponseViewer -->
+                    </div>
+
+                    <!-- Security Analysis Panel -->
+                    <div class="border-t border-slate-700 p-4 bg-slate-850">
+                        <h4 class="text-sm font-semibold text-gray-300 mb-3">
+                            <i class="fas fa-shield-alt mr-2 text-red-500"></i>Security Analysis
+                        </h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                                <span class="text-gray-300">Sensitive data exposure detected</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-300">Authentication mechanism verified</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm">
+                                <i class="fas fa-times-circle text-red-500"></i>
+                                <span class="text-gray-300">Missing rate limiting protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <div class="bg-slate-800 border-t border-slate-700 px-6 py-2">
+        <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center space-x-6">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-database text-blue-500"></i>
+                    <span class="text-gray-400">Total Requests:</span>
+                    <span class="text-white font-medium">47</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-bug text-red-500"></i>
+                    <span class="text-gray-400">Vulnerabilities Found:</span>
+                    <span class="text-red-400 font-medium">3</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-clock text-yellow-500"></i>
+                    <span class="text-gray-400">Session Duration:</span>
+                    <span class="text-white font-medium">15:32</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-question-circle mr-1"></i>Help
+                </button>
+                <button class="text-gray-400 hover:text-white">
+                    <i class="fas fa-info-circle mr-1"></i>About
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // TODO: Implement MarkitWire API integration
+            // TODO: Add real-time request/response handling
+            // TODO: Implement security testing automation
+            
+            // Endpoint selection handling
+            document.querySelectorAll('[data-endpoint]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const endpoint = this.getAttribute('data-endpoint');
+                    updateRequestBuilder(endpoint);
+                });
+            });
+
+            function updateRequestBuilder(endpoint) {
+                // TODO: Load endpoint-specific configuration
+                // TODO: Update request URL and parameters based on selected endpoint
+                // TODO: Load default payloads for penetration testing
+                console.log('Selected endpoint:', endpoint);
+            }
+
+            // Request method selection
+            document.querySelectorAll('button').forEach(button => {
+                if (['GET', 'POST', 'PUT', 'DELETE', 'PATCH'].includes(button.textContent)) {
+                    button.addEventListener('click', function() {
+                        // TODO: Update active method styling
+                        // TODO: Modify request configuration
+                        console.log('Method selected:', this.textContent);
+                    });
+                }
+            });
+
+            // Real-time syntax highlighting for JSON
+            function highlightJSON(element) {
+                // TODO: Implement real-time JSON syntax highlighting
+                // TODO: Add validation and error highlighting
+            }
+
+            // Security testing automation
+            function runSecurityTests() {
+                // TODO: Implement automated security testing based on selected options
+                // TODO: Generate test cases for OWASP Top 10
+                // TODO: Execute penetration testing scenarios
+            }
+
+            // Export functionality
+            function exportSession() {
+                // TODO: Generate comprehensive test report
+                // TODO: Export request/response history
+                // TODO: Include security findings and recommendations
+            }
+
+            console.log('MarkitWire API Penetration Testing Suite initialized');
+        })();
+    </script>
+</body>
+</html>
