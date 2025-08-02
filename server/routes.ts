@@ -239,7 +239,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Host, username, and password are required" });
       }
 
-      // Use a quick connection test that times out faster
+      // Test with GetUserInfo which requires authentication but has no parameters
       const connectCall = {
         functionName: 'GetUserInfo',
         host,

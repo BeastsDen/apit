@@ -41,7 +41,7 @@ class MarkitWireJavaService {
         call.username,
         call.password,
         call.functionName,
-        ...call.parameters.map(p => String(p))
+        ...(call.parameters || []).map(p => String(p))
       ];
 
       const result = await this.executeJavaCommand(args);
@@ -77,7 +77,7 @@ class MarkitWireJavaService {
         call.username,
         call.password,
         call.functionName,
-        ...call.parameters.map(p => String(p))
+        ...(call.parameters || []).map(p => String(p))
       ];
 
       const result = await this.executeJavaCommand(args);
