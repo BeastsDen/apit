@@ -70,19 +70,34 @@ export default function MarkitWireApiPage() {
   // Execute API call
   const executeApiMutation = useMutation({
     mutationFn: async () => {
+      if (!selectedEndpoint?.functionName) {
+        throw new Error('No API function selected');
+      }
+      if (!connectionSettings.host || !connectionSettings.username || !connectionSettings.password) {
+        throw new Error('Please fill in host, username, and password in connection settings');
+      }
+
+      const requestBody = {
+        functionName: selectedEndpoint.functionName,
+        host: connectionSettings.host,
+        username: connectionSettings.username,
+        password: connectionSettings.password,
+        parameters: Object.values(parameters),
+        apiType: connectionSettings.apiType
+      };
+
+      console.log('Sending API request:', { ...requestBody, password: '***' });
+
       const response = await fetch('/api/markitwire/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          functionName: selectedEndpoint?.functionName,
-          host: connectionSettings.host,
-          username: connectionSettings.username,
-          password: connectionSettings.password,
-          parameters: Object.values(parameters),
-          apiType: connectionSettings.apiType
-        })
+        body: JSON.stringify(requestBody)
       });
-      if (!response.ok) throw new Error('API call failed');
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'API call failed');
+      }
       return response.json();
     },
     onSuccess: (data) => {

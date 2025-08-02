@@ -102,8 +102,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } = req.body;
       
       if (!functionName || !host || !username || !password) {
+        console.log('Missing required fields:', { functionName, host, username, password: password ? '***' : undefined });
         return res.status(400).json({ 
-          error: "Function name, host, username, and password are required" 
+          error: "Function name, host, username, and password are required",
+          received: { functionName, host, username, password: password ? '***' : undefined }
         });
       }
 
