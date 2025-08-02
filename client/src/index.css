@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* Dark theme colors for penetration testing interface */
+  --slate-900: hsl(222, 84%, 5%);
+  --slate-800: hsl(215, 28%, 17%);
+  --slate-750: hsl(217, 24%, 20%);
+  --slate-700: hsl(215, 20%, 25%);
+  --slate-600: hsl(215, 16%, 35%);
+  --slate-500: hsl(215, 14%, 50%);
+  --blue-600: hsl(217, 91%, 60%);
+  --blue-500: hsl(217, 91%, 65%);
+  --green-600: hsl(142, 76%, 36%);
+  --green-500: hsl(142, 71%, 45%);
+  --red-600: hsl(0, 84%, 60%);
+  --red-500: hsl(0, 84%, 65%);
+  --yellow-600: hsl(45, 93%, 47%);
+  --yellow-500: hsl(45, 93%, 55%);
+  --purple-600: hsl(262, 83%, 58%);
+  --purple-500: hsl(262, 83%, 65%);
+  --orange-600: hsl(25, 95%, 53%);
+  --orange-500: hsl(25, 95%, 60%);
+  --emerald-500: hsl(160, 84%, 39%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-slate-900 text-gray-100;
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: var(--slate-800);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--slate-600);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--slate-500);
+}
+
+/* Syntax highlighting for JSON */
+.syntax-highlight {
+  background: var(--slate-900);
+  color: hsl(210, 40%, 95%);
+}
+
+.json-key { 
+  color: hsl(210, 100%, 75%); 
+}
+
+.json-string { 
+  color: hsl(142, 70%, 65%); 
+}
+
+.json-number { 
+  color: hsl(45, 93%, 65%); 
+}
+
+.json-boolean { 
+  color: hsl(0, 84%, 70%); 
+}
+
+/* Custom utility classes for the penetration testing interface */
+.bg-slate-900 {
+  background-color: var(--slate-900);
+}
+
+.bg-slate-800 {
+  background-color: var(--slate-800);
+}
+
+.bg-slate-750 {
+  background-color: var(--slate-750);
+}
+
+.bg-slate-700 {
+  background-color: var(--slate-700);
+}
+
+.border-slate-700 {
+  border-color: var(--slate-700);
+}
+
+.border-slate-600 {
+  border-color: var(--slate-600);
+}
+
+.text-blue-500 {
+  color: var(--blue-500);
+}
+
+.text-green-500 {
+  color: var(--green-500);
+}
+
+.text-red-500 {
+  color: var(--red-500);
+}
+
+.text-yellow-500 {
+  color: var(--yellow-500);
+}
+
+.text-purple-500 {
+  color: var(--purple-500);
+}
+
+.text-orange-500 {
+  color: var(--orange-500);
+}
+
+.text-emerald-500 {
+  color: var(--emerald-500);
+}
+
+.bg-blue-600 {
+  background-color: var(--blue-600);
+}
+
+.bg-green-600 {
+  background-color: var(--green-600);
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: hsl(217, 91%, 55%);
+}
+
+.hover\:bg-slate-750:hover {
+  background-color: var(--slate-750);
+}
+
+.hover\:bg-slate-600:hover {
+  background-color: var(--slate-600);
+}
+
+/* Monaco Editor integration */
+.monaco-editor {
+  background-color: var(--slate-900) !important;
+}
+
+.monaco-editor .margin {
+  background-color: var(--slate-800) !important;
+}
