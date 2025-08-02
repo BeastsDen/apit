@@ -1,0 +1,4 @@
+<!ELEMENT InterestGroups (InterestGroup*)>
+<!ELEMENT InterestGroup (GroupId,Subscribed)>
+<!ELEMENT GroupId (#PCDATA)>
+<!ELEMENT Subscribed (#PCDATA)>

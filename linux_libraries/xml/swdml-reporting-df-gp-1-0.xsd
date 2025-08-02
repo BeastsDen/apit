@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="swdml-reporting-1-0.xsd"/>
+	<xsd:element name="swNewNovatedTradeReportingDetails" type="SW_GPNewNovatedTradeReportingDetails" abstract="false"/>
+	<xsd:element name="swNovatedTradeReportingDetails" type="SW_GPNovatedTradeReportingDetails"/>
+	<xsd:element name="swNovationFeeTradeReportingDetails" type="SW_GPNovationFeeTradeReportingDetails"/>
+	<xsd:element name="swTradeEventReportingDetails" type="SW_GPTradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>global element, not used but its inclusion triggers DTD generation to create the necessary entities</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SW_GPNewNovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_GPTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_GPNovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_GPTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_GPNovationFeeTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_GPTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_GPTradeEventReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_GPTradeReportingDetails">
+				<xsd:sequence>
+					<xsd:element ref="swNewNovatedTradeReportingDetails" minOccurs="0"/>
+					<xsd:element ref="swNovatedTradeReportingDetails" minOccurs="0"/>
+					<xsd:element ref="swNovationFeeTradeReportingDetails" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_GPTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetailsJurisdiction">
+				<xsd:group ref="SW_GPTradePriceNotation.Model"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:group name="SW_GPTradePriceNotation.Model">
+		<xsd:annotation>
+			<xsd:documentation>GT support mutliple price and additional price notations </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Structure to contain Price Notation information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swAdditionalPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Contains Additional Price Notation information.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

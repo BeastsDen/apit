@@ -1,0 +1,972 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.markitserv.com/swml" xmlns:fpml="http://www.fpml.org/FpML-5/confirmation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.markitserv.com/swml" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.fpml.org/FpML-5/confirmation" schemaLocation="fpml-main-5-3.xsd"/>
+	<xsd:include schemaLocation="swbml-enum-5-3.xsd"/>
+	<xsd:include schemaLocation="swxml-reporting-shared-1-0.xsd"/>
+	<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+	<xsd:complexType name="SWB_AdditionalField">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The data captured through the SwapsWire Trader fields labeled Additional Field 1-60 (or the custom labels chosen by a participant). The element carries a sequence attribute which will have values '1' through '60' to indicate the particular screen field where the data was captured. A fieldName attribute will have a value set equal to the SwapsWire Trader field's screen label.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="sequence" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:integer">
+							<xsd:minInclusive value="1"/>
+							<xsd:maxInclusive value="60"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="fieldName" type="xsd:normalizedString" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Allocations">
+		<xsd:sequence>
+			<xsd:element name="swAllocation" type="SWB_Allocation" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Allocation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">An entity for defining details of an individual allocation split.
+			This element may carry an information attribute tradeDirectionDeterminate that will have a value of 'false', when the product direction on the main trades is indeterminate. It flags allocation direction is invalid as block trade direction is 	indeterminate. The tradeDirectionDeterminate attribute will not otherwise be present.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element name="swStreamReference" type="SWB_PartyOrTradeSideReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A pointer style reference to a swapStream defined elsewhere in the document. For a fixed/float interest rate swap this will reference the fixed stream.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="payerPartyReference" type="SWB_PartyOrTradeSideReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="receiverPartyReference" type="SWB_PartyOrTradeSideReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element name="buyerPartyReference" type="SWB_PartyOrTradeSideReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. The party referenced is the buyer on the allocation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="sellerPartyReference" type="SWB_PartyOrTradeSideReference">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. The party referenced is the seller on the allocation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:choice>
+				<xsd:element name="allocatedNotional" type="fpml:Money">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The notional amount applicable to the allocation. This is an FpML 4.2 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swAllocatedNumberOfOptions" type="xsd:nonNegativeInteger">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The number of options applicable to the allocation.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:sequence>
+					<xsd:element name="swAllocatedVegaNotional" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">The vega notional amount applicable to the allocation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swAllocatedVarianceAmount" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">The variance amount applicable to the allocation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<xsd:element name="swAllocatedUnits" type="xsd:decimal">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The number of shares or index units applicable to the allocation in respect of a Share Dividend Swap, Index Dividend Swap, Equity Share Swap or Equity Index Swap transaction.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="independentAmount" type="fpml:IndependentAmount" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Specifies an independent amount applicable to the allocation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBrokerTradeId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference identifier allocated by the broker. MarkitWire requires that this identifier be no more than 40 characters in length. The '|' character is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="otherPartyPayment" type="SWB_AllocationPayment" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Refers to brokers fee. Currently not supported</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="swbPartyClearingBroker" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>The BIC of the Clearing Broker</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PartyReference" type="SWB_PartyOrTradeSideReference">
+							<xsd:annotation>
+								<xsd:documentation xml:lang="en">The party reference specifying if this is the EB or Client corresponding to the CB below.  This is for each allocation on the trade.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swbClearingBroker" type="SWB_PartyDetails">
+							<xsd:annotation>
+								<xsd:documentation xml:lang="en">Definition of Clearing Broker for each allocation</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swbPartyNettingString" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>Element which defines the netting strings for the Client and/or Executing Broker for each allocation</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="partyReference" type="SWB_PartyOrTradeSideReference"/>
+						<xsd:element name="swbNettingString"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swbPartyCreditAcceptanceToken" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>Element which defines the credit acecptance token for a party.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="partyReference" type="SWB_PartyOrTradeSideReference"/>
+						<xsd:element name="swbCreditIssuer" type="xsd:normalizedString"/>
+						<xsd:element name="swbToken" type="xsd:normalizedString"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swbPartyClearingDetails" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>Element which defines the details for a trade being cleared outside MW</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="partyReference" type="SWB_PartyOrTradeSideReference"/>
+						<xsd:element name="swbClearingStatus" type="xsd:normalizedString" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Clearing Status text as provided by the Clearing House.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swbClearingHouseTradeID" type="xsd:normalizedString" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>The CCP Trade ID as provided by the Clearing House</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swbClearedTimestamp" type="xsd:dateTime" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation xml:lang="en">Clearing requirement. When this trade was cleared as provided by the Clearing House</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swbClearedUSI" type="SWB_UniqueTradeIdentifier" minOccurs="0"/>
+						<xsd:element name="swbClearedUTI" type="SWB_UniqueTradeIdentifier" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swbAllocationReportingDetails" type="SWB_AllocationReportingDetails" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="directionReversed" default="false">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="true"/>
+					<xsd:enumeration value="false"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="tradeDirectionDeterminate" default="true">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="true"/>
+					<xsd:enumeration value="false"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_AllocationPayment">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining allocation additional payments. This component is based on the FpML complex type Payment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="fpml:PayerReceiver.model"/>
+			<xsd:element name="paymentAmount" type="fpml:Money">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="seq">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="1"/>
+					<xsd:enumeration value="2"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="directionReversed" type="xsd:boolean"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Bond">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining instrument identifiers, the coupon rate and maturity date associated with a fixed income security.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="instrumentId" type="fpml:InstrumentId" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">One or more identifiers for the instrument. This may include an ISIN, CUSIP or a market standard identifier for the reference entity and obligation pair.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="couponRate" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Specifies the coupon rate (expressed in percentage) of a fixed income security. This element may contain a negative value, for example, in the case of a floating rate security where the couponRate element contains a negative floating rate spread rate.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="maturity" type="xsd:date" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The date when the principal amount of a security becomes due and payable. This element will not be present if there is no maturity date associated with the fixed income security, for example, in the case of a perpetual bond.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Broker">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about a broker participant organization.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swParticipantId" type="SWB_ParticipantId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the SwapsWire participant organization that the user belongs to. This name takes the form of a short mnemonic code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Clearing">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">An entity for defining data relating to the clearing of a trade through a central clearing house or clearing system, e.g. LCH.Clearnet's SwapClear service.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:sequence>
+				<xsd:element name="swEligibleForClearing" type="xsd:boolean">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade is eligible for clearing through a central clearing house or clearing system via an interface from SwapsWire. The eligibility is determined based on eligibility rules held within SwapsWire and is not a guarantee of subsequent acceptance by the clearance system. The clearance system may apply additional acceptance criteria prior to registration of the trade. Currently, clearing is only available for Single Currency Interest Rate Swaps via LCH.Clearnet's SwapClear service and therefore this is the only product type where this element will be present. This element will not be present on a trade with a 'Clearing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swSendForClearing" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag set by the participant to indicate that they are ready and willing (or not as the case may be) to allow the trade to be sent for clearing. This element can only be set to true by a participant if the trade is eligible for clearing as determined by SwapsWire's clearing eligibility rules, i.e. it is not possible for this element to contain a value of true if the element swEligibleForClearing contains a value of false. This element will not be present on a trade with a 'Clearing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swSendForClearingTimestamp" type="xsd:dateTime" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The timestamp associated with the swSendForClearing element value last being updated. This element will not be present on a trade with a 'Clearing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="swClearingTradeId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade identifier allocated by the clearance system, e.g. LCH.Clearnet's SwapClear service, on successful registration of a trade sent for clearing via SwapsWire. This element will only be present for a trade with a trade status of 'Clearing' and a private process state of 'Released'.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ConfirmedNovationAgreement">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">An entity for defining the terms of a Novation Agreement and any related fee associated with the transfer of the trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="eventId" type="fpml:EventId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Specifies an identifier for the Novation Agreement. This is an FpML 4.1 element. This Novation identifier can be used in the SwapsWire Tracker application to perform a search for the Old and New Transactions associated with the novation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:sequence>
+				<xsd:element name="oldTransactionReference" type="fpml:PartyTradeIdentifiers" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">Indicates a reference to the original trade (Old Transaction) between the Transferor and the Remaining Party in a three-way novation or between Transferor 1 and Transferor 2 in a four-way novation. This is an FpML 4.1 element. The reference will be the SwapsWire trade identifier of the Old Transaction. This element will only be present in the SWML for a party that is party to the Old Transaction.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="newTransactionReference" type="fpml:PartyTradeIdentifiers" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">Indicates a reference to the new trade (New Transaction) between the Transferee and the Remaining Party in a three-way novation or between Transferee 1 and Transferee 2 in a four-way novation. This is an FpML 4.1 element. The reference will be the SwapsWire trade identifier of the New Transaction. This element will only be present in the SWML for a party that is party to the New Transaction.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="transferor" type="SWB_PartyOrTradeSideReference">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. In a three-way novation the party referenced is the Transferor (outgoing party) in the novation. The Transferor means a party which transfers by novation to a Transferee all of its rights, liabilities, duties and obligations with respect to a Remaining Party. In a four-way novation the party referenced is Transferor 1 which transfers by novation to Transferee 1 all of its rights, liabilities, duties and obligations with respect to Transferor 2. ISDA 2004 Novation Term: Transferor (three-way novation) or Transferor 1 (four-way novation). This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="transferee" type="SWB_PartyOrTradeSideReference">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. In a three-way novation the party referenced is the Transferee (incoming party) in the novation. Transferee means a party which accepts by way of novation all rights, liabilities, duties and obligations of a Transferor with respect to a Remaining Party. In a four-way novation the party referenced is Transferee 1 which accepts by way of novation the rights, liabilities, duties and obligations of Transferor 1. ISDA 2004 Novation Term: Transferee (three-way novation) or Transferee 1 (four-way novation). This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="remainingParty" type="SWB_PartyOrTradeSideReference">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. In a three-way novation the party referenced is the Remaining Party in the novation. Remaining Party means a party which consents to a Transferor's transfer by novation and the acceptance thereof by the Transferee of all of the Transferor's rights, liabilities, duties and obligations with respect to such Remaining Party under and with respect of the Novated Amount of a transaction. In a four-way novation the party referenced is Transferor 2 per the ISDA definition and acts in the role of a Transferor. Transferor 2 transfers by novation to Transferee 2 all of its rights, liabilities, duties and obligations with respect to Transferor 1. ISDA 2004 Novation Term: Remaining Party (three-way novation) or Transferor 2 (four-way novation). This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="otherRemainingParty" type="SWB_PartyOrTradeSideReference" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. This element is not applicable in a three-way novation and should be omitted. In a four-way novation the party referenced is Transferee 2. Transferee 2 means a party which accepts by way of novation the rights, liabilities, duties and obligations of Transferor 2. ISDA 2004 Novation Term: Transferee 2 (four-way novation). This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="novationDate" type="xsd:date">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">Specifies the date that one party's rights, liabilities, duties and obligations with regard to the Old Transaction are transferred to another party. ISDA 2004 Novation Term: Novation Date. This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="novationTradeDate" type="xsd:date">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">Specifies the date the parties enter into a Novation Transaction. ISDA 2004 Novation Term: Novation Trade Date. This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:choice>
+					<xsd:element name="novatedAmount" type="fpml:Money">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">This represents the portion of the Old Transaction being novated. ISDA 2004 Novation Term: Novated Amount. This is an FpML 4.1 element.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="novatedNumberOfOptions" type="fpml:NonNegativeDecimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">This represents the portion of the Old Transaction being novated. ISDA 2004 Novation Term: Novated Number of Options. This is an FpML 4.1 element. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swNovatedUnits" type="xsd:nonNegativeInteger">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">This represents the Number of Shares or the Number of Units of the Old Transaction being novated in respect of an Index Dividend Swap, Equity Index Swap, Share Dividend Swap or Equity Share Swap transaction.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="novatedVarianceAmount" type="xsd:decimal">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">This represents the portion of the Old Transaction being novated. ISDA 2004 Novation Term: Novated Variance Amount. This is an FpML 4.1 element. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:choice>
+				<xsd:element name="fullFirstCalculationPeriod" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag to indicate whether Full First Calculation Period is applicable to the New Transaction arising from a novation. Full First Calculation Period relates to initial cashflow accruals for payment by each party on the first Payment Date following a novation and is defined in the 2004 ISDA Novation Definitions. ISDA 2004 Novation Term: Full First Calculation Period. This element will not be present on a Swaption novation. This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="firstPeriodStartDate" type="fpml:FirstPeriodStartDate" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">This element will occur zero or two times. This element will not be present on a Swaption novation. Each element has an href attribute that is a pointer style reference to a party identified elsewhere in the document. This date represents the commencement date of the initial Calculation Period with respect to the initial Fixed Rate Payer Payment Date or the initial Floating Rate Payer Payment Date on the New Transaction as the case may be for the party referenced. For a trade with a trade status of 'New-Novated' these dates will also corrrespond to the //swapStream/calculationPeriodDates/effectiveDate/unadjustedDate in the relevant fixed and floating streams. This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="nonReliance" type="fpml:Empty" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The presence of this empty element indicates that Non-Reliance is applicable to the Novation Transaction per the 2004 ISDA Novation Definitions. ISDA 2004 Novation Term: Non-Reliance. This is an FpML 4.1 element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swPartialNovationIndicator" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The presence of this boolean element with a value of 'true' indicates that the trade is only being partially novated. Note that this element should only be present when submitting a novation request via the SWB_SubmitNovation call (SWD_SubmitNovation for older API clients). It should never occur in an SWBML message in any other context.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+			</xsd:sequence>
+			<xsd:element name="payment" type="fpml:Payment" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Specifies the fee, if any, exchanged between the Transferor and Transferee in a three-way novation or between Transferor 1 and Transferee 1 in a four-way novation with respect to the transfer of the trade. This is an FpML 4.1 element. This payment element will only be present in the SWML for the parties to the Novation Transaction that are also parties to the fee. For example, this element would not be visible to the Remaining Party in a three-way novation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_CustomerTransaction">
+		<xsd:annotation>
+			<xsd:documentation>Sets out which parties are the client and prime broker on the trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swCustomer" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWML document. This is an FpML element. The party referenced is the customer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPrimeBroker" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWML document. This is an FpML element. The party referenced is the prime broker.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swEarlyTerminationProvision" type="SWB_EarlyTerminationProvision" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Optional early termination provisions between the Prime Broker and the Customer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_DayCountFraction">
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="dayCountFraction" type="fpml:DayCountFraction" minOccurs="0"/>
+			<xsd:element name="underlyerReference" type="SWB_UnderlyerReference" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_EarlyTerminationProvision">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining limited early termination provision information relating to the Swap Transaction. Both Mandatory and Optional Early Termination are supported.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="swBreakFirstDate" type="fpml:Period">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swBreakOverrideFirstDate" type="xsd:date">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="swBreakFrequency" type="fpml:Period" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swBreakCalculationMethod" type="SWB_BreakCalculationMethodEnum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_GiveUp">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The swGiveUp element captures details specific to Prime Brokerage, and defines a tri-party agreement on the primary prime-brokered trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swEligiblePrimeBrokerTrade" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A flag to specify whether or not a prime-brokerd trade is eligible under the user-defined rules stored in the SwapsWire system. If no rules have been defined, this element will not be present.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swCustomerTransaction" type="SWB_CustomerTransaction">
+				<xsd:annotation>
+					<xsd:documentation>Sets out which parties are the client and prime broker on the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swInterDealerTransaction" type="SWB_InterDealerTransaction">
+				<xsd:annotation>
+					<xsd:documentation>Sets out which parties are the executing dealer and prime broker on the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swExecutingDealerCustomerTransaction" type="SWB_ExecutingDealerCustomerTransaction" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Sets out the Executing Dealer's Legal Entity when facing the Client during the Primary Trilateral Trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_InterDealerTransaction">
+		<xsd:annotation>
+			<xsd:documentation>Sets out which parties are the executing dealer and prime broker on the trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swExecutingDealer" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWML document. This is an FpML element. The party referenced is the executing dealer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPrimeBroker" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWML document. This is an FpML element. The party referenced is the prime broker.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swEarlyTerminationProvision" type="SWB_EarlyTerminationProvision" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Optional early termination provisions between the Executing Broker and the Prime Broker.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ExecutingDealerCustomerTransaction">
+		<xsd:annotation>
+			<xsd:documentation>Sets out the Executing Dealer's Legal Entity when facing the Customer at the primary trilaterla trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swExecutingDealer" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWML document. This is an FpML element. The party referenced is the executing dealer. Pointer is linked to the dealer's alternate LE</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Normalisation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">An entity for defining original (pre-normalised) values for the trade date, effective date and termination date when a swap trade has been normalised as part of a backloading submission to SwapsWire, typically with the aim of backloading through to LCH.Clearnet's SwapClear service.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swNormalisationDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The date used in the normalisation algorithm. This is also the nominal target registration date at the clearing house.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swOriginalTradeDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The original (pre-normalised) trade date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swOriginalEffectiveDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The original (pre-normalised) effective date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swOriginalTerminationDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The original (pre-normalised) termination date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_NegotiationParties">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining the SwapsWire users or broker participants involved in the trade negotiation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swTrader" type="SWB_Trader" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Information describing one SwapsWire user involved in the trade conversation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swBroker" type="SWB_Broker" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Information describing one broker participant involved in the trade negotiation. This element will only be present for a new brokered trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_NegotiationPartyReference">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A reference to a swTrader or swBroker element within the SWML document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ParticipantId">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A code for identification of participant organizations operating on SwapsWire.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="swParticipantIdScheme" type="xsd:anyURI" default="http://www.swapswire.com/spec/2001/participant-id-1-0"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Party">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about a broker participant organization.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyId" type="SWB_ParticipantId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the SwapsWire participant organization that the user belongs to. This name takes the form of a short mnemonic code.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="name" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the SwapsWire participant organization that the user belongs to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_PartyOrTradeSideReference">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A reference to a party or tradeSide. (Originally in FpML 4.x)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Reference">
+				<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_OptionalEarlyTermination">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining limited information for an Optional Early Termination relating to the Swap Transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swOptionalEarlyTerminationDate" type="fpml:Period">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The earliest ISDA Optional Early Termination Date expressed as a date offset. For example, 5 years.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swOptionalEarlyTerminationFrequency" type="fpml:Period" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Optional early termination frequency.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Payment">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining additional payments. This component is based on the FpML complex type Payment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:group ref="fpml:PayerReceiver.model"/>
+			<xsd:element name="paymentAmount" type="fpml:Money">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentDate" type="fpml:AdjustableDate" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The payment date. This date is subject to adjustment in accordance with any applicable business day convention.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentType" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A classification of the type of fee or additional payment, e.g. brokerage, upfront fee etc. The paymentType element will contain the literal string entered into the SwapsWire Trader additional payment 'reason' screen entry field, except in the case of a trade cancellation when it will contain the reserved literal value 'Cancellation'. If the 'reason' screen entry field is left empty then this element will not be present.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Premium">
+		<xsd:annotation>
+			<xsd:documentation>Option premium.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="paymentAmount" type="fpml:Money">
+				<xsd:annotation>
+					<xsd:documentation>Premium payment amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPaymentDate" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>Premium payment date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ReferenceObligation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component defining the internal reference obligation and information describing the relationship between the reference entity and the obligation, for example, whether the reference entity is the primary obligor or a guarantor of the reference obligation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="bond" type="SWB_Bond">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Details to uniquely identify the reference obligation including the instrument identifiers, coupon rate and maturity date.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="primaryObligor" type="fpml:LegalEntity">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The primary obligor of the internal reference obligation. This element will only be present if the internal reference entity is the guarantor of the obligation. In such cases the primary obligor legal entity name may be included within this element if it is present within the internal data source. See the SWML 4.0 Mapping Specification for further details on population of this element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="primaryObligorReference" type="SWB_PartyOrTradeSideReference">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A pointer style reference to the internal reference entity defined in the element swPrivateReferenceInformation. This element will only be present if the internal reference entity is the primary obligor of the internal reference obligation. See the SWML 4.0 Mapping Specification for further details on population of this element.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="guarantorReference" type="SWB_PartyOrTradeSideReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to the internal reference entity defined in the element swPrivateReferenceInformation. This element will only be present if the internal reference entity is the guarantor of the internal reference obligation. See the SWML 4.0 Mapping Specification for further details on population of this element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Trader">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about a SwapsWire Trader user involved in a trade conversation, including information linking them to a specific user group and a participant organization.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swParticipantId" type="SWB_ParticipantId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the SwapsWire participant organization that the user belongs to.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="partyReference" type="SWB_PartyOrTradeSideReference" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. This is an FpML element. The element should only be present for principal users, i.e. those associated with progressing the trade to the most recent 'Done' state.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swUserId" type="SWB_UserId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The user id for the user. This element should only be included for a user that belongs to the participant organization receiving the message, i.e. participants should not be able to see user id information for other organizations.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swUserName" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the user. A free format string. This element should only be included for a user that belongs to the participant organization receiving the message, i.e. participants should not be able to see user name information for other organizations.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_UserId">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A code for identification of a SwapsWire user.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:token">
+				<xsd:attribute name="swUserIdScheme" type="xsd:anyURI" default="http://www.swapswire.com/spec/2001/user-id-1-0"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="SWB_Version">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">SWBML version number</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="5-3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="SWB_PartyDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for party id and party name.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Party Id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Party Name</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Publishing">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">An entity for defining data relating to the Publishing of a trade through a Subscriber system.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:sequence>
+				<xsd:element name="swSendForPublishing" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag set by the participant to indicate that they are ready and willing (or not as the case may be) to allow the trade to be sent for publishing. This element can only be set to true by a participant if the trade is eligible for publishing as determined by MW publishing eligibility rules, i.e. it is not possible for this element to contain a value of true if the element swEligibleForPublishing contains a value of false. This element will not be present on a trade with a 'Publishing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swEligibleForPublishing" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade is eligible for publishing. The eligibility is determined based on eligibility rules held within MarkitWire and is not a guarantee of subsequent acceptance by the subscriber system. The subscriber system may apply additional acceptance criteria prior to registration of the trade. Currently, publishing is only available for CDS Master, Index and Matrix and therefore this is the only product type where this element will be present. This element will not be present on a trade with a 'Publishing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swSendForPublishingTimestamp" type="xsd:dateTime" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The timestamp associated with the swSendForPublishing element value last being updated. This element will not be present on a trade with a 'Publishing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swSubscriberEligible" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade is eligible for publishing based on the subscriber rules set up for the selected subscriber system. The eligibility is determined based on eligibility rules held within MarkitWire and is not a guarantee of subsequent acceptance by the clearance system. The subscriber system may apply additional acceptance criteria prior to registration of the trade. This element will not be present on a trade with a 'Publishing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swPartiesEligible" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade is eligible for clearing based on the parties set-up within MarkitWire, i.e. are they set up for clearing individually and with each other for the correct product type for the clearing house in question. This element will not be present on a trade with a 'Publishing' trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swMarkitwireEligible" type="xsd:boolean" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>A true/false flag to indicate whether the trade is eligible for publishing based on MarkitWire rules such as contract and booking state.  This element will not be present on a trade with a Published trade status.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="swPublishingTradeId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade identifier allocated by the subscriber system, e.g. TIW on successful registration of a trade sent for publishing via transformer. This element will only be present for a trade with a trade status of 'Publishing' and a private process state of 'Released'.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Header">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, trade source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbBrokerTradeId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference identifier allocated by the broker. SwapsWire requires that this identifier be no more than 40 characters in length. The '|' character is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTotalLegs" type="xsd:nonNegativeInteger" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>An identifier that specifies the total number of legs for the strategy being submitted. This is validated to ensure the leg number submitted is not greater than the maximum allowed for that strategy type. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBrokerLegId" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A leg identifier allocated by the broker to identify individual legs in a larger group, e.g. a strategy. SwapsWire requires that this identifier be no more than 20 characters in length and comprises of only letters a-z (upper or lower case), digits, hyphens, underscores, colons or full stops. Whitespace is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStrategyType" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A strategy type identifier to identify the nature of the equity option strategy trade(s) being submitted. The value must be a recognised allowable value, e.g; Straddle.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStrategyComment" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A free text comment field to allow additional comments regarding strategy trades to be made bilaterally. Should only be present where swbStrategyType is populated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBrokerTradeVersionId" type="xsd:nonNegativeInteger">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference version identifier allocated by the broker. This identifier should not exceed 40 characters in length. Note that SwapsWire will not use this version identifier in its processing of the deal.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradeSource" type="SWB_TradeSource" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade source, e.g. voice brokered, electronic execution etc. The trade source will determine the applicable workflow for the trade within SwapsWire.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbVenueId" type="SWB_VenueId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The venue Identifier e.g. Pre-LEI </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbRecipient" type="SWB_Recipient" minOccurs="2" maxOccurs="4">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element defines the linkage between a recipient defined in the BrokerLoad deal submission API call and the Buyer/Seller on the FpML trade. The element carries an id attribute which must have a value corresponding to a valid recipient id for the deal. This element must occur two times.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbReplacementTradeId" type="SWB_ReplacementTradeId" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_TradeSource">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A type to define the trade source. The Trade Source Scheme is used to identify the source of the trade and determines the appropriate confirmation process within the SwapsWire system.  Different sources map to different types of SwapsWire Services as described in the SwapsWire Broker Terms.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="swbTradeSourceScheme" type="xsd:anyURI" default="http://www.swapswire.com/spec/2002/trade-source-1-0"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_VenueId">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A type to define the venue identifier issuer. The Venue Id Scheme is used to identify the source of the Id and determines the Issuer/Id  values used for Clearing and Reporting.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="swbVenueIdScheme" type="xsd:anyURI"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Recipient">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information linking the FpML trade Buyer/Seller or Payer/Receiver to the message recipients. This element carries an id attribute which must have a value corresponding to a valid recipient id for the deal</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyReference" type="SWB_PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWBML document. This is an FpML element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbUserName" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the trader that the broker dealt with at the dealer firm. Note that the name entered here does not affect who the deal is sent to within SwapsWire. It is for informational purposes only and becomes part of the SwapsWire trade record.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradingBookId" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Participant specific trading book.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbExecutionMode" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Used to differentiate between Electronic and Voice execution, only applicable for Credit products</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_PrivateData"/>
+	<xsd:complexType name="SWB_BusinessConductDetails">
+		<xsd:annotation>
+			<xsd:documentation>A component for defining trade details related to business conduct standards that are not captured within the 	FpML component of the message.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbMidMarketPrice" type="SWB_MidMarketPrice" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en"> A component for defining Mid Market Price </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_MidMarketPrice">
+		<xsd:annotation>
+			<xsd:documentation>Structure to contain Mid Market Price information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence minOccurs="0">
+			<xsd:element name="swbAmount" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>Contains value specified for Mid-Market Price</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbCurrency" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Contains currency specified for Mid-Market Price</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbUnit" type="SW_Unit">
+				<xsd:annotation>
+					<xsd:documentation>Contains unit scheme that specifies Mid-Market price type </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_PaymentFrequency">
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Frequency">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="underlyerReference" type="SWB_UnderlyerReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ResetFrequency">
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Frequency">
+				<xsd:sequence minOccurs="0">
+					<xsd:element name="underlyerReference" type="SWB_UnderlyerReference"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_UnderlyerReference">
+		<xsd:annotation>
+			<xsd:documentation>Reference to an underlyer</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="fpml:Reference">
+				<xsd:attribute name="href"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ReplacementTradeId">
+		<xsd:annotation>
+			<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbTradeId">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:normalizedString"/>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swbTradeIdType" type="SWB_TradeIdTypeEnum"/>
+			<xsd:element name="swbReplacementReason" type="SWB_ReplacementReasonEnum" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

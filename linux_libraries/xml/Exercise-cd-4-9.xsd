@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:element name="Exercise">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The trade date of the Exercise</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="Credit">
+<xsd:annotation>
+<xsd:documentation>Only Exercise of CDS Index Swaption is supported by MarkitWire.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="effectiveDate" type="xsd:date"/>
+<xsd:element name="exercisedAmount" type="Money"/>
+<xsd:element name="exerciseEventType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Only 'Physical' settlement is  permitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a currency amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="Currency">
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="currencyScheme" type="xsd:anyURI" default="http://www.fpml.org/ext/iso4217-2001-08-15"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+<xs:complexType name="dealResults">
+<xs:sequence>
+<xs:element ref="succeeded"/>
+<xs:element ref="failed"/>
+<xs:element ref="result" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="dealResults" type="dealResults"/>
+<xs:complexType name="succeeded" mixed="true"/>
+<xs:element name="succeeded" type="succeeded"/>
+<xs:complexType name="result">
+<xs:sequence>
+<xs:element ref="dvh"/>
+<xs:element ref="returnCode"/>
+<xs:element ref="returnText"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="result" type="result"/>
+<xs:complexType name="dvh" mixed="true"/>
+<xs:element name="dvh" type="dvh"/>
+<xs:complexType name="returnCode" mixed="true"/>
+<xs:element name="returnCode" type="returnCode"/>
+<xs:complexType name="returnText" mixed="true"/>
+<xs:element name="returnText" type="returnText"/>
+<xs:element name="failed"/>
+</xs:schema>

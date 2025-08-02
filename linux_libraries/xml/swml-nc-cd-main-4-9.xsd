@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="swml-shared-4-9.xsd"/>
+	<xsd:include schemaLocation="swml-nc-cd-enum-4-9.xsd"/>
+	<xsd:element name="SWML" type="SWML">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The SWML root element forms the root for any conforming SWML instance document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SWML">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The root element in an SWML document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swHeader" type="SW_Header">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade's id and version, source of the trade, status of the trade and the parties involved in the conversation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="novation" type="SW_ConfirmedNovationAgreement" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The Novation Agreement details and any related fee associated with the transfer of the trade. This element will be present if the trade has a trade status of 'Novated' or 'New-Novated'. This is an FpML 4.1 element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swStructuredTradeDetails" type="SW_NcCdsStructuredTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swNegotiation" type="SW_Negotiation" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The set of conversation dialogs recording the conversation that took place on the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPrivateData" type="SW_PrivateData" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Data which is private to an individual party. The private data consists of a mixture of process state information and private data entered through the SwapsWire Trader application, e.g. trading book identifier. Note that the element will not be present in SWML extracted via the Dealer API prior to that side picking up the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="version" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="4-9"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcCdsIndividualTradeSummary">
+		<xsd:sequence>
+			<xsd:element name="partyTradeIdentifier" type="SW_NcPartyTradeIdentifier" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>Should be used twice to represent the NCM Trade ID and the MarkitWire Trade ID.
+
+If the corresponding Detail Trade could not be submitted to MarkitWire, should only be present once to represent the NCM Trade ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="calculationAmount" type="Money">
+				<xsd:annotation>
+					<xsd:documentation>The Notional Amount for the corresponding Detail Trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentAmount" type="Money">
+				<xsd:annotation>
+					<xsd:documentation>The Novation Fee for the corresponding Detail Trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The error message if the corresponding Detail Trade could not be submitted to MarkitWire.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcCdsExtendedTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swTradeHeader" type="SW_NcCdsTradeHeader">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional bilateral non-economic trade details.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swExitReason" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element will hold the reason for any exit events. It will not be displayed if there has been no exit.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swCreditProductType" type="SW_NcCdCreditProductTypeEnum"/>
+			<xsd:element name="swNovationBlockId" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+For allocated Summary and Detail trades, the NCM Block ID of the allocation. Should not be present for unallocated trades.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="swIndividualTradeSummary" type="SW_NcCdsIndividualTradeSummary" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:sequence>
+					<xsd:element name="swConsentConfirmationEligible" type="xsd:boolean"/>
+					<xsd:element name="tradeId" type="TradeId" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:element name="swDSMatchCounterPartyWorkflowFields" type="SW_DSMatchWorkFlowFields" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>Should only be populated for C=C, this is used to capture the workflow fields of the counter party for novation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swCounterPartyReportingFields" type="SW_ReportingFields" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation>This elements will be used to capture  Regulatory Reporting fields  for C=C flow and should only be populated for C=C
+                    </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swCreditNovationClearing" type="SW_CreditNovationClearing" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element contains  C=C Mandatory Clearing details</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swCCPforUnderlyingSwap" type="SW_CCPType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Clearing House Id for Swaptions. Valid values are                      "CME"
+"LCH.SA",                               "JSCC",                      "ICEClearCredit",    "ICEClearEurope"</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcCdsStructuredTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swProductType" type="SW_NcCdProductTypeEnum">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swTemplateName" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the SwapsWire template associated with the trade. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FpML" type="DataDocument">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The FpML compliant sub-tree that describes the transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swExtendedTradeDetails" type="SW_NcCdsExtendedTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swBusinessConductDetails" type="SW_BusinessConductDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not 	captured within the FpML component of the message.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swTradeEventReportingDetails" type="SW_TradeEventReportingDetails" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcCdsTradeHeader">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining additional non-economic trade details.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swManualConfirmationRequired" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A true/false flag to indicate whether a follow-up manual confirmation is required.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swESMAFrontloading" type="SW_FrontloadEnum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Field to specify the Frontloading category under EMIR regulation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swESMAClearingExemption" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>This field is used to capture exemption from mandatory clearing under ESMA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+                        <xsd:element name="swNettingDetails" minOccurs="0">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="swNettingBatchId" minOccurs="0" type="xsd:normalizedString"/>
+                                    <xsd:element name="swNettingInstructionType" minOccurs="0" type="xsd:normalizedString"/>
+                                    <xsd:element name="swSubCategory" minOccurs="0" type="xsd:normalizedString"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcPartyTradeIdentifier">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A type defining one or more trade identifiers allocated to the trade by a party. A link identifier allows the trade to be associated with other related trades, e.g. trades forming part of a larger structured transaction. It is expected that for external communication of trade there will be only one tradeId sent in the document per party.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_NcTradeIdentifier">
+				<xsd:sequence>
+					<xsd:element name="linkId" type="LinkId" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation xml:lang="en">A link identifier allowing the trade to be associated with other related trades, e.g. the linkId may contain a tradeId for an associated trade or several related trades may be given the same linkId. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NcTradeIdentifier">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A type defining a trade identifier issued by the indicated party.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyReference" type="PartyReference" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. The party referenced has allocated the trade identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="tradeId" type="TradeId"/>
+				<xsd:element name="versionedTradeId" type="VersionedTradeId"/>
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID"/>
+	</xsd:complexType>
+	<xsd:complexType name="SW_CreditNovationClearing">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Element to provide details of C=C Mandatory Clearing.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swMandatoryClearingIndicator" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">True or False flag to decide whether the particular trade type in question is required to be cleared by this regulator. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swClearingHouseId" type="SW_NcCdClearingHouseEnum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The identifier for the clearing house. Valid values are "ICEClearCredit", "ICEClearEurope"</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_CCPType">
+		<xsd:simpleContent>
+			<xsd:extension base="Scheme">
+				<xsd:attribute name="CCPIdScheme" type="xsd:anyURI" default="http://www.markitwire.com/spec/2012/coding-scheme/CCP-id"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:schema>

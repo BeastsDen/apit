@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="swdml-reporting-1-0.xsd"/>
+	<xsd:element name="swNewNovatedTradeReportingDetails" type="SW_NewNovatedTradeReportingDetailsJurisdiction"/>
+	<xsd:element name="swNovatedTradeReportingDetails" type="SW_NovatedTradeReportingDetailsJurisdiction"/>
+	<xsd:element name="swNovationFeeTradeReportingDetails" type="SW_NovationFeeTradeReportingDetailsJurisdiction"/>
+	<xsd:element name="swTradeEventReportingDetails" type="SW_IrdTradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>global element, not used but its inclusion triggers DTD generation to create the necessary entities</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SW_IrdTradeEventReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetailsJurisdiction">
+				<xsd:sequence>
+					<xsd:element ref="swNewNovatedTradeReportingDetails" minOccurs="0"/>
+					<xsd:element ref="swNovatedTradeReportingDetails" minOccurs="0"/>
+					<xsd:element ref="swNovationFeeTradeReportingDetails" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

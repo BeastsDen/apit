@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="CEQCXML" type="SW_NovationDealUpdate">
+<xs:annotation>
+<xs:documentation>The root element in a CEQC XML document</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:complexType name="SW_NovationDealUpdate">
+<xs:annotation>
+<xs:documentation>A component for defining the details on the trade.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="RegulatoryReporting" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Element housing all regulatory reporting fields</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="MWTradeID">
+<xs:annotation>
+<xs:documentation>Markitwire Trade Id on the novation transaction</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="USIprefix" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Unique Swap Identifier prefix for the specific transaction</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="USIvalue" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Unique Swap Identifier value for the specific transaction</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

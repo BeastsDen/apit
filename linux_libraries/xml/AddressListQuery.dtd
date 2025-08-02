@@ -1,0 +1,2 @@
+<!ELEMENT AddressListQuery (ParticipantId+)>
+<!ELEMENT ParticipantId (#PCDATA)>

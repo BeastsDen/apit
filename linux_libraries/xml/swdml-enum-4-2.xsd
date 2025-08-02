@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="SW_BreakCalculationMethodEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The specification of Cap/Floor.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ISDA Standard Method">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The method agreed by ISDA IRD working group in 2006. Calculated as calendar dates from trade date as implied by the frequency tenor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Adjust To Coupon Dates">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as trade date plus spot days and then shifting to the first payment date for fixed and floating legs prior or on the date indicated by the frequency tenor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Straight Calendar Dates">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as calendar dates from trade date plus spot days as implied by the frequency tenor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_MasterAgreementTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AFB/FBF">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Francaise des Banques.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DERV">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag fur Finanztermingeschafte (also known as the German master).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ISDA">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_CBTradeTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for MarkitWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="NonMember-CB">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This represents the CB trade facing the non-member.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CB-CCP">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This represents the CB trade facing the Clearing House.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_ReplacementReasonEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The values used to specify trade id replacement reasons.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="IndexTransitionReplacedTrade">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">IBOR transition Replaced Trade ref</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="IndexTransitionReplacedByTrade">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">IBOR transition Replaced by Trade ref</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_TradeIdTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The values used to specify replacement trade id  type </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="MarkitWireId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">MarkitWire ID"</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="OtherId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Other ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_FallbacksSupplementEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A field to explicitly incorporate Supplement 70 to the 2006 IDSA Definitions into New-Novated swap transactions</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Incorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Incorporate Supplement 70 to the 2006 IDSA Definitions into New-Novated swap transaction</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Unspecified">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Incorporation of Supplement 70 to the 2006 IDSA Definitions is not explicitly specified</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_EconomicAmendmentTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Type of economic amendment being submitted on the trade</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Index Transition">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">If Transition from IRS to OIS is done via UI, swEconomicAmendmentType should be defaulted to Index Transition</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

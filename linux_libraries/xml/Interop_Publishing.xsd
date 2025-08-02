@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:import namespace="http://www.fpml.org/2010/FpML-4-9" schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:element name="Interop_Publishing">
+<xsd:annotation>
+<xsd:documentation>Comment describing your root element</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="status" type="StatusEnum">
+<xsd:annotation>
+<xsd:documentation>Status of the interop activity for example request, successful or error</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="contractState" type="ContractStateEnum">
+<xsd:annotation>
+<xsd:documentation>Contract state of the MW trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeReference">
+<xsd:annotation>
+<xsd:documentation>Stores the refrence deatils of the trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="tradeId" type="fpml:TradeId" maxOccurs="3">
+<xsd:annotation>
+<xsd:documentation>Trade of the system depending on the scheme for example if trdaeIdScheme="DTCCTradeID" then it is a DTCC trade id.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Coloration" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Elelement to store a origination system specefic id/cvalue for example DVH  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="href"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="subscriberDetails" type="subscriberDetails">
+<xsd:annotation>
+<xsd:documentation>Stores the subscriber details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="event">
+<xsd:annotation>
+<xsd:documentation>Parent element for a specefic interop event.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:choice>
+<xsd:element name="TRIChange">
+<xsd:annotation>
+<xsd:documentation>Container of a TRI-Rename Request</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="false">
+<xsd:sequence>
+<xsd:element name="productType">
+<xsd:annotation>
+<xsd:documentation>DSMatch Product Type of the Trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newTradeDetails">
+<xsd:annotation>
+<xsd:documentation>Submitter party deatils as in the BIC of the party, MW trade ID, DSMatch Tarde id etc.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="partyTradeIdentifier"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="oldTradeDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Stores the details of the old internal trade id</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element ref="partyTradeIdentifier"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="submitter" type="fpml:Party" maxOccurs="3">
+<xsd:annotation>
+<xsd:documentation>Referenece of the party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="partyTradeIdentifier" type="fpml:PartyTradeIdentifier"/>
+<xsd:simpleType name="StatusEnum">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Request"/>
+<xsd:enumeration value="Successful"/>
+<xsd:enumeration value="Error"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="ContractStateEnum">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Publishing"/>
+<xsd:enumeration value="Clearing"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="subscriberDetails">
+<xsd:sequence>
+<xsd:element name="subscriberReference" type="subscriberReference" maxOccurs="3">
+<xsd:annotation>
+<xsd:documentation>Stores the subscriber reference</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="subscriberReference">
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="subscriberRefScheme" type="xsd:anyURI" use="required">
+<xsd:annotation>
+<xsd:documentation>Stores the subscriber reference scheme </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:schema>

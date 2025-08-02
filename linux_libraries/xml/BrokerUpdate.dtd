@@ -1,0 +1,5 @@
+<!ELEMENT BrokerUpdate (Action,
+Allocation?)>
+<!ELEMENT Action (#PCDATA)>
+<!ELEMENT Allocation (TradeId)>
+<!ELEMENT TradeId (#PCDATA)>

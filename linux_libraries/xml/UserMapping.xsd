@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns="http://www.markitserv.com/2011/UserMapping"
+targetNamespace="http://www.markitserv.com/2011/UserMapping"
+elementFormDefault="qualified">
+<xsd:element name="accountMappings" type="UserMappings">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in an account mapping documentt.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="UserMappings">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the account mappings.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="account" type="Account" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A trade reference identifier allocated by MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Account">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the account mappings.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="mappingDetails" type="MappingDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Any further details regarding the mapping of the account.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="le_bic"        type="xsd:string" use="required"/>
+<xsd:attribute name="externalId"    type="xsd:string" use="required"/>
+<xsd:attribute name="additionalBic" type="xsd:string"/>
+</xsd:complexType>
+<xsd:complexType name="MappingDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the account mappings.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="mappingDetail" type="MappingDetail" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Any further details regarding the mapping of the account.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType  name="MappingDetail">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the account mappings.</xsd:documentation>
+</xsd:annotation>
+<xsd:attribute name="detailType" type="xsd:string" use="required"/>
+<xsd:attribute name="detailValue" type="xsd:string" use="required"/>
+</xsd:complexType>
+</xsd:schema>

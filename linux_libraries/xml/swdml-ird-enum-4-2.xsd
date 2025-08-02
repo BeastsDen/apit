@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:simpleType name="SW_BondIdEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A code for identification of underlying bond instruments.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="USD.OTR.4W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 4-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.8W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 8-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.13W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 13-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.17W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or  "on-the-run", nominal 17-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.26W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 26-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.52W">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 52-week note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.2Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's most recently auctioned, or "on-the-run", nominal 2-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.3Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 3-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.5Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 5-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.7Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 7-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.10Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 10-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.20Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 20-year note.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="USD.OTR.30Y">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 30-year bond.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_CapFloorTypeEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The specification of Cap/Floor.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Cap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An interest rate cap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Floor">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An interest rate floor.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Cap Floor Straddle">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An interest rate cap floor straddle.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_IrdProductTypeEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CapFloor">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An interest rate cap or a floor.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SingleCurrencyInterestRateSwap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A single currency interest rate swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="FRA">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A fixed rate agreement.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="OIS">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An overnight interest rate swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Swaption">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An option on a a single currency interest rate swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ZC Inflation Swap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A Zero Coupon Inflation Swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Single Currency Basis Swap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A Single Currency Swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Cross Currency Basis Swap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A Cross Currency Swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Cross Currency IRS">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en"> A Cross Currency IRS.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Offline Trade Rates">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A generic offline trade.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Fixed Fixed Swap">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Fixed Fixed Swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_ContractualDefinitionsEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The list of possible contractual definitons used to confirm a deal.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="ISDA2000">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">ISDA2000 contractual definitions.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ISDA2006">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">ISDA2006 contractual definitions.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+     <xsd:enumeration value="ISDA2021">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">ISDA2021 contractual definitions.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_PriceTypeEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A classification of the format used to express the bond price and hence how the price value should be interpreted.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="D5">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/100000th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}(.[0-9]{1,5})? i.e. 1 to 3 decimal digits to the left of a period decimal separator and 0 to 5 decimal digits to the right.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="F128">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/128th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}-(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31)[2+6]? i.e. 1 to 3 decimal digits to the left of a '-' fractional separator and 2 digits to the right in the decimal range 00-31 (representing 32nds) followed by an optional '2', '+' or '6' character.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="F256">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/256th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}-(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31)[13457]? i.e. 1 to 3 decimal digits to the left of a '-' fractional separator and 2 digits to the right in the decimal range 00-31 (representing 32nds) followed by an optional '0', '1','3', '4', '5' or '7' character.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_StubPositionEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The specification of a stub position.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="End">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">An end (back) stub.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Start">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A start (front) stub.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_StubLengthEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The specification of a stub length.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Short">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A short stub.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Long">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A long stub.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_SwaptionTypeEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The specification of of a swaption type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Payers">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A payer pays fixed on the underlying swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Receivers">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A receiver receives fixed on the underlying swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Straddle">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">At the point of exercise the purchaser of the swaption can elect to be a payer or receiver on the underlying swap.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_SettlementLegEnum">
+      <xsd:annotation>
+          <xsd:documentation xml:lang="en">The specification of the settlement leg.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="Initial Exchange">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en">Near leg of the XCCY trade</xsd:documentation>
+              </xsd:annotation>
+          </xsd:enumeration>
+        <xsd:enumeration value="Final Exchange">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Final leg of the XCCY trade.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:enumeration>
+      </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SW_FrontloadEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A field to indicate the frontloading category of a trade under EMIR regulation by ESMA.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Category1">
+        <xsd:annotation>
+	  <xsd:documentation xml:lang="en">The trade falls under frontloading Category 1 as per the criteria laid down by ESMA.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Category2">
+	<xsd:annotation>
+	  <xsd:documentation xml:lang="en">The trade falls under frontloading Category 2 as per the criteria laid down by ESMA.</xsd:documentation>
+	</xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NotApplicable">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The category of trade does exist but dos not match the criteria laid down by ESMA for category 1 or 2 frontloading.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

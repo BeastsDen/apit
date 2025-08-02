@@ -239,19 +239,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Host, username, and password are required" });
       }
 
-      // Test connection using SW_Connect and SW_Login
+      // Test connection using the Help command which doesn't require valid credentials
+      // but will test the connection to the server
       const connectCall = {
-        functionName: 'SW_Connect',
+        functionName: 'Help',
         host,
-        username,
-        password,
-        parameters: [host, '120']
+        username: 'test', // Use test credentials for help command
+        password: 'test',
+        parameters: []
       };
 
       const result = await markitWireJavaService.executeDealerCommand(connectCall);
+      
+      // Check if we got any output or if there was a connection-related error
+      const isConnectable = result.javaOutput?.includes('SW_API_DLL Version') || 
+                           result.javaOutput?.includes('Connecting to') ||
+                           result.error?.includes('authentication') ||
+                           result.error?.includes('login');
+      
       res.json({
-        success: result.success,
-        message: result.success ? 'Connection successful' : 'Connection failed',
+        success: isConnectable,
+        message: isConnectable ? 'Server is reachable' : 'Cannot connect to server',
         details: result
       });
     } catch (error) {

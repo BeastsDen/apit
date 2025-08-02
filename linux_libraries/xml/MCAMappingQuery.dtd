@@ -1,0 +1,5 @@
+<!ELEMENT MCAMappings (PartyA, PartyB, Broker, ProductType)>
+<!ELEMENT PartyA (#PCDATA)>
+<!ELEMENT PartyB (#PCDATA)>
+<!ELEMENT Broker (#PCDATA)>
+<!ELEMENT ProductType (#PCDATA)>

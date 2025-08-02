@@ -1,0 +1,836 @@
+<!ELEMENT PrivateData (swPrivateTradeId?,
+swTradingBookId?,
+swBrokerPartyId?,
+swBrokerTradeId?,
+swSalesCredit?,
+swBrokerageAmount?,
+swExecutionMode?,
+swNormalisation?,
+swBatchId?,
+swAssociatedFuture*,
+swSwaptionExercise?,
+swPortfolioSwapId?,
+swAdditionalField*,
+swReAffirmNotRequired?,
+swInterOpTradeId?,
+swOtherPartyInterOpTradeId?,
+swInterOpSupplementId?,
+swOldPrivateTradeId?,
+swDSMatchSupplementId?,
+swNettingString?,
+swClearingBrokerId?,
+swPrivateFundId?,
+swClearingBatchId?,
+swMarginRunPreference?,
+swOutgoingReAffirmsNovation?,
+swClearingHouseId?,
+swDSMatchWorkflowFields?,
+swClearIfEligible?,
+swSendForConfirmation?,
+swTraderId?,
+swOriginatingEvent?,
+swEventType?,
+swPriceFormingEvent?,
+swExecutionDateTime?,
+swExecutionVenueType?,
+swBrokerLocation?,
+swArrangingBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swBranchLocation?,
+swBranchIdPrefix?,
+swBranchId?,
+swBeneficiaryIdPrefix?,
+swBeneficiaryIdValue?,
+swInvestmentDecisionMaker?,
+swInvestmentDecisionMakerLocation*,
+swOffPlatformVerificationType?,
+swOffPlatformConfirmationType?,
+swOffPlatformConfirmedTimestamp?,
+swNonStandardTerms?,
+swCollateralized?,
+swCollateralPortfolioCode?,
+swEventIdentifier?,
+swGTRBulkEventProcessingID?,
+swCommercialActivity?,
+swTradingCapacity?,
+swPriorReporting?,
+swPBClientReporting?,
+swDFReporting*,
+swFeeReporting*,
+swFeeDFReporting*,
+swPriorDFReporting*,
+swNovationExecutionTradeId?,
+swPBClientDFReporting?,
+swAllocationDFReporting?,
+swJFSAReporting?,
+swPriorJFSAReporting?,
+swPBClientJFSAReporting?,
+swAllocationJFSAReporting?,
+swESMAReporting?,
+swPriorESMAReporting?,
+swPBClientESMAReporting?,
+swAllocationESMAReporting?,
+swMTMMessageId?,
+swHKMAReporting?,
+swPriorHKMAReporting?,
+swPBClientHKMAReporting?,
+swAllocationHKMAReporting?,
+swMASReporting?,
+swPriorMASReporting?,
+swPBClientMASReporting?,
+swAllocationMASReporting?,
+swASICReporting?,
+swPriorASICReporting?,
+swPBClientASICReporting?,
+swAllocationASICReporting?,
+swCANReporting?,
+swFeeCANReporting?,
+swPriorCANReporting?,
+swPBClientCANReporting?,
+swAllocationCANReporting?,
+swSECReporting?,
+swPriorSECReporting?,
+swPBClientSECReporting?,
+swAllocationSECReporting?,
+swMIFIDReporting?,
+swPriorMIFIDReporting?,
+swPBClientMIFIDReporting?,
+swAllocationMIFIDReporting?,
+swFCAReporting?,
+swPriorFCAReporting?,
+swPBClientFCAReporting?,
+swAllocationFCAReporting?,
+swCreditNovationESMAReporting?,
+swCreditNovationJFSAReporting?,
+swCreditNovationFCAReporting?,
+swClearedTradeReporting?,
+swClearingTradeId?,
+swCounterpartyNonDisclosure?,
+swIntragroup?,
+swReportingBrokerId?,
+swTIWWriteValueDate?,
+swTIWPrivateValueDate?,
+swExitAdditionalMsg?,
+swFloatingCurrentNotional?,
+swFixedCurrentNotional?,
+swFloatingCurrentNotional2?,
+swNewNovatedTradeDetails?,
+swCompressionType?,
+swExecutionMethod?,
+swUnderlyingSwapClearingDetails?,
+swOrderDetails?,
+swIdentifiers?,
+swComplexTradeDetails?,
+swExecutionVenueIdentifier?,
+swExecutionVenueLEI?,
+swCounterpartyCorporateSector?,
+swLinkedTradeDetails?,
+swProductClassification?,
+swProductFullName?,
+swProductISIN?,
+swFallbacksMechanism?,
+swGlobalUTI?,
+swGlobalPriorUTI?,
+swGlobalBlockUTI?,
+swPackageDetails?,
+swPBClientDetails?,
+swCustomBasket?,
+swPostPriceSwap?,
+swToTV?)>
+<!ELEMENT swPrivateTradeId (#PCDATA)>
+<!ELEMENT swTradingBookId (#PCDATA)>
+<!ELEMENT swBrokerPartyId (#PCDATA)>
+<!ELEMENT swBrokerTradeId (#PCDATA)>
+<!ELEMENT swSalesCredit (#PCDATA)>
+<!ELEMENT swBrokerageAmount (currency,
+amount)>
+<!ELEMENT currency (#PCDATA)>
+<!ELEMENT amount (#PCDATA)>
+<!ELEMENT swExecutionMode (#PCDATA)>
+<!ELEMENT swNormalisation  (swNormalisationDate,
+swOriginalTradeDate,
+swOriginalEffectiveDate,
+swOriginalTerminationDate)>
+<!ELEMENT swNormalisationDate  (#PCDATA)>
+<!ELEMENT swOriginalTradeDate  (#PCDATA)>
+<!ELEMENT swOriginalEffectiveDate  (#PCDATA)>
+<!ELEMENT swOriginalTerminationDate  (#PCDATA)>
+<!ELEMENT swBatchId (#PCDATA)>
+<!ELEMENT swAssociatedFuture (swFutureName,
+swQuantity,
+(swMaturity|swDescription),
+swPrice)>
+<!ELEMENT swFutureName (#PCDATA)>
+<!ELEMENT swQuantity (#PCDATA)>
+<!ELEMENT swMaturity (#PCDATA)>
+<!ELEMENT swDescription (#PCDATA)>
+<!ELEMENT swPrice (#PCDATA)>
+<!ELEMENT swSwaptionExercise  (swTradingBookId)>
+<!ELEMENT swPortfolioSwapId (#PCDATA)>
+<!ELEMENT swAdditionalField (#PCDATA)>
+<!ATTLIST swAdditionalField  sequence (1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80) #REQUIRED>
+<!ELEMENT swReAffirmNotRequired (#PCDATA)>
+<!ELEMENT swInterOpTradeId (#PCDATA)>
+<!ELEMENT swOtherPartyInterOpTradeId (#PCDATA)>
+<!ELEMENT swInterOpSupplementId (#PCDATA)>
+<!ELEMENT swOldPrivateTradeId (#PCDATA)>
+<!ELEMENT swDSMatchSupplementId (#PCDATA)>
+<!ELEMENT swNettingString (#PCDATA)>
+<!ELEMENT swClearingBrokerId (#PCDATA)>
+<!ELEMENT swPrivateFundId (#PCDATA)>
+<!ELEMENT swClearingBatchId (#PCDATA)>
+<!ELEMENT swMarginRunPreference (#PCDATA)>
+<!ELEMENT swOutgoingReAffirmsNovation (#PCDATA)>
+<!ELEMENT swClearingHouseId (#PCDATA)>
+<!ELEMENT swDSMatchWorkflowFields (swDSMatchComment?,
+swDSMatchSuperId?,
+swDSMatchDeskId?,
+swDSMatchDesignatedPartyId?,
+swDSMatchBrokerName?)>
+<!ELEMENT swDSMatchComment (#PCDATA)>
+<!ELEMENT swDSMatchSuperId (#PCDATA)>
+<!ELEMENT swDSMatchDeskId (#PCDATA)>
+<!ELEMENT swDSMatchDesignatedPartyId (#PCDATA)>
+<!ELEMENT swDSMatchBrokerName (#PCDATA)>
+<!ELEMENT swClearIfEligible (#PCDATA)>
+<!ELEMENT swSendForConfirmation (#PCDATA)>
+<!ELEMENT swTraderId (#PCDATA)>
+<!ELEMENT swOriginatingEvent (#PCDATA)>
+<!ELEMENT swEventType (#PCDATA)>
+<!ELEMENT swPriceFormingEvent (#PCDATA)>
+<!ELEMENT swExecutionDateTime (#PCDATA)>
+<!ELEMENT swExecutionVenueType (#PCDATA)>
+<!ELEMENT swBrokerLocation (#PCDATA)>
+<!ELEMENT swDeskLocation (#PCDATA)>
+<!ELEMENT swDeskId (#PCDATA)>
+<!ELEMENT swTraderLocation (#PCDATA)>
+<!ELEMENT swSalesLocation (#PCDATA)>
+<!ELEMENT swBranchLocation (#PCDATA)>
+<!ELEMENT swBranchIdPrefix (#PCDATA)>
+<!ELEMENT swBranchId (#PCDATA)>
+<!ELEMENT swBeneficiaryIdPrefix (#PCDATA)>
+<!ELEMENT swBeneficiaryIdValue (#PCDATA)>
+<!ELEMENT swOffPlatformVerificationType (#PCDATA)>
+<!ELEMENT swOffPlatformConfirmationType (#PCDATA)>
+<!ELEMENT swOffPlatformConfirmedTimestamp (#PCDATA)>
+<!ELEMENT swNonStandardTerms (#PCDATA)>
+<!ELEMENT swExecutionType (#PCDATA)>
+<!ELEMENT swCounterpartyOrigin (#PCDATA)>
+<!ELEMENT swAuthorisedInstitutionIdPrefix (#PCDATA)>
+<!ELEMENT swAuthorisedInstitutionId (#PCDATA)>
+<!ELEMENT swCollateralized (#PCDATA)>
+<!ELEMENT swCollateralPortfolioCode (#PCDATA)>
+<!ELEMENT swCommercialActivity (#PCDATA)>
+<!ELEMENT swTradingCapacity (#PCDATA)>
+<!ELEMENT swLargeSizeTrade (#PCDATA)>
+<!ELEMENT swAllocationDFReporting (swAllocation+)>
+<!ELEMENT swAllocationJFSAReporting (swAllocation+)>
+<!ELEMENT swAllocationESMAReporting (swAllocation+)>
+<!ELEMENT swAllocationHKMAReporting (swAllocation+)>
+<!ELEMENT swAllocationASICReporting (swAllocation+)>
+<!ELEMENT swAllocationMASReporting (swAllocation+)>
+<!ELEMENT swAllocationCANReporting (swAllocation+)>
+<!ELEMENT swAllocationSECReporting (swAllocation+)>
+<!ELEMENT swAllocationMIFIDReporting (swAllocation+)>
+<!ELEMENT swAllocationFCAReporting (swAllocation+)>
+<!ELEMENT swMTMMessageId (#PCDATA)>
+<!ELEMENT swAllocation (swObligatoryReporting?,
+swCollateralized?)>
+<!ELEMENT swPriorReporting (swEventIdentifier?,
+swGTRBulkEventProcessingID?,
+swExecutionDateTime?,
+swBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swOffPlatformVerificationType?,
+swOffPlatformConfirmationType?,
+swOffPlatformConfirmedTimestamp?,
+swIdentifiers?,
+swComplexTradeDetails?)>
+<!ELEMENT swPBClientReporting (swGTRBulkEventProcessingID?,
+swExecutionDateTime?,
+swExecutionVenueType?,
+swBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swOffPlatformVerificationType?,
+swOffPlatformConfirmationType?,
+swOffPlatformConfirmedTimestamp?,
+swCollateralized?,
+swIdentifiers?,
+swGlobalUTI?,
+swComplexTradeDetails?)>
+<!ELEMENT swDFReporting (swEventIdentifier?,
+swEndUserException?,
+swEndUserExceptionReason?,
+swReportRT*,
+swReportPET*,
+swReportCONF*,
+swReportLIFECYCLE*,
+swUSI?,
+swUSINamespace?,
+swPriorUSI*,
+swPriorUSINamespace*,
+swBlockUSI*,
+swBlockUSINamespace*,
+swGTRBulkEventProcessingID*,
+swReportingTRs?,
+swRegulatoryReportable?,
+swLargeSizeTrade?,
+swCounterpartyNonDisclosure?)>
+<!ELEMENT swFeeReporting (swGlobalUTI?)>
+<!ELEMENT swFeeDFReporting (swReportRT*,
+swUSI?,
+swUSINamespace?,
+swPriorUSI*,
+swPriorUSINamespace*,
+swBlockUSI*,
+swBlockUSINamespace*,
+swGTRBulkEventProcessingID*,
+swReportingTRs?,
+swExecutionDateTime?,
+swBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swLargeSizeTrade?,
+swIdentifiers?,
+swComplexTradeDetails?)>
+<!ELEMENT swPriorDFReporting (swEventIdentifier?,
+swEndUserException?,
+swEndUserExceptionReason?,
+swReportLIFECYCLE*,
+swBlockUSI*,
+swBlockUSINamespace*,
+swGTRBulkEventProcessingID*,
+swExecutionDateTime?,
+swBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swOffPlatformVerificationType?,
+swOffPlatformConfirmationType?,
+swOffPlatformConfirmedTimestamp?,
+swRegulatoryReportable?,
+swLargeSizeTrade?,
+swIdentifiers?,
+swCounterpartyLocation?)>
+<!ELEMENT swPBClientDFReporting (swEndUserException?,
+swEndUserExceptionReason?,
+swReportPET*,
+swReportCONF*,
+swUSI?,
+swUSINamespace?,
+swPriorUSI*,
+swPriorUSINamespace*,
+swBlockUSI*,
+swBlockUSINamespace*,
+swGTRBulkEventProcessingID*,
+swReportingTRs?,
+swExecutionDateTime?,
+swExecutionVenueType?,
+swBrokerLocation?,
+swDeskLocation*,
+swDeskId?,
+swBranchLocation?,
+swExecutingTrader?,
+swTraderLocation*,
+swExecutingTraderId?,
+swSalesTrader?,
+swSalesLocation*,
+swSalesTraderId?,
+swOffPlatformVerificationType?,
+swOffPlatformConfirmationType?,
+swOffPlatformConfirmedTimestamp?,
+swNonStandardTerms?,
+swCollateralized?,
+swRegulatoryReportable?,
+swLargeSizeTrade?,
+swIdentifiers?,
+swCounterpartyLocation?)>
+<!ELEMENT swJFSAReporting (swObligatoryReporting?,
+swEndUserException?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swCounterpartyNonDisclosure?)>
+<!ELEMENT swPriorJFSAReporting (swObligatoryReporting?,
+swEndUserException?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swPBClientJFSAReporting (swEndUserException?,
+swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swESMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swUTI?,
+swUTINamespace?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swIntragroup?,
+swCounterpartyNonDisclosure?,
+swReportClearingObligationX?,
+swReportForCounterparty?
+)>
+<!ELEMENT swPriorESMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swPBClientESMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swHKMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swExecutionType?,
+swCounterpartyOrigin?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swPriorHKMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swExecutionType?,
+swCounterpartyOrigin?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swPBClientHKMAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swExecutionType?,
+swCounterpartyOrigin?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swMASReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swCounterpartyNonDisclosure?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swPriorMASReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swPBClientMASReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swAuthorisedInstitutionIdPrefix?,
+swAuthorisedInstitutionId?)>
+<!ELEMENT swASICReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swCounterpartyNonDisclosure?)>
+<!ELEMENT swPriorASICReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swPBClientASICReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swCANReporting (swRegulatoryReportable?,
+swReportPPD?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swPriceFormingEvent?)>
+<!ELEMENT swFeeCANReporting (swReportPPD?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swPriceFormingEvent?)>
+<!ELEMENT swPriorCANReporting (swEventIdentifier?,
+swRegulatoryReportable?,
+swReportPPD?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swPriceFormingEvent?)>
+<!ELEMENT swPBClientCANReporting (swRegulatoryReportable?,
+swReportPPD?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swPriceFormingEvent?)>
+<!ELEMENT swSECReporting (swRegulatoryReportable?,
+swReportRT?,
+swReportPET?,
+swReportCONF?,
+swReportLIFECYCLE?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swPriceFormingEvent?,
+swLargeSizeTrade?,
+swIntentToClear?,
+swNonStandardTerms?,
+swPricingContext?
+)>
+<!ELEMENT swPriorSECReporting (swRegulatoryReportable?,
+swReportRT?,
+swReportPET?,
+swReportCONF?,
+swReportLIFECYCLE?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swPriceFormingEvent?,
+swLargeSizeTrade?,
+swIntentToClear?,
+swNonStandardTerms?,
+swPricingContext?)>
+<!ELEMENT swPBClientSECReporting (swRegulatoryReportable?,
+swReportRT?,
+swReportPET?,
+swReportCONF?,
+swReportLIFECYCLE?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swPriceFormingEvent?,
+swLargeSizeTrade?,
+swIntentToClear?,
+swNonStandardTerms?,
+swPricingContext?)>
+<!ELEMENT swMIFIDReporting (swTransactionReportable?,
+swTransparencyReportable?,
+swReportTransaction?,
+swReportTransparency?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swMIFIDTRs?,
+swMIFIDTransactionIdentifier?,
+swShortSale?,
+swOTCPostTradeIndicator*,
+swWaiver*,
+swProductISIN?)>
+<!ELEMENT swPriorMIFIDReporting (swTransactionReportable?,
+swTransparencyReportable?,
+swReportTransaction?,
+swReportTransparency?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swMIFIDTRs?,
+swMIFIDTransactionIdentifier?,
+swShortSale?,
+swOTCPostTradeIndicator*,
+swWaiver*,
+swProductISIN?)>
+<!ELEMENT swPBClientMIFIDReporting  (swTransactionReportable?,
+swTransparencyReportable?,
+swReportTransaction?,
+swReportTransparency?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swMIFIDTRs?,
+swMIFIDTransactionIdentifier?,
+swShortSale?,
+swOTCPostTradeIndicator*,
+swWaiver*,
+swProductISIN?)>
+<!ELEMENT swFCAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swUTI?,
+swUTINamespace?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?,
+swIntragroup?,
+swCounterpartyNonDisclosure?,
+swReportClearingObligationX?,
+swReportForCounterparty?)>
+<!ELEMENT swPriorFCAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swPBClientFCAReporting (swObligatoryReporting?,
+swReportPTC?,
+swReportCONF?,
+swPriorUTI?,
+swPriorUTINamespace?,
+swBlockUTI?,
+swBlockUTINamespace?,
+swReportingTRs?)>
+<!ELEMENT swClearedTradeReporting (swClearedUSINamespace?,
+swClearedUSI?,
+swClearedUTINamespace?,
+swClearedUTI?,
+swCBNonMemberUTINamespace?,
+swCBNonMemberUTI?,
+swClearedGlobalUTI?,
+swClearedTimeStamp?,
+swIsCleared?,
+swReportingPreferences*)>
+<!ELEMENT swReportingPreferences (swJurisdiction,
+swObligatoryReporting?,
+swReportCCPLeg?)>
+<!ELEMENT swEventIdentifier (#PCDATA)>
+<!ELEMENT swObligatoryReporting (#PCDATA)>
+<!ELEMENT swEndUserException (#PCDATA)>
+<!ELEMENT swEndUserExceptionReason (#PCDATA)>
+<!ELEMENT swReportRT (#PCDATA)>
+<!ELEMENT swReportPET (#PCDATA)>
+<!ELEMENT swReportCONF (#PCDATA)>
+<!ELEMENT swReportLIFECYCLE (#PCDATA)>
+<!ELEMENT swRoute1Destination (#PCDATA)>
+<!ELEMENT swRoute1Intermediary (#PCDATA)>
+<!ELEMENT swReportingTRs (swRoute1Destination,
+swRoute1Intermediary?)>
+<!ELEMENT swMIFIDTRs (swDestinationAPA?,
+swDestinationARM?)>
+<!ELEMENT swPriorUSI (#PCDATA)>
+<!ELEMENT swPriorUSINamespace (#PCDATA)>
+<!ELEMENT swBlockUSI (#PCDATA)>
+<!ELEMENT swBlockUSINamespace (#PCDATA)>
+<!ELEMENT swGTRBulkEventProcessingID (#PCDATA)>
+<!ELEMENT swNovationExecutionTradeId (#PCDATA)>
+<!ELEMENT swGlobalUTI (#PCDATA)>
+<!ELEMENT swUSI (#PCDATA)>
+<!ELEMENT swUSINamespace (#PCDATA)>
+<!ELEMENT swUTI (#PCDATA)>
+<!ELEMENT swUTINamespace (#PCDATA)>
+<!ELEMENT swPriorUTI (#PCDATA)>
+<!ELEMENT swPriorUTINamespace (#PCDATA)>
+<!ELEMENT swBlockUTI (#PCDATA)>
+<!ELEMENT swBlockUTINamespace (#PCDATA)>
+<!ELEMENT swRegulatoryReportable (#PCDATA)>
+<!ELEMENT swReportPTC (#PCDATA)>
+<!ELEMENT swCreditNovationESMAReporting (swESMAEEObligatoryReporting?,
+swESMARPObligatoryReporting?
+)>
+<!ELEMENT swESMAEEObligatoryReporting (#PCDATA)>
+<!ELEMENT swESMARPObligatoryReporting (#PCDATA)>
+<!ELEMENT swCreditNovationJFSAReporting (swJFSAEEObligatoryReporting?,
+swJFSARPObligatoryReporting?
+)>
+<!ELEMENT swJFSAEEObligatoryReporting (#PCDATA)>
+<!ELEMENT swJFSARPObligatoryReporting (#PCDATA)>
+<!ELEMENT swCreditNovationFCAReporting (swFCAEEObligatoryReporting?,
+swFCARPObligatoryReporting?
+)>
+<!ELEMENT swFCAEEObligatoryReporting (#PCDATA)>
+<!ELEMENT swFCARPObligatoryReporting (#PCDATA)>
+<!ELEMENT swClearedUSINamespace (#PCDATA)>
+<!ELEMENT swClearedUSI (#PCDATA)>
+<!ELEMENT swClearedUTINamespace (#PCDATA)>
+<!ELEMENT swClearedUTI (#PCDATA)>
+<!ELEMENT swCBNonMemberUTINamespace (#PCDATA)>
+<!ELEMENT swCBNonMemberUTI (#PCDATA)>
+<!ELEMENT swClearedTimeStamp (#PCDATA)>
+<!ELEMENT swIsCleared (#PCDATA)>
+<!ELEMENT swJurisdiction (#PCDATA)>
+<!ELEMENT swReportCCPLeg (#PCDATA)>
+<!ELEMENT swClearingTradeId (#PCDATA)>
+<!ELEMENT swIntragroup (#PCDATA)>
+<!ELEMENT swCounterpartyNonDisclosure (#PCDATA)>
+<!ELEMENT swReportingBrokerId (#PCDATA)>
+<!ELEMENT swTIWWriteValueDate (#PCDATA)>
+<!ELEMENT swTIWPrivateValueDate (#PCDATA)>
+<!ELEMENT swExecutingTrader (#PCDATA)>
+<!ELEMENT swExecutingTraderId (#PCDATA)>
+<!ELEMENT swSalesTrader (#PCDATA)>
+<!ELEMENT swSalesTraderId (#PCDATA)>
+<!ELEMENT swExitAdditionalMsg (#PCDATA)>
+<!ELEMENT swFloatingCurrentNotional (swAmount?,
+swCurrency?)>
+<!ELEMENT swFixedCurrentNotional (swAmount?,
+swCurrency?)>
+<!ELEMENT swFloatingCurrentNotional2 (swAmount?,
+swCurrency?)>
+<!ELEMENT swAmount (#PCDATA)>
+<!ELEMENT swCurrency (#PCDATA)>
+<!ELEMENT swNettingActivityType (#PCDATA)>
+<!ELEMENT swNewNovatedTradeDetails (swTradingBookId?,
+swClearedTimeStamp?,
+swClearingHouseId?,
+swCBNonMemberUTINamespace?,
+swCBNonMemberUTI?,
+swNettingActivityType?)>
+<!ELEMENT swCompressionType (#PCDATA)>
+<!ELEMENT swExecutionMethod (#PCDATA)>
+<!ELEMENT swReportClearingObligationX (#PCDATA)>
+<!ELEMENT swReportPPD (#PCDATA)>
+<!ELEMENT swUnderlyingSwapClearingDetails (swClearingBrokerId?,
+swPrivateFundId?)>
+<!ELEMENT swIntentToClear (#PCDATA)>
+<!ELEMENT swPricingContext (#PCDATA)>
+<!ELEMENT swArrangingBrokerLocation (#PCDATA)>
+<!ELEMENT swTransactionReportable (#PCDATA)>
+<!ELEMENT swTransparencyReportable (#PCDATA)>
+<!ELEMENT swReportTransaction (#PCDATA)>
+<!ELEMENT swReportTransparency (#PCDATA)>
+<!ELEMENT swMIFIDTransactionIdentifier (#PCDATA)>
+<!ELEMENT swShortSale (#PCDATA)>
+<!ELEMENT swOTCPostTradeIndicator (#PCDATA)>
+<!ELEMENT swWaiver (#PCDATA)>
+<!ELEMENT swInvestmentDecisionMaker (#PCDATA)>
+<!ELEMENT swInvestmentDecisionMakerLocation (#PCDATA)>
+<!ELEMENT swExecutionVenueIdentifier (#PCDATA)>
+<!ELEMENT swOrderDetails (swTransmittingOrder?,
+swBuyer?,
+swSeller?)>
+<!ELEMENT swTransmittingOrder (#PCDATA)>
+<!ELEMENT swBuyer (#PCDATA)>
+<!ELEMENT swSeller (#PCDATA)>
+<!ELEMENT swProductISIN (#PCDATA)>
+<!ELEMENT swDestinationAPA (#PCDATA)>
+<!ELEMENT swDestinationARM (#PCDATA)>
+<!ELEMENT swIdentifiers (swPartyIdentifiers?)>
+<!ELEMENT swPartyIdentifiers (swCounterpartyLEI?, swCounterpartyPLI?, swDataMaskingFlag?)>
+<!ELEMENT swCounterpartyLEI (#PCDATA)>
+<!ELEMENT swCounterpartyPLI (#PCDATA)>
+<!ELEMENT swDataMaskingFlag (swMaskCFTC?, swMaskJFSA?, swMaskCanada?, swMaskHKMA?, swMaskASIC?, swMaskMAS?)>
+<!ELEMENT swMaskCFTC (#PCDATA)>
+<!ELEMENT swMaskJFSA (#PCDATA)>
+<!ELEMENT swMaskCanada (#PCDATA)>
+<!ELEMENT swMaskHKMA (#PCDATA)>
+<!ELEMENT swMaskASIC (#PCDATA)>
+<!ELEMENT swMaskMAS (#PCDATA)>
+<!ELEMENT swComplexTradeDetails (swComplexTradeId?, swComplexPriceNotation?)>
+<!ELEMENT swComplexPriceNotation (swAmount?, swUnit?, swCurrency?)>
+<!ELEMENT swUnit (#PCDATA)>
+<!ELEMENT swComplexTradeId (#PCDATA)>
+<!ELEMENT swExecutionVenueLEI (#PCDATA)>
+<!ELEMENT swCounterpartyCorporateSector (#PCDATA)>
+<!ELEMENT swReportForCounterparty (#PCDATA)>
+<!ELEMENT swLinkedTradeDetails (swLinkedTradeId+)>
+<!ATTLIST swLinkedTradeDetails
+action (Modify|Replace) #IMPLIED
+>
+<!ELEMENT swLinkedTradeId (swIdType, swTradeId)>
+<!ATTLIST swLinkedTradeId
+action (Add|Delete) #IMPLIED
+>
+<!ELEMENT swIdType (#PCDATA)>
+<!ELEMENT swTradeId (#PCDATA)>
+<!ELEMENT swProductClassification (#PCDATA)>
+<!ELEMENT swProductFullName (#PCDATA)>
+<!ELEMENT swFallbacksMechanism (#PCDATA)>
+<!ELEMENT swGlobalPriorUTI (#PCDATA)>
+<!ELEMENT swGlobalBlockUTI (#PCDATA)>
+<!ELEMENT swClearedGlobalUTI (#PCDATA)>
+<!ELEMENT swPackageDetails (swPackageId?, swPackageSize?, swRegReportAsPackage?, swPackagePriceDetails?)>
+<!ELEMENT swRegReportAsPackage (#PCDATA)>
+<!ELEMENT swPackageId (#PCDATA)>
+<!ELEMENT swPackageSize (#PCDATA)>
+<!ELEMENT swPackagePriceDetails (swType?, swValue?, swNotation?, swCurrency?)>
+<!ELEMENT swValue (#PCDATA)>
+<!ELEMENT swNotation (#PCDATA)>
+<!ELEMENT swType (#PCDATA)>
+<!ELEMENT swPBClientDetails (swPackageDetails?)>
+<!ELEMENT swCustomBasket (#PCDATA)>
+<!ELEMENT swPostPriceSwap (#PCDATA)>
+<!ELEMENT swToTV (#PCDATA)>

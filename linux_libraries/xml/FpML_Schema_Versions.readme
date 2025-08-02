@@ -1,0 +1,8 @@
+FpML Schema Versions
+====================
+
+How to determine which version of the FpML schemas are in use in the DealSink API:
+
+The versions of the FpML schemas in use in the DealSink API are determined by the release of FpML in force at the time the API was released. 
+
+For each schema-based product supported by the API, the relevant SWML mapping specification will contain the URL on the FpML website from which the relevant FpML schema files may be downloaded.

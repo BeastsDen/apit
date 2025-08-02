@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.markitserv.com/2011/matchInfo-1-0" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" targetNamespace="http://www.markitserv.com/2011/matchInfo-1-0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1-0">
+<xsd:import namespace="http://www.fpml.org/2010/FpML-4-9" schemaLocation="swml-cd-main-4-9.xsd"/>
+<xsd:element name="matchInfo" type="MatchInfo"/>
+<xsd:complexType name="MatchInfo">
+<xsd:sequence>
+<xsd:element name="updatedTrade" type="UpdatedTrade" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Contains details of the trade that caused a notification to be raised</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeIdentifier" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Contains details of the trades on which an action has been performed as well as trades affected by the action</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="fpml:TradeIdentifier">
+<xsd:sequence>
+<xsd:element name="pteParent" type="PTEParent" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Contains the PTE details of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="party" type="fpml:Party" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Contains details of the party that has performed the action as well as the parties affected by the action</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="comparisonRow" type="ComparisonRow" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Present when there is one or more counterparty alleged trades that are close matches to one or more unmatched trades</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="version" use="optional" default="1.0"/>
+</xsd:complexType>
+<xsd:complexType name="UpdatedTrade">
+<xsd:attribute name="action" use="required">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The action that caused the notification to be raised</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="tradeRef" type="xsd:IDREF" use="required">
+<xsd:annotation>
+<xsd:documentation>A reference to the tradeIdentifier element upon which the action was performed</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+<xsd:attribute name="partyRef" type="xsd:IDREF" use="required">
+<xsd:annotation>
+<xsd:documentation>The reference to the party that has performed the action</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="ComparisonRow">
+<xsd:sequence>
+<xsd:element name="score" type="Score" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>The closest match score (represented as percentage/100) between the counterparty and recipient trades</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="tradeRef" type="xsd:IDREF" use="required">
+<xsd:annotation>
+<xsd:documentation>A reference to the recipient's trade (present in the tradeIdentifier element) that has new or updated close matches</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:simpleType name="ScoreValue">
+<xsd:restriction base="xsd:decimal">
+<xsd:minInclusive value="0"/>
+<xsd:maxInclusive value="1"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="Score">
+<xsd:simpleContent>
+<xsd:extension base="ScoreValue">
+<xsd:attribute name="tradeRef" type="xsd:IDREF" use="required">
+<xsd:annotation>
+<xsd:documentation>A reference to the counterparty's trade (present in the tradeIdentifier element) that is a close match to the recipient's trade</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="PTEParent">
+<xsd:sequence>
+<xsd:element name="tradeId" type="fpml:TradeId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The trade id of the PTE parent if the trade concerned is a queued PTE.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="pcEntry" type="xsd:integer" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The submit sequence of a queued PTE.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

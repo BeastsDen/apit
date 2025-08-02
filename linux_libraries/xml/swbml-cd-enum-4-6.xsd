@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="SWB_CdProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for MarkitWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CDS">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CDS Matrix">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap confirmed under the Matrix.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CDS Index">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		  <xsd:enumeration value="CDS Master">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap confirmed under Master Confirmation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

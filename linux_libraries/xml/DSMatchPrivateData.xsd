@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.dtcc.com/2010/PublishingXML-1-0" xmlns:pml="http://www.markitserv.com/2010/PublishingXML-1-0" targetNamespace="http://www.dtcc.com/2010/PublishingXML-1-0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:import namespace="http://www.markitserv.com/2010/PublishingXML-1-0" schemaLocation="PublishingXML-1-0.xsd"/>
+<xsd:include schemaLocation="swml-reporting-1-0.xsd"/>
+<xsd:element name="DSMatchPrivateData" type="SW_CreditPublishingPrivateData" substitutionGroup="pml:swPrivateData"/>
+<xsd:complexType name="SW_CreditPublishingPrivateData">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining data which is private to an individual side (party) of the trade. The private data consists of a mixture of process state information and private data entered/displayed in the SwapsWire Trader application, e.g. trading book identifier.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="DSMatchWorkFlowFields" type="SW_DSMatchWorkFlowFields" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Should only be populated for C=C, this is used to capture the workflow fields for the deal</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_DSMatchWorkFlowFields">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining workflow fields used to organize, route and prioritize NovationConsent records.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPrivateTradeId" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade identifier allocated internally by the participant. This is the internal identifier that will be passed to a Subscriber, e.g. TIW.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="status" type="SW_PrivateTradeIDEnum" default="confirmed">
+<xsd:annotation>
+<xsd:documentation>The attribute will hold the value of the status of the swPrivateTradeID. It is defaulted to confirmed. Enum of value: confirmed, pendinig.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swDSMatchSupplementId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Trade Reference Number Supplement which in conjunction with the DTCC TRI (swml field TIWPositionId) uniquely identifies the credit Post Trade Event for a confirmed trade (Partial Termination,.Amendment etc)</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="DSMatchComment" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Up to 250 characters of free-form text; will enable users to flag transactions for internal processes according to their own schemes. The Comment field will not be visible to the counterparty.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="250"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DSMatchSuperId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Up to 40 characters. An identifier that may be used to group or link related transactions, whether part of a block, strategy, collateral link, or other group; modeled on the current transaction reference number.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="40"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DSMatchDeskId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation> Up to 50 characters of freeform text. Used to identify the desk that executed the transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="50"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DSMatchDesignatedPartyId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Up to 20 characters of free-form text; may be used by prime brokers to identify the PB customer on a transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="20"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="DSMatchBrokerName" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Up to 40 characters of free-form text for recording the name of the broker.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="40"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="swMTMMessageId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Up to 40 characters of free-form text for recording the MTM Message Id</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="40"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="swESMAIntragroup" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">True/False flag to indicate whether the trade is considered an Intragroup trade, so an exclusion to report the trade may apply under ESMA</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swESMACounterpartyNonDisclosure" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">True/False flag to indicate if the counterparty should be masked when reporting the trade under ESMA</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swESMAFinancialEntityJurisdiction" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Type of Financial Entity under ESMA</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="FIN">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Financial Entity</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NON">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Non-Financial Entity</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="swESMAClearingThreshold" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">True/False flag to indicate if the clearing threshold has been breached under ESMA rules</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swESMACorporateSector" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Corporate Sector of the party under ESMA</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="A">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Assurance Undertaking</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="C">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Credit Institution</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="F">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Investment Firm</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="I">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Insurance Undertaking</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="L">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Alternative Investment Fund</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="O">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Institution For Occupational Retirement Provision</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="R">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Reinsurance Undertaking</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="U">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">UCITS</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="swESMAPartyRegion" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Whether the party is an EEA member or not</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="EEA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">EEA Member</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="nonEEA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Non EEA Member</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element ref="swPrivateTradeEventReportingDetails" minOccurs="0"/>
+<xsd:element name="swExitAdditionalMsg" type="AlphaNumeric255DataType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>May be provided for credit Exit PTE when the bilateral ExitMsg value is Other</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+</xsd:complexType>
+<xsd:simpleType name="SW_PrivateTradeIDEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Private trade identifier is allocated internally by the participant. The status attribute represent the current state of private trade id in MW.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="confirmed">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Private Trade ID confirmed in MW.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="pending">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Private Trade ID pending in MW.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="AlphaNumeric255DataType">
+<xsd:restriction base="xsd:string">
+<xsd:pattern value="[0-9A-Za-z*@# .,'/~\-]{0,255}"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:simpleType name="RegulatoryReportingScheme">
+<xs:annotation>
+<xs:documentation xml:lang="en">The base class for all types which define coding schemes.</xs:documentation>
+</xs:annotation>
+<xs:restriction base="xs:normalizedString"/>
+</xs:simpleType>
+<xs:complexType name="RegulatoryReportingPartyId">
+<xs:annotation>
+<xs:documentation xml:lang="en">The data type used for party identifiers.</xs:documentation>
+</xs:annotation>
+<xs:simpleContent>
+<xs:extension base="RegulatoryReportingScheme">
+<xs:attribute name="partyIdScheme" type="xs:anyURI" default="http://www.fpml.org/ext/iso9362">
+<xs:annotation>
+<xs:documentation>Requirement: Clearing Broker Party 1 Prefix
+Requirement: Clearing Broker Party 2 Prefix
+Requirement: Broker Party 1 Prefix
+Requirement: Broker Party 2 Prefix</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="RegulatoryReportingTradeId">
+<xs:annotation>
+<xs:documentation xml:lang="en">A trade reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</xs:documentation>
+</xs:annotation>
+<xs:simpleContent>
+<xs:extension base="RegulatoryReportingScheme">
+<xs:attribute name="tradeIdScheme" type="xs:anyURI">
+<xs:annotation>
+<xs:documentation>For a USI type trade identifier:
+Will always equal "http://www.fpml.org/coding-scheme/external/unique-transaction-identifier"
+For another type of trade identifier:
+as defined by identifier provider</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+<xs:attribute name="id" type="xs:ID">
+<xs:annotation>
+<xs:documentation>Will not be output</xs:documentation>
+</xs:annotation>
+</xs:attribute>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="RegulatoryReportingTradeIdentifier">
+<xs:annotation>
+<xs:documentation xml:lang="en">A type defining a trade identifier.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:choice>
+<xs:element name="swPartyReference" type="RegulatoryReportingPartyReference">
+<xs:annotation>
+<xs:documentation>Will not be output for USI types</xs:documentation>
+<xs:documentation>Will be output for other party trade identifiers
+e.g.
+Requirement: Clearing Broker Party 1 Id - ccp leg
+Requirement: Clearing Broker Party 1 Id - client leg
+@href will be the value assigned to the swAdditionalParty block for the parties related Clearing Broker</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="swIssuer" type="RegulatoryReportingPartyId">
+<xs:annotation>
+<xs:documentation>Always present for USI type trade identifiers
+Corresponds to USI Namespace (or Prefix)
+swIssuer value and associated @partyIdScheme identify the party which issued the USI value contained in swTradeId.</xs:documentation>
+<xs:documentation>Requirement: CRT10B</xs:documentation>
+<xs:documentation>Requirement: CRT10E</xs:documentation>
+<xs:documentation>Requirement: CRT10G</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:choice>
+<xs:element name="swTradeId" type="RegulatoryReportingTradeId">
+<xs:annotation>
+<xs:documentation>The trade identifier, relevant within context.
+For a USI this is the USI value</xs:documentation>
+<xs:documentation>Requirement: CRT10C</xs:documentation>
+<xs:documentation>Requirement: CRT10D</xs:documentation>
+<xs:documentation>Requirement: CRT10F</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID"/>
+</xs:complexType>
+<xs:complexType name="RegulatoryReportingReference" abstract="true">
+<xs:annotation>
+<xs:documentation xml:lang="en">The abstract base class for all types which define intra-document pointers.</xs:documentation>
+</xs:annotation>
+</xs:complexType>
+<xs:complexType name="RegulatoryReportingPartyReference">
+<xs:annotation>
+<xs:documentation xml:lang="en">Reference to a party.</xs:documentation>
+</xs:annotation>
+<xs:complexContent>
+<xs:extension base="RegulatoryReportingReference">
+<xs:attribute name="href" type="xs:IDREF" use="required"/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:element name="RegulatoryReportingStatus">
+<xs:annotation>
+<xs:documentation>Regulatory Report Status parent element</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="trade" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="tradeID">
+<xs:complexType mixed="true">
+<xs:attribute name="tradeIdScheme"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="reportingStatusData" maxOccurs="unbounded">
+<xs:complexType>
+<xs:annotation>
+<xs:documentation xml:lang="en">A type defining a trade identifier.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="regulatoryReportingTradeIdentifier" type="RegulatoryReportingTradeIdentifier" minOccurs="0"/>
+<xs:element name="majorVersion" type="xs:normalizedString"/>
+<xs:element name="minorVersion" type="xs:normalizedString"/>
+<xs:element name="dvh" type="xs:normalizedString"/>
+<xs:element name="eventId" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="counterpartyId" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="ownPartyId" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="reporterId" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="initiatorId" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="repositoryId" type="RepositoryId"/>
+<xs:element name="jurisdiction" type="xs:normalizedString"/>
+<xs:element name="regulator" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="facet" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="assetClass" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="reportType" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="messageType" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="transactionType" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="transactionMode" type="xs:normalizedString" minOccurs="0"/>
+<xs:element name="verification" type="xs:boolean" minOccurs="0"/>
+<xs:element name="reportingStatus">
+<xs:complexType>
+<xs:annotation>
+<xs:documentation xml:lang="en">A type defining a trade identifier.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="status" type="xs:normalizedString"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="repositoryErrorReason" type="RepositoryErrorReason"/>
+<xs:element name="initiatedTimestamp" minOccurs="0">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:dateTime">
+<xs:attribute name="timeStampTypeScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="responseReceivedTimestamp" minOccurs="0">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:dateTime">
+<xs:attribute name="timeStampTypeScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID"/>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:complexType name="RepositoryId">
+<xs:simpleContent>
+<xs:extension base="xs:normalizedString">
+<xs:attribute name="repositoryIdScheme" type="xs:anyURI" use="required"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="RepositoryErrorReason">
+<xs:sequence>
+<xs:element name="repositoryErrorCode" type="xs:normalizedString"/>
+<xs:element name="repositoryErrorDescription" type="xs:normalizedString"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

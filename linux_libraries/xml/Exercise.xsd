@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="swdml-reporting-1-0.xsd"/>
+<xsd:complexType name="Party">
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:string"/>
+<xsd:element name="partyName" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID" use="required"/>
+</xsd:complexType>
+<xsd:element name="payerParty" type="Party"/>
+<xsd:element name="receiverParty" type="Party"/>
+<xsd:complexType name="businessCenters">
+<xsd:sequence>
+<xsd:element name="businessCenter" type="xsd:string" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="businessCenters" type="businessCenters"/>
+<xsd:element name="Exercise">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="exerciseDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The event/trade date of the exercise</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="Equity">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="exerciseType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Defines whether the exercise is full or partial</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="equityOptionExercise">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="exerciseNumberOfOptions" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of options to be exercised.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="exerciseNumberOfShares" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="remainingNumberOfOptions" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of shares to be exercised.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="remainingNumberOfShares" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="deltaCross" type="deltaCross" minOccurs="0"/>
+<xsd:element name="swExercisePrice" type="Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The exercise price related to the exercise event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="independentAmount" type="independentAmount" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the independent amount applicable</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Swaption">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swaptionExerciseType">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element name="cashExercise">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="settlementRate" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="settlementPayment" minOccurs="0">
+<xsd:complexType mixed="0">
+<xsd:sequence>
+<xsd:element name="amount" type="xsd:decimal"/>
+<xsd:element name="amountCurrency" type="xsd:string"/>
+<xsd:element name="date" type="xsd:date"/>
+<xsd:element name="businessConvention" type="xsd:string"/>
+<xsd:element ref="businessCenters"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="physicalExercise">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="createAffirmReleaseSwap" type="xsd:boolean"/>
+<xsd:element name="book" type="xsd:string" minOccurs="0"/>
+<xsd:element name="firstFixingRate" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="swBilateralClearingHouse" type="SW_PartyDetails" minOccurs="0"/>
+<xsd:element name="swaptionExerciseReportingDetails" type="SW_ExerciseReportingDetails" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="swUnderlyingSwapDetails" type="SW_UnderlyingSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Details related to IRS trade resulting from exercise on a swaption contract </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="convertUnderlyingSwapToRFR" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="straddleType" type="SwaptionStraddleExerciseTypeEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Swap">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="cancelableProvision" type="SW_CancelableProvision"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:simpleType name="EquityOptionExerciseTypeEnum">
+<xsd:restriction base="xsd:token"/>
+</xsd:simpleType>
+<xsd:simpleType name="SwaptionStraddleExerciseTypeEnum">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">States whether the straddle is exercised as a payers or receivers swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Payers"/>
+<xsd:enumeration value="Receivers"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="deltaCross">
+<xsd:annotation>
+<xsd:documentation>A type allowing delta cross updates to be recorded on a deal</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="buyerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The buying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The selling party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="equity">
+<xsd:annotation>
+<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="instrumentId" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="future">
+<xsd:annotation>
+<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="maturity" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date when the future contract expires.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="instrumentId" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="price">
+<xsd:annotation>
+<xsd:documentation>The price of the underlying being crossed.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="currency" type="xsd:normalizedString"/>
+<xsd:element name="amount" type="xsd:decimal"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="quantity" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of underlying instruments being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="delta" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The percentage delta hedge achieved.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a currency amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="Currency">
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="currencyScheme" type="xsd:anyURI" default="http://www.fpml.org/ext/iso4217-2001-08-15"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for party id and party name.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party Id</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party Name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="independentAmount">
+<xsd:annotation>
+<xsd:documentation>Specifies the independent amount applicable</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="independentAmountAndPercentage">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A fixed payment and percentage amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="independentAmountAndPercentage">
+<xsd:annotation>
+<xsd:documentation>A container for elements associated with the Independent Amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount or percentage is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIAPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Independent Amount Percentage.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_UnderlyingSwapDetails">
+<xsd:sequence minOccurs="0">
+<xsd:element name="swClientClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether the IRS trade resulting from swaption exercise is a client clearing trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAutoSendForClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether the trade should be automatically sent for clearing if it satisfies the eligibility criteria.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CancelableProvision">
+<xsd:sequence>
+<xsd:element name="cancelableProvisionAdjustedDates" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The adjusted dates associated with a cancelable provision. These dates have been adjusted for any applicable business day convention.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="cancellationEvent" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The adjusted dates for an individual cancellation date.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="adjustedExerciseDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date on which option exercise takes place. This date should already be adjusted for any applicable business day convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEarlyTerminationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The early termination date that is applicable if an early termination provision is exercised. This date should already be adjusted for any applicable business day convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

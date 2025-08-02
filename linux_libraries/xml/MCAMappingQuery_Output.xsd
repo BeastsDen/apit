@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swml-eqd-enum-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-shared-4-9.xsd"/>
+<xsd:element name="masterConfirmationDetails" type="MasterConfirmationDetails"/>
+<xsd:complexType name="MasterConfirmationDetails">
+<xsd:annotation>
+<xsd:documentation>The root element in the master confirmation details result set</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="masterConfirmation" type="SW_MasterConfirmation" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>A container for MCA details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_MasterConfirmation">
+<xsd:sequence>
+<xsd:element name="productType" type="SW_EqdProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Contains the product type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="masterConfirmationType" type="MasterConfirmationType">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master confirmation executed between the parties.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="masterConfirmationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date of the confirmation executed between the parties and intended to govern all relevant transactions between those parties.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="masterConfirmationAnnexType" type="MasterConfirmationAnnexType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master confirmation annex executed between the parties.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="docsSelection" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Contains supplementary Annex details for the MCA</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

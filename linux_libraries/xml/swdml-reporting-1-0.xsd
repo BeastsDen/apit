@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+	<xsd:redefine schemaLocation="swxml-reporting-shared-1-0.xsd">
+		
+		<xsd:complexType name="SW_ReportingRegime">
+			<xsd:complexContent>
+				<xsd:restriction base="SW_ReportingRegime">
+					<xsd:sequence>
+						<xsd:sequence>
+							<xsd:element name="swJurisdiction" type="SW_Jurisdiction" minOccurs="0"/>
+						</xsd:sequence>
+						<xsd:sequence minOccurs="0">
+							<xsd:element name="swSupervisoryBodyCategory" type="SW_SupervisoryBodyCategory" minOccurs="0" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>CRT14: Regulator Type</xsd:documentation>
+									<xsd:documentation>Categorisation of the
+										supervisorybody.</xsd:documentation>
+									<xsd:documentation>Requirement: CRT14 Will always present for
+										Dodd-Frank Will never be present for
+										ODRF</xsd:documentation>
+									<xsd:documentation/>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="swReportableLocations" type="SW_ReportableLocations" minOccurs="0" maxOccurs="2"/>
+						</xsd:sequence>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+		
+	</xsd:redefine>
+	
+	<xsd:complexType name="SW_ReportingRegimeInformation">
+		<xsd:annotation>
+			<xsd:documentation>Identifis a Reporting Regine in terms of Jurisdiction, Supervisory
+				Body and Category and hold information on jurisdiction specific roles and
+				data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_ReportingRegime">
+				<xsd:group ref="SW_ReportingRegimeInformationGroup"/>
+				<xsd:attribute name="id" type="xsd:ID"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="swAllocationReportingDetails" type="SW_AllocationReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>global element, not used but its inclusion triggers DTD generation to
+				create the necessary entities</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:complexType name="SW_NewNovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovationFeeTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NewNovatedTradeReportingDetailsJurisdiction">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetailsJurisdiction"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovatedTradeReportingDetailsJurisdiction">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetailsJurisdiction"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovationFeeTradeReportingDetailsJurisdiction">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetailsJurisdiction"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_ReportableProduct">
+		<xsd:sequence>
+			<xsd:element name="swPrimaryAssetClass" type="SW_AssetClass" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GRT3: Primary Asset Class only output for Generic Template
+						products</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swSecondaryAssetClass" type="SW_AssetClass" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Optional. Only present for Equities</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="swProductId" type="SW_ProductId" minOccurs="0" maxOccurs="4">
+				<xsd:annotation>
+					<xsd:documentation>CRT29 GRT2: Product Id Value ISDA Taxonomy, with UPI to come
+						Supports ISIN and CFI for MIFID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swProductFullName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>MIFID field corresponding to Instrument full
+						name</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swEmbeddedOptionOnSwap" type="SW_EmbeddedOptionOnSwap" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>CRT17: Embedded Option</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	
+	
+	<xsd:complexType name="SW_ReportingJurisdictionInformation">
+		<xsd:annotation>
+			<xsd:documentation>Identifis a Reporting Regine in terms of Jurisdiction, Supervisory
+				Body and Category and hold information on jurisdiction specific roles and
+				data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_ReportingRegime">
+				<xsd:group ref="SW_ReportingRegimeInformationGroup"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>Container for all bilaterally available, in scope, reporting
+				details</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+			
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeReportingDetails">
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation>Existent structure reporting details for the trade in
+					SWML//FpML/trade</xsd:documentation>
+			</xsd:annotation>
+			<xsd:element name="swUniqueTransactionId" type="SW_UniqueTradeIdentifier" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="swReportingRegimeInformation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Contents reduced</xsd:documentation>
+					<xsd:documentation xml:lang="en">Container for bilateral reporting regime level
+						data </xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="SW_ReportingRegimeInformation"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swReportableProduct" type="SW_ReportableProduct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identifiers used to identify the product being
+						traded</xsd:documentation>
+					<xsd:documentation>Requirement: GRT1 </xsd:documentation>
+					<xsd:documentation>Requirement: GRT2</xsd:documentation>
+					<xsd:documentation>Requirement: GRT3</xsd:documentation>
+					<xsd:documentation>Requirement: CRT13</xsd:documentation>
+					<xsd:documentation>Requirement: M11 If primaryAssetClass differs from
+						secondaryAssetClass then the trade will have been reported as a Multi Asset
+						Swap</xsd:documentation>
+					<xsd:documentation>OpenIssue: productType to become optional in
+						FpML</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:group ref="swBuyerSeller.Model" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Buy/Sell direction required for MIFID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:group>
+			<xsd:sequence>
+				<xsd:element name="swBilateralPartyTradeInformation" type="SW_BilateralPartyTradeInformation" minOccurs="0" maxOccurs="2"/>
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeReportingDetailsJurisdiction">
+		<xsd:sequence>
+			<xsd:element name="swUniqueTransactionId" type="SW_UniqueTradeIdentifier" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="swReportingRegimeInformation" type="SW_ReportingJurisdictionInformation" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>One occurrence for each supported reporting
+						regime</xsd:documentation>
+					<xsd:documentation xml:lang="en">Container for bilateral reporting regime level
+						data </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swReportableProduct" type="SW_ReportableProduct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identifiers used to identify the product being
+						traded</xsd:documentation>
+					<xsd:documentation>Requirement: GRT1 </xsd:documentation>
+					<xsd:documentation>Requirement: GRT2</xsd:documentation>
+					<xsd:documentation>Requirement: GRT3</xsd:documentation>
+					<xsd:documentation>Requirement: CRT13</xsd:documentation>
+					<xsd:documentation>Requirement: M11 If primaryAssetClass differs from
+						secondaryAssetClass then the trade will have been reported as a Multi Asset
+						Swap</xsd:documentation>
+					<xsd:documentation>OpenIssue: productType to become optional in
+						FpML</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:group ref="swBuyerSeller.Model" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Buy/Sell direction required for MIFID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:group>
+			<xsd:sequence>
+				<xsd:element name="swBilateralPartyTradeInformation" type="SW_BilateralPartyTradeInformation" minOccurs="0" maxOccurs="2"/>
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="SW_ReportingRegimeInformationGroup">
+		<xsd:sequence>
+			<xsd:element name="swUniqueTransactionId" type="SW_UniqueTradeIdentifier" minOccurs="0"/>
+			<xsd:element name="swObligatoryReporting" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="swReportingCounterpartyReference" type="SW_PartyReference" minOccurs="0"/>
+			<xsd:element name="swReportTo" type="SW_ReportTo" minOccurs="0"/>
+			<xsd:element name="swMandatoryClearingIndicator" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>whether the particular trade type is required to be cleared
+						under within this reporting regime. is not allowed in an instance of
+						swReportingregimeInformation if, within that instance, swObligatoryReporting
+						is set to false.</xsd:documentation>
+					<xsd:documentation>Requirement: Mandatory Clearing Indicator</xsd:documentation>
+					<xsd:documentation>Requirement CRT23. Will not be output if Mandatory Clearing
+						not relevant within reporting regime</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swToTV" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>MIFID requirement to populate an indicator whether the
+						contract has been traded on a Trading Venue or not.
+				  </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:group name="swBuyerSeller.Model">
+		<xsd:sequence>
+			<xsd:element name="swBuyerPartyReference" type="SW_PartyReference" minOccurs="0"/>
+			<xsd:element name="swSellerPartyReference" type="SW_PartyReference" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

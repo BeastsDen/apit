@@ -1,0 +1,636 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="swxml-reporting-shared-1-0.xsd"/>
+	<xsd:element name="swAllocationReportingDetails" type="SW_AllocationReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>global element, not used but its inclusion triggers DTD generation to
+				create the necessary entities</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="swPrivateTradeEventReportingDetails" type="SW_PrivateTradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>All unilateral reporting information from the reporting
+				tabs</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="swTradeEventReportingDetails" type="SW_TradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>All bilateral reporting information from the reporting
+				tabs</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SW_NewNovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovatedTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_NovationFeeTradeReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_PrivateNewNovatedTradeEventReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_PrivateTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_PrivateNovatedTradeEventReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_PrivateTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_PrivateNovationFeeTradeEventReportingDetails">
+		<xsd:complexContent>
+			<xsd:extension base="SW_PrivateTradeReportingDetails"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_ClearedTradePrivateReportingDetails">
+		<xsd:sequence>
+			<xsd:element name="swPartyTradeInformation" type="SW_PartyTradeInformation" minOccurs="0"/>
+			<xsd:element name="swPartyReportingRegimeInformation" type="SW_ReportingRegimeInformationUnilateral" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Unilateral Reporting Regime specific information for the
+						trade</xsd:documentation>
+					<xsd:documentation xml:lang="en">Allows the organization to specify which if any
+						relevant regulators the event should be reported to and any additionmal
+						infor,ation requird that is specific wthin the identifed
+						regime</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_PrivateTradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>Container element for all unilateral data for the relevant party for
+				regulatory reporting purposes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_PrivateTradeReportingDetails">
+				<xsd:sequence minOccurs="0">
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>One or more of the following optional structures may
+								be provided for a post trade event,as relevant to the post trade
+								event type and the party requesting the message</xsd:documentation>
+						</xsd:annotation>
+						<xsd:element name="swNovationFeeTradePrivateReportingDetails" type="SW_PrivateNovationFeeTradeEventReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for transferee on new-novated trade
+									Present for transferor on novated trade</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swNovatedTradePrivateReportingDetails" type="SW_PrivateNovatedTradeEventReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for RP on new-novated
+									trade</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swNewNovatedTradePrivateReportingDetails" type="SW_PrivateNewNovatedTradeEventReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for RP on novated
+									trade</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swPBClientTradePrivateReportingDetails" type="SW_PrivateTradeReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for the Prime Broker to view the
+									reporting details on his side fo the trade facing the
+									client.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swClearedTradePrivateReportingDetails" type="SW_ClearedTradePrivateReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for all trades to be able to capture the
+									Cleared leg reporting details.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:element name="swPartyExtension" type="SW_PartyExtension" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>One instance, containing details for the party
+								requesting the SWML</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swAdditionalParty" type="SW_PartyExtended" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation/>
+							<xsd:documentation>A given party will only be able to submit or view the
+								data for themselves and for parties identified related to them in
+								their associated swPartyTradeInformation/relatedParty or
+								swPartyTradeInformation/relatedPerson construct. An instance will be
+								output where the data was captured with the trade, not where it was
+								from reference data. e.g. my Broker</xsd:documentation>
+							<xsd:documentation>Requirement: Clearing DCO, existing clearing swml
+								structures will be used. Broker Party Instances: Requirement: Broker
+								Id swTradeEventReportingDetails/swAdditionalParty/SW_partyId The
+								Broker for a party will be referenced from the relevant party's
+								partyTradeIdentifier structure though the xpath:
+								"swTradeEventReportingDetails/swPartyTradeInformation/SW_relatedParty/SW_partyReference/@href"
+								This will be "brokerA" for partyA's broker and "brokerB" for
+								partyB's and will be the unique MarkitWire broker code for the
+								relevany broker. Requirement: Broker Location will not be output in
+								SWML (static data)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_PrivateTradeReportingDetails">
+		<xsd:sequence>
+			<xsd:element name="swOriginatingEvent" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="SW_Scheme">
+							<xsd:attribute name="swOriginatingEventScheme" type="xsd:anyURI" default="http://www.markitwire.com/spec/2012/coding-scheme/confirmation-method"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="swEventType" minOccurs="0"/>
+			<xsd:element name="swLifecycleEvent" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="SW_Scheme">
+							<xsd:attribute name="swLifecycleEventScheme" type="xsd:anyURI" default="http://www.markitwire.com/spec/2012/coding-scheme/confirmation-method"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:group ref="SW_PrivateTradeInformation.Model"/>
+			<xsd:element name="swPartyReportingRegimeInformation" type="SW_ReportingRegimeInformationUnilateral" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Unilateral Reporting Regime specific information for the
+						trade</xsd:documentation>
+					<xsd:documentation xml:lang="en">Allows the organization to specify which if any
+						relevant regulators the event should be reported to and any additionmal
+						infor,ation requird that is specific wthin the identifed
+						regime</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_ReportableProduct">
+		<xsd:sequence>
+			<xsd:element name="swPrimaryAssetClass" type="SW_AssetClass" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>GRT3: Primary Asset Class only output for Generic Template
+						products</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swSecondaryAssetClass" type="SW_AssetClass" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>CRT13 GRT9: Secondary Asset Class only output for Generic
+						Template and Equity products</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="swProductId" type="SW_ProductId" maxOccurs="4">
+				<xsd:annotation>
+					<xsd:documentation>CRT29 GRT2: Product Id Value ISDA Taxonomy, with UPI to come
+						Supports ISIN and CFI for MIFID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swProductFullName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>MIFID field corresponding to Instrument full
+						name</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swEmbeddedOptionOnSwap" type="SW_EmbeddedOptionOnSwap" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>CRT17: Embedded Option</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeEventReportingDetails">
+		<xsd:annotation>
+			<xsd:documentation>Container for all bilaterally available, in scope, reporting
+				details</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_TradeReportingDetails">
+				<xsd:choice minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Secondary Reporting Tab details</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:choice>
+							<xsd:element name="swNewNovatedTradeReportingDetails" type="SW_NewNovatedTradeReportingDetails">
+								<xsd:annotation>
+									<xsd:documentation>Present for RP on novated
+										trade</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="swExerciseReportingDetails" type="SW_ExerciseReportingDetails" maxOccurs="unbounded"/>
+						</xsd:choice>
+						<xsd:element name="swEventIdentifierReference" type="SW_EventIdReference"/>
+					</xsd:sequence>
+					<xsd:sequence>
+						<xsd:element name="swNovationFeeTradeReportingDetails" type="SW_NovationFeeTradeReportingDetails">
+							<xsd:annotation>
+								<xsd:documentation>Present for transferee on new-novated trade
+									Present for transferor on novated trade</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swEventIdentifierReference" type="SW_EventIdReference" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>incoming party getting the swml for the new trade
+									won't include this field</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:element name="swNovatedTradeReportingDetails" type="SW_NovatedTradeReportingDetails">
+						<xsd:annotation>
+							<xsd:documentation>Present for RP on new-novated
+								trade</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swPBClientTradeReportingDetails" type="SW_TradeReportingDetails">
+						<xsd:annotation>
+							<xsd:documentation>Present for the prime broker to view reporting
+								details of his side of the trade with the
+								Client.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swEventIdentifierReference" type="SW_EventIdReference"/>
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeInformation">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A type defining additional information that may be
+				recorded against a trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			
+			<xsd:element name="swRelatedParty" type="SW_RelatedParty" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Identifies a related party performing a role
+						within the transaction.</xsd:documentation>
+					<xsd:documentation>An instance will be present for each bilaterally
+						relevant/agreed related party whose details are captured and stored with the
+						trade. Currently: None</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<xsd:element name="swExecutionType" type="SW_ExecutionType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>To remove</xsd:documentation>
+					<xsd:documentation xml:lang="en">Used to describe how the trade was executed,
+						e.g. via voice or electronically.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swTimestamps" type="SW_TradeProcessingTimestamps" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Allows timing information about a trade to be
+						recorded.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			
+			
+			
+			
+			
+			
+			<xsd:sequence minOccurs="0" maxOccurs="0">
+				<xsd:element name="swPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Structure to contain Price Notation
+							information.</xsd:documentation>
+						<xsd:documentation>Anticipated that this will not be populated initially as
+							details will be extracted from product specific Xpaths by the DTCC GTR.
+							The data capturesd here will NOT be sent to the GTR</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swAdditionalPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Contains Additional Price Notation information. There
+							will be 1 occurrence for each "Additional Price Notation"
+							captured</xsd:documentation>
+						<xsd:documentation>The data captured here will NOT be sent to the
+							GTR</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SW_TradeReportingDetails">
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation>Main Reporting Tab details</xsd:documentation>
+			</xsd:annotation>
+			<xsd:element name="swUniqueTransactionId" type="SW_UniqueTradeIdentifier" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="swReportingRegimeInformation" type="SW_ReportingRegimeInformationBilateral" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>One occurrence for each supported reporting
+						regime</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swReportableProduct" type="SW_ReportableProduct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identifiers used to identify the product being
+						traded</xsd:documentation>
+					<xsd:documentation>Requirement: GRT1 </xsd:documentation>
+					<xsd:documentation>Requirement: GRT2</xsd:documentation>
+					<xsd:documentation>Requirement: GRT3</xsd:documentation>
+					<xsd:documentation>Requirement: CRT13</xsd:documentation>
+					<xsd:documentation>Requirement: M11 If primaryAssetClass differs from
+						secondaryAssetClass then the trade will have been reported as a Multi Asset
+						Swap</xsd:documentation>
+					<xsd:documentation>OpenIssue: productType to become optional in
+						FpML</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:group ref="swBuyerSeller.Model" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Buy/Sell direction required for MIFID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:group>
+			<xsd:sequence>
+				<xsd:element name="swPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Structure to contain Price Notation
+							information.</xsd:documentation>
+						<xsd:documentation>Anticipated that this will not be populated initially as
+							details will be extracted from product specific Xpaths by the DTCC GTR.
+							The data capturesd here will NOT be sent to the GTR</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swAdditionalPriceNotation" type="SW_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Contains Additional Price Notation information. There
+							will be 1 occurrence for each "Additional Price Notation"
+							captured</xsd:documentation>
+						<xsd:documentation>The data captured here will NOT be sent to the
+							GTR</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swBilateralPartyTradeInformation" type="SW_BilateralPartyTradeInformation" minOccurs="0" maxOccurs="2"/>
+			</xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:group name="SW_PrivateTradeInformation.Model">
+		<xsd:sequence>
+			<xsd:element name="swEventId" type="SW_EventId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Event Identifiers</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPriceFormingEvent" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>CRT3: Price Forming (Marked for
+						deprecation)</xsd:documentation>
+					<xsd:documentation>Whether or not the post trade event is considered to be price
+						forming</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swRegulatoryReportable" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Regulatory Reportable (Marked for
+						deprecation)</xsd:documentation>
+					<xsd:documentation>Retained for backward compatibility, marked for
+						deprecation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swPartyTradeInformation">
+				<xsd:annotation>
+					<xsd:documentation>Unilateral Trade level information</xsd:documentation>
+					<xsd:documentation>Element may contain any Unilateral Reporting information at
+						the level of and synchronous with trade version.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="SW_PartyTradeInformation"/>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="SW_ReportingRegimeInformation">
+		<xsd:annotation>
+			<xsd:documentation>Identifis a Reporting Regine in terms of Jurisdiction, Supervisory
+				Body and Category and hold information on jurisdiction specific roles and
+				data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SW_ReportingRegime">
+				<xsd:attribute name="id" type="xsd:ID"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_ReportingRegimeInformationBilateral">
+		<xsd:complexContent>
+			<xsd:extension base="SW_ReportingRegimeInformation">
+				<xsd:sequence minOccurs="0">
+					<xsd:choice minOccurs="0">
+						<xsd:element name="swUniqueTransactionId" type="SW_UniqueTradeIdentifier">
+							<xsd:annotation>
+								<xsd:documentation>CRT10B, CRT10C: USI</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swUniqueTransactionIdReference" type="SW_UniqueTradeIdentifierReference" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>CRT10B, CRT10C: USI</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:choice>
+					<xsd:sequence minOccurs="0">
+						<xsd:element name="swObligatoryReporting" type="xsd:boolean">
+							<xsd:annotation>
+								<xsd:documentation>CRT1: Within Jurisdiction
+									(Boolean)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swReportingCounterpartyReference" type="SW_PartyReference" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>An occurrence for each party identified as a
+									reporting party within the relevant reporting regime. For
+									Dodd-Frank reporting there will always be 1
+									occurrence</xsd:documentation>
+								<xsd:documentation>Requirement: CRT2</xsd:documentation>
+								<xsd:documentation>Dodd-Frank: Always 1
+									occurence</xsd:documentation>
+								<xsd:documentation>ODRF: Always 2 occurences ("partyA" and
+									"partyB")</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:element name="swReportTo" type="SW_ReportTo" minOccurs="0" maxOccurs="2"/>
+					<xsd:element name="swMandatoryClearingIndicator" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>CRT23: Clearing Mandatory
+								(Boolean)</xsd:documentation>
+							<xsd:documentation>whether the particular trade type is requird to be
+								cleared under within this reporting rergime </xsd:documentation>
+							<xsd:documentation>Requirement: Mandatory Clearing
+								Indicator</xsd:documentation>
+							<xsd:documentation>Requirement CRT23. Will not be output if Mandatory
+								Clearing not relevant within reporting regime</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swToTV" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>MIFID requirement to populate an indicator whether
+								the contract has been traded on a Trading Venue or not.
+								(Boolean)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_ReportingRegimeInformationUnilateral">
+		<xsd:complexContent>
+			<xsd:extension base="SW_ReportingRegimeInformation">
+				<xsd:sequence minOccurs="0">
+					<xsd:sequence minOccurs="0">
+						<xsd:element name="swObligatoryReporting" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>CRT1: Within Jurisdiction
+									(Boolean)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swReportingRole" type="SW_ReportingRoleType" minOccurs="0"/>
+						<xsd:element name="swPriceFormingEvent" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>CRT3: Price Forming (Boolean)</xsd:documentation>
+								<xsd:documentation>Whether or not the post trade event is considered
+									to be price forming</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swRegulatoryReportable" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Regulatory Reportable, also a flag for MIFID
+									Transaction Reportable</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="swReportingObligation" type="xsd:boolean" minOccurs="0"/>
+						<xsd:element name="swTransparencyReportable" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>MiFID field: Transparency Reportable
+									(Boolean)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:element name="swEventId" type="SW_EventId" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Event Identifiers</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swRelatedTradeId" type="SW_RelatedTradeId" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Related Unilateral USIs Block USI (CRT10E, CRT10D)
+								Prior USI (CRT10G, CRT10F) Novation Execution Trade USI (CRT10H,
+								CRT10I)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swEndUserException" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>CRT19: Clearing Exception
+								(Boolean)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swEndUserExceptionReason" type="SW_ClearingExceptionReason" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Clearing Exception Reason. Valid values supported :
+								Cooperative, End-User, Inter-Affiliate</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swReportingSpecification" type="SW_ReportingSpecification" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Reporting parameters specified for reporting of the
+								trade event</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swReportTo" type="SW_ReportTo" minOccurs="0" maxOccurs="2"/>
+					<xsd:element name="swLargeSizeTrade" type="SW_LargeSizeTradeIndicatorEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Large Block Notional Trade Indicator. (Yes, No,
+								TRCalculate) Indicates if the publically reportable swap transaction
+								is a block trade or large notional off-facility
+								swap.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swReportClearingObligationX" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>This element is valid only for ESMA regime. It
+								corresponds to the GUI checkbox with the same name on ESMA tab under
+								Reg Reporting. This element is populated as true when the product on
+								a trade is not subject to ESMA Mandatory Clearing. When this element
+								is true, MC indicator will not be populated in the regulatory
+								reports sent to EUTR.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swShortSale" type="SW_ShortSaleEnum" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>MIFID field, a value that user would provide to
+								indicate the type of short sale conducted by the party, e.g. SELL,
+								SESH etc. </xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swOTCPostTradeIndicator" type="SW_OTCPostTradeIndicatorEnum" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>MIFID field, a value that user would provide to
+								indicate the type of OTC transaction conducted on the trade, e.g.
+								BENC,ACTX,DUPL, etc.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swWaiver" type="SW_WaiverEnum" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>MIFID field, a value that user would provide to
+								indicate any pre-trade waiver provided by relevant NCAs, e.g.
+								RFPT,MLIQ,SIZE, etc.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swMIFIDTransactionIdentifier" type="SW_MIFIDTransactionIdentifier" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>It uniquely identifies a transaction for MIFID
+								reporting purposes.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="swReportForCounterparty" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Boolean flag required for NFC- reporting for ESMA and
+								FCA</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SW_CorrelationId">
+		<xsd:annotation>
+			<xsd:documentation>A type defining a correlation identifier and qualifying
+				scheme</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:normalizedString">
+				<xsd:attribute name="correlationIdScheme" type="xsd:anyURI" use="optional" default="http://www.fpml.org/coding-scheme/external/unique-transaction-identifier"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:group name="swBuyerSeller.Model">
+		<xsd:sequence>
+			<xsd:element name="swBuyerPartyReference" type="SW_PartyReference" minOccurs="0"/>
+			<xsd:element name="swSellerPartyReference" type="SW_PartyReference" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+</xsd:schema>

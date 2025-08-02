@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="PML">
+<xsd:annotation>
+<xsd:documentation>Publishing Status XML to include DSMatchReporting in Accept element  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice>
+<xsd:element name="Accept">
+<xsd:annotation>
+<xsd:documentation>Moves the deal to CS=Publishing, BS=Released</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="MatchingTradeReference" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Matching reference number</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="AcceptText">
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Success"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="ConfirmedTimestamp" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Confirmed timestamp after trade confirmed in TIW in EST</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Update" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Does not change the CS or BS of the deal but allows unilateral data for the two parties to the deal to be updated.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="DSMatchReportingData">
+<xsd:annotation>
+<xsd:documentation>Contains USI and UPI from Reporting Venue, eg. DDTC/GTR</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="USI">
+<xsd:annotation>
+<xsd:documentation>Unique Swap Identifier, 40 char alphanumeric string, a combination of USI namespace and the USI value</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="UPI">
+<xsd:annotation>
+<xsd:documentation>Unique Product Identifier contains Credit Taxonomy value, which is very similar to MDTT</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element ref="WarehouseState" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Reject" type="RejectReason">
+<xsd:annotation>
+<xsd:documentation>Moves the deal back to CS=New, BS=Released</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TradeEnrich">
+<xsd:annotation>
+<xsd:documentation>Enrich trade data without changing contract state</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:choice>
+<xsd:element name="DSMatchReportingData" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Contains USI and UPI from Reporting Venue, eg. DDTC/GTR</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="USI">
+<xsd:annotation>
+<xsd:documentation>Unique Swap Identifier, 40 char alphanumeric string, a combination of USI namespace and the USI value</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="UPI">
+<xsd:annotation>
+<xsd:documentation>Unique Product Identifier contains Credit Taxonomy value, which is very similar to MDTT</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="TRIUpdate" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="MatchingTradeReference" minOccurs="0"/>
+<xsd:choice>
+<xsd:element name="Accept">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="AcceptText"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Reject" type="RejectReason"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="MarkitWireTradeReference" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Markitwire TradeID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MarkitWirePartyID" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="version"/>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Update" abstract="true"/>
+<xsd:element name="pmlUpdate" substitutionGroup="Update">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:any processContents="skip" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="RejectReason">
+<xsd:sequence>
+<xsd:element name="RejectReason">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="ReasonCode"/>
+<xsd:element name="ReasonText"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="WarehouseState">
+<xsd:complexType>
+<xsd:sequence minOccurs="0" maxOccurs="1">
+<xsd:element ref="WarehouseStatus"/>
+<xsd:element ref="WarehouseStatusReason" minOccurs="0" maxOccurs="2"/>
+<xsd:element name="WarehouseCurrentStateNotional" type="Money" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="WarehouseCurrentStateNotionalAsOfDate" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="WarehouseStatus" type="WarehouseStatusEnum"/>
+<xsd:element name="WarehouseStatusReason" type="WarehouseStatusReasonEnum"/>
+<xsd:simpleType name="WarehouseStatusEnum">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Alleged"/>
+<xsd:enumeration value="Certain"/>
+<xsd:enumeration value="Uncertain"/>
+<xsd:enumeration value="Unconfirmed"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="WarehouseStatusReasonEnum">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="UnconfirmedPTE-Termination/Increase/Assignment"/>
+<xsd:enumeration value="UnconfirmedPTE-Amendment/Exit"/>
+<xsd:enumeration value="UnconfirmedPTE"/>
+<xsd:enumeration value="ReservedNotional"/>
+<xsd:enumeration value="IllogicalNotional"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a currency amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="Currency">
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="currencyScheme" type="xsd:anyURI" default="http://www.fpml.org/ext/iso4217-2001-08-15"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:schema>

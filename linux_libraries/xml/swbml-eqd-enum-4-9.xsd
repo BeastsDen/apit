@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="SWB_EqdProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Share Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A variance swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A variance swap on an index underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A share option on an underlying equity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An index option on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An equity swap on an underlying equity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An equity swap on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Volatility Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Volatility Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Volatility Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Volatility swap on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Share Dividend Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A dividend swap on an underlying equity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Dividend Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A dividend swap on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Dispersion Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Dispersion Variance Swap on an underlying index and equities.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_FxDeterminationMethodEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Specifies the scheduling method</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination as specified in the General Terms.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PredefinedSource">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination according to the source selected from the predefined list.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SpecifiedSource">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination according to the user specified source.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_GrossPriceEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Gross Price.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+		  <xsd:enumeration value="Closing">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Gross Price is price at Closing.</xsd:documentation>
+			</xsd:annotation>
+		  </xsd:enumeration>
+		  <xsd:enumeration value="Opening">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Gross Price is price at Opening.</xsd:documentation>
+			</xsd:annotation>
+		  </xsd:enumeration>
+		  <xsd:enumeration value="TR Open">
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Gross Price is price at TR Open.</xsd:documentation>
+			</xsd:annotation>
+		  </xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+    <xsd:simpleType name="SWB_ApplicableRegionEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Applicable Region.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="United States">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The United States as the applicable region. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AEJA Region">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The AEJA Region as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LatAm Region">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The LatAm Region as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Canada">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Canada as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Japan">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Japan as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEA Region 1">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">EMEA Region 1 as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEA Region 2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">EMEA Region 2 as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+    </xsd:simpleType>
+	<xsd:simpleType name="SWB_ASIMCEnum">
+		<xsd:annotation>
+		  <xsd:documentation xml:lang="en">As Specified In Master Confirmation Emum</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+		  <xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+			<xsd:annotation>
+			  <xsd:documentation xml:lang="en">As Specified In Master Confirmation</xsd:documentation>
+			</xsd:annotation>
+		  </xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_EarlyFinalValuationDateElectionEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Early Final Valuation Date Election.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="NotSpecified">
+				<xsd:annotation>
+				  <xsd:documentation xml:lang="en">Early Final Valuation Date not specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ValuationDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Early Final Valuation Date specified as valuation date(s).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+				<xsd:documentation xml:lang="en">Early Final Valuation Date as specified in master confirmation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_EqdSchedulingMethodEnum">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">Specifies the scheduling method</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ParameterDriven">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Schedules are generated by the system based on the parameters specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ListDateEntry">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Direct population of and amendments to individual list dates are enabled.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

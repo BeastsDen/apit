@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:simpleType name="SWB_ComClearingVenue">
+    <xsd:annotation>
+      <xsd:documentation>The Clearing Venue at which the trade has been/will be cleared</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CME ClearPort">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">CME ClearPort</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ICE Clear Europe">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">ICE Clear Europe</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ICE Clear U.S.">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">ICE Clear U.S.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NOS Clearing">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">NOS Clearing</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="LCH.Clearnet EnClear">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">LCH.Clearnet EnClear</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SGX AsiaClear">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">SGX AsiaClear</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NGX">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">NGX</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The trade is not cleared.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SWB_ElectricityLoadShapeEnum">
+    <xsd:annotation>
+      <xsd:documentation>The name of the load shape for an electricity trade where a MarkitWire-defined load shape is in use.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Base">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Base load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Peak">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Peak load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Off-peak">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Off-peak load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Overnight">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Overnight load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Super-peak">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Super-peak load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="AsSpecifiedByCRP">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Indicates that the Load Shape definition of the Load Shape is determined by the Commodity Reference Price of the trade.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Peak (Old)">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The old definition of a Peak load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Off-peak (Old)">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The old definition of an Off-peak load for the relevant market</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SWB_ComProductTypeEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Commodity Forward"/>
+      <xsd:enumeration value="Commodity Option"/>
+      <xsd:enumeration value="Commodity Swap"/>
+      <xsd:enumeration value="Commodity Spread"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SWB_ContractMonthEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The valid values for referencing commodity futures contracts.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="JAN"/>
+      <xsd:enumeration value="FEB"/>
+      <xsd:enumeration value="MAR"/>
+      <xsd:enumeration value="APR"/>
+      <xsd:enumeration value="MAY"/>
+      <xsd:enumeration value="JUN"/>
+      <xsd:enumeration value="JUL"/>
+      <xsd:enumeration value="AUG"/>
+      <xsd:enumeration value="SEP"/>
+      <xsd:enumeration value="OCT"/>
+      <xsd:enumeration value="NOV"/>
+      <xsd:enumeration value="DEC"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SWB_ContractTradingDayEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The valid values for specifying the trading day of a listed option or futures contract on which to price.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="First"/>
+      <xsd:enumeration value="Last"/>
+      <xsd:enumeration value="Penultimate"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

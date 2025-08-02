@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="fpml-main-4-2.xsd"/>
+	<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+	
+	
+		
+	<xsd:element name="SWBML" type="SWBML">
+		<xsd:annotation>
+			<xsd:documentation>The SWBML root element forms the root for any conforming SWBML instance document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SWBML">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The root element in an SWBML document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbHeader" type="SWB_Header">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStructuredTradeDetails" type="SWB_StructuredTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradeEventReportingDetails" type="SWB_TradeEventReportingDetails" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="version" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="4-2"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_DeltaCross">
+		<xsd:annotation>
+			<xsd:documentation>A type allowing delta crosses to be recorded on a deal.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="buyerPartyReference" type="PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation>A pointer style reference to a party identifier defined elsewhere in the SWBML document. The party referenced is the buyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="sellerPartyReference" type="PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation>A pointer style reference to a party identifier defined elsewhere in the SWBML document. The party referenced is the seller.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="equity" type="EquityAsset">
+					<xsd:annotation>
+						<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="future" type="Future">
+					<xsd:annotation>
+						<xsd:documentation>A future which is crossed to hedge an equity index option trade.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="swbPrice" type="Money">
+				<xsd:annotation>
+					<xsd:documentation>The price of the underlying being crossed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbQuantity" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>The number of underlying instruments being crossed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<xsd:element name="swbDelta" type="xsd:decimal" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The percentage delta hedge achieved. A delta of 1% would be represented as 0.01.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbDeltaOptionQuantity" type="xsd:decimal" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>The number of Options the delta cross is based upon for strategy trades.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="swbOffshoreCross" type="SWB_OffshoreCross" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates that the delta on a trade has been executed in a location other than the one where the underlying is listed. For example, an option on a Hong Kong underlyer is crossed in London.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbCrossExchangeId" type="ExchangeId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The exchange where the underlying share is being crossed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_EquityOptionDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Additional trade dettails for an equity option</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbDefaultSettlementMethod" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The default settlement method i.e. Cash or Physical when the settlement type is Election.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbReferenceFXRate" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The details of any FX Rate on an Equity Option Transaction (For % input trades).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbEquityOptionPercentInput" type="SWB_EquityOptionPercentInput" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional equity option details.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbAveragingDates" type="SWB_AveragingDates" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional equity option details for Averaging Dates.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ExtendedTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductTerm" type="Interval" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The nominal term (tenor) of the credit default swap expressed as a number of months or years. This element must be included for a Credit Default Swap transaction but excluded for a Credit Default Swap Index, Equity Share or Equity Index transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbMessageText" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A free format text message that will be displayed to both dealers alongside the structured trade details. The message should not exceed 200 characters in length.   Note that if the ampersand character (&amp;) and the left (&lt;) and right (&gt;) angle brackets are entered as part of the description they should be escaped using the strings "&amp;amp;", "&amp;lt;" and "&amp;gt;" respectively in the character data of the element content (see http://www.w3.org/TR/2000/REC-xml-20001006#syntax for further explanation).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbDeltaCross" type="SWB_DeltaCross" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A structure to hold the details of a delta cross on an equity option transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbVarianceSwapDetails" type="SWB_VarianceSwapDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Variance Swap' and 'Index Variance Swap' products.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbEquityOptionDetails" type="SWB_EquityOptionDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional equity option details.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbEquitySwapDetails" type="SWB_EquitySwapDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional equity swap details.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Header">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, trade source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbBrokerTradeId" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference identifier allocated by the broker. SwapsWire requires that this identifier be no more than 40 characters in length. The '|' character is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTotalLegs" type="xsd:integer" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>An identifier that specifies the total number of legs for the strategy being submitted. This is validated to ensure the leg number submitted is not greater than the maximum allowe for that strategy type. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBrokerLegId" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A leg identifier allocated by the broker to identify individual legs in a larger group, e.g. a strategy. SwapsWire requires that this identifier be no more than 20 characters in length and comprises of only letters a-z (upper or lower case), digits, hyphens, underscores, colons or full stops. Whitespace is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStrategyType" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A strategy type identifier to identify the nature of the equity option strategy trade(s) being submitted. The value must be a recognised allowable value, e.g; Straddle.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStrategyComment" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A free text comment field to allow additional comments regarding strategy trades to be made bilaterally. Should only be present where swbStrategyType is populated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBrokerTradeVersionId" type="xsd:nonNegativeInteger">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference version identifier allocated by the broker. This identifier should not exceed 40 characters in length. Note that SwapsWire will not use this version identifier in its processing of the deal.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradeSource" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade source, e.g. voice brokered, electronic execution etc. The trade source will determine the applicable workflow for the trade within SwapsWire.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbRecipient" type="SWB_Recipient" minOccurs="2" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element defines the linkage between a recipient defined in the BrokerLoad deal submission API call and the Buyer/Seller on the FpML trade. The element carries an id attribute which must have a value corresponding to a valid recipient id for the deal. This element must occur two times.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_OffshoreCross">
+		<xsd:annotation>
+			<xsd:documentation>Indicates that the delta on a trade has been executed in a location other than the one where the underlying is listed. For example, an option on a Hong Kong underlyer is crossed in London.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbOffshoreCrossLocation" type="BusinessCenter">
+				<xsd:annotation>
+					<xsd:documentation>Captures the location of the Offshore Delta Cross</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Recipient">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information linking the FpML trade Buyer/Seller to the message recipients.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyReference" type="PartyOrTradeSideReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWBML document. This is an FpML element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:ID" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_StructuredTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductType" type="SWB_ProductTypeEnum">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FpML" type="Document">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The FpML 4.2 compliant sub-tree that describes the transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbExtendedTradeDetails" type="SWB_ExtendedTradeDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message. This element should not be included if it has no populated child elements.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_VarianceSwapDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Variance Swap' and 'Index Variance Swap' products.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="volatilityStrikePrice" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The volatility strike price. The volatility strike is the square root of the variance strike.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbExpectedNOverride" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A flag to indicate that the Expected N calculated by the SwapsWire system has been overridden by the broker. If this is the case then the Expected N submitted must be different from the SwapsWire Expected N.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbSettlementCurrencyVegaNotionalAmount" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The Vega Notional Amount denominated in the Settlement Currency. This is an element designed for use with non-deliverable currencies. Where the Settlement Currency and the Reference Currency are the same, this element should not be present.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbVegaFxSpotRate" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element holds the FX rate used to convert the Settlement Currency Vega Notional Amount into the Reference Currency. This is an element designed for use with non-deliverable currencies. Where the Settlement Currency and the Reference Currency are the same, this element should not be present.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="SWB_MasterAgreementTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The specification of master agreement types.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ISDA">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The transaction will be documented under an ISDA master agreement.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_ProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for SwapsWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Share Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Swap on an index underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An option on an underlying equity.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An option on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="SWB_EquityOptionPercentInput">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to Japan and AEJ options using percentage style input</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbHedgeLevel" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>For an Equity Share and Equity Index Option, the Hedge/Cash Level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbBasis" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>For an Equity Index Option, the basis used to calculate the implied level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbImpliedLevel" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>For an Equity Index Option, the implied level.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbPremiumPercentage" type="xsd:decimal">
+				<xsd:annotation>
+					<xsd:documentation>For an Equity Share Option or Equity Index Option, the Percentage (of notional) premium considered for the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStrikePercentage" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>For an Equity Share Option or Equity Index Option, the strike as % of the hedge/implied level considered for the trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbNotional" type="Money" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The Notional USD value.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_DividendSwapDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Dividend Swap' and 'Index Dividend Swap' products.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbBreakOutTrade" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">For a 'Share Dividend Swap' or 'Index Dividend Swap' product, a boolean true value indicates the periods on the trade should be broken out. Only applicable to trades with more than one period.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_AveragingDates">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to US Equity Share and Index Options for averaging</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbAveragingFrequency" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation>For a US Equity Share and Equity Index Option, the convention for averaging dates.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbAveragingStart" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>For a US Equity Share and Equity Index Option, the start date for Averaging observations.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbAveragingEnd" type="xsd:date">
+				<xsd:annotation>
+					<xsd:documentation>For a US Equity Share and Equity Index Option, the end date for Averaging observations.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

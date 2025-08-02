@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="SW_NcCdProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for MarkitWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Offline Trade Credit Summary">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Offline Trade Credit">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap confirmed under the Matrix.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_NcCdCreditProductTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CDS Single Name"/>
+			<xsd:enumeration value="CDS Index"/>
+			<xsd:enumeration value="LCDS"/>
+			<xsd:enumeration value="ABS"/>
+			<xsd:enumeration value="CDS Single Name Swaption"/>
+			<xsd:enumeration value="CDS Index Swaption"/>
+			<xsd:enumeration value="CDS Single Name Recovery Lock"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_NcCdClearingHouseEnum">
+		<xsd:annotation>
+			<xsd:documentation>List of valid CCP ids for Credit Novation Mandatory Clearing</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ICEClearCredit"/>
+			<xsd:enumeration value="ICEClearEurope"/>
+			<xsd:enumeration value="LCHSA"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_FrontloadEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A field to indicate the frontloading category of a trade under EMIR regulation by ESMA.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Category1">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade falls under frontloading Category 1 as per the criteria laid down by ESMA.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Category2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade falls under frontloading Category 2 as per the criteria laid down by ESMA.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NotApplicable">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The category of trade does exist but dos not match the criteria laid down by ESMA for category 1 or 2 frontloading.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

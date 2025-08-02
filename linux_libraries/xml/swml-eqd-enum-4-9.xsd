@@ -1,0 +1,644 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="fpml-enum-4-9.xsd"/>
+	<xsd:simpleType name="SW_EqdProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for SwapsWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Equity Share Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Share Option.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Index Option.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Share Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Swap on an index underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Share Dividend Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Dividend Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Dividend Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Dividend Swap on an index underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Share Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Index Swap on an index underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Option Strategy">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Share Option Strategy parent trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Option Strategy">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Index Option Strategy parent trade.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Dispersion Variance Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Dispersion Variance Swap.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Share Variance Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Option on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Index Variance Option">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Variance Option on an underlying equity index.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Option Universal">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Share Option Universal.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Option Universal">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Index Option Universal.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Share Volatility Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Volatility Swap on a single stock underlyer.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Index Volatility Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A Volatility swap on an underlying equity index</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Accumulator">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Accumulator Forward.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Decumulator">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Decumulator Forward.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Equity Basket Swap">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An Equity Equity Basket Swap.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_EqdSchedulingMethodEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Specifies the scheduling method</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ParameterDriven">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Schedules are generated by the system based on the parameters specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ListDateEntry">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Direct population of and amendments to individual list dates are enabled.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_FxDeterminationMethodEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Specifies the scheduling method</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination as specified in the General Terms.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PredefinedSource">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination according to the source selected from the predefined list.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SpecifiedSource">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">FX determination according to the user specified source.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_EarlyFinalValuationDateElectionEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Early Final Valuation Date Election.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="NotSpecified">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Early Final Valuation Date not specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="ValuationDate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Early Final Valuation Date specified as valuation date(s).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Early Final Valuation Date as specified in master confirmation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_SettlementMethodElectionPartyEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines which party is to elect Settlement Method where Settlement Method is specified as Election.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Terms in Master Confirmation apply.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Buyer">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Buyer to elect Settlement Method.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Seller">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Seller to elect Settlement Method.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Joint">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Both parties to elect Settlement Method jointly.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_BusinessDayConventionEnum">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.FpML.org" xml:lang="en">The convention for adjusting any relevant date if it would otherwise fall on a day that is not a valid business day. Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="FOLLOWING">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FRN">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Per 2000 ISDA Definitions, Section 4.11. FRN Convention; Eurodollar Convention.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MODFOLLOWING">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day unless that day falls in the next calendar month, in which case that date will be the first preceding day that is a business day.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="PRECEDING">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business day will be adjusted to the first preceding day that is a business day.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MODPRECEDING">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first preceding day that is a business day unless that day falls in the previous calendar month, in which case that date will be the first following day that us a business day.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NEAREST">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the nearest day that is a business day - i.e. if the non-business day falls on any day other than a Sunday or a Monday, it will be the first preceding day that is a business day, and will be the first following business day if it falls on a Sunday or a Monday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NONE">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date will not be adjusted if it falls on a day that is not a business day.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NotApplicable">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions are defined elsewhere, so it is not required to specify them here.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions specified in the Master Confirmation applies.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_ASIMCEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">As Specified In Master Confirmation Emum</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">As Specified In Master Confirmation</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="SW_GrossPriceEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Gross Price.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Closing">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Gross Price is price at Closing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Opening">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Gross Price is price at Opening.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TR Open">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Gross Price is price at TR Open.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="SW_ApplicableRegionEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines valid values for Applicable Region.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="United States">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The United States as the applicable region. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AEJA Region">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The AEJA Region as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="LatAm Region">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The LatAm Region as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Canada">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Canada as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Japan">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Japan as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEA Region 1">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">EMEA Region 1 as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEA Region 2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">EMEA Region 2 as the applicable region.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_RollConventionEnum">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.FpML.org" xml:lang="en">The convention for determining the sequence of calculation period end dates. It is used in conjunction with a specified frequency and the regular period start date of a calculation period, e.g. semi-annual IMM roll dates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="RollConventionEnum">
+			<xsd:enumeration value="EOM">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on month end dates irrespective of the length of the month and the previous roll day.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NONE">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">The roll convention is not required. For example, in the case of a daily calculation frequency.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="1">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 1st day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="2">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 2nd day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="3">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 3rd day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="4">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 4th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="5">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 4th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="6">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 6th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="7">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 7th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="8">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 8th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="9">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 9th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="10">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 10th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="11">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 11th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="12">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 12th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="13">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 13th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="14">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 14th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="15">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 15th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="16">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 16th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="17">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 17th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="18">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 18th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="19">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 19th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="20">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 20th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="21">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 21st day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="22">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 22nd day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="23">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 23rd day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="24">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 24th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="25">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 25th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="26">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 26th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="27">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 27th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="28">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 28th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="29">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 29th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="30">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolls on the 30th day of the month.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="MON">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Monday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="TUE">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Tuesday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="WED">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Wednesday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="THU">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Thursday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FRI">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Friday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SAT">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Saturday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SUN">
+				<xsd:annotation>
+					<xsd:documentation source="http://www.FpML.org" xml:lang="en">Rolling weekly on a Sunday.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_SubstitutionSelectionEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines Substitution Selection for underlying basket constituents</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Restricted (per MCA)">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Restricted</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Unrestricted (mutual-cancel &amp; pay)">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">mutual-cancel &amp; pay</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Unrestricted (mutual-trade continues)">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">mutual-trade continues</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Not Applicable">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">mutual-trade continues</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_TriggerTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines trigger details of the basket swap</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="As Per MCA">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">As Per MCA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Anytime ">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Anytime</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Reset Date / Valuation Date ">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Reset Date  or Valuation Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Corporate Action - No Dividend">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Corporate Action without Dividend</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Corporate Action - Dividend">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Corporate Action with Dividend</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+       <xsd:enumeration value="Not Applicable">
+         <xsd:annotation>
+           <xsd:documentation xml:lang="en">Not Applicable</xsd:documentation>
+         </xsd:annotation>
+       </xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_ElectingPartyEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines trigger details of the basket swap</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Party A and Party B">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Party A and Party B</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Party A">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Party A</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Party B ">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Party B</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+      <xsd:enumeration value="Not Applicable">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Not Applicable</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SW_SubstitutionCriteriaEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines trigger details of the basket swap</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Applicable">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Substitution Applicable</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Not Applicable">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Substitution Not Applicable</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="As Specified in Side Letter ">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Substitution as Specified in Side Letter</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

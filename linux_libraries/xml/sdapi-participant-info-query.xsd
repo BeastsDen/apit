@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="2.0">
+<xsd:element name="sdapi_participantInfoQuery" type="SDAPI_ParticipantInfoQuery"/>
+<xsd:complexType name="SDAPI_ParticipantInfoQuery">
+<xsd:sequence>
+<xsd:element name="sdapi_version" type="xsd:normalizedString" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Desired Static Data API version to be used</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice minOccurs="0">
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This contains the usernames that the query needs to be run for.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_legalEntities" type="SDAPI_LegalEntities" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the Legal Entity name.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_products" type="SDAPI_Products" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Holds the Product List name.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_interestGroups" type="SDAPI_InterestGroups" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the InterestGroup.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_booklists" type="SDAPI_Booklists" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Name of Booklist.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_productLists" type="SDAPI_ProductLists" minOccurs="0"/>
+<xsd:element name="sdapi_roles" type="SDAPI_Roles" minOccurs="0"/>
+<xsd:element name="sdapi_books" type="SDAPI_Books" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>List of books.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="sdapi_overlayLists" type="SDAPI_OverlayLists" minOccurs="0"/>
+<xsd:element name="sdapi_tradeRequestStatus" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_queryType" type="xsd:normalizedString" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Query Type</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="sdapi_participantInfoData" type="SDAPI_ParticipantInfoData"/>
+<xsd:complexType name="SDAPI_ParticipantInfoData">
+<xsd:sequence>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_interestGroups" type="SDAPI_InterestGroups" minOccurs="0"/>
+<xsd:element name="sdapi_legalEntities" type="SDAPI_LegalEntities" minOccurs="0"/>
+<xsd:element name="sdapi_products" type="SDAPI_Products" minOccurs="0"/>
+<xsd:element name="sdapi_clearingPermissions" type="SDAPI_ClearingPermissions" minOccurs="0"/>
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0"/>
+<xsd:element name="sdapi_tradeRequests" type="SDAPI_TradeRequests" minOccurs="0"/>
+<xsd:element name="sdapi_roles" type="SDAPI_Roles" minOccurs="0"/>
+<xsd:element name="sdapi_books" type="SDAPI_Books" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="sdapi_booklists" type="SDAPI_Booklists" minOccurs="0"/>
+<xsd:element name="sdapi_productLists" type="SDAPI_ProductLists" minOccurs="0"/>
+<xsd:element name="sdapi_overlays" type="SDAPI_Overlays" minOccurs="0"/>
+<xsd:element name="sdapi_brokerMappings" type="SDAPI_BrokerMappings" minOccurs="0"/>
+<xsd:element name="sdapi_overlayLists" type="SDAPI_OverlayLists" minOccurs="0"/>
+<xsd:element name="sdapi_queryLimits" type="SDAPI_QueryLimits" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="version" type="xsd:NMTOKEN" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_User">
+<xsd:annotation>
+<xsd:documentation>Container element for elements pertaining to a single user This is displayed as UserType in Live schemas</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="sdapi_userName" type="xsd:normalizedString" minOccurs="1"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_userFullName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_userDescription" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_booklists" type="SDAPI_Booklists" minOccurs="0"/>
+<xsd:element name="sdapi_books" type="SDAPI_Books" minOccurs="0"/>
+<xsd:element name="sdapi_telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_emailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_subGroup" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_products" type="SDAPI_Products" minOccurs="0"/>
+<xsd:element name="sdapi_legalEntities" type="SDAPI_LegalEntities" minOccurs="0"/>
+<xsd:element name="sdapi_interestGroups" type="SDAPI_InterestGroups" minOccurs="0"/>
+<xsd:element name="sdapi_functionalPermissions" type="SDAPI_FunctionalPermissions" minOccurs="0"/>
+<xsd:element name="sdapi_roles" type="SDAPI_Roles" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_InterestGroup">
+<xsd:sequence>
+<xsd:element name="sdapi_interestGroupName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_interestGroupShortName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_interestGroupContactName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_emailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_LegalEntity">
+<xsd:sequence>
+<xsd:element name="sdapi_legalEntityName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_legalEntityShortName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_legalEntityFullLegalName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_BIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_description" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_contactName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_emailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_countryOfIncorporation" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_defaultLE" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0"/>
+<xsd:element name="sdapi_clearingPermissions" type="SDAPI_ClearingPermissions" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_TradeRequest">
+<xsd:sequence>
+<xsd:element name="sdapi_counterPartyParticipantName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_counterPartyParticipantShortName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_counterPartylegalEntity" type="SDAPI_LegalEntity" minOccurs="0"/>
+<xsd:element name="sdapi_legalEntity" type="SDAPI_LegalEntity" minOccurs="0"/>
+<xsd:element name="sdapi_lastUpdated" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_tradeRequestStatus" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_ClearingPermission">
+<xsd:sequence>
+<xsd:element name="sdapi_counterLEName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_counterBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_productName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_clearingHouseName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_clearingHouseBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_default" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Status">
+<xsd:sequence>
+<xsd:element name="sdapi_errorDescription" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_isHidden" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="sdapi_errorCode" type="xsd:integer" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Role">
+<xsd:sequence>
+<xsd:element name="sdapi_roleName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_roleDescription" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_functionalPermissions" type="SDAPI_FunctionalPermissions" minOccurs="0"/>
+<xsd:element name="sdapi_role" minOccurs="0" maxOccurs="unbounded" type="SDAPI_Role"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_FunctionalPermission">
+<xsd:sequence>
+<xsd:element name="sdapi_functionalPermissionName" type="xsd:string"/>
+<xsd:element name="sdapi_direct" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="sdapi_functionalPermissionDescription" type="xsd:string" minOccurs="0"/>
+<xsd:element name="sdapi_roles" type="SDAPI_Roles" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Overlay">
+<xsd:sequence>
+<xsd:element name="sdapi_product" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_overlayName" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_OverlayListValue">
+<xsd:sequence>
+<xsd:element name="sdapi_overlayListValueName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListValueSequence" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListValueDescription" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListValueData" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListValueActive" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_OverlayList">
+<xsd:sequence>
+<xsd:element name="sdapi_product" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_overlayListValues" type="SDAPI_OverlayListValues" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Book">
+<xsd:annotation>
+<xsd:documentation>Simple element in live schema</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="sdapi_bookName" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Used in sdapi_book</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sdapi_direct" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="sdapi_booklists" type="SDAPI_Booklists" minOccurs="0"/>
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Books">
+<xsd:sequence>
+<xsd:element name="sdapi_book" type="SDAPI_Book" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_BookLists">
+<xsd:annotation>
+<xsd:documentation>datatype Displayed as "Booklist Type" in live schema.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="sdapi_booklistName" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_ProductList">
+<xsd:sequence>
+<xsd:element name="sdapi_productListName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_products" type="SDAPI_Products" minOccurs="0" maxOccurs="1"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Products">
+<xsd:sequence>
+<xsd:element name="sdapi_product" type="SDAPI_Product" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_LegalEntities">
+<xsd:sequence>
+<xsd:element name="sdapi_legalEntity" type="SDAPI_LegalEntity" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_TradeRequests">
+<xsd:sequence>
+<xsd:element name="sdapi_tradeRequest" type="SDAPI_TradeRequest" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>DataType mentioned as "TradeRequestType" in live schema.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_ClearingPermissions">
+<xsd:sequence>
+<xsd:element name="sdapi_clearingPermission" type="SDAPI_ClearingPermission" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Users">
+<xsd:annotation>
+<xsd:documentation>Container to represent multiple users, each represented by an User element</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="sdapi_user" type="SDAPI_User" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_InterestGroups">
+<xsd:sequence>
+<xsd:element name="sdapi_interestGroup" type="SDAPI_InterestGroup" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Roles">
+<xsd:sequence>
+<xsd:element name="sdapi_role" type="SDAPI_Role" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>DataType mentioned as "RoleType" in live schema.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_FunctionalPermissions">
+<xsd:choice>
+<xsd:element name="sdapi_functionalPermission" type="SDAPI_FunctionalPermission" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Overlays">
+<xsd:sequence>
+<xsd:element name="sdapi_overlay" type="SDAPI_Overlay" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_OverlayListValues">
+<xsd:sequence minOccurs="0">
+<xsd:element name="sdapi_overlayListValue" type="SDAPI_OverlayListValue" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_OverlayLists">
+<xsd:sequence>
+<xsd:element name="sdapi_overlayList" type="SDAPI_OverlayList" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Product">
+<xsd:sequence>
+<xsd:element name="sdapi_productName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_direct" minOccurs="0"/>
+<xsd:element name="sdapi_productLists" type="SDAPI_ProductLists" minOccurs="0"/>
+<xsd:element name="sdapi_users" type="SDAPI_Users" minOccurs="0"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_BrokerMappings">
+<xsd:sequence>
+<xsd:element name="sdapi_brokerMapping" minOccurs="0" maxOccurs="unbounded" type="SDAPI_BrokerMapping"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_BrokerMapping">
+<xsd:sequence>
+<xsd:element name="sdapi_dateModified" type="xsd:date" minOccurs="0"/>
+<xsd:element name="sdapi_bank" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_participantShortCode" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_BIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_trader" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_productName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_trade" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_interestGroupName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="sdapi_tradeSingleSided" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Booklist">
+<xsd:sequence>
+<xsd:element name="sdapi_booklistName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_status" type="SDAPI_Status" minOccurs="0"/>
+<xsd:element name="sdapi_books" type="SDAPI_Books" minOccurs="0" maxOccurs="1"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_Booklists">
+<xsd:sequence>
+<xsd:element name="sdapi_booklist" type="SDAPI_Booklist" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_ProductLists">
+<xsd:sequence>
+<xsd:element name="sdapi_productList" type="SDAPI_ProductList" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_QueryLimits">
+<xsd:sequence>
+<xsd:element name="sdapi_queryLimit" type="SDAPI_QueryLimit" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SDAPI_QueryLimit">
+<xsd:sequence>
+<xsd:element name="sdapi_queryTypeName" type="xsd:normalizedString"/>
+<xsd:element name="sdapi_inputLimit" type="xsd:integer"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="ParticipantInfoQuery">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0">
+<xsd:element name="Users" type="SW_User" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This contains the usernames that the query needs to be run for.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LegalEntity" type="xsd:normalizedString" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the Legal Entity name.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ProductList" type="xsd:normalizedString" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the Product List name.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="InterestGroup" type="xsd:normalizedString" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the InterestGroup.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Booklist" type="xsd:normalizedString" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Name of Booklist.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="BIC" type="xsd:normalizedString" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Holds the BIC code.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Product" minOccurs="0"/>
+<xsd:element name="UserRole" minOccurs="0"/>
+<xsd:element name="Books" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>List of Books.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence minOccurs="0">
+<xsd:element name="Book" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="OverlayListName" minOccurs="0"/>
+<xsd:element name="Query" type="xsd:normalizedString" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Query Type</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ParticipantInfoData" type="ParticipantInfoDataType">
+</xsd:element>
+<xsd:complexType name="ParticipantInfoDataType">
+<xsd:sequence>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+<xsd:element name="ClearingPermissions" type="ClearingPermissionsType" minOccurs="0"/>
+<xsd:element name="Product" type="xsd:normalizedString" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="Users" type="UsersType" minOccurs="0"/>
+<xsd:element name="LegalEntities" type="LegalEntitiesType" minOccurs="0"/>
+<xsd:element name="TradeRequests" type="TradeRequestsType" minOccurs="0"/>
+<xsd:element name="Booklist" type="xsd:normalizedString" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="Roles" type="RolesType" minOccurs="0"/>
+<xsd:element name="Books" type="BooksType" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="BookUsers" type="BookUsersType" minOccurs="0"/>
+<xsd:element name="InterestGroups" type="InterestGroupsType" minOccurs="0"/>
+<xsd:element name="ProductLists" type="ProductListsType" minOccurs="0"/>
+<xsd:element name="Overlays" type="OverlaysType" minOccurs="0"/>
+<xsd:element name="BrokerMappings" type="BrokerMappingsType" minOccurs="0"/>
+<xsd:element name="ProductList" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Products" type="ProductsType" minOccurs="0"/>
+<xsd:element name="OverlayLists" type="OverlayListsType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UserType">
+<xsd:annotation>
+<xsd:documentation>Container element for elements pertaining to a single user</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="Name" type="xsd:normalizedString" minOccurs="1"/>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+<xsd:element name="FullName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Description" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Booklists" type="BooklistsType" minOccurs="0"/>
+<xsd:element name="Books" type="BooksType" minOccurs="0"/>
+<xsd:element name="Telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="EmailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="SubGroup" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Products" type="ProductsType" minOccurs="0"/>
+<xsd:element name="LegalEntities" type="LegalEntitiesShort" minOccurs="0"/>
+<xsd:element name="InterestGroups" type="InterestGroupsShort" minOccurs="0"/>
+<xsd:element name="FunctionalPermissions" type="FunctionalPermissionsShortType" minOccurs="0"/>
+<xsd:element name="Roles" type="RolesType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InterestGroupType">
+<xsd:sequence>
+<xsd:element name="InterestGroupName" type="xsd:normalizedString"/>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+<xsd:element name="ShortName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ContactName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="EmailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Users" type="UsersType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LegalEntityType">
+<xsd:sequence>
+<xsd:element name="LegalEntityName" type="xsd:normalizedString"/>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+<xsd:element name="ShortName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="FullLegalName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="BIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Description" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ContactName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Telephone" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="EmailAddress" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="CountryOfIncorporation" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="DefaultLE" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="Users" type="UsersType" minOccurs="0"/>
+<xsd:element name="ClearingPermissions" type="ClearingPermissionsType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TradeRequestType">
+<xsd:sequence>
+<xsd:element name="CounterPartyParticipant" type="xsd:normalizedString"/>
+<xsd:element name="CounterLE" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="CounterLEBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="LE" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="LEBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="LastUpdated" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Status" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ClearingPermissionType">
+<xsd:sequence>
+<xsd:element name="CounterLE" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="CounterBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ProductName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ClearingHouse" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ClearingHouseBIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Default" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="StatusType">
+<xsd:sequence>
+<xsd:element name="Error" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="IsHidden" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RoleType" mixed="true">
+<xsd:sequence>
+<xsd:element name="RoleName" type="xsd:string" minOccurs="0"/>
+<xsd:element name="RoleDescription" type="xsd:string" minOccurs="0"/>
+<xsd:element name="FunctionalPermissions" type="FunctionalPermissionsType" minOccurs="0"/>
+<xsd:element name="Role" type="RoleType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="FunctionalPermissionType">
+<xsd:sequence>
+<xsd:element name="FunctionalPermissionName" type="xsd:string"/>
+<xsd:element name="FunctionalPermissionDescription" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OverlayType">
+<xsd:sequence>
+<xsd:element name="Product" type="xsd:normalizedString"/>
+<xsd:element name="OverlayName" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OverlayListValueType">
+<xsd:sequence>
+<xsd:element name="Name" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Sequence" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Description" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Data" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Active" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OverlayListType">
+<xsd:sequence>
+<xsd:element name="Product" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="OverlayListName" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Values" type="OverlayListsValuesType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BooksType">
+<xsd:choice>
+<xsd:element name="Book" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="BooklistsType">
+<xsd:sequence>
+<xsd:element name="Booklist" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ProductListsType">
+<xsd:sequence>
+<xsd:element name="ProductList" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ProductsType">
+<xsd:choice>
+<xsd:element name="Product" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="ProductInfo" type="ProductInfoType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="LegalEntitiesType">
+<xsd:sequence minOccurs="0">
+<xsd:element name="LegalEntity" type="LegalEntityType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LegalEntitiesShort">
+<xsd:sequence minOccurs="0">
+<xsd:element name="LegalEntity" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TradeRequestsType">
+<xsd:sequence>
+<xsd:element name="TradeRequest" type="TradeRequestType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ClearingPermissionsType">
+<xsd:sequence>
+<xsd:element name="ClearingPermission" type="ClearingPermissionType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="UsersType">
+<xsd:annotation>
+<xsd:documentation>Container to represent multiple users, each represented by an User element</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="User" type="UserType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InterestGroupsType">
+<xsd:sequence minOccurs="0">
+<xsd:element name="InterestGroup" type="InterestGroupType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BookUsersType">
+<xsd:sequence minOccurs="0">
+<xsd:element name="Book" type="BookInfoType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InterestGroupsShort">
+<xsd:sequence minOccurs="0">
+<xsd:element name="InterestGroup" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RolesType">
+<xsd:choice>
+<xsd:element name="Role" type="RoleType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="FunctionalPermissionsType">
+<xsd:choice>
+<xsd:element name="FunctionalPermission" type="FunctionalPermissionType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="FunctionalPermissionsShortType">
+<xsd:choice>
+<xsd:element name="FunctionalPermission" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="OverlaysType">
+<xsd:sequence>
+<xsd:element name="Overlay" type="OverlayType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OverlayListsValuesType">
+<xsd:sequence>
+<xsd:element name="Value" type="OverlayListValueType" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OverlayListsType">
+<xsd:sequence>
+<xsd:element name="OverlayList" type="OverlayListType" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BrokerMappingsType">
+<xsd:sequence>
+<xsd:element name="BrokerMapping" type="BrokerMappingType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BrokerMappingType">
+<xsd:sequence>
+<xsd:element name="DateModified" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Bank" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="ParticipantShortCode" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="BIC" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Trader" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Trade" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="Product" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="InterestGroup" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="TradeSingleSided" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="BookInfoType">
+<xsd:sequence>
+<xsd:element name="BookName" type="xsd:normalizedString"/>
+<xsd:element name="Direct" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="Booklists" type="BooklistsType" minOccurs="0"/>
+<xsd:element name="Users" type="UsersType" minOccurs="0"/>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ProductInfoType">
+<xsd:sequence>
+<xsd:element name="ProductName" type="xsd:normalizedString"/>
+<xsd:element name="Direct" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="ProductLists" type="ProductListsType" minOccurs="0"/>
+<xsd:element name="Users" type="UsersType" minOccurs="0"/>
+<xsd:element name="Status" type="StatusType" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_User">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Holds the Username.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="User" type="xsd:normalizedString" minOccurs="1" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">UserName</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

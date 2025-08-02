@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="fpml-shared-4-2.xsd"/>
+<xsd:include schemaLocation="Cancellation-Enum.xsd"/>
+<xsd:element name="cancellation">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="cancellationFee" type="cancellationFee" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The cancellationFee XML.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="cancellationFee2" type="cancellationFee" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The cancellationFee XML.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancellationType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if a cancellation is affected for a trade which was booked in error and will contain the value 'BookedInError', or for a trade with a Cancellable Option and will contain the value 'CancellableExercise'</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="BookedInError">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Booked in Error</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CancellableExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cancellable Exercise</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="swForwardPremium" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Boolean element indicates if the Swaption premium payment amount is live or the payment has been settled at the time of cancellation event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBulkAction" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to identify trades created or amended as part of a bulk process.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFinalExchangeVariableNotional" type="xsd:decimal" default="0" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The final principal exchange amount for the varying notional leg on a mark-to-market Cross Currency Swap upon cancellation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNovationReporting" type="SW_NovationReporting" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will hold the novation reporting boolean flags.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swModificationTradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The date on which the cancellation is agreed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swModificationEffectiveDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The date from which the cancellation is effective.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBusinessConductDetails" type="SW_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not 	captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSendToCLS" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether the message is eligible for the settlement at CLS.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swSettlementLegEligibility" minOccurs="1" maxOccurs="2">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:boolean">
+<xsd:attribute name="swSettlementLeg" type="SW_SettlementLegEnum"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swPrincipalExchanges" type="SW_PrincipalExchanges" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The true/false flags indicating whether initial, intermediate or final exchanges of principal should occur.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swReplacementTradeId" type="SW_ReplacementTradeId" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="cancellationFee">
+<xsd:annotation>
+<xsd:documentation>The cancellationFee XML.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payReceiveDirection">
+<xsd:annotation>
+<xsd:documentation>Describes whether the API's organisation should pay or receive the cancellation fee.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Pay">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Payer.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Receive">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Receiver.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="paymentAmount" type="Money">
+<xsd:annotation>
+<xsd:documentation>Cancellation fee.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="AdjustableDate">
+<xsd:annotation>
+<xsd:documentation>Cancellation fee payment date.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_NovationReporting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for the novation reporting flags.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="novated" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Novated</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNovated" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">New-Novated</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_BusinessConductDetails">
+<xsd:annotation>
+<xsd:documentation>A component for defining trade details related to business conduct standards that are not captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swMidMarketPrice" type="SW_MidMarketPrice" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en"> A component for defining Mid Market Price </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_MidMarketPrice">
+<xsd:annotation>
+<xsd:documentation>Component to contain Mid Market Price information</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Contains value specified for Mid-Market Price</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCurrency" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Contains currency specified for Mid-Market Price</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnit" type="SW_Unit">
+<xsd:annotation>
+<xsd:documentation>Contains unit scheme that specifies Mid-Market price type </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Unit">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type used to record information about a unit, subdivision, desk, or other similar business entity.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="unitScheme" type="SW_Scheme" use="optional" default="http://www.markitwire.com/spec/2012/coding-scheme/price-quote-units">
+<xsd:annotation>
+<xsd:documentation>default="http://www.markitwire.com/spec/2012/coding-scheme/price-quote-units"
+''Price"
+"BasisPoints"
+"Percentage"
+"Amount"
+</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_Scheme">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The base class for all types which define coding schemes.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_PrincipalExchanges">
+<xsd:annotation>
+<xsd:documentation>Complex structure indicating whether initial, intermediate or final exchanges of principal should occur.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swInitialExchange" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether there is an initial exchange of principal on the effective date.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFinalExchange" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether there is a final exchange of principal on the termination date.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ReplacementTradeId">
+<xsd:annotation>
+<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTradeId">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swTradeIdType" type="SW_TradeIdTypeEnum"/>
+<xsd:element name="swReplacementReason" type="SW_ReplacementReasonEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.fpml.org/2005/FpML-4-2" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swml-shared-4-2.xsd"/>
+<xsd:element name="NettingGrid">
+<xsd:annotation>
+<xsd:documentation>Comment describing your root element</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Header">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="NettingBatchId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The Netting Batch ID the dealer submitted for this trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ClearingHouse" type="SW_PartyID">
+<xsd:annotation>
+<xsd:documentation>BIC of the Clearing House that conducting the Netting Activity</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LegalEntity" type="SW_PartyID">
+<xsd:annotation>
+<xsd:documentation>BIC of the Legal Entity the Netting run occured on</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="NettingInstructionType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The type of netting instruction, this will be set to Netting or Other</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="SubCategory" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Sub Category of the Netting Instruction Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="StatusInformation">
+<xsd:annotation>
+<xsd:documentation>Status Information for the Netting Grid</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Status" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Status of the Netting Grid</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TotalToProcess" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation>The number of trades to process as part of this netting batch</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TotalProcessed" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation>The total number of trades that have been processed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ErrorTotal" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation>The total number of trades that are in an error status</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="Trade" maxOccurs="unbounded">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Sequence" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation>Sequence number of the trade in the batch</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MarkitWireTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The MarkitWire Trade ID. Only populated if the trade exists in MarkitWire</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ClearingHouseTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Clearing House Trade ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="TypeOfNettingEvent" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>States whether the trade is to be cancelled (Terminate) or created (New)</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Status" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Status of the trade. Created, Cancelled or Error</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ErrorDescription" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Error description for when the status is in Error</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ContractState" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The MarkitWire contract state of the trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swPrivateData" type="SW_PrivateData" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Data which is private to an individual party. The private data consists of a mixture of process state information and private data entered/displayed in the SwapsWire Trader application or set via an API, e.g. trading book identifier. Note that the element will not be present in SWML extracted via the Dealer API prior to that side picking up the deal.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="SW_PartyID">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining party information.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">bank identifier code (BIC).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID" use="required">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The id uniquely identifying the Party within the document.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:schema>

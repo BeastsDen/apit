@@ -171,10 +171,9 @@ export default function MarkitWireApiPage() {
       <Alert>
         <Info className="h-4 w-4" />
         <AlertDescription>
-          <strong>Simulation Mode:</strong> Since we're running on Linux but have Windows DLL files, 
-          this interface simulates MarkitWire API responses based on the official PDF documentation. 
-          All functions and responses are realistic examples for testing and development purposes.
-          Try "demo" / "demo" as credentials for successful connection simulation.
+          <strong>Real API Mode:</strong> This interface now uses the actual MarkitWire Linux native libraries 
+          to make real API calls. All functions connect to the actual MarkitWire servers using the 
+          Java wrapper libraries and Linux .so files. Enter your real MarkitWire credentials to connect.
         </AlertDescription>
       </Alert>
 

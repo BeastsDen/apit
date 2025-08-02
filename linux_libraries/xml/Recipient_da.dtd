@@ -1,0 +1,5 @@
+<!ELEMENT Recipient (ParticipantId , GroupId* , UserId*)>
+<!ATTLIST Recipient id ID #REQUIRED >
+<!ELEMENT ParticipantId (#PCDATA)>
+<!ELEMENT GroupId (#PCDATA)>
+<!ELEMENT UserId (#PCDATA)>

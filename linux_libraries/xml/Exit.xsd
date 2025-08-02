@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="Exit">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swModificationTradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The date corresponds to the trade date of the transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swModificationEffectiveDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The date from which the exit is effective.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExitReason" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The exit reson</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNovationReporting" type="SW_NovationReporting" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will hold the novation reporting boolean flags.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="SW_NovationReporting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for the novation reporting flags.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="novated" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Novated</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNovated" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">New-Novated</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

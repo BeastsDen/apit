@@ -1,0 +1,10 @@
+<!ELEMENT EndedDealInfoQuery (  StartTimestamp,
+EndTimestamp,
+AutoProcessed?,
+ExecutionVenue?,
+GateCheckDispute?)>
+<!ELEMENT StartTimestamp (#PCDATA)>
+<!ELEMENT EndTimestamp (#PCDATA)>
+<!ELEMENT AutoProcessed (#PCDATA)>
+<!ELEMENT ExecutionVenue (#PCDATA)>
+<!ELEMENT GateCheckDispute (#PCDATA)>

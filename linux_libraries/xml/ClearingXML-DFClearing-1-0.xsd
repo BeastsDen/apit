@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1-0">
+<xsd:include schemaLocation="ClearingXML-shared.xsd"/>
+<xsd:complexType name="SW_TradeEventReportingDetails">
+<xsd:annotation>
+<xsd:documentation>Container for all available, in scope, reporting details</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swUniqueTransactionId" type="SW_Global_UTI" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Global UTI</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyRelatedTradeId" type="SW_PartyRelatedTradeId" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Identification of trades that are related to the trade being reported on and classification of their relationship with this trade</xsd:documentation>
+<xsd:documentation>One occurrence per Prior and Block USI</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swReportingRegimeInformation" type="SW_ReportingRegimeInformation" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Container for reporting regime level data</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swReportableProduct" type="SW_Product" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Identifiers used to identify the product being traded</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTradePartyDetails" type="SW_PartyInformation" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>A Trade Counterparty will only be able to view or submit an instance containing their own party details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyTradeInformation" type="SW_PartyTradeInformation" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyTradeInformation">
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference which relates to information below</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:sequence>
+<xsd:element name="swExecutionVenueType" type="SW_ExecutionVenueType"/>
+<xsd:element name="swNonStandardTerms" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Specifies whether the trade contains terms that affect pricing that are not represented by the standard reportable data fields, that is, it indicates a bespoke trade that might otherwise appear from its characteristics to be a standardized trade but is really non-standard. The flag indicates that the price for this trade is not to be construed as being indicative of the market.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:element name="swNonStandardTerms" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation>Specifies whether the trade contains terms that affect pricing that are not represented by the standard reportable data fields, that is, it indicates a bespoke trade that might otherwise appear from its characteristics to be a standardized trade but is really non-standard. The flag indicates that the price for this trade is not to be construed as being indicative of the market.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swExecutionDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation/>
+<xsd:documentation xml:lang="en">Trade execution date time provided by a central execution facility.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRelatedParty" type="SW_RelatedParty" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Identification of applicable party components in the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionVenueIdentifier" type="SW_ExecutionVenueIdentifier" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Unique identifier that specifies which set of exchange identifiers has been used to specify a securities or derivatives exchange. i.e. MIC requirement for MIFID and ESMA RTS 2.0</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ExecutionVenueIdentifier">
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="ExchangeIdScheme" type="SW_Scheme" default="http://www.fpml.org/coding-scheme/external/mifir/extension-iso10383">
+<xsd:annotation>
+<xsd:documentation>default: "http://www.fpml.org/coding-scheme/external/mifir/extension-iso10383"</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_RelatedParty">
+<xsd:sequence>
+<xsd:element name="swPartyId" type="xsd:normalizedString"/>
+<xsd:element name="swRole" type="SW_PartyRole">
+<xsd:annotation>
+<xsd:documentation>e.g "Execution Agent"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyRole">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type describing a role played by a party in one or more transactions. Examples include roles such as guarantor, custodian, confirmation service provider, etc. This can be extended to provide custom roles.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="partyRoleScheme" type="xsd:anyURI" default="http://www.fpml.org/coding-scheme/party-role">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">default="http://www.fpml.org/coding-scheme/party-role"</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ExecutionVenueType">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type used to represent the type of market where a trade can be executed.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="executionVenueTypeScheme" type="xsd:anyURI" default="http://www.fpml.org/coding-scheme/execution-venue-type"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:group name="SW_PartyInformation.model">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Information about a party for reporting purposes.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence/>
+</xsd:group>
+<xsd:complexType name="SW_PartyInformation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type extending the SWML//FpML/party block for the relevant party</xsd:documentation>
+<xsd:documentation xml:lang="en">Parties can perform multiple roles in a trade lifecycle. For example, the principal parties obligated to make payments from time to time during the term of the trade, but may include other parties involved in, or incidental to, the trade, such as parties acting in the role of novation transferor/transferee, broker, calculation agent, etc. In FpML roles are defined in multiple places within a document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="xsd:normalizedString" minOccurs="1"/>
+<xsd:element name="swPartyLegalIdentifier" type="SW_PartyId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">One of agreed on prefix values for standard ID's (ex. if value of the ID is a BIC code, the prefix will read 'BIC', for DTCC ID's the prefix will read 'DTCC'). If a firm is using an internal id, then best practice will be to populate prefix with a well known code/value identifying the firm in question i.e. the actual value of their own BIC, DTCC ID etc.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOrganizationType" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap Dealer (SD), Major Swap Participant (MSP), etc...</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The data type used for party LEIs.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="partyIdScheme" type="xsd:anyURI" default="http://www.fpml.org/ext/iso9362"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyObligatoryReporting">
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference" minOccurs="1">
+<xsd:annotation>
+<xsd:documentation>This is a reference to party for which reproting obligation is specified</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swObligatoryReporting" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>This indicates whether party has reporting obligations to the jurisdiction. A message indicating SEC or CFTC Reporting Obligation will be sent to the US SDR.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ReportingRegimeInformation">
+<xsd:annotation>
+<xsd:documentation>Identifies a Reporting Regime in terms of Jurisdiction, Supervisory Body and Category and holds information on jurisdiction specific roles and data</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_ReportingRegime">
+<xsd:sequence>
+<xsd:element name="swReportingCounterpartyReference" type="SW_PartyReference" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An occurrence for each party identified as a reporting party within the relevant reporting regime.
+For Dodd-Frank reporting there will always be 1 occurrence</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyReportingObligation" type="SW_PartyObligatoryReporting" maxOccurs="unbounded"/>
+<xsd:sequence>
+<xsd:element name="swMandatoryClearingIndicator" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element that indicates whether the particular trade type is requird to be cleared  within the specified reporting rergime </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:element name="swLargeSizeTrade" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Large Block Notional Trade Indicator. (Yes, No)
+Indicates if the publically reportable swap transaction is a block trade or large notional off-facility swap.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swReportTo" type="SW_ReportTo" minOccurs="0" maxOccurs="2"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyReportingRegimeInformation">
+<xsd:annotation>
+<xsd:documentation>Identifis a Reporting Regine in terms of Jurisdiction, Supervisory Body and Category and hold information on jurisdiction specific roles and data</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_ReportingRegime">
+<xsd:sequence minOccurs="0"/>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ReportingRegime">
+<xsd:annotation>
+<xsd:documentation>Identifies a Reporting Regine in terms of Jurisdiction, Supervisory Body and Category and contains data specific to the defined regime.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swJurisdiction" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element to capture one or more jurisdictions where the trade is reportable to(independent of reporting obligation).</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swJurisdictionNameScheme" type="SW_Scheme" default="TBC">
+<xsd:annotation>
+<xsd:documentation>codified values for in scope jurisdictions. e.g. Dodd-Frank</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swSupervisoryBodyCategory" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The regulator or other supervisory body for which the data is produced</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swSupervisoryBodyCategoryScheme">
+<xsd:annotation>
+<xsd:documentation>BroadBased, NarrowBased, Mixed</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swUniqueTransactionId" type="SW_PartyTradeIdentifier" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Unique Transaction Identifier (USI) by which the trade being reported on is known in the reporting regime</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyRelatedTradeId" type="SW_PartyRelatedTradeId" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Identification of trades that are related to the trade being reported on and classification of their relationship with this trade</xsd:documentation>
+<xsd:documentation>One occurrence per Prior and Block USI</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyEventId" type="SW_EventId" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Event Identifiers</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_BulkProcessingEvent">
+<xsd:annotation>
+<xsd:documentation>A Block Event Processing ID can be uniquely identified by the combination of values in "swEventProcessingID/text()" and "swEventProcessingID/@swEventProcessingIDScheme"</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swEventProcessingIDScheme" type="SW_Scheme"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EventId">
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference which relates to GTR Bulk Event Processing Id specified below</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBulkProcessingEventId" type="SW_BulkProcessingEvent">
+<xsd:annotation>
+<xsd:documentation>GTR Blk Event Processing ID
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyRelatedTradeId">
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference which relates to USI is specified below</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRelatedTradeId" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Identification of trades that are related to the trade being reported on and classification of their relationship with this trade</xsd:documentation>
+<xsd:documentation>One occurrence per Prior and Block USI</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="SW_PartyTradeIdentifier">
+<xsd:sequence>
+<xsd:element name="swRelationshipType">
+<xsd:annotation>
+<xsd:documentation>Describes the relationship between the trade identified in swTradeId and the trade on which the event is being reported</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swRelatedTradeRelationshipTypeScheme" type="SW_Scheme" default="TBC"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyTradeIdentifier">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining one or more trade identifiers allocated to the trade by a party. A link identifier allows the trade to be associated with other related trades, e.g. trades forming part of a larger structured transaction. It is expected that for external communication of trade there will be only one tradeId sent in the document per party.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_TradeIdentifier"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_TradeIdentifier">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a trade identifier issued by the indicated party.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swIssuer" type="SW_IssuerId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>USI Namespace</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTradeId" type="SW_TradeId">
+<xsd:annotation>
+<xsd:documentation>USI Value</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_IssuerId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The data type used for issuer identifiers.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="issuerIdScheme" type="xsd:anyURI" default="http://www.fpml.org/ext/iso9362">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_TradeId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A trade reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="tradeIdScheme" type="xsd:anyURI">
+<xsd:annotation>
+<xsd:documentation>For a USI type trade identifier: Will always equal "http://www.fpml.org/coding-scheme/external/unique-transaction-identifier" For another type of trade identifier: as defined by identifier provider</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_Product">
+<xsd:annotation>
+<xsd:documentation>productType to made optional in later versions of FpML spec</xsd:documentation>
+<xsd:documentation>The productId element must have a productIdScheme attribute, the value of that attribute must be "UPI", "ISDA" or "GTR".</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductId" type="SW_ProductId" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A product reference identifier. The product ID is an identifier that describes the key economic characteristics of the trade type, with the exception of concepts such as size (notional, quantity, number of units) and price (fixed rate, strike, etc.) that are negotiated for each transaction. It can be used to hold identifiers such as the "UPI" (universal product identifier) required by certain regulatory reporting rules. It can also be used to hold identifiers of benchmark products or product temnplates used by certain trading systems or facilities. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ProductId">
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="productIdScheme" type="xsd:anyURI"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_Global_UTI">
+<xsd:sequence>
+<xsd:element name="swTradeId" type="SW_TradeId"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

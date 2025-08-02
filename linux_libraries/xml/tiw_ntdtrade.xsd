@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:element name="TIWNTDTrade">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ProductType"/>
+<xs:element name="PartyAId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:NMTOKEN"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyAIdType"/>
+<xs:element name="PartyBId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:NMTOKEN"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyBIdType"/>
+<xs:element name="ExitReason"/>
+<xs:element name="EffectiveDate"/>
+<xs:element name="TIWDTCCTRI"/>
+<xs:element name="TIWActiveStatus"/>
+<xs:element name="TIWValueDate"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="swbml-shared-4-6.xsd"/>
+	<xsd:include schemaLocation="swbml-com-enum-4-6.xsd"/>
+	<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+	<xsd:element name="SWBML" type="SWBML">
+		<xsd:annotation>
+			<xsd:documentation>The SWBML root element forms the root for any conforming SWBML instance document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SWBML">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The root element in an SWBML document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbHeader" type="SWB_Header">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStructuredTradeDetails" type="SWB_StructuredTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradeEventReportingDetails" type="SWB_TradeEventReportingDetails" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="version" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="4-6"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ComExtendedTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductTerm" type="Interval" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The nominal term (tenor) of the credit default swap expressed as a number of months or years. This element must be included for a Credit Default Swap transaction but excluded for a Credit Default Swap Index, Equity Share or Equity Index transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbMessageText" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A free format text message that will be displayed to both dealers alongside the structured trade details. The message should not exceed 200 characters in length.   Note that if the ampersand character (&amp;) and the left (&lt;) and right (&gt;) angle brackets are entered as part of the description they should be escaped using the strings "&amp;amp;", "&amp;lt;" and "&amp;gt;" respectively in the character data of the element content (see http://www.w3.org/TR/2000/REC-xml-20001006#syntax for further explanation).</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbClearingVenue" type="SWB_ComClearingVenue" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The Clearing Venue at which the trade has been/will be cleared</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="swbCommodityForwardDetails" type="SWB_CommodityForwardDetails">
+					<xsd:annotation>
+						<xsd:documentation>Additional trade details specific to the 'Commodity Forward' product.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbCommodityOptionDetails" type="SWB_CommodityOptionDetails">
+					<xsd:annotation>
+						<xsd:documentation>Additional trade details specific to the 'Commodity Option' product.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbCommoditySpreadDetails" type="SWB_CommoditySpreadDetails">
+					<xsd:annotation>
+						<xsd:documentation>Additional trade details specific to the 'Commodity Spread' product.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbCommoditySwapDetails" type="SWB_CommoditySwapDetails">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Swap' product. This component must be supplied when the product type is 'Commodity Swap'.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_CommodityForwardDetails">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to the ' Commodity Forward' product.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Forward' product.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:element name="swbElectricityLoadShape" type="SWB_ElectricityLoadShape">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The load-shape for a trade where a MarkitWire-defined load shape is to be used.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_CommodityOptionDetails">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to the ' Commodity Option' product.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Option' product.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:sequence minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>If the option style is European or American and the trade is intended to line up with a listed future, swbContractMonth, swbContractYear and swbContractTradingDay must be present.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="swbContractMonth" type="SWB_ContractMonthEnum">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The month in which the contract expires.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbContractYear" type="xsd:gYear">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The year in which the contract expires.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbContractTradingDay" type="SWB_ContractTradingDayEnum">
+					<xsd:annotation>
+						<xsd:documentation>The trading day of the contract that the option should expire on. </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="swbTotalNotionalQuantityLots" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Optional input of the Total Notional Quantity In Terms of Lots. Intended for when the trade was originally quoted in lots, this will be validated against the system-calculated Total Notional Quantity Lots.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_CommoditySwapDetails">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to the ' Commodity Swap' product.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Swap' product. This component must be supplied when the product type is 'Commodity Swap'.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:element name="swbBulletIndicator" type="xsd:boolean">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">An indicator that this trade is not an averaging swap but a single period bullet or strip of bullets based on a listed future. This should always be set to false when trading an averaging swap - it is only intended to be set to true when confirming a futures look-alike transaction. Note that if this is a look-alike transaction, the start and end months of the futures contracts and the year will need to be stated in the relevant tags within the SWB_CommoditySwapDetails type. This will enable the system to calculate the correct Effective and Termination dates for the transaction based on the relevant exchange calendar and contract expiration rules - note thtat this means the values submitted by users for effectiveDate and terminationDate will be ignored.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:sequence minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>If swbBulletIndicator is set to true and the bullet trade is intended to line up with a listed future, swbFirstContractMonth, swbLastContractMonth and swbContractYear must be present.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="swbFirstContractMonth" type="SWB_ContractMonthEnum">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The first futures contract referenced by a bullet trade.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbLastContractMonth" type="SWB_ContractMonthEnum">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The last futures contract referenced by a bullet trade. If this is not a futures look-alike strip of bullets (i.e. it is a single period bullet), the last contract month should be set to the same value as the first contract month.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="swbContractYear" type="xsd:gYear">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">The year in which the contracts expire.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="swbTotalNotionalQuantityLots" type="xsd:decimal" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Optional input of the Total Notional Quantity In Terms of Lots. Intended for when the trade was originally quoted in lots, this will be validated against the system-calculated Total Notional Quantity Lots.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbElectricityLoadShape" type="SWB_ElectricityLoadShape" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The load-shape for a trade where a MarkitWire-defined load shape is to be used.
+
+If this element is present, the settlementPeriodsReference element should be used in place of the settlementPeriods element within pricingDates and should reference this element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_CommoditySpreadDetails">
+		<xsd:annotation>
+			<xsd:documentation>Additional trade details specific to the ' Commodity Spread' product.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:annotation>
+				<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Spread' product. </xsd:documentation>
+			</xsd:annotation>
+			<xsd:element name="swbElectricityLoadShape" type="SWB_ElectricityLoadShape" minOccurs="0" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The load-shape for the electricity legs of a spread.
+
+If this element is present, the settlementPeriodsReference element for that leg should be used in place of the settlementPeriods element within pricingDates and should reference this element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ElectricityLoadShape">
+		<xsd:annotation>
+			<xsd:documentation>The name of the load shape for an electricity trade. MarkitWire will calculate the actual load shape based on the region of the Delivery Point or Commodity Reference Price as appropriate.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="SWB_ElectricityLoadShapeEnum">
+				<xsd:attribute name="id" type="xsd:ID"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_StructuredTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductType" type="SWB_ComProductTypeEnum">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FpML" type="DataDocument">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The FpML compliant sub-tree that describes the transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbExtendedTradeDetails" type="SWB_ComExtendedTradeDetails" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message. This element should not be included if it has no populated child elements.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2003/FpML-4-0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2003/FpML-4-0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:include schemaLocation="fpml-main-4-0.xsd"/>
+	<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+	
+	
+	
+	
+	
+			
+	<xsd:element name="SWBML" type="SWBML">
+		<xsd:annotation>
+			<xsd:documentation>The SWBML root element forms the root for any conforming SWBML instance document.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="SWBML">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The root element in an SWBML document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbHeader" type="SWB_Header">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbStructuredTradeDetails" type="SWB_StructuredTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The details of the trade defined in a formal structure.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbTradeEventReportingDetails" type="SWB_TradeEventReportingDetails" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="version" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="4-0"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_ExtendedTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductTerm" type="Interval">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The nominal term (tenor) of the swap expressed as a number of months or years.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbMessageText" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A free format text message that will be displayed to both dealers alongside the structured trade details. The message should not exceed 200 characters in length.   Note that if the ampersand character (&amp;) and the left (&lt;) and right (&gt;) angle brackets are entered as part of the description they should be escaped using the strings "&amp;amp;", "&amp;lt;" and "&amp;gt;" respectively in the character data of the element content (see http://www.w3.org/TR/2000/REC-xml-20001006#syntax for further explanation).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:normalizedString">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="200"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="swbConfirmationType" type="SWB_ConfirmationTypeEnum">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The market defaults that are applicable for the CDS transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Header">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbBrokerTradeId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference identifier allocated by the broker. SwapsWire requires that this identifier be no more than 40 characters in length. The '|' character is not allowed within the identifier string.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:normalizedString">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="swbBrokerLegId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A leg identifier allocated by the broker to identify individual legs in a larger group, e.g. a strategy. SwapsWire requires that this identifier be no more than 20 characters in length. The '|' character is not allowed within the identifier string. The preferred format for an swbBrokerLegId is '1/3' which would indicate that this trade is leg 1 of 3.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:normalizedString">
+						<xsd:minLength value="1"/>
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="swbBrokerTradeVersionId">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A trade reference version identifier allocated by the broker. Note that SwapsWire will not use this version identifier in its processing of the deal.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:nonNegativeInteger">
+						<xsd:maxInclusive value="99999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="swbTradeSource" type="xsd:normalizedString">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The trade source, e.g. voice brokered, electronic execution etc. The trade source will determine the applicable workflow for the trade within SwapsWire.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbRecipient" type="SWB_Recipient" minOccurs="2" maxOccurs="2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">This element defines the linkage between a recipient defined in the BrokerLoad deal submission API call and the Buyer/Seller on the Credit Default Swap. The element carries an id attribute which must have a value corresponding to a valid recipient id for the deal. This element must occur two times.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_Recipient">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining information linking the Credit Default Swap Buyer/Seller to the message recipients. The inclusion of the name of the trader that the broker dealt with is for informational purposes and does not affect who receives the trade message within SwapsWire.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="partyReference" type="PartyReference">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWBML document. This is an FpML element.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbUserName" type="xsd:normalizedString" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The name of the trader that the broker dealt with at the dealer firm. The name must be a valid SwapsWire user name, i.e. it will be validated by SwapsWire during trade submission. Note that the name entered here does not affect who the deal is sent to within SwapsWire. It is for informational purposes only and becomes part of the SwapsWire trade record.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:ID">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="40"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SWB_StructuredTradeDetails">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="swbProductType" type="SWB_ProductTypeEnum">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="FpML" type="Document">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The FpML 4.0 compliant sub-tree that describes the CDS transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="swbExtendedTradeDetails" type="SWB_ExtendedTradeDetails">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="SWB_MasterAgreementTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The specification of master agreement types.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ISDA">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">The transaction will be documented under an ISDA master agreement.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_ProductTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The product type is the top level categorization for SwapsWire templates.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CDS">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">A credit default swap.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SWB_ConfirmationTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Defines the market defaults that are applicable to a CDS trade.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="EuropeCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">(Western) Europe Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EuropeInsurerSubDebt">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">(Western) Europe Insurer Subordinated Debt</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EuropeSovereign">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">(Western) Europe Sovereign</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NorthAmericaCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">North America Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NorthAmericaMonolineInsurer">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">North America Monoline Insurer</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEuropeCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Emerging Market (Central and Eastern) Europe</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMEuropeSovereign">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Emerging Market (Central and Eastern) Europe</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMLatinAmericaCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Emerging Market Latin America Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="EMLatinAmericaSovereign">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Emerging Market Latin America Sovereign</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="JapanCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Japan Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="JapanSovereign">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Japan Sovereign</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AustraliaCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Australia Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="NewZealandCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">New Zealand Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AsiaCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Asia Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="AsiaSovereign">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Asia Sovereign</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="SingaporeCorporate">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Singapore Corporate</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

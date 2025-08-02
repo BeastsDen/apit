@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:complexType name="Step">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a step date and step value pair. This step definitions are used to define varying rate or amount schedules, e.g. a notional amortization or a step-up coupon schedule.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="StepBase">
+<xsd:sequence>
+<xsd:element name="stepValue" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The rate or amount which becomes effective on the associated stepDate. A rate of 5% would be represented as 0.05.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="StepBase" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a step date and step value pair. This step definitions are used to define varying rate or amount schedules, e.g. a notional amortization or a step-up coupon schedule.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="stepDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date on which the associated stepValue becomes effective. This day may be subject to adjustment in accordance with a business day convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:element name="RepoRerate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Re-rate lifecycle event for an Open Repo.  It provides the new Repo Spread / Repo Rate and it's Effective Date</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="step" type="Step" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The schedule of step date and value pairs. On each step date, the associated step value becomes effective. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>

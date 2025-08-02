@@ -1,0 +1,1375 @@
+<!ENTITY % reportingElements SYSTEM "swbml-reporting-1-0.dtd">
+%reportingElements;
+<!ENTITY % FpML_AdjustableDate "unadjustedDate
+, dateAdjustments">
+<!ENTITY % FpML_AdjustableDates "unadjustedDate+
+, dateAdjustments">
+<!ENTITY % FpML_AdjustableOrRelativeDate "adjustableDate">
+<!ENTITY % FpML_Schedule "initialValue, step*">
+<!ENTITY % FpML_AmountSchedule "(%FpML_Schedule;
+, currency )">
+<!ENTITY % FpML_Step "stepDate , stepValue">
+<!ENTITY % FpML_AutomaticExercise "thresholdRate">
+<!ENTITY % FpML_BusinessCenters "businessCenter+">
+<!ENTITY % FpML_BusinessCenterTime "hourMinuteTime
+, businessCenter">
+<!ENTITY % FpML_BusinessDayAdjustments "businessDayConvention
+, (businessCentersReference
+| businessCenters)?">
+<!ENTITY % FpML_Calculation "notionalSchedule
+, (fixedRateSchedule
+| floatingRateCalculation )
+, dayCountFraction
+, compoundingMethod?">
+<!ENTITY % FpML_CalculationAgent "calculationAgentPartyReference+
+| calculationAgentParty">
+<!ENTITY % FpML_CalculationPeriodAmount "calculation| knownAmountSchedule">
+<!ENTITY % FpML_CalculationPeriodDates "effectiveDate
+, terminationDate
+, calculationPeriodDatesAdjustments
+, firstRegularPeriodStartDate?
+, lastRegularPeriodEndDate?
+, calculationPeriodFrequency">
+<!ENTITY % FpML_CashPriceMethod "cashSettlementReferenceBanks?
+, cashSettlementCurrency
+, quotationRateType">
+<!ENTITY % FpML_CashSettlementReferenceBanks "referenceBank+">
+<!ENTITY % FpML_ExerciseSelection "europeanExercise">
+<!ENTITY % FpML_InformationSource "rateSource
+, rateSourcePage?">
+<!ENTITY % FpML_Interval "periodMultiplier
+, period">
+<!ENTITY % FpML_CalculationPeriodFrequency "(%FpML_Interval;
+, rollConvention)">
+<!ENTITY % FpML_CapFloor "capFloorStream
+, additionalPayment*">
+<!ENTITY % FpML_EuropeanExercise "expirationDate
+, earliestExerciseTime
+, expirationTime">
+<!ENTITY % FpML_ExerciseProcedure "(manualExercise
+| automaticExercise)
+, followUpConfirmation">
+<!ENTITY % FpML_Payment "payerPartyReference
+, receiverPartyReference
+, paymentAmount
+, paymentDate?">
+<!ENTITY % FpML_Fee "%FpML_Payment; , paymentType?">
+<!ENTITY % FpML_FloatingRate "floatingRateIndex
+, indexTenor?
+, spreadSchedule?
+, capRateSchedule?
+, floorRateSchedule?">
+<!ENTITY % FpML_FloatingRateCalculation "(%FpML_FloatingRate;
+, initialRate?)">
+<!ENTITY % FpML_Fra "buyerPartyReference
+, sellerPartyReference
+, adjustedEffectiveDate
+, adjustedTerminationDate
+, paymentDate
+, fixingDateOffset
+, dayCountFraction
+, calculationPeriodNumberOfDays
+, notional
+, fixedRate
+, floatingRateIndex
+, indexTenor+
+, fraDiscounting">
+<!ENTITY % FpML_InterestRateStream "payerPartyReference
+, receiverPartyReference
+, calculationPeriodDates
+, paymentDates
+, resetDates?
+, calculationPeriodAmount
+, stubCalculationPeriodAmount?">
+<!ENTITY % FpML_Money "currency
+, amount">
+<!ENTITY % FpML_ManualExercise "fallbackExercise?">
+<!ENTITY % FpML_Notional "notionalStepSchedule">
+<!ENTITY % FpML_Offset "(%FpML_Interval;
+, dayType?)">
+<!ENTITY % FpML_Party "partyId
+, partyName?">
+<!ENTITY % FpML_PartyTradeIdentifier "partyReference
+, tradeId+">
+<!ENTITY % FpML_PaymentDates "calculationPeriodDatesReference
+, paymentFrequency
+, firstPaymentDate?
+, lastRegularPaymentDate?
+, payRelativeTo
+, paymentDaysOffset?
+, paymentDatesAdjustments">
+<!ENTITY % FpML_ProductSelection "(capFloor | fra | swap | swaption)">
+<!ENTITY % FpML_ReferenceBank "referenceBankId
+, referenceBankName?">
+<!ENTITY % FpML_RelativeDateOffset "(%FpML_Offset;
+, businessDayConvention
+, (businessCentersReference
+| businessCenters)?
+, dateRelativeTo)">
+<!ENTITY % FpML_ResetDates "calculationPeriodDatesReference
+, resetRelativeTo?
+, initialFixingDate?
+, fixingDates
+, resetFrequency
+, resetDatesAdjustments">
+<!ENTITY % FpML_ResetFrequency "(%FpML_Interval; )">
+<!ENTITY % FpML_SettlementRateSource "informationSource
+| cashSettlementReferenceBanks">
+<!ENTITY % FpML_StrikeSchedule "(%FpML_Schedule;
+, buyer?
+, seller?)">
+<!ENTITY % FpML_Stub " (floatingRate+
+| stubRate)">
+<!ENTITY % FpML_StubCalculationPeriodAmount "calculationPeriodDatesReference
+, initialStub?
+, finalStub?">
+<!ENTITY % FpML_Swap "swapStream+
+, additionalPayment*">
+<!ENTITY % FpML_Swaption "buyerPartyReference
+, sellerPartyReference
+, premium*
+, (%FpML_ExerciseSelection;)
+, exerciseProcedure?
+, (calculationAgent|calculationAgentPartyReference+)?
+, cashSettlement?
+, swaptionStraddle
+, swap">
+<!ENTITY % FpML_Trade "tradeHeader
+, %FpML_ProductSelection;
+, party+
+, otherPartyPayment*
+, calculationAgent?">
+<!ENTITY % FpML_TradeHeader "partyTradeIdentifier+
+, tradeDate">
+<!ENTITY % FpML_YieldCurveMethod "settlementRateSource?
+, quotationRateType">
+<!ENTITY % SWBML_AssociatedBonds "swbExchangeBonds
+, swbNegotiatedSpreadRate?
+, swbBondDetails*">
+<!ENTITY % SWBML_AssociatedFuture "swbFutureName
+, swbQuantity
+, (swbMaturity
+| swbDescription)
+, swbPrice">
+<!ENTITY % SWBML_BondDetails "swbBondId?
+, swbBondName
+, swbBondFaceAmount
+, swbPriceType
+, swbBondPrice">
+<!ENTITY % SWBML_CustomerTransaction "swbCustomer
+, swbPrimeBroker
+, swbMandatoryClearing*
+, swbSettlementAgent?">
+<!ENTITY % SWBML_DateRelativeToPaymentDates "swbPaymentDatesReference+">
+<!ENTITY % SWBML_DateRelativeToCalculationPeriodDates "calculationPeriodDatesReference+">
+<!ENTITY % SWBML_EarlyTerminationProvision "swbMandatoryEarlyTerminationDate
+| swbOptionalEarlyTermination">
+<!ENTITY % SWBML_ExecutingDealerCustomerTransaction "swbExecutingDealer">
+<!ENTITY % SWBML_ExtendedTradeDetails "swbTradeHeader?
+, swbProductTerm?
+, swbMasterAgreementType?
+, swbContractualDefinitions?
+, swbMessageText?
+, swbStubPosition?
+, swbNoStubLinearInterpolation?
+, swbStubLength*
+, swbFrontAndBackStubs?
+, (swbEarlyTerminationProvision
+| swbNoEarlyTerminationProvision)?
+, swbAssociatedBonds?
+, swbAssociatedFuture*
+, swbSettlementProvision?
+, swbFutureValue?
+, swbCollateralizedCashPrice?
+, swbSettlementAgent?
+, swbOrderDetails*
+, swbAgreedDiscountRate?
+, swbPackageDetails*">
+<!ENTITY % SWBML_FrontAndBackStubs "swbNoStubLinearInterpolation?
+,swbStubLength*">
+<!ENTITY % SWBML_FutureValue "(calculationPeriodNumberOfDays
+, swbNotionalFutureValue)">
+<!ENTITY % SWBML_FxFixingDate "%FpML_Offset;
+, (%FpML_BusinessDayAdjustments;
+,(swbDateRelativeToPaymentDates|swbDateRelativeToCalculationPeriodDates))">
+<!ENTITY % SWBML_GiveUp "swbCustomerTransaction
+, swbInterDealerTransaction
+, swbExecutingDealerCustomerTransaction?">
+<!ENTITY % SWBML_Header "swbBrokerTradeId
+, swbBrokerLegId?
+, swbBrokerTradeVersionId
+, swbTradeSource
+, swbVenueId?
+, swbRecipient+
+, swbReplacementTradeId*">
+<!ENTITY % SWBML_InterDealerTransaction "swbExecutingDealer
+, swbPrimeBroker
+, swbMandatoryClearing*
+, swbSettlementAgent?">
+<!ENTITY % SWBML_NonDeliverableSettlement "swbReferenceCurrency
+, (swbFxFixingDate|swbFxFixingSchedule)?
+, swbSettlementRateOption">
+<!ENTITY % SWBML_OptionalEarlyTermination "swbOptionalEarlyTerminationDate
+, swbOptionalEarlyTerminationFrequency?">
+<!ENTITY % SWBML_Recipient "partyReference
+, swbUserName?
+, swbTradingBookId?">
+<!ENTITY % SWBML_SettlementProvision "swbSettlementCurrency
+, swbNonDeliverableSettlement">
+<!ENTITY % SWBML_StructuredTradeDetails "swbProductType
+, FpML
+, swbExtendedTradeDetails
+, swbBusinessConductDetails?
+, swbTradePackageHeader?">
+<!ENTITY % SWBML_TradeHeader "swbExternalInteropabilityId?
+, swbInteropNettingString?
+, swbAutoProcessing?
+, swbAutoSendForClearing?
+, swbMandatoryClearing*
+, swbClientClearing?
+, swbClearingHouse?
+, swbClearedPhysicalSettlement?
+, swbAnonymousTrade?
+, swbOffsettingTradeId?
+, swbCompressionType?
+, swbPartyExecutionMethod*
+, swbExecutionMethod?
+, swbOTVConfirmation?
+, swbPartyClearingDetails*
+, swbPartyIntroducingBroker?
+, swbPartyIntroducingBroker?
+, swbOriginatingEvent?
+, swbPredeterminedClearerForUnderlyingSwap?
+, swbPricedToClearCCP?">
+<!ENTITY % SWBML_PartyDetails "partyId
+, partyName?">
+<!ENTITY % SWBML_MandatoryClearing "swbJurisdiction
+, swbSupervisoryBodyCategory?
+, swbMandatoryClearingIndicator?
+, swbPartyExemption?
+, swbPartyExemption?
+, swbInterAffiliateExemption?">
+<!ENTITY % SWBML_PartyExemption "partyReference
+, swbExemption">
+<!ENTITY % SWBML_PartyClearingDetails "partyReference
+, swbClearinghStatus?
+, swbClearingHouseTradeID?
+, swbClearingHouseUpfrontFeeSettlementDate?
+, swbClearingHousePreferredISIN?
+, swbClearedTimestamp?
+, swbClearedUSI?
+, swbClearedUTI?">
+<!ENTITY % SWBML_ClearedUSI "swbIssuer
+, swbTradeId?">
+<!ENTITY % SWBML_ClearedUTI "swbIssuer
+, swbTradeId?">
+<!ENTITY % SWBML_BusinessConductDetails "swbMidMarketPrice?">
+<!ENTITY % SWBML_MidMarketPrice "swbAmount?
+,   swbCurrency?
+,	swbUnit?">
+<!ENTITY % SWBML_TradePackageHeader "swbPackageIdentifier
+, swbSize
+, swbPartyCreditAcceptanceToken*">
+<!ENTITY % SWBML_PackageIdentifier "swbIssuer
+, swbTradeId">
+<!ENTITY % SWBML_PartyCreditAcceptanceToken "partyReference
+, swbCreditIssuer
+, swbToken">
+<!ENTITY % SWBML_SettlementAgent "swbSettlementAgency
+,swbSettlementAgencyModel">
+<!ENTITY % SWBML_SettlementAgency "partyId
+,partyName?">
+<!ENTITY % SWBML_OrderDetails "swbTypeOfOrder?
+,swbTotalConsideration?
+,swbRateOfExchange?
+,swbClientCounterparty?
+,swbTotalCommissionAndExpenses?
+,swbClientSettlementResponsibilities?">
+<!ENTITY % SWBML_ReplacementTradeId "swbTradeId
+, swbTradeIdType
+, swbReplacementReason?">
+<!ELEMENT SWBML (swbHeader, swbGiveUp?, (swbBlockTrade | swbAllocations)?, swbStructuredTradeDetails, swbTradeEventReportingDetails?, swbPrivatePartyTradeEventReportingDetails*)>
+<!ATTLIST SWBML
+version (3-0) #REQUIRED
+periodSchemeDefault CDATA #IMPLIED
+swbBondIdSchemeDefault CDATA #IMPLIED
+swbMasterAgreementTypeSchemeDefault CDATA #IMPLIED
+swbContractualDefinitionsSchemeDefault CDATA #IMPLIED
+swbPriceTypeSchemeDefault CDATA #IMPLIED
+swbProductTypeSchemeDefault CDATA #IMPLIED
+swbStubPositionSchemeDefault CDATA #IMPLIED
+swbStubLengthSchemeDefault CDATA #IMPLIED
+swbTradeSourceSchemeDefault CDATA #IMPLIED
+swbVenueIdSchemeDefault CDATA #IMPLIED
+>
+<!ELEMENT swbAssociatedBonds (%SWBML_AssociatedBonds;)>
+<!ATTLIST swbAssociatedBonds
+type NMTOKEN #FIXED "AssociatedBonds"
+>
+<!ELEMENT swbAssociatedFuture (%SWBML_AssociatedFuture;)>
+<!ATTLIST swbAssociatedFuture
+type NMTOKEN #FIXED "AssociatedFuture"
+href CDATA #REQUIRED
+>
+<!ELEMENT swbAutoProcessing (#PCDATA)>
+<!ATTLIST swbAutoProcessing
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbAutoSendForClearing (#PCDATA)>
+<!ATTLIST swbAutoSendForClearing
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbClientClearing (#PCDATA)>
+<!ATTLIST swbClientClearing
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbExternalInteropabilityId (#PCDATA)>
+<!ATTLIST swbExternalInteropabilityId
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbInteropNettingString (#PCDATA)>
+<!ATTLIST swbInteropNettingString
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbBondDetails (%SWBML_BondDetails;)>
+<!ATTLIST swbBondDetails
+type NMTOKEN #FIXED "BondDetails"
+id ID #IMPLIED
+>
+<!ELEMENT swbBondFaceAmount (#PCDATA)>
+<!ATTLIST swbBondFaceAmount
+type NMTOKEN #FIXED "nonNegativeInteger"
+>
+<!ELEMENT swbBondId (#PCDATA)>
+<!ATTLIST swbBondId
+type NMTOKEN #FIXED "string"
+swbBondIdScheme CDATA #IMPLIED
+>
+<!ELEMENT swbBondName (#PCDATA)>
+<!ATTLIST swbBondName
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbBondPrice (#PCDATA)>
+<!ATTLIST swbBondPrice
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbBrokerLegId (#PCDATA)>
+<!ATTLIST swbBrokerLegId
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+>
+<!ELEMENT swbBrokerTradeId (#PCDATA)>
+<!ATTLIST swbBrokerTradeId
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+>
+<!ELEMENT swbBrokerTradeVersionId (#PCDATA)>
+<!ATTLIST swbBrokerTradeVersionId
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+>
+<!ELEMENT swbClearingHouse (%SWBML_PartyDetails;)>
+<!ATTLIST swbClearingHouse
+type NMTOKEN #FIXED "ClearingHouse"
+>
+<!ELEMENT swbClearedPhysicalSettlement (#PCDATA)>
+<!ATTLIST swbClearedPhysicalSettlement
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbAnonymousTrade (#PCDATA)>
+<!ATTLIST swbAnonymousTrade
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbOffsettingTradeId (#PCDATA)>
+<!ATTLIST swbOffsettingTradeId
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbCompressionType (#PCDATA)>
+<!ATTLIST swbCompressionType
+type (Standard | NoNetting) #IMPLIED
+type NMTOKEN #FIXED "ENUM"
+>
+<!ELEMENT swbExecutionMethod (#PCDATA)>
+<!ATTLIST swbExecutionMethod
+type NMTOKEN #FIXED "string"
+>
+<!ENTITY % SWBML_PartyExecutionMethod "partyReference
+, swbExecutionMethod">
+<!ELEMENT swbPartyExecutionMethod (%SWBML_PartyExecutionMethod;)>
+<!ELEMENT swbOTVConfirmation (#PCDATA)>
+<!ATTLIST swbOTVConfirmation
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbPartyIntroducingBroker (partyReference, swbIntroducingBroker)>
+<!ELEMENT swbIntroducingBroker (#PCDATA)>
+<!ELEMENT swbCollateralizedCashPrice (%FpML_YieldCurveMethod;)>
+<!ATTLIST swbCollateralizedCashPrice
+type NMTOKEN #FIXED "YieldCurveMethod"
+>
+<!ELEMENT swbContractualDefinitions (#PCDATA)>
+<!ATTLIST swbContractualDefinitions
+type NMTOKEN #FIXED "string"
+swbContractualDefinitionsScheme CDATA #IMPLIED
+>
+<!ELEMENT swbCustomer EMPTY>
+<!ATTLIST swbCustomer
+href CDATA #REQUIRED
+>
+<!ELEMENT swbCustomerTransaction (%SWBML_CustomerTransaction;)>
+<!ATTLIST swbCustomerTransaction
+type NMTOKEN #FIXED "CustomerTransaction"
+>
+<!ELEMENT swbDateRelativeToPaymentDates (%SWBML_DateRelativeToPaymentDates;)>
+<!ATTLIST swbDateRelativeToPaymentDates
+type NMTOKEN #FIXED "DateRelativeToPaymentDates"
+>
+<!ELEMENT swbDateRelativeToCalculationPeriodDates (%SWBML_DateRelativeToCalculationPeriodDates;)>
+<!ATTLIST swbDateRelativeToCalculationPeriodDates
+type NMTOKEN #FIXED "DateRelativeToCalculationPeriodDates"
+>
+<!ELEMENT swbEarlyTerminationProvision (%SWBML_EarlyTerminationProvision;)>
+<!ATTLIST swbEarlyTerminationProvision
+type NMTOKEN #FIXED "EarlyTerminationProvision"
+>
+<!ELEMENT swbNoEarlyTerminationProvision EMPTY>
+<!ELEMENT swbExchangeBonds (#PCDATA)>
+<!ATTLIST swbExchangeBonds
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbExecutingDealerCustomerTransaction (%SWBML_ExecutingDealerCustomerTransaction;)>
+<!ATTLIST swbExecutingDealerCustomerTransaction
+type NMTOKEN #FIXED "ExecutingDealerCustomerTransaction"
+>
+<!ELEMENT swbExtendedTradeDetails (%SWBML_ExtendedTradeDetails;)>
+<!ATTLIST swbExtendedTradeDetails
+type NMTOKEN #FIXED "ExtendedTradeDetails"
+>
+<!ELEMENT swbExecutingDealer EMPTY>
+<!ATTLIST swbExecutingDealer
+href CDATA #REQUIRED
+>
+<!ELEMENT swbFrontAndBackStubs (%SWBML_FrontAndBackStubs;)>
+<!ATTLIST swbFrontAndBackStubs
+type NMTOKEN #FIXED "FrontAndBackStubs"
+>
+<!ELEMENT swbFutureName (#PCDATA)>
+<!ATTLIST swbFutureName
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbFutureValue (%SWBML_FutureValue;)>
+<!ATTLIST swbFutureValue
+type NMTOKEN #FIXED "FutureValue"
+>
+<!ELEMENT swbFxFixingDate (%SWBML_FxFixingDate;)>
+<!ATTLIST swbFxFixingDate
+type NMTOKEN #FIXED "FxFixingDate"
+id ID #IMPLIED
+>
+<!ELEMENT swbFxFixingSchedule (%FpML_AdjustableDates;)>
+<!ATTLIST swbFxFixingSchedule
+type NMTOKEN #FIXED "FxFixingSchedule"
+id ID #IMPLIED
+>
+<!ELEMENT swbGiveUp (%SWBML_GiveUp;)>
+<!ATTLIST swbGiveUp
+type NMTOKEN #FIXED "GiveUp"
+>
+<!ELEMENT swbHeader (%SWBML_Header;)>
+<!ATTLIST swbHeader
+type NMTOKEN #FIXED "Header"
+>
+<!ELEMENT swbInterDealerTransaction (%SWBML_InterDealerTransaction;)>
+<!ATTLIST swbInterDealerTransaction
+type NMTOKEN #FIXED "InterDealerTransaction"
+>
+<!ELEMENT swbMandatoryEarlyTerminationDate (%FpML_Interval;)>
+<!ATTLIST swbMandatoryEarlyTerminationDate
+type NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT swbMasterAgreementType (#PCDATA)>
+<!ATTLIST swbMasterAgreementType
+type NMTOKEN #FIXED "string"
+swbMasterAgreementTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT manualExercise (%FpML_ManualExercise;)>
+<!ATTLIST manualExercise
+type NMTOKEN #FIXED "ManualExercise"
+>
+<!ELEMENT swbMaturity (#PCDATA)>
+<!ATTLIST swbMaturity
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT swbDescription (#PCDATA)>
+<!ATTLIST swbDescription
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbMessageText (#PCDATA)>
+<!ATTLIST swbMessageText
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbNegotiatedSpreadRate (#PCDATA)>
+<!ATTLIST swbNegotiatedSpreadRate
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT swbNonDeliverableSettlement (%SWBML_NonDeliverableSettlement;)>
+<!ATTLIST swbNonDeliverableSettlement
+type NMTOKEN #FIXED "NonDeliverableSettlement"
+>
+<!ELEMENT swbNoStubLinearInterpolation EMPTY>
+<!ATTLIST swbNoStubLinearInterpolation
+href CDATA #REQUIRED
+>
+<!ELEMENT swbNotionalFutureValue (%FpML_Money;)>
+<!ATTLIST swbNotionalFutureValue
+type NMTOKEN #FIXED "Money"
+href CDATA #REQUIRED
+>
+<!ELEMENT swbOptionalEarlyTermination (%SWBML_OptionalEarlyTermination;)>
+<!ATTLIST swbOptionalEarlyTermination
+type NMTOKEN #FIXED "OptionalEarlyTermination"
+>
+<!ELEMENT swbOptionalEarlyTerminationDate (%FpML_Interval;)>
+<!ATTLIST swbOptionalEarlyTerminationDate
+type NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT swbOptionalEarlyTerminationFrequency (%FpML_Interval;)>
+<!ATTLIST swbOptionalEarlyTerminationFrequency
+type NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT swbPaymentDatesReference EMPTY>
+<!ATTLIST swbPaymentDatesReference
+href CDATA #REQUIRED
+>
+<!ELEMENT swbPrice (#PCDATA)>
+<!ATTLIST swbPrice
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT swbPriceType (#PCDATA)>
+<!ATTLIST swbPriceType
+type NMTOKEN #FIXED "string"
+swbPriceTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT swbProductTerm (%FpML_Interval;)>
+<!ATTLIST swbProductTerm
+type NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT swbProductType (#PCDATA)>
+<!ATTLIST swbProductType
+type NMTOKEN #FIXED "string"
+swbProductTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT swbQuantity (#PCDATA)>
+<!ATTLIST swbQuantity
+type NMTOKEN #FIXED "positiveInteger"
+>
+<!ELEMENT swbRecipient (%SWBML_Recipient;)>
+<!ATTLIST swbRecipient
+type NMTOKEN #FIXED "Recipient"
+id ID #REQUIRED
+>
+<!ELEMENT swbReferenceCurrency (#PCDATA)>
+<!ATTLIST swbReferenceCurrency
+type NMTOKEN #FIXED "string"
+currencyScheme CDATA #IMPLIED
+>
+<!ELEMENT swbSettlementCurrency (#PCDATA)>
+<!ATTLIST swbSettlementCurrency
+type NMTOKEN #FIXED "string"
+currencyScheme CDATA #IMPLIED
+>
+<!ELEMENT swbSettlementProvision (%SWBML_SettlementProvision;)>
+<!ATTLIST swbSettlementProvision
+type NMTOKEN #FIXED "SettlementProvision"
+>
+<!ELEMENT swbSettlementRateOption (#PCDATA)>
+<!ATTLIST swbSettlementRateOption
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbStubPosition (#PCDATA)>
+<!ATTLIST swbStubPosition
+type NMTOKEN #FIXED "string"
+swbStubPositionScheme CDATA #IMPLIED
+>
+<!ELEMENT swbStubLength (#PCDATA)>
+<!ATTLIST swbStubLength
+type NMTOKEN #FIXED "string"
+swbStubLengthScheme CDATA #IMPLIED
+href CDATA #REQUIRED
+>
+<!ELEMENT swbStructuredTradeDetails (%SWBML_StructuredTradeDetails;)>
+<!ATTLIST swbStructuredTradeDetails
+type NMTOKEN #FIXED "StructuredTradeDetails"
+>
+<!ELEMENT swbTradeHeader (%SWBML_TradeHeader;)>
+<!ATTLIST swbTradeHeader
+type NMTOKEN #FIXED "TradeHeader"
+>
+<!ELEMENT swbTradeSource (#PCDATA)>
+<!ATTLIST swbTradeSource
+type NMTOKEN #FIXED "string"
+swbTradeSourceScheme CDATA #IMPLIED
+>
+<!ELEMENT swbVenueId (#PCDATA)>
+<!ATTLIST swbVenueId
+type NMTOKEN #FIXED "string"
+swbVenueIdScheme CDATA #IMPLIED
+>
+<!ELEMENT swbTradingBookId (#PCDATA)>
+<!ATTLIST swbTradingBookId
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbUserName (#PCDATA)>
+<!ATTLIST swbUserName
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbMandatoryClearing (%SWBML_MandatoryClearing;)>
+<!ATTLIST swbMandatoryClearing
+type NMTOKEN #FIXED "MandatoryClearing"
+>
+<!ELEMENT swbPartyExemption (%SWBML_PartyExemption;)>
+<!ELEMENT swbExemption (#PCDATA)>
+<!ELEMENT FpML (trade)>
+<!ATTLIST FpML
+version (2-0) #REQUIRED
+businessCenterSchemeDefault CDATA #IMPLIED
+businessDayConventionSchemeDefault CDATA #IMPLIED
+compoundingMethodSchemeDefault CDATA #IMPLIED
+currencySchemeDefault CDATA #IMPLIED
+dateRelativeToSchemeDefault CDATA #IMPLIED
+dayCountFractionSchemeDefault CDATA #IMPLIED
+dayTypeSchemeDefault CDATA #IMPLIED
+floatingRateIndexSchemeDefault CDATA #IMPLIED
+partyIdSchemeDefault CDATA #IMPLIED
+payerReceiverSchemeDefault CDATA #IMPLIED
+paymentTypeSchemeDefault CDATA #IMPLIED
+payRelativeToSchemeDefault CDATA #IMPLIED
+periodSchemeDefault CDATA #IMPLIED
+resetRelativeToSchemeDefault CDATA #IMPLIED
+rollConventionSchemeDefault CDATA #IMPLIED
+tradeIdSchemeDefault CDATA #IMPLIED
+>
+<!ELEMENT additionalPayment (%FpML_Fee;)>
+<!ATTLIST additionalPayment
+type NMTOKEN #FIXED "Fee"
+base NMTOKEN #FIXED "Payment"
+id ID #IMPLIED
+>
+<!ELEMENT adjustableDate (%FpML_AdjustableDate;)>
+<!ATTLIST adjustableDate
+type NMTOKEN #FIXED "AdjustableDate"
+>
+<!ELEMENT adjustedEffectiveDate (#PCDATA)>
+<!ATTLIST adjustedEffectiveDate
+type NMTOKEN #FIXED "date"
+id ID #REQUIRED
+>
+<!ELEMENT adjustedTerminationDate (#PCDATA)>
+<!ATTLIST adjustedTerminationDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT amount (#PCDATA)>
+<!ATTLIST amount
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT automaticExercise (%FpML_AutomaticExercise;)>
+<!ATTLIST automaticExercise
+type NMTOKEN #FIXED "AutomaticExercise"
+>
+<!ELEMENT businessCenter (#PCDATA)>
+<!ATTLIST businessCenter
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+businessCenterScheme CDATA #IMPLIED
+>
+<!ELEMENT businessCenters (%FpML_BusinessCenters;)>
+<!ATTLIST businessCenters
+type NMTOKEN #FIXED "BusinessCenters"
+id ID #IMPLIED
+>
+<!ELEMENT businessCentersReference EMPTY>
+<!ATTLIST businessCentersReference
+href CDATA #REQUIRED
+>
+<!ELEMENT businessDayConvention (#PCDATA)>
+<!ATTLIST businessDayConvention
+type NMTOKEN #FIXED "string"
+businessDayConventionScheme CDATA #IMPLIED
+>
+<!ELEMENT buyer (#PCDATA)>
+<!ATTLIST buyer
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+payerReceiverScheme CDATA #IMPLIED
+>
+<!ELEMENT buyerPartyReference EMPTY>
+<!ATTLIST buyerPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT calculation (%FpML_Calculation;)>
+<!ATTLIST calculation
+type NMTOKEN #FIXED "Calculation"
+>
+<!ELEMENT calculationAgent (%FpML_CalculationAgent;)>
+<!ATTLIST calculationAgent
+type NMTOKEN #FIXED "CalculationAgent"
+>
+<!ELEMENT calculationAgentParty (#PCDATA)>
+<!ATTLIST calculationAgentParty
+type NMTOKEN #FIXED "string"
+calculationAgentPartyScheme CDATA #IMPLIED
+>
+<!ELEMENT calculationAgentPartyReference EMPTY>
+<!ATTLIST calculationAgentPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT calculationPeriodAmount (%FpML_CalculationPeriodAmount;)>
+<!ATTLIST calculationPeriodAmount
+type NMTOKEN #FIXED "CalculationPeriodAmount"
+>
+<!ELEMENT calculationPeriodDates (%FpML_CalculationPeriodDates;)>
+<!ATTLIST calculationPeriodDates
+type NMTOKEN #FIXED "CalculationPeriodDates"
+id ID #REQUIRED
+>
+<!ELEMENT calculationPeriodDatesAdjustments (%FpML_BusinessDayAdjustments;)>
+<!ATTLIST calculationPeriodDatesAdjustments
+type NMTOKEN #FIXED "BusinessDayAdjustments"
+>
+<!ELEMENT calculationPeriodDatesReference EMPTY>
+<!ATTLIST calculationPeriodDatesReference
+href CDATA #REQUIRED
+>
+<!ELEMENT calculationPeriodFrequency (%FpML_CalculationPeriodFrequency;)>
+<!ATTLIST calculationPeriodFrequency
+type NMTOKEN #FIXED "CalculationPeriodFrequency"
+base NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT calculationPeriodNumberOfDays (#PCDATA)>
+<!ATTLIST calculationPeriodNumberOfDays
+type NMTOKEN #FIXED "positiveInteger"
+>
+<!ELEMENT capFloor (%FpML_CapFloor;)>
+<!ATTLIST capFloor
+type NMTOKEN #FIXED "CapFloor"
+base NMTOKEN #FIXED "Product"
+id ID #IMPLIED
+>
+<!ELEMENT capFloorStream (%FpML_InterestRateStream;)>
+<!ATTLIST capFloorStream
+type NMTOKEN #FIXED "InterestRateStream"
+id ID #IMPLIED
+>
+<!ELEMENT capRateSchedule (%FpML_StrikeSchedule;)>
+<!ATTLIST capRateSchedule
+type NMTOKEN #FIXED "StrikeSchedule"
+base NMTOKEN #FIXED "Schedule"
+id ID #IMPLIED
+>
+<!ELEMENT cashSettlement EMPTY>
+<!ELEMENT cashSettlementCurrency (#PCDATA)>
+<!ATTLIST cashSettlementCurrency
+type NMTOKEN #FIXED "string"
+currencyScheme CDATA #IMPLIED
+>
+<!ELEMENT cashSettlementReferenceBanks (%FpML_CashSettlementReferenceBanks;)>
+<!ATTLIST cashSettlementReferenceBanks
+type NMTOKEN #FIXED "CashSettlementReferenceBanks"
+id ID #IMPLIED
+>
+<!ELEMENT compoundingMethod (#PCDATA)>
+<!ATTLIST compoundingMethod
+type NMTOKEN #FIXED "string"
+compoundingMethodScheme CDATA #IMPLIED
+>
+<!ELEMENT currency (#PCDATA)>
+<!ATTLIST currency
+type NMTOKEN #FIXED "string"
+currencyScheme CDATA #IMPLIED
+>
+<!ELEMENT dateAdjustments (%FpML_BusinessDayAdjustments;)>
+<!ATTLIST dateAdjustments
+type NMTOKEN #FIXED "BusinessDayAdjustments"
+>
+<!ELEMENT dateRelativeTo (#PCDATA)>
+<!ATTLIST dateRelativeTo
+type NMTOKEN #FIXED "string"
+href CDATA #REQUIRED
+dateRelativeToScheme CDATA #IMPLIED
+>
+<!ELEMENT dayCountFraction (#PCDATA)>
+<!ATTLIST dayCountFraction
+type NMTOKEN #FIXED "string"
+dayCountFractionScheme CDATA #IMPLIED
+>
+<!ELEMENT dayType (#PCDATA)>
+<!ATTLIST dayType
+type NMTOKEN #FIXED "string"
+dayTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT earliestExerciseTime (%FpML_BusinessCenterTime;)>
+<!ATTLIST earliestExerciseTime
+type NMTOKEN #FIXED "BusinessCenterTime"
+>
+<!ELEMENT effectiveDate (%FpML_AdjustableDate;)>
+<!ATTLIST effectiveDate
+type NMTOKEN #FIXED "AdjustableDate"
+>
+<!ELEMENT europeanExercise (%FpML_EuropeanExercise;)>
+<!ATTLIST europeanExercise
+type NMTOKEN #FIXED "EuropeanExercise"
+id ID #IMPLIED
+>
+<!ELEMENT exerciseProcedure (%FpML_ExerciseProcedure;)>
+<!ATTLIST exerciseProcedure
+type NMTOKEN #FIXED "ExerciseProcedure"
+>
+<!ELEMENT expirationDate (%FpML_AdjustableOrRelativeDate;)>
+<!ATTLIST expirationDate
+type NMTOKEN #FIXED "AdjustableOrRelativeDate"
+>
+<!ELEMENT expirationTime (%FpML_BusinessCenterTime;)>
+<!ATTLIST expirationTime
+type NMTOKEN #FIXED "BusinessCenterTime"
+>
+<!ELEMENT firstPaymentDate (#PCDATA)>
+<!ATTLIST firstPaymentDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT firstRegularPeriodStartDate (#PCDATA)>
+<!ATTLIST firstRegularPeriodStartDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT fixedRate (#PCDATA)>
+<!ATTLIST fixedRate
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT fixedRateSchedule (%FpML_Schedule;)>
+<!ATTLIST fixedRateSchedule
+type NMTOKEN #FIXED "Schedule"
+>
+<!ELEMENT fixingDateOffset (%FpML_RelativeDateOffset;)>
+<!ATTLIST fixingDateOffset
+type NMTOKEN #FIXED "RelativeDateOffset"
+base NMTOKEN #FIXED "Offset"
+>
+<!ELEMENT fixingDates (%FpML_RelativeDateOffset;)>
+<!ATTLIST fixingDates
+type NMTOKEN #FIXED "RelativeDateOffset"
+base NMTOKEN #FIXED "Offset"
+>
+<!ELEMENT floatingRate (%FpML_FloatingRate;)>
+<!ATTLIST floatingRate
+type NMTOKEN #FIXED "FloatingRate"
+id ID #IMPLIED
+>
+<!ELEMENT floatingRateCalculation (%FpML_FloatingRateCalculation;)>
+<!ATTLIST floatingRateCalculation
+type NMTOKEN #FIXED "FloatingRateCalculation"
+base NMTOKEN #FIXED "FloatingRate"
+>
+<!ELEMENT floatingRateIndex (#PCDATA)>
+<!ATTLIST floatingRateIndex
+type NMTOKEN #FIXED "string"
+floatingRateIndexScheme CDATA #IMPLIED
+>
+<!ELEMENT floorRateSchedule (%FpML_StrikeSchedule;)>
+<!ATTLIST floorRateSchedule
+type NMTOKEN #FIXED "StrikeSchedule"
+base NMTOKEN #FIXED "Schedule"
+id ID #IMPLIED
+>
+<!ELEMENT followUpConfirmation (#PCDATA)>
+<!ATTLIST followUpConfirmation
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT thresholdRate (#PCDATA)>
+<!ATTLIST thresholdRate
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT fallbackExercise (#PCDATA)>
+<!ATTLIST fallbackExercise
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT finalStub (%FpML_Stub;)>
+<!ATTLIST finalStub
+type NMTOKEN #FIXED "Stub"
+>
+<!ELEMENT fra (%FpML_Fra;)>
+<!ATTLIST fra
+type NMTOKEN #FIXED "Fra"
+base NMTOKEN #FIXED "Product"
+id ID #IMPLIED
+>
+<!ELEMENT fraDiscounting (#PCDATA)>
+<!ATTLIST fraDiscounting
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT hourMinuteTime (#PCDATA)>
+<!ATTLIST hourMinuteTime
+type NMTOKEN #FIXED "time"
+>
+<!ELEMENT indexTenor (%FpML_Interval;)>
+<!ATTLIST indexTenor
+type NMTOKEN #FIXED "Interval"
+id ID #IMPLIED
+>
+<!ELEMENT informationSource (%FpML_InformationSource;)>
+<!ATTLIST informationSource
+type NMTOKEN #FIXED "InformationSource"
+>
+<!ELEMENT initialFixingDate (%FpML_RelativeDateOffset;)>
+<!ATTLIST initialFixingDate
+type NMTOKEN #FIXED "RelativeDateOffset"
+base NMTOKEN #FIXED "Offset"
+>
+<!ELEMENT initialRate (#PCDATA)>
+<!ATTLIST initialRate
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT initialStub (%FpML_Stub;)>
+<!ATTLIST initialStub
+type NMTOKEN #FIXED "Stub"
+>
+<!ELEMENT initialValue (#PCDATA)>
+<!ATTLIST initialValue
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT knownAmountSchedule (%FpML_AmountSchedule;)>
+<!ATTLIST knownAmountSchedule
+type NMTOKEN #FIXED "AmountSchedule"
+base NMTOKEN #FIXED "Schedule"
+>
+<!ELEMENT lastRegularPaymentDate (#PCDATA)>
+<!ATTLIST lastRegularPaymentDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT lastRegularPeriodEndDate (#PCDATA)>
+<!ATTLIST lastRegularPeriodEndDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT notional (%FpML_Money;)>
+<!ATTLIST notional
+type NMTOKEN #FIXED "Money"
+>
+<!ELEMENT notionalSchedule (%FpML_Notional;)>
+<!ATTLIST notionalSchedule
+type NMTOKEN #FIXED "Notional"
+id ID #IMPLIED
+>
+<!ELEMENT notionalStepSchedule (%FpML_AmountSchedule;)>
+<!ATTLIST notionalStepSchedule
+type NMTOKEN #FIXED "AmountSchedule"
+base NMTOKEN #FIXED "Schedule"
+>
+<!ELEMENT otherPartyPayment (%FpML_Fee;)>
+<!ATTLIST otherPartyPayment
+type NMTOKEN #FIXED "Fee"
+base NMTOKEN #FIXED "Payment"
+id ID #IMPLIED
+>
+<!ELEMENT party (%FpML_Party;)>
+<!ATTLIST party
+type NMTOKEN #FIXED "Party"
+id ID #REQUIRED
+>
+<!ELEMENT partyId (#PCDATA)>
+<!ATTLIST partyId
+type NMTOKEN #FIXED "string"
+partyIdScheme CDATA #IMPLIED
+>
+<!ELEMENT partyName (#PCDATA)>
+<!ATTLIST partyName
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT partyReference EMPTY>
+<!ATTLIST partyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT partyTradeIdentifier (%FpML_PartyTradeIdentifier;)>
+<!ATTLIST partyTradeIdentifier
+type NMTOKEN #FIXED "PartyTradeIdentifier"
+id ID #IMPLIED
+>
+<!ELEMENT payerPartyReference EMPTY>
+<!ATTLIST payerPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT paymentAmount (%FpML_Money;)>
+<!ATTLIST paymentAmount
+type NMTOKEN #FIXED "Money"
+>
+<!ELEMENT paymentDate (%FpML_AdjustableDate;)>
+<!ATTLIST paymentDate
+type NMTOKEN #FIXED "AdjustableDate"
+id ID #IMPLIED
+>
+<!ELEMENT paymentDates (%FpML_PaymentDates;)>
+<!ATTLIST paymentDates
+type NMTOKEN #FIXED "PaymentDates"
+id ID #IMPLIED
+>
+<!ELEMENT paymentDatesAdjustments (%FpML_BusinessDayAdjustments;)>
+<!ATTLIST paymentDatesAdjustments
+type NMTOKEN #FIXED "BusinessDayAdjustments"
+>
+<!ELEMENT paymentDaysOffset (%FpML_Offset;)>
+<!ATTLIST paymentDaysOffset
+type NMTOKEN #FIXED "Offset"
+base NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT paymentFrequency (%FpML_Interval;)>
+<!ATTLIST paymentFrequency
+type NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT paymentType (#PCDATA)>
+<!ATTLIST paymentType
+type NMTOKEN #FIXED "string"
+paymentTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT payRelativeTo (#PCDATA)>
+<!ATTLIST payRelativeTo
+type NMTOKEN #FIXED "string"
+payRelativeToScheme CDATA #IMPLIED
+>
+<!ELEMENT period (#PCDATA)>
+<!ATTLIST period
+type NMTOKEN #FIXED "string"
+periodScheme CDATA #IMPLIED
+>
+<!ELEMENT periodMultiplier (#PCDATA)>
+<!ATTLIST periodMultiplier
+type NMTOKEN #FIXED "integer"
+>
+<!ELEMENT premium (%FpML_Payment;)>
+<!ATTLIST premium
+type NMTOKEN #FIXED "Payment"
+id ID #IMPLIED
+>
+<!ELEMENT quotationRateType (#PCDATA)>
+<!ATTLIST quotationRateType
+type NMTOKEN #FIXED "string"
+quotationRateTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT swbPrimeBroker EMPTY>
+<!ATTLIST swbPrimeBroker
+href CDATA #REQUIRED
+>
+<!ELEMENT rateSource (#PCDATA)>
+<!ATTLIST rateSource
+type NMTOKEN #FIXED "string"
+informationProviderScheme CDATA #IMPLIED
+>
+<!ELEMENT rateSourcePage (#PCDATA)>
+<!ATTLIST rateSourcePage
+type NMTOKEN #FIXED "string"
+rateSourcePageScheme CDATA #IMPLIED
+>
+<!ELEMENT receiverPartyReference EMPTY>
+<!ATTLIST receiverPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT referenceBank (%FpML_ReferenceBank;)>
+<!ATTLIST referenceBank
+type NMTOKEN #FIXED "ReferenceBank"
+id ID #IMPLIED
+>
+<!ELEMENT referenceBankId (#PCDATA)>
+<!ATTLIST referenceBankId
+type NMTOKEN #FIXED "string"
+referenceBankIdScheme CDATA #IMPLIED
+>
+<!ELEMENT referenceBankName (#PCDATA)>
+<!ATTLIST referenceBankName
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT resetDates (%FpML_ResetDates;)>
+<!ATTLIST resetDates
+type NMTOKEN #FIXED "ResetDates"
+id ID #REQUIRED
+>
+<!ELEMENT resetDatesAdjustments (%FpML_BusinessDayAdjustments;)>
+<!ATTLIST resetDatesAdjustments
+type NMTOKEN #FIXED "BusinessDayAdjustments"
+>
+<!ELEMENT resetFrequency (%FpML_ResetFrequency;)>
+<!ATTLIST resetFrequency
+type NMTOKEN #FIXED "ResetFrequency"
+base NMTOKEN #FIXED "Interval"
+>
+<!ELEMENT resetRelativeTo (#PCDATA)>
+<!ATTLIST resetRelativeTo
+type NMTOKEN #FIXED "string"
+resetRelativeToScheme CDATA #IMPLIED
+>
+<!ELEMENT rollConvention (#PCDATA)>
+<!ATTLIST rollConvention
+type NMTOKEN #FIXED "string"
+rollConventionScheme CDATA #IMPLIED
+>
+<!ELEMENT seller (#PCDATA)>
+<!ATTLIST seller
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+payerReceiverScheme CDATA #IMPLIED
+>
+<!ELEMENT sellerPartyReference EMPTY>
+<!ATTLIST sellerPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT settlementRateSource (%FpML_SettlementRateSource;)>
+<!ATTLIST settlementRateSource
+type NMTOKEN #FIXED "SettlementRateSource"
+>
+<!ELEMENT spreadSchedule (%FpML_Schedule;)>
+<!ATTLIST spreadSchedule
+type NMTOKEN #FIXED "Schedule"
+>
+<!ELEMENT step (%FpML_Step;)>
+<!ATTLIST step
+type NMTOKEN #FIXED "Step"
+id ID #IMPLIED
+>
+<!ELEMENT stepDate (#PCDATA)>
+<!ATTLIST stepDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT stepValue (#PCDATA)>
+<!ATTLIST stepValue
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT stubRate (#PCDATA)>
+<!ATTLIST stubRate
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT stubCalculationPeriodAmount (%FpML_StubCalculationPeriodAmount;)>
+<!ATTLIST stubCalculationPeriodAmount
+type NMTOKEN #FIXED "StubCalculationPeriodAmount"
+>
+<!ELEMENT swap (%FpML_Swap;)>
+<!ATTLIST swap
+type NMTOKEN #FIXED "Swap"
+base NMTOKEN #FIXED "Product"
+id ID #IMPLIED
+>
+<!ELEMENT swapStream (%FpML_InterestRateStream;)>
+<!ATTLIST swapStream
+type NMTOKEN #FIXED "InterestRateStream"
+id ID #IMPLIED
+>
+<!ELEMENT swaption (%FpML_Swaption;)>
+<!ATTLIST swaption
+type NMTOKEN #FIXED "Swaption"
+base NMTOKEN #FIXED "Product"
+id ID #IMPLIED
+>
+<!ELEMENT swaptionStraddle (#PCDATA)>
+<!ATTLIST swaptionStraddle
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT terminationDate (%FpML_AdjustableDate;)>
+<!ATTLIST terminationDate
+type NMTOKEN #FIXED "AdjustableDate"
+id ID #IMPLIED
+>
+<!ELEMENT trade (%FpML_Trade;)>
+<!ATTLIST trade
+type NMTOKEN #FIXED "Trade"
+id ID #IMPLIED
+>
+<!ELEMENT tradeDate (#PCDATA)>
+<!ATTLIST tradeDate
+type NMTOKEN #FIXED "date"
+>
+<!ELEMENT tradeHeader (%FpML_TradeHeader;)>
+<!ATTLIST tradeHeader
+type NMTOKEN #FIXED "TradeHeader"
+>
+<!ELEMENT tradeId (#PCDATA)>
+<!ATTLIST tradeId
+type NMTOKEN #FIXED "string"
+id ID #IMPLIED
+tradeIdScheme CDATA #IMPLIED
+>
+<!ELEMENT unadjustedDate (#PCDATA)>
+<!ATTLIST unadjustedDate
+type NMTOKEN #FIXED "date"
+id ID #IMPLIED
+>
+<!ELEMENT swbBlockTrade EMPTY>
+<!ENTITY % SWBML_Allocation "((swbStreamReference
+, payerPartyReference
+, receiverPartyReference)
+| (buyerPartyReference
+, sellerPartyReference))
+, allocatedNotional?
+, independentAmount?
+, swbBrokerTradeId
+, otherPartyPayment*
+, swbPartyClearingDetails*">
+<!ENTITY % SWBML_Allocations "swbAllocation+">
+<!ENTITY % SWBML_IndependentAmount "payerPartyReference
+, receiverPartyReference
+, paymentDetail">
+<!ENTITY % SWBML_PaymentDetail "paymentAmount">
+<!ELEMENT allocatedNotional (%FpML_Money;)>
+<!ATTLIST allocatedNotional
+type NMTOKEN #FIXED "Money"
+>
+<!ELEMENT independentAmount (%SWBML_IndependentAmount;)>
+<!ATTLIST independentAmount
+type NMTOKEN #FIXED "IndependentAmount"
+>
+<!ELEMENT paymentDetail (%SWBML_PaymentDetail;)>
+<!ATTLIST paymentDetail
+type NMTOKEN #FIXED "PaymentDetail"
+>
+<!ELEMENT swbAllocation (%SWBML_Allocation;)>
+<!ATTLIST swbAllocation
+type NMTOKEN #FIXED "Allocation"
+>
+<!ELEMENT swbAllocations (%SWBML_Allocations;)>
+<!ATTLIST swbAllocations
+type NMTOKEN #FIXED "Allocations"
+>
+<!ELEMENT swbStreamReference EMPTY>
+<!ATTLIST swbStreamReference
+href CDATA #REQUIRED
+>
+<!ENTITY % SWBML_PartyClearingDetails "partyReference
+, swbClearinghStatus?
+, swbClearingHouseTradeID?
+, swbClearedTimestamp?
+, swbClearedUSI?
+, swbClearedUTI?">
+<!ENTITY % SWBML_ClearedUSI "swbIssuer
+, swbTradeId?">
+<!ENTITY % SWBML_ClearedUTI "swbIssuer
+, swbTradeId?">
+<!ELEMENT swbInterAffiliateExemption (#PCDATA)>
+<!ELEMENT swbBusinessConductDetails (%SWBML_BusinessConductDetails;)>
+<!ATTLIST swbBusinessConductDetails
+type NMTOKEN #FIXED "BusinessConductDetails"
+>
+<!ELEMENT swbMidMarketPrice (%SWBML_MidMarketPrice;)>
+<!ATTLIST swbMidMarketPrice
+type NMTOKEN #FIXED "MidMarketPrice"
+>
+<!ELEMENT swbAmount (#PCDATA)>
+<!ATTLIST swbAmount
+type NMTOKEN #FIXED "decimal"
+>
+<!ELEMENT swbCurrency (#PCDATA)>
+<!ATTLIST swbCurrency
+type NMTOKEN #FIXED "string"
+currencyScheme CDATA #IMPLIED
+>
+<!ELEMENT swbUnit (#PCDATA)>
+<!ATTLIST swbUnit
+unitScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/price-quote-units"
+>
+<!ELEMENT swbOriginatingEvent (#PCDATA)>
+<!ATTLIST swbOriginatingEvent
+originatingEventScheme NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbTradePackageHeader (%SWBML_TradePackageHeader;)>
+<!ATTLIST swbTradePackageHeader
+type NMTOKEN #FIXED "TradePackageHeader"
+>
+<!ELEMENT swbPackageIdentifier (%SWBML_PackageIdentifier;)>
+<!ATTLIST swbPackageIdentifier
+type NMTOKEN #FIXED "PackageIdentifier"
+>
+<!ELEMENT swbSize (#PCDATA)>
+<!ATTLIST swbSize
+type NMTOKEN #FIXED "positiveInteger"
+>
+<!ELEMENT swbPartyCreditAcceptanceToken (%SWBML_PartyCreditAcceptanceToken;)>
+<!ATTLIST swbPartyCreditAcceptanceToken
+type NMTOKEN #FIXED "PartyCreditAcceptanceToken"
+>
+<!ELEMENT swbCreditIssuer (#PCDATA)>
+<!ATTLIST swbCreditIssuer
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbToken (#PCDATA)>
+<!ATTLIST swbToken
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbPredeterminedClearerForUnderlyingSwap (#PCDATA)>
+<!ATTLIST swbPredeterminedClearerForUnderlyingSwap
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbPricedToClearCCP (%SWBML_PartyDetails;)>
+<!ATTLIST swbPricedToClearCCP
+type NMTOKEN #FIXED "ClearingHouse"
+>
+<!ELEMENT swbSettlementAgent (%SWBML_SettlementAgent;)>
+<!ATTLIST swbSettlementAgent
+type NMTOKEN #FIXED "SettlementAgent"
+>
+<!ELEMENT swbSettlementAgency (%SWBML_SettlementAgency;)>
+<!ATTLIST swbSettlementAgency
+type NMTOKEN #FIXED "SettlementAgency"
+>
+<!ELEMENT swbSettlementAgencyModel (#PCDATA)>
+<!ATTLIST swbSettlementAgencyModel
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbOrderDetails (%SWBML_OrderDetails;)>
+<!ATTLIST swbOrderDetails
+type NMTOKEN #FIXED "OrderDetails"
+href CDATA #REQUIRED
+>
+<!ELEMENT swbTypeOfOrder (#PCDATA)>
+<!ATTLIST swbTypeOfOrder
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbTotalConsideration (#PCDATA)>
+<!ATTLIST swbTotalConsideration
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbRateOfExchange (#PCDATA)>
+<!ATTLIST swbRateOfExchange
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbClientCounterparty (#PCDATA)>
+<!ATTLIST swbClientCounterparty
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbTotalCommissionAndExpenses (#PCDATA)>
+<!ATTLIST swbTotalCommissionAndExpenses
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbClientSettlementResponsibilities (#PCDATA)>
+<!ATTLIST swbClientSettlementResponsibilities
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbAgreedDiscountRate (#PCDATA)>
+<!ATTLIST swbAgreedDiscountRate
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbReplacementTradeId (%SWBML_ReplacementTradeId;)>
+<!ATTLIST swbReplacementTradeId
+type NMTOKEN #FIXED "ReplacementTradeId"
+>
+<!ELEMENT swbReplacementReason (#PCDATA)>
+<!ATTLIST swbReplacementReason
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbTradeIdType (#PCDATA)>
+<!ATTLIST swbTradeIdType
+type NMTOKEN #FIXED "string"
+>
+<!ELEMENT swbPackageDetails (swbPackageId?, swbPackageSize?, swbRegReportAsPackage?, swbPackagePriceDetails?)>
+<!ATTLIST swbPackageDetails
+href CDATA #REQUIRED
+>
+<!ELEMENT swbPackageId (#PCDATA)>
+<!ELEMENT swbPackageSize (#PCDATA)>
+<!ELEMENT swbRegReportAsPackage (#PCDATA)>
+<!ATTLIST swbRegReportAsPackage
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbPackagePriceDetails (swbType?, swbValue?, swbNotation?, swbCurrency?)>
+<!ELEMENT swbValue (#PCDATA)>
+<!ELEMENT swbNotation (#PCDATA)>

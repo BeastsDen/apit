@@ -63,38 +63,33 @@ if (rc < SWERR_Success) {
     isActive: true
   },
 
-  // Deal Management
+  // Deal Management - Actual Dealer Commands
   {
-    name: "SW_SendDeal",
+    name: "SubmitNewDeal",
     category: "Deal Management",
-    functionName: "SW_SendDeal",
-    description: "Send a new deal to counterparty",
+    functionName: "SubmitNewDeal",
+    description: "Submit a new deal to counterparty",
     parameters: [
-      { name: "loginHandle", type: "number", description: "Login handle", required: true },
-      { name: "dealXML", type: "string", description: "Deal data in SWML format", required: true },
-      { name: "addressee", type: "string", description: "Counterparty address", required: true }
+      { name: "SWDML", type: "string", description: "Deal data in SWDML format", required: true, example: "<?xml version='1.0'?><trade>...</trade>" },
+      { name: "privateDataXML", type: "string", description: "Private data XML", required: false, example: "" },
+      { name: "recipientXML", type: "string", description: "Recipient XML", required: true, example: "<recipients><recipient>COUNTERPARTY</recipient></recipients>" },
+      { name: "messageText", type: "string", description: "Message text", required: false, example: "New deal submission" }
     ],
-    sampleCode: `String dealXML = "<?xml version=\\"1.0\\"?>\\n<trade>...</trade>";
-long dealHandle = -1;
-int rc = SW_SendDeal(loginHandle, dealXML, "COUNTERPARTY", &dealHandle);
-if (rc < SWERR_Success) {
-    System.out.println("Failed to send deal: " + getError(rc));
-}`,
+    sampleCode: `java -jar java_dealer_example.jar host:port username password SubmitNewDeal "<?xml version='1.0'?><trade>...</trade>" "" "<recipients><recipient>COUNTERPARTY</recipient></recipients>" "New deal"`,
     isActive: true
   },
   {
-    name: "SW_AffirmDeal",
-    category: "Deal Management",
-    functionName: "SW_AffirmDeal",
+    name: "Affirm",
+    category: "Deal Management", 
+    functionName: "Affirm",
     description: "Affirm a received deal",
     parameters: [
-      { name: "loginHandle", type: "number", description: "Login handle", required: true },
-      { name: "dealVersionHandle", type: "number", description: "Deal version handle", required: true }
+      { name: "oldDealVersionHandle", type: "string", description: "Deal version handle", required: true, example: "12345" },
+      { name: "SWDML", type: "string", description: "Deal data in SWDML format", required: true, example: "<?xml version='1.0'?><trade>...</trade>" },
+      { name: "privateDataXML", type: "string", description: "Private data XML", required: false, example: "" },
+      { name: "messageText", type: "string", description: "Message text", required: false, example: "Deal affirmed" }
     ],
-    sampleCode: `int rc = SW_AffirmDeal(loginHandle, dealVersionHandle);
-if (rc < SWERR_Success) {
-    System.out.println("Failed to affirm deal: " + getError(rc));
-}`,
+    sampleCode: `java -jar java_dealer_example.jar host:port username password Affirm "12345" "<?xml version='1.0'?><trade>...</trade>" "" "Deal affirmed"`,
     isActive: true
   },
   {
@@ -131,39 +126,25 @@ if (rc < SWERR_Success) {
 
   // Deal Information
   {
-    name: "SW_GetDealList",
+    name: "QueryDeals",
     category: "Deal Information",
-    functionName: "SW_GetDealList",
-    description: "Get list of deals for the logged in user",
+    functionName: "QueryDeals",
+    description: "Query deals with search criteria",
     parameters: [
-      { name: "loginHandle", type: "number", description: "Login handle", required: true },
-      { name: "criteria", type: "string", description: "Search criteria (optional)", required: false }
+      { name: "queryXML", type: "string", description: "Query XML with search criteria", required: true, example: "<?xml version='1.0'?><query>...</query>" }
     ],
-    sampleCode: `String dealList = null;
-int rc = SW_GetDealList(loginHandle, "", &dealList);
-if (rc < SWERR_Success) {
-    System.out.println("Failed to get deal list: " + getError(rc));
-} else {
-    System.out.println("Deal list: " + dealList);
-}`,
+    sampleCode: `java -jar java_dealer_example.jar host:port username password QueryDeals "<?xml version='1.0'?><query>...</query>"`,
     isActive: true
   },
   {
-    name: "SW_GetDealInfo",
+    name: "GetDealInfo",
     category: "Deal Information", 
-    functionName: "SW_GetDealInfo",
+    functionName: "GetDealInfo",
     description: "Get detailed information about a specific deal",
     parameters: [
-      { name: "loginHandle", type: "number", description: "Login handle", required: true },
-      { name: "dealHandle", type: "number", description: "Deal handle", required: true }
+      { name: "DealVersionHandle", type: "string", description: "Deal version handle", required: true, example: "12345" }
     ],
-    sampleCode: `String dealInfo = null;
-int rc = SW_GetDealInfo(loginHandle, dealHandle, &dealInfo);
-if (rc < SWERR_Success) {
-    System.out.println("Failed to get deal info: " + getError(rc));
-} else {
-    System.out.println("Deal info: " + dealInfo);
-}`,
+    sampleCode: `java -jar java_dealer_example.jar host:port username password GetDealInfo "12345"`,
     isActive: true
   },
 
@@ -205,22 +186,14 @@ if (rc < SWERR_Success) {
     isActive: true
   },
 
-  // DealSink Specific 
+  // User and Organization Info
   {
-    name: "SW_GetBookList",
-    category: "DealSink",
-    functionName: "SW_GetBookList",
-    description: "Get list of available books (DealSink)",
-    parameters: [
-      { name: "loginHandle", type: "number", description: "Login handle", required: true }
-    ],
-    sampleCode: `String bookList = null;
-int rc = SW_GetBookList(loginHandle, &bookList);
-if (rc < SWERR_Success) {
-    System.out.println("Failed to get book list: " + getError(rc));
-} else {
-    System.out.println("Book list: " + bookList);
-}`,
+    name: "GetBookList",
+    category: "User Info",
+    functionName: "GetBookList",
+    description: "Get list of available books",
+    parameters: [],
+    sampleCode: `java -jar java_dealer_example.jar host:port username password GetBookList`,
     isActive: true
   },
   {

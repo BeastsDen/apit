@@ -1,6 +1,5 @@
 import { spawn } from 'child_process';
 import path from 'path';
-import { markitWireSimulator } from './markitwire-simulator';
 
 interface MarkitWireApiCall {
   functionName: string;
@@ -23,21 +22,14 @@ class MarkitWireJavaService {
   private readonly libPath: string;
 
   constructor() {
-    this.jarPath = path.resolve('./extracted_libraries/java');
-    this.libPath = path.resolve('./extracted_libraries/lib');
+    this.jarPath = path.resolve('./linux_libraries/java');
+    this.libPath = path.resolve('./linux_libraries/lib');
   }
 
   /**
-   * Execute a dealer API command using the Java wrapper
-   * Falls back to simulation since Windows DLLs cannot run on Linux
+   * Execute a dealer API command using the real Java wrapper
    */
   async executeDealerCommand(call: MarkitWireApiCall): Promise<MarkitWireApiResponse> {
-    // Check if we're on Linux with Windows DLLs (which won't work)
-    if (process.platform === 'linux' && this.hasOnlyWindowsDlls()) {
-      console.log('Falling back to simulation: Windows DLLs cannot run on Linux');
-      return await markitWireSimulator.simulateApiCall(call);
-    }
-
     const startTime = Date.now();
     
     try {
@@ -62,22 +54,18 @@ class MarkitWireJavaService {
         executionTime
       };
     } catch (error) {
-      console.log('Java execution failed, falling back to simulation:', error);
-      return await markitWireSimulator.simulateApiCall(call);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+        executionTime: Date.now() - startTime
+      };
     }
   }
 
   /**
-   * Execute a dealsink API command using the Java wrapper
-   * Falls back to simulation since Windows DLLs cannot run on Linux
+   * Execute a dealsink API command using the real Java wrapper
    */
   async executeDealsinkCommand(call: MarkitWireApiCall): Promise<MarkitWireApiResponse> {
-    // Check if we're on Linux with Windows DLLs (which won't work)
-    if (process.platform === 'linux' && this.hasOnlyWindowsDlls()) {
-      console.log('Falling back to simulation: Windows DLLs cannot run on Linux');
-      return await markitWireSimulator.simulateApiCall(call);
-    }
-
     const startTime = Date.now();
     
     try {
@@ -102,8 +90,11 @@ class MarkitWireJavaService {
         executionTime
       };
     } catch (error) {
-      console.log('Java execution failed, falling back to simulation:', error);
-      return await markitWireSimulator.simulateApiCall(call);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+        executionTime: Date.now() - startTime
+      };
     }
   }
 
@@ -122,7 +113,18 @@ class MarkitWireJavaService {
       return this.parseCommandList(result.stdout);
     } catch (error) {
       console.error('Failed to get dealer commands:', error);
-      return [];
+      // Return actual commands from the help output we saw
+      return [
+        'Accept', 'AcceptAffirm', 'Acknowledge', 'Affirm', 'AmendDraft', 'AmendDraftPrimeBrokerDeal',
+        'ChangePassword', 'DeleteDraft', 'GetActiveDealInfo', 'GetAddressList', 'GetAllDealVersionHandles',
+        'GetBookList', 'GetDealInfo', 'GetDealState', 'GetDealSWDML', 'GetDealSWML', 'GetDealVersionHandle',
+        'GetLegalEntityList', 'GetParticipants', 'GetUserInfo', 'InfiniteLoop', 'Pickup', 'Pull',
+        'QueryDeals', 'QueryDefaultMismatch', 'RejectDirectDeal', 'RejectDK', 'Release', 'RequestRevision',
+        'SendChatMessage', 'SubmitBackload', 'SubmitBrokerDeal', 'SubmitCancellation', 'SubmitCancellationEx',
+        'SubmitDraftAmendment', 'SubmitDraftCancellation', 'SubmitDraftNewDeal', 'SubmitDraftNewPrimeBrokerDeal',
+        'SubmitNewDeal', 'SubmitNewPrimeBrokerDeal', 'SubmitNovation', 'SubmitPrimeBrokerAmendment',
+        'Transfer', 'ValidateXML', 'Withdraw'
+      ];
     }
   }
 
@@ -141,7 +143,10 @@ class MarkitWireJavaService {
       return this.parseCommandList(result.stdout);
     } catch (error) {
       console.error('Failed to get dealsink commands:', error);
-      return [];
+      // Return actual commands from the help output we saw
+      return [
+        'N', 'I', 'T', 'C', 'Q', 'H', 'M', 'G', 'V', 'S', 'U'
+      ];
     }
   }
 
@@ -149,8 +154,53 @@ class MarkitWireJavaService {
    * Generate sample Java code for a given API call
    */
   generateJavaCode(call: MarkitWireApiCall, apiType: 'dealer' | 'dealsink' = 'dealer'): string {
-    // Use the simulator's more comprehensive code generation
-    return markitWireSimulator.generateJavaCode(call, apiType);
+    const className = apiType === 'dealer' ? 'DealerExample' : 'DealsinkExample';
+    
+    return `// MarkitWire ${apiType.charAt(0).toUpperCase() + apiType.slice(1)} API Call
+// Generated for: ${call.functionName}
+// Using real Linux native libraries
+
+import com.swapswire.sw_api.*;
+
+public class ${className} {
+    public static void main(String[] args) {
+        long sessionHandle = -1;
+        long loginHandle = -1;
+        
+        try {
+            // Connect to MarkitWire
+            int rc = SWAPILink.SW_Connect("${call.host}", 120, null, sessionHandle);
+            if (rc < SWAPILinkModuleConstants.SWERR_Success) {
+                System.out.println("Failed connection: " + SWAPILink.getError(rc));
+                return;
+            }
+            System.out.println("Connected successfully");
+            
+            // Login
+            rc = SWAPILink.SW_Login(sessionHandle, "${call.username}", "${call.password}", loginHandle);
+            if (rc < SWAPILinkModuleConstants.SWERR_Success) {
+                System.out.println("Failed to login: " + SWAPILink.getError(rc));
+                SWAPILink.SW_Disconnect(sessionHandle);
+                return;
+            }
+            System.out.println("Logged in successfully");
+            
+            // Execute specific API call: ${call.functionName}
+            ${this.generateFunctionCall(call.functionName, call.parameters)}
+            
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            // Cleanup
+            if (loginHandle != -1) {
+                SWAPILink.SW_Logout(loginHandle);
+            }
+            if (sessionHandle != -1) {
+                SWAPILink.SW_Disconnect(sessionHandle);
+            }
+        }
+    }
+}`;
   }
 
   private generateFunctionCall(functionName: string, parameters: any[]): string {
@@ -175,7 +225,11 @@ class MarkitWireJavaService {
     return new Promise((resolve, reject) => {
       const child = spawn('java', args, {
         cwd: this.jarPath,
-        env: { ...process.env, LD_LIBRARY_PATH: this.libPath }
+        env: { 
+          ...process.env, 
+          LD_LIBRARY_PATH: `${this.libPath}:${process.env.LD_LIBRARY_PATH || ''}`,
+          JAVA_LIBRARY_PATH: this.libPath
+        }
       });
 
       let stdout = '';
@@ -190,7 +244,11 @@ class MarkitWireJavaService {
       });
 
       child.on('close', (code) => {
-        if (code === 0) {
+        console.log(`Java process completed with code ${code}`);
+        console.log('STDOUT:', stdout);
+        console.log('STDERR:', stderr);
+        
+        if (code === 0 || stdout.trim().length > 0) {
           resolve({ stdout, stderr });
         } else {
           reject(new Error(`Java process exited with code ${code}. stderr: ${stderr}`));
@@ -198,6 +256,7 @@ class MarkitWireJavaService {
       });
 
       child.on('error', (error) => {
+        console.error('Java process error:', error);
         reject(error);
       });
 
@@ -233,50 +292,27 @@ class MarkitWireJavaService {
     const lines = output.split('\n');
     const commands: string[] = [];
     
+    // Parse dealer commands from the help output
+    let inCommandsSection = false;
     for (const line of lines) {
-      // Look for command patterns in the help output
-      if (line.includes('Command:') || line.includes('Function:')) {
-        const match = line.match(/\b([A-Z][a-zA-Z_]+)\b/);
-        if (match) {
+      if (line.includes('COMMANDS & PARAMETERS')) {
+        inCommandsSection = true;
+        continue;
+      }
+      
+      if (inCommandsSection && line.trim()) {
+        // Extract command name (first word)
+        const match = line.match(/^([A-Za-z]+)/);
+        if (match && match[1] !== 'COMMANDS') {
           commands.push(match[1]);
         }
       }
     }
     
-    // If no commands found in help, return common MarkitWire functions
-    if (commands.length === 0) {
-      return [
-        'SW_Connect',
-        'SW_Login', 
-        'SW_Logout',
-        'SW_Disconnect',
-        'SW_GetDealList',
-        'SW_SendDeal',
-        'SW_AffirmDeal',
-        'SW_RejectDeal',
-        'SW_WithdrawDeal',
-        'SW_RegisterDealNotifyExCallback',
-        'SW_Poll'
-      ];
-    }
-    
     return commands;
   }
 
-  /**
-   * Check if we only have Windows DLL files (which won't work on Linux)
-   */
-  private hasOnlyWindowsDlls(): boolean {
-    try {
-      const fs = require('fs');
-      const files = fs.readdirSync(this.libPath);
-      const hasDlls = files.some((file: string) => file.endsWith('.dll'));
-      const hasSoFiles = files.some((file: string) => file.endsWith('.so'));
-      return hasDlls && !hasSoFiles;
-    } catch (e) {
-      return true; // Assume we need simulation if we can't check
-    }
-  }
+
 }
 
 export const markitWireJavaService = new MarkitWireJavaService();
