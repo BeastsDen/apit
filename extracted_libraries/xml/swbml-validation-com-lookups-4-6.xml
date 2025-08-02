@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commodityCategories>
+<commodityCategory name="Oil">
+<CRPStartsWith>BENZENE</CRPStartsWith>
+<CRPStartsWith>DIESEL FUEL</CRPStartsWith>
+<CRPStartsWith>FUEL OIL</CRPStartsWith>
+<CRPStartsWith>GAS OIL</CRPStartsWith>
+<CRPStartsWith>GASOLINE</CRPStartsWith>
+<CRPStartsWith>MTBE</CRPStartsWith>
+<CRPStartsWith>BUCKEYE PIPELINE GASOLINE ASSESSMENTS</CRPStartsWith>
+<CRPStartsWith>HEATING OIL</CRPStartsWith>
+<CRPStartsWith>JET FUEL</CRPStartsWith>
+<CRPStartsWith>KEROSENE</CRPStartsWith>
+<CRPStartsWith>CLEAN FUELS</CRPStartsWith>
+<CRPStartsWith>NAPHTHA</CRPStartsWith>
+<CRPStartsWith>OIL</CRPStartsWith>
+<CRPStartsWith>OMAN MINISTRY OF GAS OFFICIAL PRICE</CRPStartsWith>
+<CRPStartsWith>ULTRA LOW SULPHUR DIESEL</CRPStartsWith>
+<CRPStartsWith>FRENCH ULTRA LOW SULPHUR DIESEL</CRPStartsWith>
+<CRPStartsWith>10PPM ULTRA LOW SULPHUR DIESEL</CRPStartsWith>
+<CRPStartsWith>50PPM ULTRA LOW SULPHUR DIESEL</CRPStartsWith>
+<CRPStartsWith>NGL</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Coal">
+<CRPStartsWith>COAL</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Ags">
+<CRPStartsWith>CANOLA</CRPStartsWith>
+<CRPStartsWith>COCOA</CRPStartsWith>
+<CRPStartsWith>COFFEE</CRPStartsWith>
+<CRPStartsWith>CORN</CRPStartsWith>
+<CRPStartsWith>YELLOW MAIZE</CRPStartsWith>
+<CRPStartsWith>WHITE MAIZE</CRPStartsWith>
+<CRPStartsWith>COTTON</CRPStartsWith>
+<CRPStartsWith>CATTLE</CRPStartsWith>
+<CRPStartsWith>FEEDER CATTLE</CRPStartsWith>
+<CRPStartsWith>LIVE CATTLE</CRPStartsWith>
+<CRPStartsWith>LEAN HOGS</CRPStartsWith>
+<CRPStartsWith>MILK</CRPStartsWith>
+<CRPStartsWith>OATS</CRPStartsWith>
+<CRPStartsWith>FROZEN CONCENTRATED ORANGE JUICE</CRPStartsWith>
+<CRPStartsWith>RUBBER</CRPStartsWith>
+<CRPStartsWith>SOYBEAN</CRPStartsWith>
+<CRPStartsWith>SUGAR</CRPStartsWith>
+<CRPStartsWith>WHITE SUGAR</CRPStartsWith>
+<CRPStartsWith>SUNFLOWER SEEDS</CRPStartsWith>
+<CRPStartsWith>WHEAT</CRPStartsWith>
+<CRPStartsWith>FINE WOOL</CRPStartsWith>
+<CRPStartsWith>GREASY WOOL</CRPStartsWith>
+<CRPStartsWith>BROAD WOOL</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Freight">
+<CRPStartsWith>FREIGHT</CRPStartsWith>
+<CRPStartsWith>BALTIC</CRPStartsWith>
+<CRPStartsWith>PLATTS TD</CRPStartsWith>
+<CRPStartsWith>PLATTS TC</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Paper">
+<CRPStartsWith>CONTAINERBOARD</CRPStartsWith>
+<CRPStartsWith>NEWPRINT</CRPStartsWith>
+<CRPStartsWith>NEWSPRINT</CRPStartsWith>
+<CRPStartsWith>PULP</CRPStartsWith>
+<CRPStartsWith>RECOVERED PAPER</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Gas">
+<CRPStartsWith>NATURAL GAS</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Base">
+<CRPStartsWith>ALUMINUM</CRPStartsWith>
+<CRPStartsWith>ALUMINIUM</CRPStartsWith>
+<CRPStartsWith>NASAAC</CRPStartsWith>
+<CRPStartsWith>COPPER</CRPStartsWith>
+<CRPStartsWith>LEAD</CRPStartsWith>
+<CRPStartsWith>NICKEL</CRPStartsWith>
+<CRPStartsWith>STEEL</CRPStartsWith>
+<CRPStartsWith>TIN</CRPStartsWith>
+<CRPStartsWith>ZINC</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Precious">
+<CRPStartsWith>GOLD</CRPStartsWith>
+<CRPStartsWith>PALLADIUM</CRPStartsWith>
+<CRPStartsWith>PLATINUM</CRPStartsWith>
+<CRPStartsWith>SILVER</CRPStartsWith>
+</commodityCategory>
+<commodityCategory name="Electricity">
+<CRPStartsWith>ELECTRICITY</CRPStartsWith>
+</commodityCategory>
+</commodityCategories>

@@ -1,0 +1,76 @@
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:fpml="http://www.fpml.org/2005/FpML-4-2"
+exclude-result-prefixes="fpml">
+<xsl:param name="index" select="1"/>
+<xsl:strip-space elements="*"/>
+<xsl:variable name="swHeader"      select="/fpml:NettingInstruction/fpml:swHeader"/>
+<xsl:variable name="swTermination" select="/fpml:NettingInstruction/fpml:swTermination[$index]"/>
+<xsl:variable name="swLinkedTradeDetails"
+select="/fpml:NettingInstruction/fpml:swTermination/fpml:swLinkedTradeDetails/fpml:swLinkId"/>
+<xsl:template match="/">
+<termination>
+<xsl:for-each select="$swHeader">
+<xsl:for-each select="fpml:correlationId">
+<CorrelationId><xsl:value-of select="."/></CorrelationId>
+</xsl:for-each>
+<xsl:for-each select="fpml:swNettingBatchId">
+<NettingBatchID><xsl:value-of select="."/></NettingBatchID>
+</xsl:for-each>
+<xsl:for-each select="fpml:swSize">
+<NettingBatchSize><xsl:value-of select="."/></NettingBatchSize>
+</xsl:for-each>
+<xsl:for-each select="fpml:swOriginatingEvent">
+<OriginatingEvent><xsl:value-of select="."/></OriginatingEvent>
+</xsl:for-each>
+<xsl:for-each select="fpml:swClearingHouse/fpml:partyId">
+<PartyAId><xsl:value-of select="."/></PartyAId>
+</xsl:for-each>
+<xsl:for-each select="fpml:swGTRBulkEventProcessingID">
+<BulkEventID><xsl:value-of select="."/></BulkEventID>
+</xsl:for-each>
+<xsl:for-each select="fpml:swClearingModel">
+<ClearingModel><xsl:value-of select="."/></ClearingModel>
+</xsl:for-each>
+</xsl:for-each>
+<xsl:for-each select="$swTermination">
+<xsl:for-each select="fpml:swSequenceNumber">
+<NettingSequenceNumber><xsl:value-of select="."/></NettingSequenceNumber>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLegalEntity/fpml:partyId">
+<PartyBId><xsl:value-of select="."/></PartyBId>
+</xsl:for-each>
+<xsl:for-each select="fpml:swClearingHouseTradeId">
+<PrivateClearingTradeID><xsl:value-of select="."/></PrivateClearingTradeID>
+</xsl:for-each>
+<xsl:for-each select="fpml:swMarkitWireTradeId">
+<ApplicationID><xsl:value-of select="."/></ApplicationID>
+</xsl:for-each>
+<xsl:for-each select="fpml:swEffectiveDate">
+<EffectiveFrom><xsl:value-of select="."/></EffectiveFrom>
+</xsl:for-each>
+</xsl:for-each>
+<xsl:if test="$swHeader/fpml:swOriginatingEvent!='PortfolioTransfer'">
+<LinkedTradeDetails>
+<xsl:for-each select="$swLinkedTradeDetails">
+<xsl:variable name="iter" select="position()"/>
+<xsl:if test="@linkIdScheme='http://www.swapswire.com/spec/2001/trade-id-1-0'">
+<LinkedIDType>MarkitWireID</LinkedIDType>
+</xsl:if>
+<xsl:if test="@linkIdScheme='http://www.swapswire.com/spec/2001/ccp-trade-id-1-0'">
+<LinkedIDType>CCPTradeID</LinkedIDType>
+</xsl:if>
+<xsl:if test="@linkIdScheme='http://www.swapswire.com/spec/2001/internal-trade-id-1-0'">
+<LinkedIDType>InternalTradeID</LinkedIDType>
+</xsl:if>
+<xsl:if test="@linkIdScheme='http://www.swapswire.com/spec/2001/trade-id-1-0' or @linkIdScheme='http://www.swapswire.com/spec/2001/ccp-trade-id-1-0' or @linkIdScheme='http://www.swapswire.com/spec/2001/internal-trade-id-1-0'">
+<LinkedTradeID>
+<xsl:value-of select="$swLinkedTradeDetails[$iter]"/>
+</LinkedTradeID>
+</xsl:if>
+</xsl:for-each>
+</LinkedTradeDetails>
+</xsl:if>
+</termination>
+</xsl:template>
+</xsl:stylesheet>

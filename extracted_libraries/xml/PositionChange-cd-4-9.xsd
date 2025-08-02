@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.fpml.org/2010/FpML-4-9" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swdml-cd-main-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:element name="PositionChange">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a position update on a trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The trade date of the position update</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="positionChangeType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Determines the type of position update. Only PartialTermination is currently support.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="credit">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element name="creditDefaultSwap" type="creditDefaultSwap"/>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swBusinessConductDetails" type="SW_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTradeEventReportingDetails" type="SW_CreditTradeEventReportingDetails" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="creditDefaultSwap">
+<xsd:sequence>
+<xsd:element name="effectiveDate" type="xsd:date"/>
+<xsd:element name="notionalChange" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The positive currency amount of the change in notional</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="positionChangeFee" type="FeePayment" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="FeePayment">
+<xsd:sequence>
+<xsd:element name="payerPartyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The paying party, identified by MarkitWire Legal Entity BIC</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The receiving party, identified by MarkitWire Legal Entity BIC</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The adjusted payment date. This date should already be adjusted for any applicable business day convention. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,7 @@
+<!ELEMENT AddressList (ParticipantAddressList*)>
+<!ELEMENT ParticipantAddressList (GroupSubType, UserId*, GroupId*)>
+<!ATTLIST ParticipantAddressList id CDATA #REQUIRED >
+<!ELEMENT GroupSubType (#PCDATA)>
+<!ELEMENT UserId (#PCDATA)>
+<!ATTLIST UserId type CDATA #IMPLIED >
+<!ELEMENT GroupId (#PCDATA)>

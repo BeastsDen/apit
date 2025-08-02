@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" elementFormDefault="qualified">
+<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+<xs:element name="SAML">
+<xs:complexType>
+<xs:sequence>
+<xs:choice>
+<xs:element ref="StatusUpdate"/>
+<xs:element ref="Accept" maxOccurs="1"/>
+<xs:element ref="Reject" maxOccurs="1"/>
+<xs:element ref="Remove" maxOccurs="1"/>
+<xs:element ref="Terminate" maxOccurs="1"/>
+</xs:choice>
+<xs:element ref="MatchingService"/>
+<xs:element ref="MatchingServiceTradeReference"/>
+</xs:sequence>
+<xs:attribute name="version" type="xs:anySimpleType"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="StatusUpdate">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="SAServiceTradeReference"/>
+<xs:element ref="SAServiceStatusUpdate"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Accept">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="SAServiceTradeReference" minOccurs="1"/>
+<xs:element ref="AcceptText" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Reject">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="RejectReason" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SAServiceTradeReference">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="SAServiceStatusUpdate">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="AcceptText">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="RejectReason">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="ReasonCode"/>
+<xs:element ref="ReasonText"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ReasonCode">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="ReasonText">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="MatchingServiceTradeReference">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="MatchingService">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="Remove">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="SAServiceTradeReference" minOccurs="1"/>
+<xs:element ref="CorrelationId" minOccurs="1"/>
+<xs:element ref="ReasonText" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Terminate">
+<xs:complexType>
+<xs:sequence>
+<xs:element ref="SAServiceTradeReference" minOccurs="1"/>
+<xs:element ref="CorrelationId" minOccurs="1"/>
+<xs:element ref="SAServiceTradeOffsetReference" minOccurs="0"/>
+<xs:element ref="ReasonText" minOccurs="0"/>
+<xs:element ref="TerminateModificationTradeDate" minOccurs="0"/>
+<xs:element ref="TerminateModificationEffectiveDate" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SAServiceTradeOffsetReference">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="TerminateModificationTradeDate">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="TerminateModificationEffectiveDate">
+<xs:complexType mixed="true"/>
+</xs:element>
+<xs:element name="CorrelationId">
+<xs:complexType mixed="true"/>
+</xs:element>
+</xs:schema>

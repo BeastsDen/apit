@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="ComparisonResult" type="ComparisonMatchResult">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in a ComparisonResult document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="ComparisonMatchResult">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A container holding the results of the comparisons.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="ComparisonRow" type="ComparisonMatchRow" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the comparison result between the two deal version handles supplied.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ComparisonMatchRow">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A container for the field by field comparison.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="PercentageMatch" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Percentage match of two deals being compared in this comparison row.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Trade" type="ComparisonMatchTrade" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Details of the two trade are being matched.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ComparisonMatchTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A container holding the comparison trade Id and the mismatch fields.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The deal Id.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dvh" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Deal Version Handle of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTemplatedField" type="SWAttribute" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWAttribute">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The individual field describing the name of the attribute that differs and it's value.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="id" type="xsd:normalizedString"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:schema>

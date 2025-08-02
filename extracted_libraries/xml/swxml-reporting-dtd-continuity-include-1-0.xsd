@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:complexType name="SW_AssetClass">
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="assetClassScheme" type="xsd:anyURI" default="http://www.fpml.org/coding-scheme/asset-class-simple">
+<xsd:annotation>
+<xsd:documentation>default="http://www.fpml.org/coding-scheme/asset-class-simple"
+"Credit"
+"InterestRate"
+"ForeignExchange"
+"Equity"
+"Commodity"</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_Currency">
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString"/>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ProductId">
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="productIdScheme" type="SW_Scheme" default="http://www.fpml.org/coding-scheme/product-taxonomy">
+<xsd:annotation>
+<xsd:documentation>CRT28 GRT1: Product Id Type
+ISDA Taxonomy, with UPI to come
+default="http://www.fpml.org/coding-scheme/product-taxonomy"                           ISIN                                 default="http://www.fpml.org/coding-scheme/external/instrument-id-ISIN"              CFI                                  default="http://www.fpml.org/coding-scheme/external/product-classification/iso10962"
+</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ProductType">
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="productTypeScheme" type="SW_Scheme" default="http://www.fpml.org/coding-scheme/product-type-simple"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_ReportingBusinessDayConventionEnum">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The convention for adjusting any relevant date if it would otherwise fall on a day that is not a valid business day. Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="FOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MODFOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day unless that day falls in the next calendar month, in which case that date will be the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PRECEDING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business day will be adjusted to the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NONE">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date will not be adjusted if it falls on a day that is not a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NotApplicable">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions are defined elsewhere, so it is not required to specify them here.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_Scheme">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The base class for all types which define coding schemes.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

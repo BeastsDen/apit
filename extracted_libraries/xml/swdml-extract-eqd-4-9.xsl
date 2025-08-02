@@ -1,0 +1,5830 @@
+<?xml version="1.0"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" xmlns:common="http://exslt.org/common" exclude-result-prefixes="fpml common" version="1.0">
+<xsl:import href="swdml-extract-reporting.xsl"/>
+<xsl:output method="xml"/>
+<xsl:variable name="reportingData.rtf">
+<xsl:apply-templates select="/fpml:SWDML/fpml:swTradeEventReportingDetails/node()" mode="mapReportingData"/>
+<productType><xsl:value-of select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swProductType)"/></productType>
+<partyRoles>
+<transferor><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferor/@href"/></transferor>
+<transferee><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferee/@href"/></transferee>
+<remainingParty><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:remainingParty/@href"/></remainingParty>
+<otherRemainingParty><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:otherRemainingParty/@href"/></otherRemainingParty>
+</partyRoles>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId">
+<branch1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId/@partyIdScheme"/></branch1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId">
+<branch1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId"/></branch1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId">
+<branch2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId/@partyIdScheme"/></branch2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId">
+<branch2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId"/></branch2>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId">
+<indirCpty1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId/@partyIdScheme"/></indirCpty1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId">
+<indirCpty1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId"/></indirCpty1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId">
+<indirCpty2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId/@partyIdScheme"/></indirCpty2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId">
+<indirCpty2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId"/></indirCpty2>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId">
+<arrangingBroker1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId/@partyIdScheme"/></arrangingBroker1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId">
+<arrangingBroker1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId"/></arrangingBroker1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId">
+<arrangingBroker2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId/@partyIdScheme"/></arrangingBroker2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId">
+<arrangingBroker2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId"/></arrangingBroker2>
+</xsl:if>
+</xsl:variable>
+<xsl:template match="/|comment()|processing-instruction()" mode="mapReportingData">
+<xsl:copy>
+<xsl:apply-templates mode="mapReportingData"/>
+</xsl:copy>
+</xsl:template>
+<xsl:template match="*" mode="mapReportingData">
+<xsl:element name="{local-name()}">
+<xsl:apply-templates select="@*|node()" mode="mapReportingData"/>
+</xsl:element>
+</xsl:template>
+<xsl:template match="@*" mode="mapReportingData">
+<xsl:attribute name="{local-name()}"><xsl:value-of select="."/></xsl:attribute>
+</xsl:template>
+<xsl:template match="/">
+<xsl:apply-templates select="fpml:SWDML" mode="get-reporting-data"/>
+</xsl:template>
+<xsl:template match="/fpml:SWDML[function-available('common:node-set')]" mode="get-reporting-data">
+<xsl:apply-templates select=".">
+<xsl:with-param name="reportingData" select="common:node-set($reportingData.rtf)"/>
+</xsl:apply-templates>
+</xsl:template>
+<xsl:template match="/fpml:SWDML[not(function-available('common:node-set'))]" mode="get-reporting-data">
+<xsl:apply-templates select=".">
+<xsl:with-param name="reportingData" select="$reportingData.rtf"/>
+</xsl:apply-templates>
+</xsl:template>
+<xsl:variable name="swTradeHeader" select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader"/>
+<xsl:variable name="swOrderDetails"    select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swOrderDetails"/>
+<xsl:variable name="partyA">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="/fpml:SWDML//fpml:transferor/@href"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="/fpml:SWDML//fpml:swOriginatorPartyReference/@href"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="partyB">
+<xsl:choose>
+<xsl:when test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations or /fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp)">
+<xsl:for-each select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:tradeHeader/fpml:partyTradeIdentifier">
+<xsl:variable name="party" select="string(fpml:partyReference/@href)"/>
+<xsl:if test="$party!=$partyA">
+<xsl:value-of select="$party"/>
+</xsl:if>
+</xsl:for-each>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="/fpml:SWDML//fpml:transferee/@href"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade//fpml:party[@id!=$partyA]/@id"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id!=$partyA]/@id"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="partyC">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp">
+<xsl:value-of select="/fpml:SWDML//fpml:swInterDealerTransaction/fpml:swPrimeBroker/@href"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="fpml:SWDML//fpml:remainingParty/@href"/>
+</xsl:when>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="partyD">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp">
+<xsl:value-of select="/fpml:SWDML//fpml:swCustomerTransaction/fpml:swPrimeBroker/@href"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="/fpml:SWDML//fpml:otherRemainingParty/@href"/>
+</xsl:when>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="partyE">
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:payment">
+<xsl:value-of select="/fpml:SWDML//fpml:receiverPartyReference/@href"/>
+</xsl:if>
+</xsl:variable>
+<xsl:variable name="partyF">
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:payment">
+<xsl:value-of select="/fpml:SWDML//fpml:payerPartyReference/@href"/>
+</xsl:if>
+</xsl:variable>
+<xsl:variable name="docsType">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swDocsType"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:masterConfirmation/fpml:masterConfirmationType"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:contractualMatrix/fpml:matrixTerm"/>
+</xsl:variable>
+<xsl:variable name="docsAnnexType">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swDocsAnnexType"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:masterConfirmation/fpml:masterConfirmationAnnexType"/>
+</xsl:variable>
+<xsl:variable name="universalType">
+<xsl:choose>
+<xsl:when test="(//fpml:swStructuredTradeDetails/fpml:swProductType = 'Equity Share Option Universal' or //fpml:swStructuredTradeDetails/fpml:swProductType = 'Equity Index Option Universal')">Equity Option Universal</xsl:when>
+<xsl:otherwise>Non Universal</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:template match="fpml:SWDML">
+<xsl:param name="reportingData"/>
+<SWDMLTrade version="4-9">
+<xsl:variable name="productType">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer">Equity Share Option</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swIndexUnderlyer">Equity Index Option</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swEquityUnderlyer">Share Variance Swap</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swIndexUnderlyer">Index Variance Swap</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swEquityUnderlyer">Equity Share Swap</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swIndexUnderlyer">Equity Index Swap</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swEquityUnderlyer">Equity Share Volatility Swap</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swIndexUnderlyer">Equity Index Volatility Swap</xsl:when>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="fpml:swLongFormTrade">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swProductType"/>
+</xsl:when>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="swAmendmentType">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swAmendmentType"/>
+</xsl:variable>
+<SWDMLVersion>
+<xsl:value-of select="@version"/>
+</SWDMLVersion>
+<ReplacementTradeId>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swReplacementTradeId/fpml:swTradeId"/>
+</ReplacementTradeId>
+<ReplacementTradeIdType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swReplacementTradeId/fpml:swTradeIdType"/>
+</ReplacementTradeIdType>
+<ReplacementReason>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swReplacementTradeId/fpml:swReplacementReason"/>
+</ReplacementReason>
+<ShortFormInput>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade">true</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade">false</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</ShortFormInput>
+<ProductType>
+<xsl:choose>
+<xsl:when test="$productType='Index Variance Swap'">Equity Index Variance Swap</xsl:when>
+<xsl:when test="$productType='Share Variance Swap'">Equity Share Variance Swap</xsl:when>
+<xsl:when test="$productType='Index Dividend Swap'">Equity Index Dividend Swap</xsl:when>
+<xsl:when test="$productType='Share Dividend Swap'">Equity Share Dividend Swap</xsl:when>
+<xsl:when test="$productType='Equity Index Option Strategy'">Equity Index Option</xsl:when>
+<xsl:when test="$productType='Equity Share Option Strategy'">Equity Share Option</xsl:when>
+<xsl:when test="$productType='Dispersion Variance Swap'">Equity Dispersion Variance Swap</xsl:when>
+<xsl:when test="$productType='Index Variance Option'">Equity Index Variance Option</xsl:when>
+<xsl:when test="$productType='Share Variance Option'">Equity Share Variance Option</xsl:when>
+<xsl:when test="$productType='Equity Index Option Universal'">Universal Equity Index Option</xsl:when>
+<xsl:when test="$productType='Equity Share Option Universal'">Universal Equity Share Option</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$productType"/>
+</xsl:otherwise>
+</xsl:choose>
+</ProductType>
+<ProductSubType/>
+<ParticipantSupplement>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swParticipantSupplement"/>
+</ParticipantSupplement>
+<ConditionPrecedentBondId/>
+<ConditionPrecedentBondMaturity/>
+<AllocatedTrade>
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Swap' and ($swAmendmentType='CorporateAction' or $swAmendmentType='CorporateActionAmendment')">
+false
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations))"/>
+</xsl:otherwise>
+</xsl:choose>
+</AllocatedTrade>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations">
+<xsl:call-template name="fpml:swAllocations"/>
+</xsl:if>
+<PrimeBrokerTrade>
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp))"/>
+</PrimeBrokerTrade>
+<ReversePrimeBrokerLegalEntities>
+<xsl:value-of select="string(boolean(string(/fpml:SWDML//fpml:swCustomerTransaction/fpml:swCustomer/@href)=string($partyA)))"/>
+</ReversePrimeBrokerLegalEntities>
+<PartyAId>
+<xsl:if test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp or /fpml:SWDML/fpml:swLongFormTrade/fpml:novation)">
+<xsl:attribute name="id">
+<xsl:value-of select="$partyA"/>
+</xsl:attribute>
+</xsl:if>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade//fpml:party[@id=$partyA]/fpml:partyId"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyA]/fpml:partyId"/>
+</PartyAId>
+<PartyAIdType>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyA]/fpml:partyId/@partyIdScheme"/>
+</PartyAIdType>
+<PartyBId>
+<xsl:if test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp or /fpml:SWDML/fpml:swLongFormTrade/fpml:novation)">
+<xsl:attribute name="id">
+<xsl:value-of select="$partyB"/>
+</xsl:attribute>
+</xsl:if>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade//fpml:party[@id=$partyB]/fpml:partyId"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyB]/fpml:partyId"/>
+</PartyBId>
+<PartyBIdType>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyB]/fpml:partyId/@partyIdScheme"/>
+</PartyBIdType>
+<PartyCId>
+<xsl:if test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp or /fpml:SWDML/fpml:swLongFormTrade/fpml:novation)">
+<xsl:attribute name="id">
+<xsl:value-of select="$partyC"/>
+</xsl:attribute>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade//fpml:party[@id=$partyC]/fpml:partyId"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyC]/fpml:partyId"/>
+</xsl:if>
+</PartyCId>
+<PartyCIdType>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyC]/fpml:partyId/@partyIdScheme"/>
+</PartyCIdType>
+<PartyDId>
+<xsl:if test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp or /fpml:SWDML/fpml:swLongFormTrade/fpml:novation)">
+<xsl:if test="$partyD!=''">
+<xsl:attribute name="id">
+<xsl:value-of select="$partyD"/>
+</xsl:attribute>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade//fpml:party[@id=$partyD]/fpml:partyId"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyD]/fpml:partyId"/>
+</xsl:if>
+</xsl:if>
+</PartyDId>
+<PartyDIdType>
+<xsl:if test="(/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp or /fpml:SWDML/fpml:swLongFormTrade/fpml:novation)">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$partyD]/fpml:partyId/@partyIdScheme"/>
+</xsl:if>
+</PartyDIdType>
+<PartyGId/>
+<PartyGIdType/>
+<Interoperable/>
+<ExternalInteropabilityId/>
+<InteropNettingString/>
+<DirectionA>
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:variable name="buyer">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:buyerPartyReference/@href"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:buyerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:variable name="buyer">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:buyerPartyReference/@href"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:buyerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:variable name="buyer">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:buyerPartyReference/@href"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:payerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Equity Accumulator' or $productType='Equity Decumulator'">
+<xsl:variable name="buyer">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:buyerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:variable name="buyer" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Dispersion Variance Swap'">
+<xsl:variable name="LegIdD" select="string(.//fpml:legId)"/>
+<xsl:if test="number($LegIdD='0')">
+<xsl:variable name="buyer" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:payerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=string($partyA)">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:when>
+<xsl:when test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:variable name="payer" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:payerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$payer=string($partyA)">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:variable name="payer">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:buyerPartyReference/@href"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:payerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$payer=string($partyA)">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+</xsl:choose>
+</DirectionA>
+<TradeDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:tradeDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:tradeDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:tradeDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:tradeDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:tradeHeader/fpml:tradeDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</TradeDate>
+<StartDateTenor/>
+<EndDateTenor/>
+<StartDateDay/>
+<Tenor>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:call-template name="calculateTenor">
+<xsl:with-param name="startDate" select="string(/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:tradeHeader/fpml:tradeDate)"/>
+<xsl:with-param name="endDate" select="string(/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</Tenor>
+<StartDate/>
+<FirstFixedPeriodStartDate/>
+<FirstFloatPeriodStartDate/>
+<FirstFloatPeriodStartDate_2/>
+<EndDate/>
+<FixedPaymentFreq/>
+<FixedPaymentFreq_2/>
+<FloatPaymentFreq/>
+<FloatPaymentFreq_2/>
+<FloatRollFreq/>
+<FloatRollFreq_2/>
+<RollsType/>
+<RollsMethod/>
+<RollDay/>
+<MonthEndRolls/>
+<FirstPeriodStartDate/>
+<FirstPaymentDate/>
+<LastRegularPaymentDate/>
+<FixedRate/>
+<FixedRate_2/>
+<initialPoints/>
+<quotationStyle/>
+<RecoveryRate/>
+<FixedSettlement/>
+<Currency>
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' ">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swReferenceCurrency"/>
+</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature/fpml:referenceCurrency"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:currency"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:varianceAmount/fpml:currency"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount//fpml:variance/fpml:varianceAmount/fpml:currency"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+</xsl:when>
+<xsl:when test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityPremium/fpml:paymentAmount/fpml:currency"/>
+</xsl:when>
+</xsl:choose>
+</Currency>
+<Currency_2/>
+<Notional/>
+<NotionalFloating/>
+<Notional_2/>
+<InitialNotional/>
+<FixedAmount/>
+<FixedAmountCurrency/>
+<FixedDayBasis/>
+<FloatDayBasis/>
+<FloatDayBasis_2/>
+<FixedConvention/>
+<FixedCalcPeriodDatesConvention/>
+<FixedTerminationDateConvention/>
+<FloatConvention/>
+<FloatCalcPeriodDatesConvention/>
+<FloatTerminationDateConvention/>
+<FloatConvention_2/>
+<FloatTerminationDateConvention_2/>
+<FloatingRateIndex/>
+<FloatingRateIndex_2/>
+<InflationLag/>
+<IndexSource/>
+<InterpolationMethod/>
+<InitialIndexLevel/>
+<RelatedBond/>
+<IndexTenor1/>
+<IndexTenor1_2/>
+<LinearInterpolation/>
+<LinearInterpolation_2/>
+<IndexTenor2/>
+<IndexTenor2_2/>
+<InitialInterpolationIndex/>
+<InitialInterpolationIndex_2/>
+<SpreadOverIndex/>
+<SpreadOverIndex_2/>
+<FirstFixingRate/>
+<FirstFixingRate_2/>
+<FixingDaysOffset/>
+<FixingDaysOffset_2/>
+<FixingHolidayCentres/>
+<FixingHolidayCentres_2/>
+<ResetInArrears/>
+<ResetInArrears_2/>
+<FirstFixingDifferent/>
+<FirstFixingDifferent_2/>
+<FirstFixingDaysOffset/>
+<FirstFixingDaysOffset_2/>
+<FirstFixingHolidayCentres/>
+<FirstFixingHolidayCentres_2/>
+<PaymentHolidayCentres/>
+<PaymentHolidayCentres_2/>
+<PaymentLag/>
+<PaymentLag_2/>
+<RollHolidayCentres/>
+<RollHolidayCentres_2/>
+<AdjustFixedStartDate/>
+<AdjustFloatStartDate/>
+<AdjustFloatStartDate_2/>
+<AdjustRollEnd/>
+<AdjustFloatRollEnd/>
+<AdjustFloatRollEnd_2/>
+<AdjustFixedFinalRollEnd/>
+<AdjustFinalRollEnd/>
+<AdjustFinalRollEnd_2/>
+<CompoundingMethod/>
+<CompoundingMethod_2/>
+<AveragingMethod/>
+<AveragingMethod_2/>
+<FloatingRateMultiplier/>
+<FloatingRateMultiplier_2/>
+<DesignatedMaturity/>
+<DesignatedMaturity_2/>
+<ResetFreq/>
+<ResetFreq_2/>
+<WeeklyRollConvention/>
+<WeeklyRollConvention_2/>
+<RateCutOffDays/>
+<RateCutOffDays_2/>
+<InitialExchange/>
+<FinalExchange/>
+<MarkToMarket/>
+<IntermediateExchange/>
+<FallbackBondApplicable/>
+<CalculationMethod/>
+<CalculationStyle/>
+<FinalPriceExchangeCalc/>
+<SpreadCalculationMethod/>
+<CouponRate/>
+<Maturity/>
+<RelatedBondValue/>
+<RelatedBondID/>
+<MTMRateSource/>
+<MTMRateSourcePage/>
+<MTMFixingDate/>
+<MTMFixingHolidayCentres/>
+<MTMFixingTime/>
+<MTMLocation/>
+<MTMCutoffTime/>
+<CalculationPeriodDays/>
+<FraDiscounting/>
+<HasBreak/>
+<BreakFromSwap/>
+<BreakOverride/>
+<BreakCalculationMethod/>
+<BreakFirstDateTenor/>
+<BreakFrequency/>
+<BreakOptionA/>
+<BreakDate/>
+<BreakExpirationDate/>
+<BreakEarliestTime/>
+<BreakLatestTime/>
+<BreakCalcAgentA/>
+<BreakExpiryTime/>
+<BreakCashSettleCcy/>
+<BreakLocation/>
+<BreakHolidayCentre/>
+<BreakSettlement/>
+<BreakValuationDate/>
+<BreakValuationTime/>
+<BreakSource/>
+<BreakReferenceBanks/>
+<BreakQuotation/>
+<BreakMMVApplicableCSA/>
+<BreakCollateralCurrency/>
+<BreakCollateralInterestRate/>
+<BreakAgreedDiscountRate/>
+<BreakProtectedPartyA/>
+<BreakMutuallyAgreedCH/>
+<BreakPrescribedDocAdj/>
+<ExchangeUnderlying/>
+<SwapSpread/>
+<BondId1/>
+<BondName1/>
+<BondAmount1/>
+<BondPriceType1/>
+<BondPrice1/>
+<BondId2/>
+<BondName2/>
+<BondAmount2/>
+<BondPriceType2/>
+<BondPrice2/>
+<StubAt/>
+<FixedStub/>
+<FloatStub/>
+<FloatStub_2/>
+<FrontAndBackStubs/>
+<FixedBackStub/>
+<FloatBackStub/>
+<BackStubIndexTenor1/>
+<BackStubIndexTenor2/>
+<BackStubLinearInterpolation/>
+<BackStubInitialInterpIndex/>
+<FirstFixedRegPdStartDate/>
+<FirstFloatRegPdStartDate/>
+<LastFixedRegPdEndDate/>
+<LastFloatRegPdEndDate/>
+<MasterAgreement/>
+<ManualConfirm>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:manualConfirm"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swManualConfirmationRequired"/>
+</ManualConfirm>
+<NovationExecution>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swNovationExecution"/>
+</NovationExecution>
+<ExclFromClearing>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swClearingNotRequired"/>
+</ExclFromClearing>
+<NonStdSettlInst/>
+<Normalised/>
+<DataMigrationId/>
+<NormalisedStubLength/>
+<ClientClearing>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swClientClearing"/>
+</ClientClearing>
+<AutoSendForClearing>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swAutoSendForClearing"/>
+</AutoSendForClearing>
+<ASICMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ASIC']/fpml:swMandatoryClearingIndicator"/>
+</ASICMandatoryClearingIndicator>
+<NewNovatedASICMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ASIC']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedASICMandatoryClearingIndicator>
+<PBEBTradeASICMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ASIC']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeASICMandatoryClearingIndicator>
+<PBClientTradeASICMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ASIC']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeASICMandatoryClearingIndicator>
+<CANMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swMandatoryClearingIndicator"/>
+</CANMandatoryClearingIndicator>
+<CANClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</CANClearingExemptIndicator1PartyId>
+<CANClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</CANClearingExemptIndicator1Value>
+<CANClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</CANClearingExemptIndicator2PartyId>
+<CANClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</CANClearingExemptIndicator2Value>
+<NewNovatedCANMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='CAN']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedCANMandatoryClearingIndicator>
+<NewNovatedCANClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedCANClearingExemptIndicator1PartyId>
+<NewNovatedCANClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</NewNovatedCANClearingExemptIndicator1Value>
+<NewNovatedCANClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedCANClearingExemptIndicator2PartyId>
+<NewNovatedCANClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</NewNovatedCANClearingExemptIndicator2Value>
+<PBEBTradeCANMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeCANMandatoryClearingIndicator>
+<PBEBTradeCANClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeCANClearingExemptIndicator1PartyId>
+<PBEBTradeCANClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBEBTradeCANClearingExemptIndicator1Value>
+<PBEBTradeCANClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeCANClearingExemptIndicator2PartyId>
+<PBEBTradeCANClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBEBTradeCANClearingExemptIndicator2Value>
+<PBClientTradeCANMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeCANMandatoryClearingIndicator>
+<PBClientTradeCANClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeCANClearingExemptIndicator1PartyId>
+<PBClientTradeCANClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBClientTradeCANClearingExemptIndicator1Value>
+<PBClientTradeCANClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeCANClearingExemptIndicator2PartyId>
+<PBClientTradeCANClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='CAN']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBClientTradeCANClearingExemptIndicator2Value>
+<ESMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swMandatoryClearingIndicator"/>
+</ESMAMandatoryClearingIndicator>
+<ESMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</ESMAClearingExemptIndicator1PartyId>
+<ESMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</ESMAClearingExemptIndicator1Value>
+<ESMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</ESMAClearingExemptIndicator2PartyId>
+<ESMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</ESMAClearingExemptIndicator2Value>
+<NewNovatedESMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ESMA']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedESMAMandatoryClearingIndicator>
+<NewNovatedESMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedESMAClearingExemptIndicator1PartyId>
+<NewNovatedESMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</NewNovatedESMAClearingExemptIndicator1Value>
+<NewNovatedESMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedESMAClearingExemptIndicator2PartyId>
+<NewNovatedESMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</NewNovatedESMAClearingExemptIndicator2Value>
+<PBEBTradeESMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeESMAMandatoryClearingIndicator>
+<PBEBTradeESMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeESMAClearingExemptIndicator1PartyId>
+<PBEBTradeESMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBEBTradeESMAClearingExemptIndicator1Value>
+<PBEBTradeESMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeESMAClearingExemptIndicator2PartyId>
+<PBEBTradeESMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBEBTradeESMAClearingExemptIndicator2Value>
+<PBClientTradeESMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeESMAMandatoryClearingIndicator>
+<PBClientTradeESMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeESMAClearingExemptIndicator1PartyId>
+<PBClientTradeESMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBClientTradeESMAClearingExemptIndicator1Value>
+<PBClientTradeESMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeESMAClearingExemptIndicator2PartyId>
+<PBClientTradeESMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='ESMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBClientTradeESMAClearingExemptIndicator2Value>
+<FCAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swMandatoryClearingIndicator"/>
+</FCAMandatoryClearingIndicator>
+<FCAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</FCAClearingExemptIndicator1PartyId>
+<FCAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</FCAClearingExemptIndicator1Value>
+<FCAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</FCAClearingExemptIndicator2PartyId>
+<FCAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</FCAClearingExemptIndicator2Value>
+<NewNovatedFCAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='FCA']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedFCAMandatoryClearingIndicator>
+<NewNovatedFCAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedFCAClearingExemptIndicator1PartyId>
+<NewNovatedFCAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</NewNovatedFCAClearingExemptIndicator1Value>
+<NewNovatedFCAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedFCAClearingExemptIndicator2PartyId>
+<NewNovatedFCAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</NewNovatedFCAClearingExemptIndicator2Value>
+<PBEBTradeFCAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeFCAMandatoryClearingIndicator>
+<PBEBTradeFCAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeFCAClearingExemptIndicator1PartyId>
+<PBEBTradeFCAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBEBTradeFCAClearingExemptIndicator1Value>
+<PBEBTradeFCAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeFCAClearingExemptIndicator2PartyId>
+<PBEBTradeFCAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBEBTradeFCAClearingExemptIndicator2Value>
+<PBClientTradeFCAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeFCAMandatoryClearingIndicator>
+<PBClientTradeFCAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeFCAClearingExemptIndicator1PartyId>
+<PBClientTradeFCAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBClientTradeFCAClearingExemptIndicator1Value>
+<PBClientTradeFCAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeFCAClearingExemptIndicator2PartyId>
+<PBClientTradeFCAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='FCA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBClientTradeFCAClearingExemptIndicator2Value>
+<HKMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swMandatoryClearingIndicator"/>
+</HKMAMandatoryClearingIndicator>
+<HKMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</HKMAClearingExemptIndicator1PartyId>
+<HKMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</HKMAClearingExemptIndicator1Value>
+<HKMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</HKMAClearingExemptIndicator2PartyId>
+<HKMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</HKMAClearingExemptIndicator2Value>
+<NewNovatedHKMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='HKMA']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedHKMAMandatoryClearingIndicator>
+<NewNovatedHKMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedHKMAClearingExemptIndicator1PartyId>
+<NewNovatedHKMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</NewNovatedHKMAClearingExemptIndicator1Value>
+<NewNovatedHKMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedHKMAClearingExemptIndicator2PartyId>
+<NewNovatedHKMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</NewNovatedHKMAClearingExemptIndicator2Value>
+<PBEBTradeHKMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeHKMAMandatoryClearingIndicator>
+<PBEBTradeHKMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeHKMAClearingExemptIndicator1PartyId>
+<PBEBTradeHKMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBEBTradeHKMAClearingExemptIndicator1Value>
+<PBEBTradeHKMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeHKMAClearingExemptIndicator2PartyId>
+<PBEBTradeHKMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBEBTradeHKMAClearingExemptIndicator2Value>
+<PBClientTradeHKMAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeHKMAMandatoryClearingIndicator>
+<PBClientTradeHKMAClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeHKMAClearingExemptIndicator1PartyId>
+<PBClientTradeHKMAClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBClientTradeHKMAClearingExemptIndicator1Value>
+<PBClientTradeHKMAClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeHKMAClearingExemptIndicator2PartyId>
+<PBClientTradeHKMAClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='HKMA']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBClientTradeHKMAClearingExemptIndicator2Value>
+<JFSAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='JFSA']/fpml:swMandatoryClearingIndicator"/>
+</JFSAMandatoryClearingIndicator>
+<CFTCMandatoryClearingIndicator>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swMandatoryClearingIndicator">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swMandatoryClearingIndicator"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swTradeEventReportingDetails/fpml:swReportingRegimeInformation[fpml:swJurisdiction/text()='DoddFrank']/fpml:swMandatoryClearingIndicator">
+<xsl:value-of select="/fpml:SWDML/fpml:swTradeEventReportingDetails/fpml:swReportingRegimeInformation[fpml:swJurisdiction/text()='DoddFrank']/fpml:swMandatoryClearingIndicator"/>
+</xsl:when>
+</xsl:choose>
+</CFTCMandatoryClearingIndicator>
+<CFTCClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</CFTCClearingExemptIndicator1PartyId>
+<CFTCClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</CFTCClearingExemptIndicator1Value>
+<CFTCClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</CFTCClearingExemptIndicator2PartyId>
+<CFTCClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</CFTCClearingExemptIndicator2Value>
+<CFTCInterAffiliateExemption>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swInterAffiliateExemption"/>
+</CFTCInterAffiliateExemption>
+<NewNovatedCFTCMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedCFTCMandatoryClearingIndicator>
+<NewNovatedCFTCClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedCFTCClearingExemptIndicator1PartyId>
+<NewNovatedCFTCClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</NewNovatedCFTCClearingExemptIndicator1Value>
+<NewNovatedCFTCClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</NewNovatedCFTCClearingExemptIndicator2PartyId>
+<NewNovatedCFTCClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</NewNovatedCFTCClearingExemptIndicator2Value>
+<NewNovatedCFTCInterAffiliateExemption>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='DoddFrank']/fpml:swInterAffiliateExemption"/>
+</NewNovatedCFTCInterAffiliateExemption>
+<PBEBTradeCFTCMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeCFTCMandatoryClearingIndicator>
+<PBEBTradeJFSAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='JFSA']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeJFSAMandatoryClearingIndicator>
+<PBEBTradeCFTCClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeCFTCClearingExemptIndicator1PartyId>
+<PBEBTradeCFTCClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBEBTradeCFTCClearingExemptIndicator1Value>
+<PBEBTradeCFTCClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBEBTradeCFTCClearingExemptIndicator2PartyId>
+<PBEBTradeCFTCClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBEBTradeCFTCClearingExemptIndicator2Value>
+<PBEBTradeCFTCInterAffiliateExemption>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swInterAffiliateExemption"/>
+</PBEBTradeCFTCInterAffiliateExemption>
+<PBClientTradeCFTCMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeCFTCMandatoryClearingIndicator>
+<PBClientTradeJFSAMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='JFSA']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeJFSAMandatoryClearingIndicator>
+<PBClientTradeCFTCClearingExemptIndicator1PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeCFTCClearingExemptIndicator1PartyId>
+<PBClientTradeCFTCClearingExemptIndicator1Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[1]/fpml:swExemption"/>
+</PBClientTradeCFTCClearingExemptIndicator1Value>
+<PBClientTradeCFTCClearingExemptIndicator2PartyId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swPartyReference/@href]/fpml:partyId"/>
+</PBClientTradeCFTCClearingExemptIndicator2PartyId>
+<PBClientTradeCFTCClearingExemptIndicator2Value>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swPartyExemption[2]/fpml:swExemption"/>
+</PBClientTradeCFTCClearingExemptIndicator2Value>
+<PBClientTradeCFTCInterAffiliateExemption>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='DoddFrank']/fpml:swInterAffiliateExemption"/>
+</PBClientTradeCFTCInterAffiliateExemption>
+<MASMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swMandatoryClearing[fpml:swJurisdiction='MAS']/fpml:swMandatoryClearingIndicator"/>
+</MASMandatoryClearingIndicator>
+<NewNovatedMASMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swMandatoryClearingNewNovatedTrade[fpml:swJurisdiction='MAS']/fpml:swMandatoryClearingIndicator"/>
+</NewNovatedMASMandatoryClearingIndicator>
+<PBEBTradeMASMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swInterDealerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='MAS']/fpml:swMandatoryClearingIndicator"/>
+</PBEBTradeMASMandatoryClearingIndicator>
+<PBClientTradeMASMandatoryClearingIndicator>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swGiveUp/fpml:swCustomerTransaction/fpml:swMandatoryClearing[fpml:swJurisdiction='MAS']/fpml:swMandatoryClearingIndicator"/>
+</PBClientTradeMASMandatoryClearingIndicator>
+<ClearingHouseId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swClearingHouse/fpml:partyId"/>
+</ClearingHouseId>
+<ClearingBrokerId>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swClearingBroker/fpml:partyId"/>
+</ClearingBrokerId>
+<OriginatingEvent>
+<xsl:value-of select="$swTradeHeader/fpml:swOriginatingEvent"/>
+</OriginatingEvent>
+<ESMAClearingExemption>
+<xsl:value-of select="$swTradeHeader/fpml:swESMAClearingExemption"/>
+</ESMAClearingExemption>
+<BackLoadingFlag>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swBackLoadingFlag">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swBackLoadingFlag"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swShortFormTrade/fpml:swBackLoadingFlag">
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swBackLoadingFlag"/>
+</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</BackLoadingFlag>
+<Novation>
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation))"/>
+</Novation>
+<xsl:variable name="tradeNotional">
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:numberOfOptions"/>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+</xsl:when>
+<xsl:when test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:openUnits"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:openUnits"/>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+</xsl:when>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="novatedAmount">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novatedNumberOfOptions">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novatedNumberOfOptions"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novatedVarianceAmount">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novatedVarianceAmount"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovatedVegaNotionalAmount">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovatedVegaNotionalAmount"/>
+</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovatedUnits">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovatedUnits"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$tradeNotional"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<PartialNovation>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swPartialNovationIndicator">
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swPartialNovationIndicator = 'true'))"/>
+</xsl:if>
+</PartialNovation>
+<FourWayNovation>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:otherRemainingParty))"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</FourWayNovation>
+<NovationTradeDate>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novationTradeDate)"/>
+</xsl:call-template>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</NovationTradeDate>
+<NovationDate>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:novationDate)"/>
+</xsl:call-template>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</NovationDate>
+<NovatedAmount>
+<xsl:value-of select="$novatedAmount"/>
+</NovatedAmount>
+<NovatedAmount_2/>
+<NovatedCurrency/>
+<NovatedCurrency_2/>
+<NovatedFV/>
+<FullFirstCalculationPeriod/>
+<NonReliance>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:value-of select="string(boolean(/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:nonReliance))"/>
+</xsl:if>
+</NonReliance>
+<PreserveEarlyTerminationProvision/>
+<CopyPremiumToNewTrade>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation and ($productType='Equity Index Option' or $productType='Equity Share Option')">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swCopyPremiumToNewTrade = 'true'">true</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swCopyPremiumToNewTrade = 'false'">false</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+</CopyPremiumToNewTrade>
+<IntendedClearingHouse>
+<xsl:if test="$productType='Equity Index Option' or $productType='Equity Share Option'">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation ">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swBilateralClearingHouse/fpml:partyId"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="/fpml:SWDML/fpml:swShortFormTrade/fpml:swClearingHouse/fpml:partyId"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swTradeHeader/fpml:swClearingHouse/fpml:partyId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</IntendedClearingHouse>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:payment">
+<xsl:apply-templates select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:payment"/>
+</xsl:if>
+<OptionStyle>
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade//fpml:swEquityAmericanExercise">American</xsl:when>
+<xsl:when test="fpml:swShortFormTrade//fpml:swEquityEuropeanExercise">European</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityAmericanExercise">American</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityBermudaExercise">Bermuda</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityEuropeanExercise">European</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityExercise/fpml:equityAmericanExercise">American</xsl:when>
+<xsl:otherwise>European</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+</xsl:choose>
+</OptionStyle>
+<OptionType>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:optionType"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:optionType"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:optionType"/>
+</xsl:if>
+</OptionType>
+<OptionExpirationDate>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal' ">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swExpirationDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:expirationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityExercise/fpml:equityEuropeanExercise/fpml:expirationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:if>
+</OptionExpirationDate>
+<OptionExpirationDateConvention>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal' ">
+<xsl:variable name="optionExpiryConvention">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:expirationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$optionExpiryConvention = 'NotApplicable'"></xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="substring($optionExpiryConvention,1,4)"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</OptionExpirationDateConvention>
+<OptionHolidayCenters/>
+<OptionEarliestTime/>
+<OptionEarliestTimeHolidayCentre/>
+<OptionExpiryTime>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:variable name="optionExpiryTimeMethod">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityExpirationTimeType"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:expirationTimeDetermination"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swEquityExpirationTimeMethod"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="($productType='Equity Share Option' or $productType='Equity Share Option Strategy') and ($docsType='ISDA2005EquityJapaneseInterdealer' or $docsType='ISDA2008EquityJapanese') and $optionExpiryTimeMethod='AsSpecifiedInMasterConfirmation'">Close</xsl:when>
+<xsl:when test="($productType='Equity Share Option' or $productType='Equity Share Option Strategy') and ($docsType='ISDA2005EquityJapaneseInterdealer' or $docsType='ISDA2008EquityJapanese') and $optionExpiryTimeMethod='MorningClose'">Morning Close</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="not($universalType = 'Equity Option Universal') and $optionExpiryTimeMethod = 'AsSpecifiedInMasterConfirmation'">Per Master Confirm</xsl:when>
+<xsl:when test="not($universalType = 'Equity Option Universal') and $optionExpiryTimeMethod = 'SpecificTime' ">Specific Time</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$optionExpiryTimeMethod"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityExercise//fpml:equityExpirationTimeType = 'AsSpecifiedInMasterConfirmation'">Per Master Confirm</xsl:if>
+</xsl:if>
+</OptionExpiryTime>
+<ValuationTime>
+<xsl:if test="($productType='Equity Share Option' and ($docsType = 'EquityOptionAEJPrivate' or $docsType = 'EquityOptionAmericasPrivate' or $docsType = 'EquityOptionEMEAPrivate'))">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityExpirationTimeType = 'AsSpecifiedInMasterConfirmation' ">Per Master Confirm</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityExpirationTimeType"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</ValuationTime>
+<OptionExpiryTimeHolidayCentre/>
+<OptionSpecificExpiryTime>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityExpirationTime/fpml:hourMinuteTime"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swEquityExpirationTime"/>
+</OptionSpecificExpiryTime>
+<OptionLocation/>
+<OptionCalcAgent/>
+<OptionAutomaticExercise/>
+<OptionThreshold/>
+<ManualExercise/>
+<OptionWrittenExerciseConf/>
+<PremiumAmount>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:paymentAmount/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityPremium/fpml:paymentAmount/fpml:amount"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityPremium/fpml:paymentAmount/fpml:amount"/>
+</xsl:if>
+</PremiumAmount>
+<PremiumCurrency>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:paymentAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityPremium/fpml:paymentAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityPremium/fpml:paymentAmount/fpml:currency"/>
+</PremiumCurrency>
+<PremiumPaymentDate>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:swPaymentDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityPremium/fpml:paymentDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityPremium/fpml:paymentDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</PremiumPaymentDate>
+<PremiumHolidayCentres/>
+<Strike>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:strikePrice"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:strike/fpml:strikePrice"/>
+</xsl:if>
+</Strike>
+<StrikeCurrency>
+<xsl:if test="$universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:strike/fpml:currency"/>
+</xsl:if>
+</StrikeCurrency>
+<StrikePercentage>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:strikePercentage"/>
+</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:strike/fpml:strikePercentage">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:strike/fpml:strikePercentage"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:if test ="not (fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swHedgeLevel)">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swStrikePercentage"/>
+</xsl:if>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</StrikePercentage>
+<StrikeDate>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swStrikeDeterminationDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:strike/fpml:strikeDeterminationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="($productType='Equity Share Swap' or $productType='Equity Index Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:strikeDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:strikeDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="($productType='Equity Share Swap' or $productType='Equity Index Swap') and fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:strikeDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:strikeDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+</StrikeDate>
+<OptionSettlement>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:settlementType"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementType"/>
+</xsl:if>
+</OptionSettlement>
+<OptionCashSettlementValuationTime>
+<xsl:if test="$universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationTimeType"/>
+</xsl:if>
+</OptionCashSettlementValuationTime>
+<OptionSpecificValuationTime>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationTime/fpml:hourMinuteTime"/>
+</OptionSpecificValuationTime>
+<OptionCashSettlementValuationDate/>
+<OptionCashSettlementPaymentDate/>
+<OptionCashSettlementMethod/>
+<OptionCashSettlementQuotationRate/>
+<OptionCashSettlementRateSource/>
+<OptionCashSettlementReferenceBanks/>
+<xsl:if test="($productType='Equity Share Option' or $productType='Equity Index Option') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock|fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock">
+<BarrierType>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn">Knock In</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn">Knock In</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut">Knock Out</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut">Knock Out</xsl:when>
+</xsl:choose>
+</BarrierType>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn|fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn">
+<KnockInTriggerType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerType"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerType"/>
+</KnockInTriggerType>
+<KnockInPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:trigger/fpml:level"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:trigger/fpml:level"/>
+</KnockInPrice>
+<KnockInPeriodStartDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:schedule/fpml:startDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:schedule/fpml:startDate"/>
+</KnockInPeriodStartDate>
+<KnockInPeriodEndDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:schedule/fpml:endDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:schedule/fpml:endDate"/>
+</KnockInPeriodEndDate>
+<KnockInValuationTime>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerTimeType = 'Closing'">Close</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerTimeType = 'Anytime'">Continuous Observation</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerTimeType = 'Closing'">Close</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockIn/fpml:trigger/fpml:triggerTimeType = 'Anytime'">Continuous Observation</xsl:when>
+</xsl:choose>
+</KnockInValuationTime>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut|fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut">
+<KnockOutTriggerType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerType"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerType"/>
+</KnockOutTriggerType>
+<KnockOutPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:trigger/fpml:level"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:trigger/fpml:level"/>
+</KnockOutPrice>
+<KnockOutPeriodStartDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:schedule/fpml:startDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:schedule/fpml:startDate"/>
+</KnockOutPeriodStartDate>
+<KnockOutPeriodEndDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:schedule/fpml:endDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:schedule/fpml:endDate"/>
+</KnockOutPeriodEndDate>
+<KnockOutValuationTime>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerTimeType = 'Closing'">Close</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerTimeType = 'Anytime'">Continuous Observation</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerTimeType = 'Closing'">Close</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:trigger/fpml:triggerTimeType = 'Anytime'">Continuous Observation</xsl:when>
+</xsl:choose>
+</KnockOutValuationTime>
+<Rebate>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:featurePayment">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:featurePayment">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</Rebate>
+<RebateAmount>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:amount"/>
+</RebateAmount>
+<RebateAmountPaymentDate>
+<xsl:choose>
+<xsl:when test="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:featurePaymentDate/fpml:relativeDate/fpml:dateRelativeTo/@href)=string('observationDate')">Immediate</xsl:when>
+<xsl:when test="string(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:featurePaymentDate/fpml:relativeDate/fpml:dateRelativeTo/@href)=string('observationDate')">Immediate</xsl:when>
+<xsl:otherwise>Delayed</xsl:otherwise>
+</xsl:choose>
+</RebateAmountPaymentDate>
+<RebateAmountPaymentLag>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:featurePaymentDate/fpml:relativeDate/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:knock/fpml:knockOut/fpml:featurePayment/fpml:featurePaymentDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</RebateAmountPaymentLag>
+</xsl:if>
+<KnockObservationDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swObservationDate"/>
+</KnockObservationDate>
+</xsl:if>
+<ClearedPhysicalSettlement/>
+<ClearingTakeupClientId/>
+<ClearingTakeupClientName/>
+<ClearingTakeupClientTradeId/>
+<ClearingTakeupExecSrcId/>
+<ClearingTakeupExecSrcName/>
+<ClearingTakeupExecSrcTradeId/>
+<ClearingTakeupCorrelationId/>
+<ClearingTakeupClearingHouseTradeId/>
+<ClearingTakeupOriginatingEvent/>
+<ClearingTakeupBlockTradeId/>
+<ClearingTakeupSentBy/>
+<ClearingTakeupCreditTokenIssuer/>
+<ClearingTakeupCreditToken/>
+<ClearingTakeupClearingStatus/>
+<ClearingTakeupVenueLEI/>
+<ClearingTakeupVenueLEIScheme/>
+<DocsType>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:choose>
+<xsl:when test="$docsType='ISDA2005EquityAsiaExcludingJapanInterdealer'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionAEJPrivate'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer'">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAmericas'">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityAmericas'">Americas Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionAmericasPrivate'">Americas Master</xsl:when>
+<xsl:when test="$docsType='2004EquityEuropeanInterdealer'">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean'">European Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionEuropePrivate'">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquityJapaneseInterdealer'">Japanese Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityJapanese'">Japanese Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionPanAsiaPrivate'">PanAsia Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionGlobalPrivate'">Global Master</xsl:when>
+<xsl:when test="$docsType='ISDA2010EquityEMEAInterdealer'">EMEA Master</xsl:when>
+<xsl:when test="$docsType='EquityOptionEMEAPrivate'">EMEA Master</xsl:when>
+<xsl:when test="$docsType='EquityCliquetOptionPrivate'">Cliquet Master</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasPrivate'">Spread Master</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2008'">Spread Master</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2009'">Spread Master</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2004'">Spread Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='ISDA2007VarianceSwapAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer'">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAmericas'">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007VarianceSwapAmericas'">Americas Master</xsl:when>
+<xsl:when test="$docsType='2005VarianceSwapEuropeanInterdealer'">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007VarianceSwapEuropean'">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2006VarianceSwapJapaneseInterdealer'">Japanese Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='VolatilitySwapAsiaExcludingJapanPrivate'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapAmericasPrivate'">Americas Master</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapEuropeanPrivate'">European Master</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapJapanesePrivate'">Japanese Master</xsl:when>
+<xsl:when test="$docsType='IVS1OpenMarkets'">IVS1 OpenMarkets</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Accumulator' or $productType='Equity Decumulator'">
+<xsl:choose>
+<xsl:when test="$docsType='Private'">Private</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='EquitySwapAEJPrivate' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquitySwapAsiaExcludingJapanInterdealer' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityFinanceSwapAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityFinanceSwapAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityFinanceSwapEuropean' ">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean' ">European Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapEuropePrivate' ">European Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapAmericasPrivate' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapAmericas' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapPanAsia' ">PanAsia Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapPanAsiaPrivate' ">PanAsia Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' ">European Master</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapIndustry' ">Emerging Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapGlobalPrivate' ">Global Master</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapEMEA' ">Emerging Master</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapLATAM' ">Emerging Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='EquitySwapAEJPrivate' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquitySwapAsiaExcludingJapanInterdealer' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityFinanceSwapAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityFinanceSwapAsiaExcludingJapan'">AEJ Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityFinanceSwapEuropean' ">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean' ">European Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapEuropePrivate' ">European Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' ">European Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapAmericasPrivate' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapAmericas' ">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapPanAsia' ">PanAsia Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapPanAsiaPrivate' ">PanAsia Master</xsl:when>
+<xsl:when test="$docsType='EquitySwapGlobalPrivate' ">Global Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='2006DividendSwapEuropeanInterdealer'">European Master</xsl:when>
+<xsl:when test="$docsType='DividendSwapEuropeanPrivate'">European Master</xsl:when>
+<xsl:when test="$docsType='DividendSwapAmericasPrivate'">Americas Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008DividendSwapJapan' ">Japanese Master</xsl:when>
+<xsl:when test="$docsType='ISDA2008DividendSwapJapaneseRev1' ">Japanese Master</xsl:when>
+<xsl:when test="$docsType='DividendSwapAsiaExcludingJapanPrivate' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='2014DividendSwapAsiaExcludingJapanInterdealer' ">AEJ Master</xsl:when>
+<xsl:when test="$docsType='2013DividendSwapAmericasInterdealer' ">Americas Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Dispersion Variance Swap'">
+<xsl:if test="$docsType='ISDA2007DispersionVarianceSwapEuropean'">European Master</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:choose>
+<xsl:when test="$docsType='ISDA2007VarianceOptionEuropean'">European Master</xsl:when>
+</xsl:choose>
+</xsl:if>
+</DocsType>
+<DocsSubType>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:choose>
+<xsl:when test="$docsType='2004EquityEuropeanInterdealer'">2004 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean'">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='EquityOptionEuropePrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquityJapaneseInterdealer'">2005 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityJapanese'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquityAsiaExcludingJapanInterdealer'">2006 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAsiaExcludingJapan'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='EquityOptionAEJPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer'">2004 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAmericas'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityAmericas'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='EquityOptionAmericasPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquityOptionPanAsiaPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquityOptionGlobalPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2010EquityEMEAInterdealer'">2010 ISDA</xsl:when>
+<xsl:when test="$docsType='EquityOptionEMEAPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='EquityCliquetOptionPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2008'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2009'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='EquitySpreadOptionAmericasISDA2004'">2004 Interdealer</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='2005VarianceSwapEuropeanInterdealer'">2005 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2007VarianceSwapEuropean'">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2006VarianceSwapJapaneseInterdealer'">2006 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer'">2004 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityAmericas'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007VarianceSwapAmericas'">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007VarianceSwapAsiaExcludingJapan'">2007 ISDA</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='VolatilitySwapAsiaExcludingJapanPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapAmericasPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapEuropeanPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='VolatilitySwapJapanesePrivate'">Private</xsl:when>
+<xsl:when test="$docsType='IVS1OpenMarkets'">ISDA</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='EquitySwapAEJPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquitySwapAsiaExcludingJapanInterdealer' ">2005 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityFinanceSwapEuropean' ">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean' ">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='EquitySwapEuropePrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquitySwapAmericasPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapAmericas' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer' ">2004 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityFinanceSwapAsiaExcludingJapan'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityFinanceSwapAsiaExcludingJapan'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapPanAsia'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2009EquityEuropeanInterdealerAnnexSS' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2010FairValueShareSwapEuropeanInterdealer' ">2009 ISDA (FVSS)</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2009IndexSwapEuropeanInterdealer' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapIndustry'">Industry</xsl:when>
+<xsl:when test="$docsType='EquitySwapGlobalPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquitySwapPanAsiaPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapEMEA' ">EMEA</xsl:when>
+<xsl:when test="$docsType='EmergingEquitySwapLATAM' ">LATAM</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='EquitySwapAEJPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2005EquitySwapAsiaExcludingJapanInterdealer' ">2005 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityFinanceSwapEuropean' ">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2007EquityEuropean' ">2007 ISDA</xsl:when>
+<xsl:when test="$docsType='EquitySwapEuropePrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquitySwapAmericasPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapAmericas' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2004EquityAmericasInterdealer' ">2004 Interdealer</xsl:when>
+<xsl:when test="$docsType='ISDA2008EquityFinanceSwapAsiaExcludingJapan'">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityFinanceSwapAsiaExcludingJapan'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquitySwapPanAsia'">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2009EquityEuropeanInterdealerAnnexSS' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2010FairValueShareSwapEuropeanInterdealer' ">2009 ISDA (FVSS)</xsl:when>
+<xsl:when test="$docsType='ISDA2009EquityEuropeanInterdealer' and $docsAnnexType='ISDA2009IndexSwapEuropeanInterdealer' ">2009 ISDA</xsl:when>
+<xsl:when test="$docsType='EquitySwapGlobalPrivate' ">Private</xsl:when>
+<xsl:when test="$docsType='EquitySwapPanAsiaPrivate' ">Private</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:choose>
+<xsl:when test="$docsType='2006DividendSwapEuropeanInterdealer'">2006 Interdealer</xsl:when>
+<xsl:when test="$docsType='DividendSwapEuropeanPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='DividendSwapAmericasPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='ISDA2008DividendSwapJapan' ">2008 ISDA</xsl:when>
+<xsl:when test="$docsType='ISDA2008DividendSwapJapaneseRev1' ">2008 ISDA (Rev 1)</xsl:when>
+<xsl:when test="$docsType='DividendSwapAsiaExcludingJapanPrivate'">Private</xsl:when>
+<xsl:when test="$docsType='2014DividendSwapAsiaExcludingJapanInterdealer'">2014 Interdealer</xsl:when>
+<xsl:when test="$docsType='2013DividendSwapAmericasInterdealer'">2013 Interdealer</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Dispersion Variance Swap'">
+<xsl:if test="$docsType='ISDA2007DispersionVarianceSwapEuropean'">2007 ISDA</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:if test="$docsType='ISDA2007VarianceOptionEuropean'">2007 ISDA</xsl:if>
+</xsl:if>
+</DocsSubType>
+<ContractualDefinitions/>
+<ContractualSupplement>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:contractualSupplement = 'ISDA2007FullLookthroughDepositoryReceiptSupplement'">Full</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:contractualSupplement = 'ISDA2007PartialLookthroughDepositoryReceiptSupplement'">Partial</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:isdaLookthroughDR = 'Full' ">Full</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:isdaLookthroughDR = 'Partial' ">Partial</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:isdaLookthroughDR = 'Full' ">Full</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:isdaLookthroughDR = 'Partial' ">Partial</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:isdaLookthroughDR = 'Full' ">Full</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:isdaLookthroughDR = 'Partial' ">Partial</xsl:when>
+</xsl:choose>
+</ContractualSupplement>
+<CanadianSupplement>
+<xsl:if test="//fpml:FpML/fpml:trade/fpml:documentation/fpml:contractualSupplement = 'ISDAMarch2004EquityCanadianSupplement' ">true</xsl:if>
+</CanadianSupplement>
+<ExchangeTradedContractNearest>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeTradedContractNearest"/>
+</ExchangeTradedContractNearest>
+<RestructuringCreditEvent/>
+<CalculationAgentCity/>
+<RefEntName/>
+<RefEntStdId/>
+<REROPairStdId/>
+<RefOblRERole/>
+<RefOblSecurityIdType/>
+<RefOblSecurityId/>
+<BloombergID/>
+<RefOblMaturity/>
+<RefOblCoupon/>
+<RefOblPrimaryObligor/>
+<BorrowerNames/>
+<FacilityType/>
+<CreditAgreementDate/>
+<IsSecuredList/>
+<ObligationCategory/>
+<DesignatedPriority/>
+<CreditDateAdjustments>
+<Convention/>
+<Holidays/>
+</CreditDateAdjustments>
+<OptionalEarlyTermination/>
+<ReferencePrice/>
+<ReferencePolicy/>
+<PaymentDelay/>
+<StepUpProvision/>
+<WACCapInterestProvision/>
+<InterestShortfallCapIndicator/>
+<InterestShortfallCompounding/>
+<InterestShortfallCapBasis/>
+<InterestShortfallRateSource/>
+<MortgagePaymentFrequency/>
+<MortgageFinalMaturity/>
+<MortgageOriginalAmount/>
+<MortgageInitialFactor/>
+<MortgageSector/>
+<MortgageInsurer/>
+<IndexName/>
+<IndexId/>
+<IndexAnnexDate/>
+<IndexTradedRate/>
+<UpfrontFee/>
+<UpfrontFeeAmount/>
+<UpfrontFeeDate/>
+<UpfrontFeePayer/>
+<AttachmentPoint/>
+<ExhaustionPoint/>
+<PublicationDate/>
+<MasterAgreementDate/>
+<MasterAgreementVersion/>
+<AmendmentTradeDate/>
+<SettlementCurrency>
+<xsl:choose>
+<xsl:when test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:paymentAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementCurrency"/>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swSettlementCurrency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:paymentCurrency/fpml:currency"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swSettlementCurrency"/>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:settlementCurrency"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Accumulator' or $productType='Equity Decumulator'">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:settlementCurrency"/>
+</xsl:when>
+<xsl:when test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:settlementCurrency"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:settlementCurrency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:amount/fpml:paymentCurrency/fpml:currency"/>
+</xsl:when>
+<xsl:when test="$productType='Dispersion Variance Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:settlementCurrency"/>
+</xsl:when>
+<xsl:when test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:equityExercise/fpml:settlementCurrency"/>
+</xsl:when>
+</xsl:choose>
+</SettlementCurrency>
+<ReferenceCurrency>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="//fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:currency"/>
+</xsl:if>
+</ReferenceCurrency>
+<SettlementRateOption/>
+<NonDeliverable/>
+<FxFixingDate>
+<FxFixingAdjustableDate/>
+<FxFixingPeriod/>
+<FxFixingDayConvention/>
+<FxFixingCentres/>
+</FxFixingDate>
+<SettlementCurrency_2/>
+<ReferenceCurrency_2/>
+<SettlementRateOption_2/>
+<FxFixingDate_2>
+<FxFixingPeriod_2/>
+<FxFixingDayConvention_2/>
+<FxFixingCentres_2/>
+</FxFixingDate_2>
+<OutsideNovationTradeDate/>
+<OutsideNovationNovationDate/>
+<OutsideNovationOutgoingParty/>
+<OutsideNovationIncomingParty/>
+<OutsideNovationRemainingParty/>
+<OutsideNovationFullFirstCalculationPeriod/>
+<CalcAgentA/>
+<AmendmentType>
+<xsl:choose>
+<xsl:when test="$swAmendmentType = 'CorporateAction'">Corporate Action</xsl:when>
+<xsl:when test="$swAmendmentType = 'CorporateActionAmendment'">Corp Action Amendment</xsl:when>
+</xsl:choose>
+</AmendmentType>
+<AmendmentEffectiveDate>
+<xsl:if test="($productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swAmendmentDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swAmendmentDate)"/>
+</xsl:call-template>
+</xsl:if>
+</AmendmentEffectiveDate>
+<CancellationType/>
+<OfflineLeg1/>
+<OfflineLeg2/>
+<OfflineSpread/>
+<OfflineSpreadLeg/>
+<OfflineSpreadParty/>
+<OfflineSpreadDirection/>
+<OfflineAdditionalDetails/>
+<OfflineOrigRef/>
+<OfflineOrigRef_2/>
+<OfflineTradeDesk/>
+<OfflineTradeDesk_2/>
+<OfflineProductType/>
+<OfflineExpirationDate/>
+<OfflineOptionType/>
+<EquityRic>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swIndexUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swEquityUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swIndexUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swEquityUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swIndexUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swEquityUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swIndexUnderlyer/fpml:swInstrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+</EquityRic>
+<xsl:if test="$productType ='Equity Accumulator' or $productType='Equity Decumulator'">
+<eqStartDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod/fpml:observationPeriodStartDate"/>
+</eqStartDate>
+<eqEndDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:equityEuropeanExercise/fpml:expirationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</eqEndDate>
+<initialAmtPayer>
+<xsl:variable name="payer">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:prePayment/fpml:payerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$payer=string($partyA)">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</initialAmtPayer>
+<noOfGuaranteedPrd>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swNumberOfGuaranteedPeriods"/>
+</noOfGuaranteedPrd>
+<prePaymentAmount>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:prePayment/fpml:prePaymentAmount/fpml:amount"/>
+</prePaymentAmount>
+<prePaymentAmountCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:prePayment/fpml:prePaymentAmount/fpml:currency"/>
+</prePaymentAmountCurrency>
+<prePaymentDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:prePayment/fpml:prePaymentDate/fpml:unadjustedDate"/>
+</prePaymentDate>
+<knockOutCommencementDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swKnockOutParameters/fpml:swKnockOutCommencementDate"/>
+</knockOutCommencementDate>
+<customDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swCustomDates"/>
+</customDate>
+<swPaymentDateOffset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swPaymentDateOffset"/>
+</swPaymentDateOffset>
+<targetPerformance>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort//fpml:swKnockOutParameters/fpml:swKnockOutTrigger/fpml:swTargetPerformance"/>
+</targetPerformance>
+<knockOutPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort//fpml:swKnockOutParameters/fpml:swKnockOutTrigger/fpml:swLevelPercentage"/>
+</knockOutPrice>
+<knockOutType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort//fpml:swKnockOutParameters/fpml:swKnockOutTrigger/fpml:swTriggerTimeType"/>
+</knockOutType>
+<spotPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:spotPrice/fpml:amount"/>
+</spotPrice>
+<spotPriceCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:spotPrice/fpml:currency"/>
+</spotPriceCurrency>
+<forwardPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:forwardPrice/fpml:amount"/>
+</forwardPrice>
+<forwardPriceCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:forwardPrice/fpml:currency"/>
+</forwardPriceCurrency>
+<purchaseFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSharesPerDay/fpml:swPurchaseFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSharesPerDay/fpml:swPurchaseFrequency/fpml:period)"/>
+</xsl:call-template>
+</purchaseFrequency>
+<settlementFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSettlementFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSettlementFrequency/fpml:period)"/>
+</xsl:call-template>
+</settlementFrequency>
+<NumberOfSharesPerDay>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSharesPerDay/fpml:swNumberOfSharesPerDay"/>
+</NumberOfSharesPerDay>
+<gearingFactor>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSharesPerDay/fpml:swGearing/fpml:swGearingFactor"/>
+</gearingFactor>
+<leverageTriggerPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swSharesPerDay/fpml:swGearing/fpml:swLeverageTriggerPrice"/>
+</leverageTriggerPrice>
+<higherForwardPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swBonusAccumulator/fpml:swHigherForwardPrice"/>
+</higherForwardPrice>
+<lowerForwardPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swBonusAccumulator/fpml:swLowerForwardPrice"/>
+</lowerForwardPrice>
+<AccumulatorSettlementDetails>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod">
+<xsl:call-template name="frontSettlement">
+<xsl:with-param name="position" select="string(position())"/>
+</xsl:call-template>
+</xsl:for-each>
+</AccumulatorSettlementDetails>
+</xsl:if>
+<OptionQuantity>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:numberOfOptions"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:numberOfOptions"/>
+</OptionQuantity>
+<OptionNumberOfShares>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:numberOfShares"/>
+</OptionNumberOfShares>
+<Price>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:pricePerOption/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityPremium/fpml:pricePerOption/fpml:amount"/>
+</Price>
+<PricePerOptionCurrency>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swPremium/fpml:pricePerOption/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityPremium/fpml:pricePerOption/fpml:currency"/>
+</PricePerOptionCurrency>
+<ExchangeLookAlike>
+<xsl:if test="($productType='Equity Share Option' or $productType='Equity Share Option Strategy')">
+<xsl:choose>
+<xsl:when test="($docsType='ISDA2008EquityAmericas')">true</xsl:when>
+<xsl:when test="($docsType='ISDA2010EquityEMEAInterdealer' or $docsType='EquityOptionEMEAPrivate' or $docsType='2004EquityEuropeanInterdealer' or $docsType='ISDA2007EquityEuropean' or $docsType='EquityOptionEuropePrivate')">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeLookAlike='true'">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeLookAlike='false'">false</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeLookAlike='true'">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeLookAlike='false'">false</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="($docsType='ISDA2010EquityEMEAInterdealer' or $docsType='EquityOptionEMEAPrivate')">false</xsl:when>
+<xsl:when test="($docsType='ISDA2008EquityAmericas' or $docsType='2004EquityEuropeanInterdealer' or $docsType='ISDA2007EquityEuropean' or $docsType='EquityOptionEuropePrivate')">true</xsl:when>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeLookAlike='true'">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeLookAlike='true'">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeLookAlike"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeLookAlike"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Index Option' and ($docsType='ISDA2010EquityEMEAInterdealer' or $docsType='EquityOptionEMEAPrivate' or $docsType='ISDA2008EquityAmericas' or $docsType='ISDA2009EquityAmericas' or $docsType='EquityOptionAmericasPrivate')">
+<xsl:choose>
+<xsl:when test="$docsType='ISDA2008EquityAmericas'">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeTradedContractNearest='true'">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:exchangeTradedContractNearest='false'">false</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeTradedContractNearest='true'">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:exchangeTradedContractNearest='false'">false</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="($docsType='ISDA2010EquityEMEAInterdealer' or $docsType='EquityOptionEMEAPrivate')">false</xsl:when>
+<xsl:when test="($docsType='ISDA2008EquityAmericas' or $docsType='ISDA2009EquityAmericas' or 'EquityOptionAmericasPrivate')">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</ExchangeLookAlike>
+<AdjustmentMethod>
+<xsl:variable name="adjustmentMethod" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:methodOfAdjustment)"/>
+<xsl:choose>
+<xsl:when test="$adjustmentMethod='CalculationAgent'">CAA</xsl:when>
+<xsl:when test="$adjustmentMethod='OptionsExchange'">OEA</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</AdjustmentMethod>
+<MasterConfirmationDate>
+<xsl:variable name="Date">
+<xsl:choose>
+<xsl:when test="$docsType='IVS1OpenMarkets'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:masterAgreement/fpml:masterAgreementDate"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:documentation/fpml:masterConfirmation/fpml:masterConfirmationDate"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string($Date)"/>
+</xsl:call-template>
+</MasterConfirmationDate>
+<Multiplier>
+<xsl:if test="$productType ='Equity Index Option' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:multiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:multiplierShortForm"/>
+</xsl:if>
+<xsl:if test="$productType ='Equity Index Swap' or $productType='Equity Share Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:multiplier"/>
+</xsl:if>
+</Multiplier>
+<OptionExchange>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:exchangeId"/>
+</xsl:if>
+</OptionExchange>
+<RelatedExchange>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy'">
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquityOptionParameters">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId"/>
+</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId"/>
+</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId = 'NotApplicable'">Not Applicable</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId = 'AllExchanges'">All Exchanges</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId[1]='.NSEI'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:when>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:if test="fpml:swShortFormTrade/fpml:swVarianceSwapParameters">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:if test="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId = 'AsSpecifiedInMasterConfirmation'">Per Master Confirm</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId = 'NotApplicable'">Not Applicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId) or (fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId)">
+<xsl:choose>
+<xsl:when test="(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId = 'NotApplicable') or (fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId = 'NotApplicable') ">Not Applicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swEquityUnderlyer/fpml:swRelatedExchangeId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swIndexUnderlyer/fpml:swRelatedExchangeId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Dispersion Variance Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</xsl:if>
+</RelatedExchange>
+<DefaultSettlementMethod>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy'">
+<xsl:variable name="settlementType">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:settlementType"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementType"/>
+</xsl:variable>
+<xsl:if test="$settlementType='Election'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDefaultSettlementMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDefaultSettlementMethod"/>
+</xsl:if>
+</xsl:if>
+</DefaultSettlementMethod>
+<SettlementPriceDefaultElectionMethod>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swSettlementPriceDefaultElection"/>
+</xsl:if>
+</SettlementPriceDefaultElectionMethod>
+<DesignatedContract>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDesignatedContract"/>
+</DesignatedContract>
+<FxDeterminationMethod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFxDeterminationMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swFxDeterminationMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVolatilitySwapDetails/fpml:swFxDeterminationMethod"/>
+</FxDeterminationMethod>
+<SWFXRateSource>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFxSource/fpml:swRateSource"/>
+</SWFXRateSource>
+<SWFXRateSourcePage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFxSource/fpml:swRateSourcePage"/>
+</SWFXRateSourcePage>
+<SWFXHourMinuteTime>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFxSource/fpml:hourMinuteTime"/>
+</SWFXHourMinuteTime>
+<SWFXBusinessCenter>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFxSource/fpml:businessCenter"/>
+</SWFXBusinessCenter>
+<SettlementMethodElectionDate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementMethodElectionDate/fpml:adjustableDate/fpml:unadjustedDate or fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swSettlementMethodElectionDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementMethodElectionDate/fpml:adjustableDate/fpml:unadjustedDate "/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swSettlementMethodElectionDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+</SettlementMethodElectionDate>
+<SettlementMethodElectingParty>
+<xsl:if test="$universalType != 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementMethodElectingPartyReference/@href"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:settlementMethodElectingPartyReference/@href"/>
+</xsl:if>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swSettlementMethodElectionParty"/>
+</xsl:if>
+</SettlementMethodElectingParty>
+<SettlementDateOffset>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swCashSettlementPaymentDateOffset"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:settlementDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swCashSettlementPaymentDateOffset"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:cashSettlementPaymentDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swCashSettlementPaymentDateOffset"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:settlementDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</xsl:if>
+<xsl:if test="$productType='Share Dividend Swap' or $productType='Index Dividend Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg//fpml:paymentDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:settlementDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</xsl:if>
+</SettlementDateOffset>
+<SettlementType>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swCashSettlementType"/>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature)">Vanilla</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature/fpml:composite">Composite</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature/fpml:crossCurrency">Cross-Currency</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:fxFeature/fpml:quanto">Quanto</xsl:when>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swCashSettlementType"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:settlementType"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Accumulator' or $productType='Equity Decumulator'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swEquityExercise/fpml:swSettlementType"/>
+</xsl:if>
+</SettlementType>
+<MultipleExchangeIndexAnnex>
+<xsl:if test="$productType='Equity Index Option' or $productType='Equity Index Option Strategy' or $productType='Index Variance Swap' or $productType='Equity Index Volatility Swap' or $productType='Dispersion Variance Swap' or $productType='Equity Index Swap' or $productType='Equity Index Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:multipleExchangeIndexAnnexFallback"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:multipleExchangeIndexAnnexFallback"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:multipleExchangeIndexAnnexFallback"/>
+</xsl:if>
+</MultipleExchangeIndexAnnex>
+<ComponentSecurityIndexAnnex>
+<xsl:if test="$productType='Equity Index Swap' or $productType='Equity Index Option Universal' or $productType='Equity Index Option' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:componentSecurityIndexAnnexFallback"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:componentSecurityIndexAnnexFallback"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:componentSecurityIndexAnnexFallback"/>
+</xsl:if>
+</ComponentSecurityIndexAnnex>
+<LocalJurisdiction>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $productType = 'Share Variance Swap' ">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:localJurisdiction = 'Not Applicable' or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localTaxes = 'Not Applicable'">Not Applicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:localJurisdiction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localTaxes"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Option Universal' ">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:localJurisdiction = 'Not Applicable' or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localTaxes = 'Not Applicable' ">Not Applicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:localJurisdiction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localTaxes"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</LocalJurisdiction>
+<OptionHedgingDisruption>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:hedgingDisruption"/>
+</OptionHedgingDisruption>
+<OptionLossOfStockBorrow>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:lossOfStockBorrow"/>
+</OptionLossOfStockBorrow>
+<OptionMaximumStockLoanRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:maximumStockLoanRate"/>
+</OptionMaximumStockLoanRate>
+<OptionIncreasedCostOfStockBorrow>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:increasedCostOfStockBorrow"/>
+</OptionIncreasedCostOfStockBorrow>
+<OptionInitialStockLoanRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:initialStockLoanRate"/>
+</OptionInitialStockLoanRate>
+<OptionIncreasedCostOfHedging>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:increasedCostOfHedging"/>
+</OptionIncreasedCostOfHedging>
+<OptionForeignOwnershipEvent>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:foreignOwnershipEvent"/>
+</OptionForeignOwnershipEvent>
+<OptionEntitlement>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:optionEntitlement"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:optionEntitlement"/>
+</xsl:if>
+</OptionEntitlement>
+<FxFeature>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature">true</xsl:if>
+</FxFeature>
+<ReferencePriceSource>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $productType = 'Share Variance Swap' or $productType = 'Index Variance Swap' or $productType = 'Equity Share Volatility Swap' or $productType = 'Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature//fpml:fxSpotRateSource/fpml:primaryRateSource/fpml:rateSource"/>
+</xsl:if>
+</ReferencePriceSource>
+<ReferencePricePage>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $productType = 'Share Variance Swap' or $productType = 'Index Variance Swap' or $productType = 'Equity Share Volatility Swap' or $productType = 'Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature//fpml:fxSpotRateSource/fpml:primaryRateSource/fpml:rateSourcePage"/>
+</xsl:if>
+</ReferencePricePage>
+<ReferencePriceTime>
+<xsl:if test="($productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $productType = 'Share Variance Swap' or $productType = 'Index Variance Swap' or $productType = 'Equity Share Volatility Swap' or $productType = 'Equity Index Volatility Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature//fpml:fxSpotRateSource/fpml:fixingTime">
+<xsl:call-template name="formatTime">
+<xsl:with-param name="time" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature//fpml:fxSpotRateSource/fpml:fixingTime/fpml:hourMinuteTime)"/>
+</xsl:call-template>
+</xsl:if>
+</ReferencePriceTime>
+<ReferencePriceCity>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $productType = 'Share Variance Swap' or $productType = 'Index Variance Swap' or $productType = 'Equity Share Volatility Swap' or $productType = 'Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:fxFeature//fpml:fxSpotRateSource/fpml:fixingTime/fpml:businessCenter"/>
+</xsl:if>
+</ReferencePriceCity>
+<MinimumNumberOfOptions>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityMultipleExercise/fpml:minimumNumberOfOptions"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:equityMultipleExercise/fpml:minimumNumberOfOptions"/>
+</xsl:if>
+</MinimumNumberOfOptions>
+<IntegralMultiple>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityMultipleExercise/fpml:integralMultipleExercise"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:equityMultipleExercise/fpml:integralMultipleExercise"/>
+</xsl:if>
+</IntegralMultiple>
+<MaximumNumberOfOptions>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:equityMultipleExercise/fpml:maximumNumberOfOptions"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:equityMultipleExercise/fpml:maximumNumberOfOptions"/>
+</xsl:if>
+</MaximumNumberOfOptions>
+<ExerciseCommencementDate>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal' ">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:commencementDate or fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityAmericanExercise/fpml:swCommencementDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:commencementDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swCommencementDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+</ExerciseCommencementDate>
+<BermudaExerciseDates>
+<xsl:for-each select="//fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityBermudaExercise/fpml:bermudaExerciseDates/fpml:date">
+<BermudaExerciseDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</BermudaExerciseDate>
+</xsl:for-each>
+</BermudaExerciseDates>
+<BermudaFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swBermudaExercise/fpml:swBermudaFrequency"/>
+</BermudaFrequency>
+<BermudaFirstDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swBermudaExercise/fpml:swBermudaFirstDate)"/>
+</xsl:call-template>
+</BermudaFirstDate>
+<BermudaFinalDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swBermudaExercise/fpml:swBermudaFinalDate)"/>
+</xsl:call-template>
+</BermudaFinalDate>
+<LatestExerciseTimeMethod>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:latestExerciseTimeDetermination"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:latestExerciseTimeType"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swLatestExerciseTimeMethod"/>
+</xsl:if>
+</LatestExerciseTimeMethod>
+<LatestExerciseSpecificTime>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:latestExerciseTime/fpml:hourMinuteTime"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters//fpml:swLatestExerciseTime"/>
+</xsl:if>
+</LatestExerciseSpecificTime>
+<DcCurrency>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swPrice/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swPrice/fpml:currency"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swPrice/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swPrice/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swPrice/fpml:currency"/>
+</DcCurrency>
+<DcDelta>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swDelta"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swDelta"/>
+</DcDelta>
+<DcEventTypeA>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm">
+<xsl:variable name="buyer" select="string(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=$partyA">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross">
+<xsl:variable name="buyer" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=$partyA">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm">
+<xsl:variable name="buyer" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=$partyA">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross">
+<xsl:variable name="buyer" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=$partyA">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross">
+<xsl:variable name="buyer" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$buyer=$partyA">Buy</xsl:when>
+<xsl:otherwise>Sell</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</DcEventTypeA>
+<DcExchange>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swCrossExchangeId"/>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swCrossExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swCrossExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Basket Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swCrossExchangeId"/>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swCrossExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swCrossExchangeId"/>
+</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swCrossExchangeId">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swCrossExchangeId"/>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:if>
+</DcExchange>
+<DcExpiryDate>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:maturity"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:future/fpml:maturity"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:maturity"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:future/fpml:maturity"/>
+</DcExpiryDate>
+<DcFuturesCode>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:future/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:future/fpml:instrumentId"/>
+</DcFuturesCode>
+<DcOffshoreCross>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swOffshoreCross">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swOffshoreCross">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swOffshoreCross">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swOffshoreCross">true</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swOffshoreCross">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</DcOffshoreCross>
+<DcOffshoreCrossLocation>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swOffshoreCross/fpml:swOffshoreCrossLocation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swOffshoreCross/fpml:swOffshoreCrossLocation"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swOffshoreCross/fpml:swOffshoreCrossLocation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swOffshoreCross/fpml:swOffshoreCrossLocation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swOffshoreCross/fpml:swOffshoreCrossLocation"/>
+</xsl:if>
+</DcOffshoreCrossLocation>
+<DcPrice>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swPrice/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swPrice/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swPrice/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swPrice/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swPrice/fpml:amount"/>
+</DcPrice>
+<DcQuantity>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:swQuantity"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swQuantity"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:swQuantity"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:swQuantity"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:swQuantity"/>
+</DcQuantity>
+<DcRequired>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Index Option' or $productType='Equity Share Option Strategy' or $productType='Equity Index Option Strategy' or $universalType = 'Equity Option Universal'">
+<xsl:if test="fpml:swShortFormTrade">
+<xsl:value-of select="string(boolean(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm))"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross))"/>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<xsl:if test="fpml:swShortFormTrade">
+<xsl:value-of select="string(boolean(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm))"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross))"/>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Equity Basket Swap'">
+<xsl:if test="fpml:swShortFormTrade">
+<xsl:value-of select="string(boolean(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm))"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross))"/>
+</xsl:if>
+</xsl:if>
+</DcRequired>
+<DcRic>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $universalType = 'Equity Option Universal' or $productType='Equity Index Option' or $productType='Equity Index Option Strategy'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swDeltaCrossShortForm/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross//fpml:instrumentId"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'or $productType='Equity Basket Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:deltaCrossShortForm/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:future/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross/fpml:equity/fpml:instrumentId"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross/fpml:equity/fpml:instrumentId"/>
+</xsl:if>
+</DcRic>
+<DcDescription>
+<xsl:if test="$productType='Equity Share Option' or $productType='Equity Share Option Strategy' or $universalType = 'Equity Option Universal' or $productType='Equity Index Option' or $productType='Equity Index Option Strategy'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross//fpml:description"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDeltaCross//fpml:description"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swDeltaCross//fpml:description"/>
+</xsl:if>
+</DcDescription>
+<AveragingInOut>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:asian/fpml:averagingInOut"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingInOut"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:averagingInOut"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swAveragingDates2/fpml:averagingInOut"/>
+</AveragingInOut>
+<AveragingDateTimes>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:asian/fpml:averagingPeriodOut/fpml:averagingDateTimes/fpml:dateTime">
+<AveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</AveragingDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingDateTimes/fpml:dateTime">
+<AveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</AveragingDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:averagingDateTimes/fpml:dateTime">
+<AveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</AveragingDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging/fpml:averagingDateTimes/fpml:dateTime">
+<AveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</AveragingDate>
+</xsl:for-each>
+</AveragingDateTimes>
+<MarketDisruption>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:asian/fpml:averagingPeriodOut/fpml:marketDisruption"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swMarketDisruption"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:marketDisruption"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging/fpml:AveragingDateDisruption"/>
+</MarketDisruption>
+<AveragingFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swAveragingDates/fpml:swAveragingFrequency"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingFrequency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swAveragingDates/fpml:swAveragingFrequency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:swAveragingFrequency"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging/fpml:swAveragingFrequency"/>
+</AveragingFrequency>
+<AveragingRollConvention>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swAveragingDates/fpml:swRollConvention"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swRollConvention"/>
+</AveragingRollConvention>
+<AveragingStartDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swAveragingDates/fpml:swAveragingStart"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingStart"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swAveragingDates/fpml:swAveragingStart"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:swAveragingStart"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging/fpml:swAveragingStart"/>
+</AveragingStartDate>
+<AveragingEndDate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swAveragingDates/fpml:swAveragingEnd"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingEnd"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swAveragingDates/fpml:swAveragingEnd"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:swAveragingEnd"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging/fpml:swAveragingEnd"/>
+</AveragingEndDate>
+<AveragingBusinessDayConvention>
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingDateAdjustments/fpml:businessDayConvention,1,4)"/>
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swAveragingDates/fpml:swAveragingBusinessDayConvention,1,4)"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDates2/fpml:swAveragingBusinessDayConvention"/>
+</AveragingBusinessDayConvention>
+<ReferenceFXRate>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swReferenceFXRate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swReferenceFXRate"/>
+</ReferenceFXRate>
+<HedgeLevel>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityOptionPercentInput/fpml:swHedgeLevel"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swHedgeLevel"/>
+</HedgeLevel>
+<Basis>
+<xsl:if test="$productType='Equity Index Option' or $productType='Equity Index Option Strategy' or $productType='Equity Index Option Universal' ">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityOptionPercentInput/fpml:swBasis"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swBasis"/>
+</xsl:if>
+</Basis>
+<ImpliedLevel>
+<xsl:if test="$productType='Equity Index Option' or $productType='Equity Index Option Strategy' or $productType='Equity Index Option Universal' ">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityOptionPercentInput/fpml:swImpliedLevel"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swImpliedLevel"/>
+</xsl:if>
+</ImpliedLevel>
+<PremiumPercent>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityOptionPercentInput/fpml:swPremiumPercentage"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swPremiumPercentage"/>
+</PremiumPercent>
+<StrikePercent>
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swEquityOptionPercentInput/fpml:swStrikePercentage"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:if test ="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swHedgeLevel">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swStrikePercentage"/>
+</xsl:if>
+</xsl:otherwise>
+</xsl:choose>
+</StrikePercent>
+<BaseNotional>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swNotional/fpml:amount"/>
+</BaseNotional>
+<BaseNotionalCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionPercentInput/fpml:swNotional/fpml:currency"/>
+</BaseNotionalCurrency>
+<BreakOutTrade>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDividendSwapDetails/fpml:swBreakOutTrade"/>
+</BreakOutTrade>
+<SplitCollateral>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDividendSwapDetails/fpml:swSplitCollateral"/>
+</SplitCollateral>
+<xsl:if test ="$docsType != 'ISDA2008DividendSwapJapan' and $docsType != 'ISDA2008DividendSwapJapaneseRev1'">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDividendSwapDetails/fpml:swPeriodPaymentDate">
+<PeriodPaymentDate>
+<PeriodPaymentDateRef>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDividendSwapDetails/fpml:swPeriodPaymentDate/@href"/>
+<xsl:value-of select="@href"/>
+</PeriodPaymentDateRef>
+<PeriodPaymentDateValue>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDividendSwapDetails/fpml:swPeriodPaymentDate"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</PeriodPaymentDateValue>
+</PeriodPaymentDate>
+</xsl:for-each>
+</xsl:if>
+<OpenUnits>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:openUnits"/>
+</OpenUnits>
+<DeclaredCashDividendPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:declaredCashDividendPercentage"/>
+</DeclaredCashDividendPercentage>
+<DeclaredCashEquivalentDividendPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:declaredCashEquivalentDividendPercentage"/>
+</DeclaredCashEquivalentDividendPercentage>
+<DividendPayer>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:payerPartyReference/@href"/>
+</DividendPayer>
+<DividendReceiver>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:receiverPartyReference/@href"/>
+</DividendReceiver>
+<DividendPeriods>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:dividendPeriod">
+<DividendPeriod>
+<DividendPeriodId>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:dividendPeriod/@id"/>
+<xsl:value-of select="@id"/>
+</DividendPeriodId>
+<UnadjustedStartDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg//fpml:unadjustedStartDate"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:unadjustedStartDate)"/>
+</xsl:call-template>
+</UnadjustedStartDate>
+<UnadjustedEndDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg//fpml:unadjustedEndDate"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:unadjustedEndDate)"/>
+</xsl:call-template>
+</UnadjustedEndDate>
+<PaymentDateReference>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:dividendPeriod/fpml:paymentDate/@id"/>
+<xsl:value-of select="fpml:paymentDate/@id"/>
+</PaymentDateReference>
+<FixedStrike>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg//fpml:fixedStrike"/>
+<xsl:value-of select="fpml:fixedStrike"/>
+</FixedStrike>
+<DividendValuationDateReference>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:dividendPeriod/fpml:valuationDate/@id"/>
+<xsl:value-of select="fpml:valuationDate/@id"/>
+</DividendValuationDateReference>
+<DividendValuationDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:dividendPeriod/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</DividendValuationDate>
+</DividendPeriod>
+</xsl:for-each>
+</DividendPeriods>
+<SpecialDividends>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:specialDividends"/>
+</SpecialDividends>
+<MaterialDividend>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:dividendLeg/fpml:materialDividend"/>
+</MaterialDividend>
+<FixedPayer>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:payerPartyReference/@href"/>
+</FixedPayer>
+<FixedReceiver>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:receiverPartyReference/@href"/>
+</FixedReceiver>
+<FixedPeriods>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:fixedPayment">
+<FixedPayment>
+<DivSwapFixedAmount>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:fixedPayment/fpml:paymentAmount/fpml:amount"/>
+<xsl:value-of select="fpml:paymentAmount/fpml:amount"/>
+</DivSwapFixedAmount>
+<DivSwapFixedDateOffset>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:fixedPayment/fpml:paymentDate/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:paymentDate/fpml:periodMultiplier"/>
+</DivSwapFixedDateOffset>
+<DivSwapFixedDateRelativeTo>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:dividendSwapTransactionSupplement/fpml:fixedLeg/fpml:fixedPayment/fpml:paymentDate/fpml:dateRelativeTo/@href"/>
+<xsl:value-of select="fpml:paymentDate/fpml:dateRelativeTo/@href"/>
+</DivSwapFixedDateRelativeTo>
+</FixedPayment>
+</xsl:for-each>
+</FixedPeriods>
+<EquityAveragingObservations>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:feature/fpml:asian/fpml:averagingPeriodOut/fpml:averagingObservations/fpml:averagingObservation">
+<EquityAveragingObservation>
+<EquityAveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:dateTime)"/>
+</xsl:call-template>
+</EquityAveragingDate>
+<EquityAveragingWeight>
+<xsl:value-of select="fpml:weight"/>
+</EquityAveragingWeight>
+</EquityAveragingObservation>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swAveragingDatesShortForm/fpml:swAveragingObservationsShortForm/fpml:averagingObservation">
+<EquityAveragingObservation>
+<EquityAveragingDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:dateTime)"/>
+</xsl:call-template>
+</EquityAveragingDate>
+<EquityAveragingWeight>
+<xsl:value-of select="fpml:weight"/>
+</EquityAveragingWeight>
+</EquityAveragingObservation>
+</xsl:for-each>
+</EquityAveragingObservations>
+<EquityInitialSpot>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:spotPrice"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swSpotPriceShortForm"/>
+</EquityInitialSpot>
+<EquityCap>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swCap"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swCap"/>
+</EquityCap>
+<EquityCapPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swCapPercentage"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swCapPercentage"/>
+</EquityCapPercentage>
+<EquityFloor>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFloor"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swFloor"/>
+</EquityFloor>
+<EquityFloorPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swFloorPercentage"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swFloorPercentage"/>
+</EquityFloorPercentage>
+<EquityNotional>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:notional/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swNotionalShortForm/fpml:amount"/>
+</EquityNotional>
+<EquityNotionalCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:notional/fpml:currency"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swNotionalShortForm/fpml:currency"/>
+</EquityNotionalCurrency>
+<EquityFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+</EquityFrequency>
+<EquityValuationMethod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityValuationMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:swEquityValuationMethodShortForm"/>
+</EquityValuationMethod>
+<EquityFrequencyConvention>
+<xsl:if test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:expirationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention[.='NotApplicable']) or $docsType = 'EquityCliquetOptionPrivate'">
+<xsl:choose>
+<xsl:when test="(($productType='Equity Index Option' or $productType='Equity Index Option Strategy') and $docsType != 'EquityCliquetOptionPrivate')">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise//fpml:expirationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodDatesAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="not(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationPeriodDatesAdjustments/fpml:businessDayConvention[.='NotApplicable'])">
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationPeriodDatesAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:if>
+<xsl:if test="not(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention[.='NotApplicable'])">
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:if>
+</EquityFrequencyConvention>
+<EquityFreqFirstDate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</EquityFreqFirstDate>
+<EquityFreqFinalDate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</EquityFreqFinalDate>
+<EquityFreqRoll>
+<xsl:variable name="equityFreqRoll" select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:rollConvention"/>
+<xsl:variable name="equityFreqRollShort" select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:rollConvention"/>
+<xsl:choose>
+<xsl:when test="$equityFreqRoll='NONE' or equityFreqRollShort='NONE'">None</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$equityFreqRoll"/>
+<xsl:value-of select="$equityFreqRollShort"/>
+</xsl:otherwise>
+</xsl:choose>
+</EquityFreqRoll>
+<EquityListedValuationDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EquityListedValuationDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EquityListedValuationDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:adjustableDates/fpml:unadjustedDate">
+<EquityListedValuationDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EquityListedValuationDate>
+</xsl:for-each>
+</EquityListedValuationDates>
+<EquityListedDatesConvention>
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:swValuationDatesShortForm/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</EquityListedDatesConvention>
+<StrategyType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swStrategy/fpml:swStrategyType"/>
+</StrategyType>
+<StrategyDeltaLeg>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swDeltaStrategyLeg"/>
+</StrategyDeltaLeg>
+<StrategyDeltaQuantity>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swDeltaCross/fpml:swDeltaStrategyQuantity"/>
+</StrategyDeltaQuantity>
+<StrategyComments>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swStrategy/fpml:swStrategyComments"/>
+</StrategyComments>
+<StrategySingleTrade>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swStrategy/fpml:swSingleStrategy='true'">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</StrategySingleTrade>
+<StrategyLegs>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails">
+<StrategyLeg>
+<SlDirectionA>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:buyerPartyReference/@href"/>
+<xsl:variable name="slbuyer" select="string(fpml:buyerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$slbuyer=$partyA">Buy</xsl:when>
+<xsl:when test="$slbuyer=$partyB">Sell</xsl:when>
+<xsl:otherwise>***ERROR***</xsl:otherwise>
+</xsl:choose>
+</SlDirectionA>
+<SlLegId>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/@id"/>
+<xsl:value-of select="@id"/>
+</SlLegId>
+<SlExpirationDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:expirationDate//fpml:unadjustedDate)"/>
+</xsl:call-template>
+</SlExpirationDate>
+<SlNumberOfOptions>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:numberOfOptions"/>
+<xsl:value-of select="fpml:numberOfOptions"/>
+</SlNumberOfOptions>
+<SlOptionType>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:optionType"/>
+<xsl:value-of select="fpml:optionType"/>
+</SlOptionType>
+<SlPayAmount>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:paymentAmount/fpml:amount"/>
+<xsl:value-of select="fpml:paymentAmount/fpml:amount"/>
+</SlPayAmount>
+<SlPricePerOptionAmount>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:pricePerOption/fpml:amount"/>
+<xsl:value-of select="fpml:pricePerOption/fpml:amount"/>
+</SlPricePerOptionAmount>
+<SlStrikePrice>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:strike/fpml:strikePrice"/>
+<xsl:value-of select="fpml:strike/fpml:strikePrice"/>
+</SlStrikePrice>
+<SlFwdStrikePercentage>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:strike/fpml:strikePercentage"/>
+<xsl:value-of select="fpml:strike/fpml:strikePercentage"/>
+</SlFwdStrikePercentage>
+<SlFwdStrikeDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:strike/fpml:strikeDeterminationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:value-of select="fpml:strike/fpml:strikeDeterminationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</SlFwdStrikeDate>
+<SlPremiumPercent>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swEquityOptionPercentInput/fpml:swPremiumPercentage"/>
+<xsl:value-of select="fpml:swEquityOptionPercentInput/fpml:swPremiumPercentage"/>
+</SlPremiumPercent>
+<SlStrikePercent>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swEquityOptionPercentInput/fpml:swStrikePercentage"/>
+<xsl:value-of select="fpml:swEquityOptionPercentInput/fpml:swStrikePercentage"/>
+</SlStrikePercent>
+<SlBaseNotional>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquityOptionDetails/fpml:swEquityOptionStrategy/fpml:swEquityOptionStrategyDetails/fpml:swEquityOptionPercentInput/fpml:swNotional/fpml:amount"/>
+<xsl:value-of select="fpml:swEquityOptionPercentInput/fpml:swNotional/fpml:amount"/>
+</SlBaseNotional>
+</StrategyLeg>
+</xsl:for-each>
+</StrategyLegs>
+<VegaNotional>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:vegaNotionalAmount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swVegaNotionalAmount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:vegaNotionalAmount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swVegaNotionalAmount"/>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:vegaNotionalAmount"/>
+</xsl:if>
+</VegaNotional>
+<ExpectedN>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:expectedN"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:expectedN"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:expectedN"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swExpectedN"/>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:expectedN"/>
+</xsl:if>
+</ExpectedN>
+<ExpectedNOverride>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swExpectedNOverride"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swExpectedNOverride"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swExpectedNOverride"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVolatilitySwapDetails/fpml:swExpectedNOverride"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceOptionDetails/fpml:swExpectedNOverride"/>
+</ExpectedNOverride>
+<VarianceAmount>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:varianceAmount/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+</xsl:if>
+</VarianceAmount>
+<VarianceStrikePrice>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:varianceStrikePrice"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:varianceStrikePrice"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceStrikePrice"/>
+</xsl:if>
+</VarianceStrikePrice>
+<VolatilityStrikePrice>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:volatilityStrikePrice"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:volatilityStrikePrice"/>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swVolatilityStrikePrice"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swVolatilityStrikePrice"/>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceOptionDetails/fpml:volatilityStrikePrice"/>
+</xsl:if>
+</VolatilityStrikePrice>
+<VarianceCapIndicator>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:varianceCap"/>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:varianceCap='true'))"/>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceCap='true'))"/>
+</xsl:if>
+</xsl:if>
+</VarianceCapIndicator>
+<VarianceCapFactor>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:unadjustedVarianceCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:unadjustedVarianceCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:unadjustedVarianceCap"/>
+</VarianceCapFactor>
+<TotalVarianceCap>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swTotalVarianceCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swTotalVarianceCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceOptionDetails/fpml:swTotalVarianceCap"/>
+</TotalVarianceCap>
+<VolatilityCapIndicator>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swVolatilityCap"/>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swVolatilityCap='true'))"/>
+</xsl:if>
+</VolatilityCapIndicator>
+<TotalVolatilityCap>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swTotalVolatilityCap"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swTotalVolatilityCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swTotalVolatilityCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceOptionDetails/fpml:swTotalVolatilityCap"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swTotalVolatilityCap"/>
+</TotalVolatilityCap>
+<VolatilityCapFactor>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swVolatilityCapFactor"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swVolatilityCapFactor"/>
+</VolatilityCapFactor>
+<ObservationStartDate>
+<xsl:if test="$productType = 'Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swObservationStartDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:observationStartDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType = 'Share Variance Option' or $productType='Index Variance Option'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:observationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType = 'Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swObservationStartDate"/>
+<xsl:value-of select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:observationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+</ObservationStartDate>
+<ValuationDate>
+<xsl:if test="$productType = 'Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swValuationDate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityValuation/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType = 'Share Variance Option' or $productType='Index Variance Option'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:valuation/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="$productType = 'Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swValuationDate"/>
+<xsl:value-of select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:valuation/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:if>
+</ValuationDate>
+<InitialSharePriceOrIndexLevel>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:initialLevel"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swInitialLevel"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:initialLevel"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swInitialLevel"/>
+</InitialSharePriceOrIndexLevel>
+<ClosingSharePriceOrClosingIndexLevelIndicator>
+<xsl:if test="$productType='Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:closingLevel='true'">Closing</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:expiringLevel='true'">Expiring</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:closingLevel='true'">Closing</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:variance/fpml:expiringLevel='true'">Expiring</xsl:when>
+<xsl:otherwise>Specified</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swInitialLevelSource='ClosingPrice'">Closing</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swInitialLevelSource='ExpiringContractLevel'">Expiring</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swInitialLevelSource='OSPPricing' and $docsType='IVS1OpenMarkets'">OSPPricing</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swInitialLevelSource='IndexClosePricing' and $docsType='IVS1OpenMarkets'">IndexClosePricing</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swInitialLevelSource='ClosingPrice'">Closing</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swInitialLevelSource='ExpiringContractLevel'">Expiring</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swInitialLevelSource='OSPPricing' and $docsType='IVS1OpenMarkets'">OSPPricing</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:swVolatility/fpml:swInitialLevelSource='IndexClosePricing' and $docsType='IVS1OpenMarkets'">IndexClosePricing</xsl:when>
+<xsl:otherwise>Specified</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$productType='Share Variance Option' or $productType='Index Variance Option'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:closingLevel='true'">Closing</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:expiringLevel='true'">Expiring</xsl:when>
+<xsl:otherwise>Specified</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</ClosingSharePriceOrClosingIndexLevelIndicator>
+<FuturesPriceValuation>
+<xsl:choose>
+<xsl:when test="$productType = 'Share Variance Swap' or $productType='Index Variance Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:futuresPriceValuation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityValuation/fpml:futuresPriceValuation"/>
+</xsl:when>
+<xsl:when test="$productType = 'Equity Share Volatility Swap' or $productType='Equity Index Volatility Swap'">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:futuresPriceValuation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:valuation/fpml:futuresPriceValuation"/>
+</xsl:when>
+<xsl:when test="(($productType='Equity Index Option' or $productType='Equity Index Option Strategy') and ($docsType='ISDA2005EquityAsiaExcludingJapanInterdealer' or $docsType= 'EquityOptionAEJPrivate' or $docsType='ISDA2008EquityAsiaExcludingJapan' or $docsType='Equity Options (AEJ)' or $docsType='ISDA2004EquityAmericasInterdealer' or $docsType ='ISDA2008EquityAmericas' or $docsType ='ISDA2009EquityAmericas' or $docsType ='EquityOptionAmericasPrivate' or $docsType='Equity Options (Americas)' or $docsType='ISDA2008EquityJapanese' or $docsType='ISDA2010EquityEMEAInterdealer' or $docsType='EquityOptionEMEAPrivate' or $docsType='ISDA2005EquityJapaneseInterdealer' or $docsType='2004EquityEuropeanInterdealer' or $docsType='ISDA2007EquityEuropean' or $docsType='EquityOptionEuropePrivate' or $docsType='EquitySpreadOptionAmericasPrivate' or $docsType='EquitySpreadOptionAmericasISDA2008' or $docsType='EquitySpreadOptionAmericasISDA2009' or $docsType='EquitySpreadOptionAmericasISDA2004' or $docsType='Equity Options (EMEA)' or $docsType='Equity Options (Japan)' or $docsType='Equity Options (Spread)' or $docsType='Equity Options (Americas)' or $docsType='Equity Options (Europe)')) or ($productType='Equity Share Option' and ($docsType = 'EquityOptionAEJPrivate' or $docsType = 'EquityOptionAmericasPrivate' or $docsType = 'EquityOptionEMEAPrivate' or $docsType = 'EquityOptionEuropePrivate'))">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquityOptionParameters/fpml:futuresPriceValuation"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:futuresPriceValuation"/>
+</xsl:when>
+<xsl:when test="$productType='Equity Index Option Universal' ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equityOptionTransactionSupplement/fpml:equityExercise/fpml:equityValuation/fpml:futuresPriceValuation"/>
+</xsl:when>
+<xsl:when test="$productType='Index Variance Option'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:equityValuation/fpml:futuresPriceValuation"/>
+</xsl:when>
+</xsl:choose>
+</FuturesPriceValuation>
+<AllDividends>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:allDividends"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:allDividends"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:varianceLeg/fpml:equityAmount/fpml:allDividends"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:varianceOptionTransactionSupplement/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:allDividends"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade//fpml:swVolatilitySwapTransactionSupplement/fpml:swVolatilityLeg/fpml:swAmount/fpml:allDividends"/>
+</AllDividends>
+<SettlementCurrencyVegaNotional>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swSettlementCurrencyVegaNotionalAmount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swSettlementCurrencyVegaNotionalAmount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swSettlementCurrencyVegaNotionalAmount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVolatilitySwapDetails/fpml:swSettlementCurrencyVegaNotionalAmount"/>
+</SettlementCurrencyVegaNotional>
+<VegaFxRate>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVarianceSwapParameters/fpml:swVegaFxSpotRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swVolatilitySwapParameters/fpml:swVegaFxSpotRate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swVegaFxSpotRate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVolatilitySwapDetails/fpml:swVegaFxSpotRate"/>
+</VegaFxRate>
+<HolidayDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceSwapDetails/fpml:swVarianceSwapHolidayDate">
+<HolidayDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</HolidayDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVolatilitySwapDetails/fpml:swVolatilitySwapHolidayDate">
+<HolidayDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</HolidayDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swVarianceOptionDetails/fpml:swVarianceOptionHolidayDate">
+<HolidayDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</HolidayDate>
+</xsl:for-each>
+</HolidayDates>
+<DispLegs>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg">
+<DispLeg>
+<DispLegId>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//legId"/>
+<xsl:value-of select="fpml:legIdentifier/fpml:legId"/>
+</DispLegId>
+<DispLegVersionId>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//version"/>
+<xsl:value-of select="fpml:legIdentifier/fpml:version"/>
+</DispLegVersionId>
+<DispLegPayer>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg"/>
+<xsl:value-of select="fpml:payerPartyReference/@href"/>
+</DispLegPayer>
+<DispLegReceiver>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg"/>
+<xsl:value-of select="fpml:receiverPartyReference/@href"/>
+</DispLegReceiver>
+<DispEquityRic>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:instrumentId"/>
+<xsl:value-of select="fpml:underlyer/fpml:singleUnderlyer//fpml:instrumentId"/>
+</DispEquityRic>
+<DispEquityRelEx>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:relatedExchangeId"/>
+<xsl:value-of select="fpml:underlyer/fpml:singleUnderlyer//fpml:relatedExchangeId"/>
+</DispEquityRelEx>
+<DispVegaNotional>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:vegaNotionalAmount"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:vegaNotionalAmount"/>
+</DispVegaNotional>
+<DispExpectedN>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:expectedN"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:expectedN"/>
+</DispExpectedN>
+<DispSettlementDateOffset>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:settlementDate/fpml:relativeDate/fpml:periodMultiplier"/>
+</DispSettlementDateOffset>
+<DispVarianceAmount>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:varianceAmount/fpml:amount"/>
+</DispVarianceAmount>
+<DispShareVarCurrency>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:varianceAmount/fpml:currency"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:varianceAmount/fpml:currency"/>
+</DispShareVarCurrency>
+<DispVarianceStrikePrice>
+<xsl:for-each select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:varianceStrikePrice"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:varianceStrikePrice"/>
+</DispVarianceStrikePrice>
+<DispVarianceCapIndicator>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:varianceCap"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:varianceCap"/>
+</DispVarianceCapIndicator>
+<DispVarianceCapFactor>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:unadjustedVarianceCap"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:unadjustedVarianceCap"/>
+</DispVarianceCapFactor>
+<DispVegaNotionalAmount>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:vegaNotionalAmount"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:vegaNotionalAmount"/>
+</DispVegaNotionalAmount>
+<DispObservationStartDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:amount/fpml:observationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</DispObservationStartDate>
+<DispValuationDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg"/>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:valuation/fpml:valuationDate//fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</DispValuationDate>
+<DispInitialLevel>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance//fpml:initialLevel"/>
+<xsl:value-of select="fpml:amount/fpml:variance/fpml:initialLevel"/>
+</DispInitialLevel>
+<DispClosingLevelIndicator>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg/fpml:amount/fpml:variance/fpml:closingLevel"/>
+<xsl:choose>
+<xsl:when test="fpml:amount/fpml:variance/fpml:closingLevel='true'">Closing</xsl:when>
+<xsl:when test="fpml:amount/fpml:variance/fpml:expiringLevel='true'">Expiring</xsl:when>
+<xsl:otherwise>Specified</xsl:otherwise>
+</xsl:choose>
+</DispClosingLevelIndicator>
+<DispFuturesPriceValuation>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:futuresPriceValuation"/>
+<xsl:value-of select="fpml:valuation/fpml:futuresPriceValuation"/>
+</DispFuturesPriceValuation>
+<DispAllDividends>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:varianceSwapTransactionSupplement/fpml:varianceLeg//fpml:allDividends"/>
+<xsl:value-of select="fpml:amount/fpml:allDividends"/>
+</DispAllDividends>
+</DispLeg>
+</xsl:for-each>
+</DispLegs>
+<DispLegsSW>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails">
+<DispLegSW>
+<DispCorrespondingLeg>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails/@id"/>
+<xsl:value-of select="@id"/>
+</DispCorrespondingLeg>
+<DispVolatilityStrikePrice>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails/fpml:volatilityStrikePrice"/>
+<xsl:value-of select="fpml:volatilityStrikePrice"/>
+</DispVolatilityStrikePrice>
+<DispHolidayDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails"/>
+<xsl:for-each select="fpml:swVarianceSwapHolidayDate">
+<HolidayDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</HolidayDate>
+</xsl:for-each>
+</DispHolidayDates>
+<DispExpectedNOverride>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails//fpml:swExpectedNOverride"/>
+<xsl:value-of select="fpml:swExpectedNOverride"/>
+</DispExpectedNOverride>
+<DispShareWeight>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDispersionVarianceSwapDetails/fpml:swLegComponentDetails//fpml:swComponentWeighting"/>
+<xsl:value-of select="fpml:swComponentWeighting"/>
+</DispShareWeight>
+</DispLegSW>
+</xsl:for-each>
+</DispLegsSW>
+<BulletIndicator>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swBulletIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swBulletIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:bulletIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:bulletIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</BulletIndicator>
+<DocsSelection>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swDocsSelection"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swDocsSelection"/>
+</DocsSelection>
+<NovationReporting>
+<Novated>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swNovationReporting/fpml:novated"/>
+</Novated>
+<NewNovated>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swNovationReporting/fpml:newNovated"/>
+</NewNovated>
+</NovationReporting>
+<InterestLegDrivenIndicator>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swInterestLegDriven)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swInterestLegDriven"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:interestLegDriven)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:interestLegDriven"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</InterestLegDrivenIndicator>
+<EquityFrontStub>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStubControl/fpml:swEquityFrontStub"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:stubControl/fpml:swEquityFrontStub"/>
+</EquityFrontStub>
+<EquityEndStub>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStubControl/fpml:swEquityEndStub"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:stubControl/fpml:swEquityEndStub"/>
+</EquityEndStub>
+<InterestFrontStub>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStubControl/fpml:swInterestFrontStub"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:stubControl/fpml:swInterestFrontStub"/>
+</InterestFrontStub>
+<InterestEndStub>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStubControl/fpml:swInterestEndStub"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:stubControl/fpml:swInterestEndStub"/>
+</InterestEndStub>
+<FixedRateIndicator>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="$productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFixedRateIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFixedRateIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise>
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFixedRateIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFixedRateIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:fixedRatePercentage">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</FixedRateIndicator>
+<EswFixingDateOffset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegResetDates/fpml:fixingDates/fpml:relativeDate/fpml:periodMultiplier"/>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swFixingDayOffset"/>
+</xsl:if>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swFixingDateOffset"/>
+</EswFixingDateOffset>
+<DividendPaymentDates>
+<xsl:variable name="dividendPaymentDates">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendPaymentDate/fpml:dividendDateReference"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendPaymentDate"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$dividendPaymentDates = 'CashSettlementPaymentDate' ">Cash Settlement Payment Date</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'SharePayment' ">Share Payment</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'RecordDate' ">Record Date</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'TerminationDate' ">Termination Date</xsl:when>
+<xsl:when test="($docsType='EquitySwapAmericasPrivate' or $docsType='EquitySwapAEJPrivate') and $dividendPaymentDates = '' ">As Specified In Master Confirmation</xsl:when>
+<xsl:when test="($docsType='ISDA2009EquitySwapAmericas' or $docsType='ISDA2005EquitySwapAsiaExcludingJapanInterdealer' or $docsType='ISDA2009EquitySwapPanAsia' or $docsType='ISDA2004EquityAmericasInterdealer' or $docsType='EquitySwapPanAsiaPrivate') and $dividendPaymentDates = '' ">Cash Settlement Payment Date</xsl:when>
+<xsl:when test="$docsType='EquitySwapEuropePrivate' and $dividendPaymentDates = '' ">Cash Settlement Payment Date</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'FloatingAmountPaymentDate' ">Floating Amount Payment Date</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'CashSettlePaymentDateExDiv' ">Cash Settlement Payment Date - Ex Dividend</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'CashSettlePaymentDateIssuerPayment' ">Cash Settlement Payment Date - Issuer Payment</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'ExDividendPaymentDate' ">Ex-Dividend Payment Date</xsl:when>
+<xsl:when test="$dividendPaymentDates = 'ExDate' ">
+<xsl:choose>
+<xsl:when test="$docsAnnexType = 'ISDA2009EquityEuropeanInterdealerAnnexSS' ">Ex Payment Date</xsl:when>
+<xsl:when test="$docsAnnexType = 'ISDA2009EquityEuropeanIS' ">Ex-Dividend Payment Date</xsl:when>
+<xsl:when test="$docsAnnexType = 'ISDA2009IndexSwapEuropeanInterdealer' ">Ex-Dividend Payment Date</xsl:when>
+<xsl:when test="$docsAnnexType = 'ISDA2010FairValueShareSwapEuropeanInterdealer' ">Ex-Dividend Payment Date</xsl:when>
+<xsl:when test="$docsType = 'EquitySwapEuropePrivate' and $productType ='Equity Share Swap'">Ex Payment Date</xsl:when>
+<xsl:when test="$docsType = 'EmergingEquitySwapIndustry' and $productType ='Equity Share Swap'">Ex Payment Date</xsl:when>
+<xsl:otherwise>ExDate</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+</xsl:choose>
+</DividendPaymentDates>
+<DividendPaymentOffset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendPaymentDate/fpml:paymentDateOffset/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendPaymentOffset"/>
+</DividendPaymentOffset>
+<EswDividendAmount>
+<xsl:variable name="eswDividendAmount">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendAmount"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$eswDividendAmount = 'ExAmount'">ExAmount</xsl:when>
+<xsl:when test="$eswDividendAmount = 'RecordAmount'">RecordAmount</xsl:when>
+<xsl:when test="$eswDividendAmount = ''">AsPerMCA</xsl:when>
+<xsl:when test="$eswDividendAmount = 'AsSpecifiedInMasterConfirmation'">AsPerMCA</xsl:when>
+</xsl:choose>
+</EswDividendAmount>
+<EswDividendPeriod>
+<xsl:variable name="eswDividendPeriod">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendPeriod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendPeriod"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$eswDividendPeriod = 'FirstPeriod'">FirstPeriod</xsl:when>
+<xsl:when test="$eswDividendPeriod = 'SecondPeriod'">SecondPeriod</xsl:when>
+<xsl:when test="$eswDividendPeriod = ''">AsPerMCA</xsl:when>
+</xsl:choose>
+</EswDividendPeriod>
+<DividendPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:dividendPayout/fpml:dividendPayoutRatio"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendPercentage"/>
+</DividendPercentage>
+<DividendReinvestment>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendReinvestment"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendReinvestment"/>
+</DividendReinvestment>
+<EswDeclaredCashDividendPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:declaredCashDividendPercentage"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:declaredCashDividendPercentage"/>
+</EswDeclaredCashDividendPercentage>
+<EswDeclaredCashEquivalentDividendPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:declaredCashEquivalentDividendPercentage"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:declaredCashEquivalentDividendPercentage"/>
+</EswDeclaredCashEquivalentDividendPercentage>
+<EswDividendSettlementCurrency>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:determinationMethod or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:swDividendSettlementCurrencyDetermination ">
+<xsl:variable name="dividendSettlementCurrencyDetermination">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:determinationMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:swDividendSettlementCurrencyDetermination"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$dividendSettlementCurrencyDetermination = 'SettlementCurrency' ">Settlement Currency</xsl:when>
+<xsl:when test="$dividendSettlementCurrencyDetermination = 'IssuerPaymentCurrency' ">Issuer Payment Currency</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswDividendSettlementCurrency>
+<EswNonCashDividendTreatment>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:nonCashDividendTreatment"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:nonCashDividendTreatment"/>
+</EswNonCashDividendTreatment>
+<EswDividendComposition>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:dividendComposition"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendComposition"/>
+</EswDividendComposition>
+<EswSpecialDividends>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:dividendConditions/fpml:specialDividends"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:specialDividends"/>
+</EswSpecialDividends>
+<EswDividendValuationOffset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:relativeDateSequence/fpml:dateOffset/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendValuationOffset"/>
+</EswDividendValuationOffset>
+<EswDividendValuationFrequency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendValuationFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendValuationFrequency/fpml:period)"/>
+</xsl:call-template>
+</EswDividendValuationFrequency>
+<EswDividendInitialValuation>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationStartDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendInitialValuationDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendInitialValuationDate)"/>
+</xsl:call-template>
+</xsl:if>
+</EswDividendInitialValuation>
+<EswDividendFinalValuation>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationEndDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendFinalValuation">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendFinalValuation)"/>
+</xsl:call-template>
+</xsl:if>
+</EswDividendFinalValuation>
+<EswDividendValuationDay>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:rollConvention"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendValuationDay"/>
+</EswDividendValuationDay>
+<EswDividendValuationCustomDatesInterim>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:dividendValuationDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EswDividendValuationCustomDateInterim>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswDividendValuationCustomDateInterim>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:dividends/fpml:dividendValuationDates">
+<EswDividendValuationCustomDateInterim>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswDividendValuationCustomDateInterim>
+</xsl:for-each>
+</EswDividendValuationCustomDatesInterim>
+<EswDividendValuationCustomDateFinal>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:adjustableDates/fpml:unadjustedDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:dividendValuationDates/fpml:adjustableDates/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</EswDividendValuationCustomDateFinal>
+<ExitReason/>
+<TransactionDate/>
+<EffectiveDate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:effectiveDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:effectiveDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:paymentEffectiveDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:paymentEffectiveDate)"/>
+</xsl:call-template>
+</xsl:if>
+</EffectiveDate>
+<xsl:variable name="schedulingMethod">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:schedulingMethod"/>
+</xsl:variable>
+<EquityHolidayCentres>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:if test="$schedulingMethod!='ListDateEntry' or $schedulingMethod='' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+<xsl:if test="$schedulingMethod='ListDateEntry' and not($schedulingMethod='') ">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:when>
+<xsl:when test="($productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:when>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:equityHolidayCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</EquityHolidayCentres>
+<OtherValuationBusinessCenters>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swOtherValuationBusinessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swOtherValuationBusinessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</OtherValuationBusinessCenters>
+<EswFuturesPriceValuation>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:futuresPriceValuation)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:futuresPriceValuation"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:futuresPriceValuation)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:futuresPriceValuation"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswFuturesPriceValuation>
+<EswFpvFinalPriceElectionFallback>
+<xsl:if test="$productType='Equity Index Swap'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:fPVFinalPriceElectionFallback"/>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:if test="$docsType='ISDA2009EquitySwapPanAsia' or $docsType='EquitySwapPanAsiaPrivate'">FPVClose</xsl:if>
+</xsl:if>
+</xsl:if>
+</EswFpvFinalPriceElectionFallback>
+<EswDesignatedMaturity>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:indexTenor/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:indexTenor/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:designatedMaturity">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:designatedMaturity/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:designatedMaturity/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</EswDesignatedMaturity>
+<EswEquityValConvention>
+<xsl:if test="$schedulingMethod='ListDateEntry' and not($schedulingMethod='') ">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention = 'NotApplicable' ">NA</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention != 'NotApplicable' ">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:when>
+<xsl:when test="($productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention = 'NotApplicable' ">NA</xsl:when>
+<xsl:when test="($productType='Equity Share Swap' or $productType='Equity Index Swap' or $productType='Equity Basket Swap') and fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention != 'NotApplicable' ">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:equityBusinessDayConvention = 'NotApplicable' ">NA</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:equityBusinessDayConvention != 'NotApplicable' ">
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:equityBusinessDayConvention,1,4)"/>
+</xsl:when>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="$schedulingMethod!='ListDateEntry' or $schedulingMethod='' ">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:equityBusinessDayConvention,1,4)"/>
+</xsl:if>
+</EswEquityValConvention>
+<EswInterestFloatConvention>
+<xsl:if test="$schedulingMethod='ListDateEntry' and not($schedulingMethod='') ">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention = 'NotApplicable' ">NA</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention != 'NotApplicable' ">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:paymentBusinessDayConvention = 'NotApplicable' ">NA</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:paymentBusinessDayConvention != 'NotApplicable' ">
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:paymentBusinessDayConvention,1,4)"/></xsl:if>
+</xsl:if>
+<xsl:if test="$schedulingMethod!='ListDateEntry' or $schedulingMethod='' ">
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+<xsl:value-of select="substring(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:periodicDates/fpml:calculationPeriodDatesAdjustments/fpml:businessDayConvention,1,4)"/>
+<xsl:value-of select="substring(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:paymentBusinessDayConvention,1,4)"/>
+</xsl:if>
+</EswInterestFloatConvention>
+<EswInterestFloatDayBasis>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:dayCountFraction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:dayCountFraction"/>
+</EswInterestFloatDayBasis>
+<EswInterestFloatingRateIndex>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:floatingRateIndex"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:floatingRateIndex"/>
+</EswInterestFloatingRateIndex>
+<EswInterestFixedRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:fixedRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:fixedRatePercentage"/>
+</EswInterestFixedRate>
+<EswInterestSpreadOverIndex>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:spreadSchedule/fpml:initialValue"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:spreadOverFloating"/>
+</EswInterestSpreadOverIndex>
+<EswInterestSpreadOverIndexStep>
+<EswInterestSpreadOverIndexStepValue>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:spreadSchedule/fpml:step">
+<xsl:value-of select="fpml:stepValue"/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</EswInterestSpreadOverIndexStepValue>
+<EswInterestSpreadOverIndexStepDate>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:spreadSchedule/fpml:step">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:stepDate"/>
+</xsl:with-param>
+</xsl:call-template>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</EswInterestSpreadOverIndexStepDate>
+</EswInterestSpreadOverIndexStep>
+<EswLocalJurisdiction>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:localJurisdiction = 'NotApplicable' ">Not Applicable</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localJurisdiction = 'NotApplicable' ">Not Applicable</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:relevantJurisdiction = 'NotApplicable' ">Not Applicable</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:relevantJurisdiction = 'NotApplicable' ">Not Applicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:localJurisdiction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:localJurisdiction"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:relevantJurisdiction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:relevantJurisdiction"/>
+</xsl:otherwise>
+</xsl:choose>
+</EswLocalJurisdiction>
+<EswReferencePriceSource>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:fxFeature/fpml:crossCurrency/fpml:fxSpotRateSource/fpml:primaryRateSource/fpml:rateSource"/>
+</EswReferencePriceSource>
+<EswReferencePricePage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:fxFeature/fpml:crossCurrency/fpml:fxSpotRateSource/fpml:primaryRateSource/fpml:rateSourcePage"/>
+</EswReferencePricePage>
+<EswReferencePriceTime>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:fxFeature/fpml:crossCurrency/fpml:fxSpotRateSource/fpml:fixingTime/fpml:hourMinuteTime"/>
+</EswReferencePriceTime>
+<EswReferencePriceCity>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:fxFeature/fpml:crossCurrency/fpml:fxSpotRateSource/fpml:fixingTime/fpml:businessCenter"/>
+</EswReferencePriceCity>
+<EswNotionalAmount>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:notional/fpml:notionalAmount/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:notionalAmount/fpml:amount"/>
+</EswNotionalAmount>
+<EswNotionalCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:notional/fpml:notionalAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:notionalAmount/fpml:currency"/>
+<xsl:if test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:notional/fpml:notionalAmount/fpml:currency)">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swNotionalCurrency"/>
+</xsl:if>
+</EswNotionalCurrency>
+<EswOpenUnits>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:openUnits"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:basket/fpml:openUnits"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:openUnits"/>
+</EswOpenUnits>
+<EswInitialUnits>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:initialUnits"/>
+</EswInitialUnits>
+<FeeIn>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSpreadDetails/fpml:swSpreadIn"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSpreadDetails/fpml:swSpreadIn"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swSpreadDetails/fpml:swSpreadIn"/>
+</FeeIn>
+<FeeInOutIndicator>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="$productType='Equity Basket Swap'">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSpreadDetails))"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSpreadDetails))"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:value-of select="string(boolean(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swSpreadDetails))"/>
+</xsl:if>
+</FeeInOutIndicator>
+<FeeOut>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSpreadDetails/fpml:swSpreadOut"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSpreadDetails/fpml:swSpreadOut"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swSpreadDetails/fpml:swSpreadOut"/>
+</FeeOut>
+<FinalPriceDefaultElection>
+<xsl:variable name="finalPriceDefaultElection">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:determinationMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:finalPriceElection"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$finalPriceDefaultElection = 'HedgeExecution' ">Hedge Execution</xsl:when>
+<xsl:when test="$finalPriceDefaultElection = 'AsSpecifiedInMasterConfirmation' ">As Specified In Master Confirmation</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$finalPriceDefaultElection"/>
+</xsl:otherwise>
+</xsl:choose>
+</FinalPriceDefaultElection>
+<FinalValuationDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:finalValuationDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</FinalValuationDate>
+<FullyFundedAmount>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFullyFunded/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFullyFunded/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swFullyFunded/fpml:amount"/>
+</FullyFundedAmount>
+<FullyFundedIndicator>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="$productType='Equity Basket Swap'">
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFullyFunded))"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="string(boolean(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFullyFunded))"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:value-of select="string(boolean(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swFullyFunded))"/>
+</xsl:if>
+</FullyFundedIndicator>
+<FullyFundedFixedRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFullyFunded/fpml:fixedRate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFullyFunded/fpml:fixedRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swFullyFunded/fpml:fixedRate"/>
+</FullyFundedFixedRate>
+<FullyFundedDayCountFract>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFullyFunded/fpml:dayCountFraction"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFullyFunded/fpml:dayCountFraction"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swFullyFunded/fpml:dayCountFraction"/>
+</FullyFundedDayCountFract>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Index Swap'">
+<InitialPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:initialPrice/fpml:netPrice/fpml:amount"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swInitialPrice/fpml:initialPrice/fpml:amount"/>
+</InitialPrice>
+</xsl:if>
+<InitialPriceElection>
+<xsl:variable name="initialPriceElection">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swInitialPrice/fpml:determinationMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:initialPrice/fpml:determinationMethod"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$initialPriceElection = 'HedgeExecution' ">Hedge Execution</xsl:when>
+<xsl:when test="$initialPriceElection = 'AgreedInitialPrice' ">Agreed Initial Price</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$initialPriceElection"/>
+</xsl:otherwise>
+</xsl:choose>
+</InitialPriceElection>
+<EquityNotionalReset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:notionalReset"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:notionalReset"/>
+</EquityNotionalReset>
+<EswReferenceInitialPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swReferenceInitialPrice"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swInitialPrice/fpml:initialPriceReference/fpml:amount"/>
+</EswReferenceInitialPrice>
+<EswReferenceFXRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swReferenceFXRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swInitialPrice/fpml:FxRate"/>
+</EswReferenceFXRate>
+<PaymentDateOffset>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:paymentDates/fpml:paymentDateFinal/fpml:relativeDate/fpml:periodMultiplier"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swPaymentDateOffset"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swPaymentDateOffset"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:paymentDateOffset"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swPaymentDateOffset"/>
+</PaymentDateOffset>
+<PaymentFrequency>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:periodMultiplier">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:periodMultiplier">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swInterestLegPaymentDate/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:paymentFrequency">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:paymentFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:paymentFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</PaymentFrequency>
+<EswFixingHolidayCentres>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegResetDates/fpml:fixingDates/fpml:relativeDate/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegResetDates/fpml:fixingDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</EswFixingHolidayCentres>
+<EswPaymentHolidayCentres>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:if test="$schedulingMethod='ListDateEntry' and not($schedulingMethod='') ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+<xsl:if test="$schedulingMethod!='ListDateEntry' or $schedulingMethod='' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:paymentDates/fpml:paymentDateFinal/fpml:relativeDate/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:paymentDates/fpml:paymentDateFinal/fpml:adjustableDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:paymentHolidayCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</EswPaymentHolidayCentres>
+<ReturnType>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:return/fpml:returnType"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:return/fpml:returnType"/>
+</ReturnType>
+<Synthetic>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFullyFunded">true</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSpreadDetails">true</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFullyFunded">true</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSpreadDetails">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swFullyFunded">true</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:synthetic/fpml:swSpreadDetails">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</Synthetic>
+<TerminationDate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:terminationDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:terminationDate/fpml:adjustableDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:paymentTerminationDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:paymentTerminationDate)"/>
+</xsl:call-template>
+</xsl:if>
+</TerminationDate>
+<ValuationDay>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:rollConvention"/>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:rollConvention/fpml:returnLeg"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:rollConvention/fpml:returnLeg"/>
+</xsl:if>
+<xsl:if test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:interestLegDriven = 'true' or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swBulletIndicator = 'true')">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:valuationFrequency/fpml:rollConvention"/>
+</xsl:if>
+</ValuationDay>
+<PaymentDay>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:rollConvention"/>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:rollConvention/fpml:interestLeg"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:rollConvention/fpml:interestLeg"/>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:interestLegDriven = 'true' or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:swBulletIndicator = 'true' ">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:paymentFrequency/fpml:rollConvention"/>
+</xsl:if>
+</PaymentDay>
+<ValuationFrequency>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:periodicDates">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:periodMultiplier">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:periodMultiplier">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swScheduleFrequencies/fpml:swValuationDate/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:valuationFrequency">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:valuationFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:valuationFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</ValuationFrequency>
+<ValuationStartDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:effectiveDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:valuationStartDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</ValuationStartDate>
+<EswSchedulingMethod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSchedulingMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:schedulingMethod"/>
+</EswSchedulingMethod>
+<EswValuationDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swValuationDatesInterim/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swValuationDatesInterim/fpml:swUnadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:if test="$schedulingMethod='ListDateEntry' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceInterim/fpml:valuationRules/fpml:valuationDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:valuationPriceFinal/fpml:valuationRules/fpml:valuationDate/fpml:adjustableDate/fpml:unadjustedDate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:finalValuationDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:if>
+</EswValuationDates>
+<EswFixingDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swFixingDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:if test="$schedulingMethod='ListDateEntry' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegResetDates/fpml:fixingDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+</xsl:if>
+</EswFixingDates>
+<EswInterestLegPaymentDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swInterestLegPaymentDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swInterestLegPaymentDates/fpml:swUnadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:if test="$schedulingMethod='ListDateEntry' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestLegCalculationPeriodDates/fpml:interestLegPaymentDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+</xsl:if>
+</EswInterestLegPaymentDates>
+<EswEquityLegPaymentDates>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swEquityLegPaymentDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swEquityLegPaymentDates/fpml:swUnadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<xsl:if test="$schedulingMethod='ListDateEntry' and not(fpml:swShortFormTrade)">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:paymentDates/fpml:paymentDatesInterim/fpml:adjustableDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:rateOfReturn/fpml:paymentDates/fpml:paymentDateFinal/fpml:adjustableDate/fpml:unadjustedDate"/>
+</xsl:with-param>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:if>
+</EswEquityLegPaymentDates>
+<EswCompoundingDates>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swCompoundingDates">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleDates/fpml:swCompoundingDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swCompoundingDates">
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:listedDates/fpml:swCompoundingDates/fpml:swUnadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+</xsl:if>
+<xsl:if test="$schedulingMethod='ListDateEntry' ">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding/fpml:compoundingDates/fpml:adjustableDates/fpml:unadjustedDate">
+<EswUnadjustedDate>
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(.)"/>
+</xsl:call-template>
+</EswUnadjustedDate>
+</xsl:for-each>
+</xsl:if>
+</EswCompoundingDates>
+<EswCompoundingMethod>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:compoundingMethod ">
+<xsl:variable name="eswCompoundingMethod">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding/fpml:compoundingMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:compoundingMethod"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$eswCompoundingMethod = 'Flat' ">F</xsl:when>
+<xsl:when test="$eswCompoundingMethod = 'None' ">N</xsl:when>
+<xsl:when test="$eswCompoundingMethod = 'Straight' ">S</xsl:when>
+<xsl:when test="$eswCompoundingMethod = 'SpreadExclusive' ">E</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswCompoundingMethod>
+<EswCompoundingFrequency>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding ">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding/fpml:compoundingDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:compounding/fpml:compoundingDates/fpml:periodicDates/fpml:calculationPeriodFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swSchedulingMethod = 'ListDateEntry'">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swCompoundingDate/fpml:periodMultiplier">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swCompoundingDate/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swScheduleFrequencies/fpml:swCompoundingDate/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:compoundingFrequency">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:compoundingFrequency/fpml:periodMultiplier"/>
+<xsl:call-template name="periodToLowerCase">
+<xsl:with-param name="period" select="string(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:scheduleDates/fpml:parameterDetails/fpml:compoundingFrequency/fpml:period)"/>
+</xsl:call-template>
+</xsl:if>
+</EswCompoundingFrequency>
+<EswCalculationMethod>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:calculationMethod or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:calculationMethod">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:calculationMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:calculationMethod"/>
+</xsl:when>
+<xsl:otherwise>NotApplicable</xsl:otherwise>
+</xsl:choose>
+</EswCalculationMethod>
+<EswApplicableBusinessDays>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:applicableBusinessDays or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:applicableBusinessDays">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:applicableBusinessDays/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:applicableBusinessDays/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</EswApplicableBusinessDays>
+<EswObservationMethod>
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift">ObservationPeriodShift</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lockout or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lockout">Lockout</xsl:when>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lookback or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lookback">Lookback</xsl:when>
+<xsl:otherwise>NotApplicable</xsl:otherwise>
+</xsl:choose>
+</EswObservationMethod>
+<EswAdditionalBusinessDays>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:additionalBusinessDays or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:additionalBusinessDays">
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:additionalBusinessDays/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:additionalBusinessDays/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</xsl:if>
+</EswAdditionalBusinessDays>
+<EswOffsetDays>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:offsetDays or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:offsetDays">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:offsetDays"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:offsetDays"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lockout/fpml:offsetDays or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lockout/fpml:offsetDays">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lockout/fpml:offsetDays"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lockout/fpml:offsetDays"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lookback/fpml:offsetDays or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lookback/fpml:offsetDays">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:lookback/fpml:offsetDays"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:lookback/fpml:offsetDays"/>
+</xsl:if>
+</EswOffsetDays>
+<EswObservationPeriod>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:observationPeriodDates or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:observationPeriodDates">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationShift/fpml:observationPeriodDates "/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationShift/fpml:observationPeriodDates"/>
+</xsl:if>
+</EswObservationPeriod>
+<EswDailyCapRate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationCapRate or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationCapRate">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationCapRate "/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationCapRate"/>
+</xsl:if>
+</EswDailyCapRate>
+<EswDailyFloorRate>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationFloorRate or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationFloorRate">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:floatingRateCalculation/fpml:calculationParameters/fpml:observationFloorRate "/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:observationFloorRate"/>
+</xsl:if>
+</EswDailyFloorRate>
+<EswInterpolationMethod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:interpolationMethod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:linearInterpolation"/>
+</EswInterpolationMethod>
+<EswInterpolationPeriod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:interestLeg/fpml:interestCalculation/fpml:interpolationPeriod"/>
+</EswInterpolationPeriod>
+<EswAdditionalDisruptionEventIndicator>
+<xsl:if test="$productType='Equity Index Swap' and $docsType='ISDA2009EquitySwapAmericas'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAdditionalDisruptionEventIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAdditionalDisruptionEventIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:additionalDisruptionEventIndicator)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:additionalDisruptionEventIndicator"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+</EswAdditionalDisruptionEventIndicator>
+<EswOverrideNotionalCalculation>
+<xsl:if test="$productType='Equity Index Swap' or $productType='Equity Share Swap'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swOverrideNotionalCalculation)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swOverrideNotionalCalculation"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:overrideNotionalCalculation)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:overrideNotionalCalculation"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swOverrideNotionalCalculation)">false</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swOverrideNotionalCalculation"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswOverrideNotionalCalculation>
+<EswPaymentDaysOffset>
+<xsl:if test="$productType='Equity Index Swap' or $productType='Equity Share Swap'">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swPaymentDaysOffset">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swPaymentDaysOffset/fpml:periodMultiplier"/>
+</xsl:if>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:if test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:swPaymentDaysOffset/fpml:periodMultiplier)">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:calculationParameters/fpml:swPaymentDaysOffset/fpml:periodMultiplier"/>
+</xsl:if>
+</xsl:if>
+</xsl:if>
+<xsl:if test="$productType='Equity Basket Swap'">
+<xsl:if  test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swPaymentDaysOffset">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swPaymentDaysOffset/fpml:periodMultiplier"/>
+</xsl:if>
+</xsl:if>
+</EswPaymentDaysOffset>
+<EswAveragingDatesIndicator>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swAveragingDatesIndicator"/>
+<xsl:if test="fpml:swShortFormTrade/fpml:swEquitySwapParameters">
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:averaging">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswAveragingDatesIndicator>
+<EswADTVIndicator>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swADTVIndicator"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:aDTVIndicator"/>
+</EswADTVIndicator>
+<EswLimitationPercentage>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:averageDailyTradingVolume/fpml:limitationPercentage"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:limitationPercentage"/>
+</EswLimitationPercentage>
+<EswLimitationPeriod>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:singleUnderlyer/fpml:averageDailyTradingVolume/fpml:limitationPeriod"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:limitPeriod"/>
+</EswLimitationPeriod>
+<EswStockLoanRateIndicator>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStockLoanRateIndicator"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:stockLoanRateIndicator"/>
+</EswStockLoanRateIndicator>
+<EswMaximumStockLoanRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStockLoanRate/fpml:maximumStockLoanRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:stockLoanRate/fpml:maximumStockLoanRate"/>
+</EswMaximumStockLoanRate>
+<EswInitialStockLoanRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swStockLoanRate/fpml:initialStockLoanRate"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swStockLoanRate/fpml:initialStockLoanRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:stockLoanRate/fpml:initialStockLoanRate"/>
+</EswInitialStockLoanRate>
+<EswOptionalEarlyTermination>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:optionalEarlyTermination)">AsSpecifiedInMasterConfirmation</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:optionalEarlyTermination"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:optionalEarlyTerminationApplicability)">AsSpecifiedInMasterConfirmation</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:optionalEarlyTerminationApplicability"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswOptionalEarlyTermination>
+<EswBreakFundingRecovery>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:breakFundingRecovery"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:breakFundingRecovery"/>
+</EswBreakFundingRecovery>
+<EswBreakFeeElection>
+<xsl:choose>
+<xsl:when test="$docsType = 'EquitySwapGlobalPrivate' ">
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:optionalEarlyTermination = 'false'">NotApplicable</xsl:when>
+<xsl:otherwise>FlatFee</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:when>
+<xsl:otherwise>
+<xsl:if test="fpml:swLongFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:breakFeeElection)">NotApplicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:breakFeeElection"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swShortFormTrade">
+<xsl:choose>
+<xsl:when test="not(fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:breakFeeElection)">NotApplicable</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:breakFeeElection"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</xsl:otherwise>
+</xsl:choose>
+</EswBreakFeeElection>
+<EswBreakFeeRate>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:breakFeeRate"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:breakFeeRate"/>
+</EswBreakFeeRate>
+<EswFinalPriceFee>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFinalPriceFee"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swFinalPriceFee"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:finalPriceFee"/>
+</EswFinalPriceFee>
+<EswFinalPriceFeeAmount>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFinalPriceFeeAmount/fpml:amount"/>
+</EswFinalPriceFeeAmount>
+<EswFinalPriceFeeCurrency>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swFinalPriceFeeAmount/fpml:currency"/>
+</EswFinalPriceFeeCurrency>
+<EswRightToIncrease>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swRightToIncrease"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swRightToIncrease"/>
+</EswRightToIncrease>
+<EswGrossPrice>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swGrossPrice"/>
+</EswGrossPrice>
+<EswApplicableRegion>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swApplicableRegion"/>
+</EswApplicableRegion>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swDividendPercentageComponent">
+<EswDividendComponent>
+<DividendPercentageComponentShare>
+<xsl:value-of select="fpml:dividendPercentageComponentShare"/>
+</DividendPercentageComponentShare>
+<DividendPercentageComponent>
+<xsl:value-of select="fpml:dividendPercentageComponent"/>
+</DividendPercentageComponent>
+</EswDividendComponent>
+</xsl:for-each>
+<EswEarlyFinalValuationDateElection>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyFinalValuationDateElection or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:optionalEarlyTerminationDate">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyFinalValuationDateElection"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:optionalEarlyTerminationDate"/>
+</xsl:if>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyFinalValuationDateElection">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyFinalValuationDateElection"/>
+</xsl:if>
+</EswEarlyFinalValuationDateElection>
+<EswEarlyTerminationElectingParty>
+<xsl:choose>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:earlyTerminationElectingParty or fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyTerminationElectingParty or fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyTerminationElectingParty">
+<xsl:for-each select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:earlyTerminationElectingParty">
+<PartyOccurrence>
+<xsl:value-of select="./@href"/>
+</PartyOccurrence>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyTerminationElectingParty">
+<PartyOccurrence>
+<xsl:value-of select="./@href"/>
+</PartyOccurrence>
+</xsl:for-each>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyTerminationElectingParty">
+<PartyOccurrence>
+<xsl:value-of select="./@href"/>
+</PartyOccurrence>
+</xsl:for-each>
+</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:earlyTerminationElectingPartyMethod or fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyTerminationElectingPartyMethod or fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyTerminationElectingPartyMethod">
+<PartyOccurrence>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination/fpml:earlyTerminationElectingPartyMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swEarlyTerminationElectingPartyMethod"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swEarlyTerminationElectingPartyMethod"/>
+</PartyOccurrence>
+</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</EswEarlyTerminationElectingParty>
+<xsl:if test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails or fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:optionalEarlyTermination">
+<xsl:for-each select="//fpml:noticePeriod">
+<xsl:if test="fpml:noticeParty/@href='partyA'">
+<NoticePeriodPtyA>
+<xsl:value-of select="fpml:numberOfDays/fpml:periodMultiplier"/>
+</NoticePeriodPtyA>
+</xsl:if>
+<xsl:if test="fpml:noticeParty/@href='partyB'">
+<NoticePeriodPtyB>
+<xsl:value-of select="fpml:numberOfDays/fpml:periodMultiplier"/>
+</NoticePeriodPtyB>
+</xsl:if>
+</xsl:for-each>
+</xsl:if>
+<EswInsolvencyFiling>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:insolvencyFiling"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:insolvencyFiling"/>
+</EswInsolvencyFiling>
+<EswLossOfStockBorrow>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:lossOfStockBorrow"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:lossOfStockBorrow"/>
+</EswLossOfStockBorrow>
+<EswIncreasedCostOfStockBorrow>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:extraordinaryEvents/fpml:additionalDisruptionEvents/fpml:increasedCostOfStockBorrow"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:increasedCostOfStockBorrow"/>
+</EswIncreasedCostOfStockBorrow>
+<EswBulletCompoundingSpread>
+<xsl:if test="$docsType='EquitySwapAmericasPrivate' or $docsType='EquitySwapAEJPrivate' or $docsType='EquitySwapEuropePrivate' or $docsType='EquitySwapGlobalPrivate'">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:swBulletCompoundingSpread"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBulletCompoundingSpread"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:bulletCompoundingSpread"/>
+</xsl:if>
+</EswBulletCompoundingSpread>
+<EswSpecifiedExchange>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:extraordinaryEvents/fpml:specifiedExchangeId"/>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:specifiedExchange"/>
+</EswSpecifiedExchange>
+<EswCorporateActionFlag>
+<xsl:if test="$productType='Equity Share Swap' or $productType='Equity Basket Swap'">
+<xsl:choose>
+<xsl:when test="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swCorporateActionFlag">
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swCorporateActionFlag"/>
+</xsl:when>
+<xsl:when test="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:corporateActionFlag">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swEquitySwapParameters/fpml:corporateActionFlag"/>
+</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswCorporateActionFlag>
+<xsl:if test="//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swApplicableSideLetters/fpml:sw2021ISDADefs">
+<sw2021ISDADefs>
+<xsl:value-of select="//fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swApplicableSideLetters/fpml:sw2021ISDADefs"/>
+</sw2021ISDADefs>
+</xsl:if>
+<EswChinaConnectFlag>
+<xsl:if test="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swChinaConnect">
+<xsl:choose>
+<xsl:when test="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swChinaConnect">true</xsl:when>
+<xsl:otherwise>false</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</EswChinaConnectFlag>
+<EswChinaConnect>
+<xsl:if test="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swChinaConnect">
+<EswShareDisqualification>
+<xsl:value-of select="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swChinaConnect/fpml:swShareDisqualification"/>
+</EswShareDisqualification>
+<EswServiceTermination>
+<xsl:value-of select="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swChinaConnect/fpml:swServiceTermination"/>
+</EswServiceTermination>
+</xsl:if>
+</EswChinaConnect>
+<EswEventId>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swEquitySwapDetails/fpml:pcEntry"/>
+</EswEventId>
+<xsl:if test="$productType='Equity Basket Swap'">
+<EquityExchange>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swSwapExchangeId"/>
+</EquityExchange>
+<EbsSubstitutionSelection>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionSelection"/>
+</EbsSubstitutionSelection>
+<EbsSubstitutionTrigger>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swTrigger"/>
+</EbsSubstitutionTrigger>
+<EbsSubstitutionElectingParty>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swElectingParty"/>
+</EbsSubstitutionElectingParty>
+<EbsSubstitutionCriteria>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swSubstitutionCriteria"/>
+</EbsSubstitutionCriteria>
+<EbsEligibleIndexGrid>
+<xsl:for-each select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swEligibleIndex">
+<EbsEligibleIndexEntry>
+<EligibleIndex>
+<xsl:value-of select="fpml:swIndex/fpml:instrumentId"/>
+</EligibleIndex>
+<MinPercent>
+<xsl:value-of select="fpml:swMinPercent"/>
+</MinPercent>
+<MaxPercent>
+<xsl:value-of select="fpml:swMaxPercent"/>
+</MaxPercent>
+</EbsEligibleIndexEntry>
+</xsl:for-each>
+</EbsEligibleIndexGrid>
+<xsl:for-each select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swRestrictedRegion/fpml:swRegion">
+<EbsRestrictedRegion>
+<xsl:value-of select="."/>
+</EbsRestrictedRegion>
+</xsl:for-each>
+<EbsRestrictedRegionMinPercent>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swRestrictedRegion/fpml:swMinPercent"/>
+</EbsRestrictedRegionMinPercent>
+<EbsRestrictedRegionMaxPercent>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swRestrictedRegion/fpml:swMaxPercent"/>
+</EbsRestrictedRegionMaxPercent>
+<EbsSubstitutionAmount>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swSubstitutionAmount/fpml:swAmount"/>
+</EbsSubstitutionAmount>
+<EbsSubstitutionAmountMinPercent>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swSubstitutionAmount/fpml:swMinPercent"/>
+</EbsSubstitutionAmountMinPercent>
+<EbsSubstitutionAmountMaxPercent>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swSubstitutionAmount/fpml:swMaxPercent"/>
+</EbsSubstitutionAmountMaxPercent>
+<EbsEligibleSectorGrid>
+<xsl:for-each select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swEligibleSector">
+<EbsEligibleSectorEntry>
+<EligibleIndustrialSector>
+<xsl:value-of select="fpml:swIndustrialSector"/>
+</EligibleIndustrialSector>
+<EligibleSectorMinPercent>
+<xsl:value-of select="fpml:swMinPercent"/>
+</EligibleSectorMinPercent>
+<EligibleSectorMaxPercent>
+<xsl:value-of select="fpml:swMaxPercent"/>
+</EligibleSectorMaxPercent>
+</EbsEligibleSectorEntry>
+</xsl:for-each>
+</EbsEligibleSectorGrid>
+<EbsADTVDays>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swAvgDailyTradingVolume/fpml:swDays"/>
+</EbsADTVDays>
+<EbsADTVPercentage>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swBasketSubstitutionDetails/fpml:swSubstitutionCriteriaDetails/fpml:swAvgDailyTradingVolume/fpml:swPercentage"/>
+</EbsADTVPercentage>
+<SwapSideLetter>
+<xsl:value-of select="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swApplicableSideLetters/fpml:swBasketSwapSideLetter"/>
+</SwapSideLetter>
+<SubstitutionSideLetter>
+<xsl:value-of select="//fpml:swLongFormTrade//fpml:swExtendedTradeDetails/fpml:swApplicableSideLetters//fpml:swSubstitutionSideLetter"/>
+</SubstitutionSideLetter>
+<EbsGrid>
+<TotalShares>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:basket/fpml:openUnits"/>
+</TotalShares>
+<xsl:for-each select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:equitySwapTransactionSupplement/fpml:returnLeg/fpml:underlyer/fpml:basket/fpml:basketConstituent">
+<xsl:variable name="ebs_id" select="@id"/>
+<EbsEntry>
+<RIC>
+<xsl:value-of select="fpml:equity/fpml:instrumentId[1]"/>
+</RIC>
+<ISIN>
+<xsl:value-of select="fpml:equity/fpml:instrumentId[2]"/>
+</ISIN>
+<Description>
+<xsl:value-of select="fpml:equity/fpml:description"/>
+</Description>
+<Exchange>
+<xsl:value-of select="fpml:equity/fpml:exchangeId"/>
+</Exchange>
+<SharesAmount>
+<xsl:value-of select="fpml:constituentWeight/fpml:openUnits"/>
+</SharesAmount>
+<ReferenceAmount>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swReferencePrice[@href=$ebs_id]/fpml:swReferenceAmount"/>
+</ReferenceAmount>
+<RefCurrency>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swReferencePrice[@href=$ebs_id]/fpml:swReferenceCurrency"/>
+</RefCurrency>
+<FxRate>
+<xsl:value-of select="//fpml:swExtendedTradeDetails/fpml:swBasketSwapDetails/fpml:swReferencePrice[@href=$ebs_id]/fpml:swReferenceFXRate"/>
+</FxRate>
+<UnitPrice>
+<xsl:value-of select="fpml:underlyerPrice/fpml:netPrice/fpml:amount"/>
+</UnitPrice>
+<Currency>
+<xsl:value-of select="fpml:underlyerPrice/fpml:netPrice/fpml:currency"/>
+</Currency>
+<Notional>
+<xsl:value-of select="fpml:underlyerNotional/fpml:amount"/>
+</Notional>
+<RelatedExchange>
+<xsl:value-of select="fpml:equity/fpml:relatedExchangeId"/>
+</RelatedExchange>
+<DividendPercentage>
+<xsl:value-of select="fpml:dividendPayout/fpml:dividendPayoutRatio"/>
+</DividendPercentage>
+</EbsEntry>
+</xsl:for-each>
+</EbsGrid>
+</xsl:if>
+<NCCreditProductType/>
+<NCIndivTradeSummary>
+<NCIndivNCMId/>
+<NCIndivMWId/>
+<NCIndivORFundId/>
+<NCIndivORFund/>
+<NCIndivRPFundId/>
+<NCIndivRPFund/>
+<NCIndivEEFundId/>
+<NCIndivEEFund/>
+<NCIndivNotionalAmount/>
+<NCIndivNotionalCurrency/>
+<NCIndivFeeAmount/>
+<NCIndivFeeCurrency/>
+<NCIndivStatus/>
+</NCIndivTradeSummary>
+<NCNovationBlockID/>
+<NCNCMID/>
+<NCRPOldTRN/>
+<NCCEqualsCEligible/>
+<NCSummaryLinkID/>
+<NCORFundId/>
+<NCORFundName/>
+<NCRPFundId/>
+<NCRPFundName/>
+<NCEEFundId/>
+<NCEEFundName/>
+<NCRecoveryFactor/>
+<NCFixedSettlement/>
+<NCSwaptionDocsType/>
+<NCAdditionalMatrixProvision/>
+<NCSwaptionPublicationDate/>
+<NCOptionDirectionA/>
+<TIWDTCCTRI/>
+<TIWActiveStatus/>
+<TIWValueDate/>
+<TIWAsOfDate/>
+<EquityBackLoadingFlag>
+<xsl:value-of select="//fpml:swLongFormTrade/fpml:swBackLoadingFlag"/>
+<xsl:value-of select="//fpml:swShortFormTrade/fpml:swEDRBackLoadingFlag"/>
+</EquityBackLoadingFlag>
+<MigrationReferences>
+<xsl:for-each select="//fpml:swLongFormTrade/fpml:swMigrationReference">
+<MigrationReference>
+<MigrationIDParty>
+<xsl:value-of select="@href"/>
+</MigrationIDParty>
+<MigrationID>
+<xsl:value-of select="./fpml:swMigrationID"/>
+</MigrationID>
+</MigrationReference>
+</xsl:for-each>
+<xsl:for-each select="//fpml:swShortFormTrade/fpml:swMigrationReference">
+<MigrationReference>
+<MigrationIDParty>
+<xsl:value-of select="@href"/>
+</MigrationIDParty>
+<MigrationID>
+<xsl:value-of select="./fpml:swMigrationID"/>
+</MigrationID>
+</MigrationReference>
+</xsl:for-each>
+</MigrationReferences>
+<Rule15A-6>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swComplianceElection/fpml:rule15A-6"/>
+</Rule15A-6>
+<HedgingParty>
+<xsl:for-each select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:hedgingParty">
+<HedgingPartyOccurrence>
+<xsl:value-of select="./@href"/>
+</HedgingPartyOccurrence>
+</xsl:for-each>
+<xsl:for-each select="//fpml:swShortFormTrade/fpml:hedgingParty">
+<HedgingPartyOccurrence>
+<xsl:value-of select="./@href"/>
+</HedgingPartyOccurrence>
+</xsl:for-each>
+</HedgingParty>
+<DeterminingParty>
+<xsl:for-each select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:determiningParty">
+<DeterminingPartyOccurrence>
+<xsl:value-of select="./@href"/>
+</DeterminingPartyOccurrence>
+</xsl:for-each>
+<xsl:for-each select="//fpml:swShortFormTrade/fpml:determiningParty">
+<DeterminingPartyOccurrence>
+<xsl:value-of select="./@href"/>
+</DeterminingPartyOccurrence>
+</xsl:for-each>
+</DeterminingParty>
+<CalculationAgent>
+<xsl:for-each select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:calculationAgent/fpml:calculationAgentPartyReference">
+<CalculationAgentOccurrence>
+<xsl:value-of select="./@href"/>
+</CalculationAgentOccurrence>
+</xsl:for-each>
+<xsl:for-each select="//fpml:swShortFormTrade/fpml:calculationAgentPartyReference">
+<CalculationAgentOccurrence>
+<xsl:value-of select="./@href"/>
+</CalculationAgentOccurrence>
+</xsl:for-each>
+</CalculationAgent>
+<IndependentAmount2>
+<Payer>
+<xsl:variable name="payer">
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swIndependentAmount/fpml:payerPartyReference/@href"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:collateral/fpml:independentAmount/fpml:payerPartyReference/@href"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swIndependentAmountPercentage/fpml:payerPartyReference/@href"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$payer=$partyA">A</xsl:when>
+<xsl:when test="$payer=$partyB">B</xsl:when>
+</xsl:choose>
+</Payer>
+<Currency>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swIndependentAmount/fpml:paymentAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:collateral/fpml:independentAmount/fpml:paymentDetail/fpml:paymentAmount/fpml:currency"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swIndependentAmountPercentage/fpml:currency"/>
+</Currency>
+<Amount>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swIndependentAmount/fpml:paymentAmount/fpml:amount"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:collateral/fpml:independentAmount/fpml:paymentDetail/fpml:paymentAmount/fpml:amount"/>
+</Amount>
+<IndependentAmountPercentage>
+<xsl:value-of select="fpml:swShortFormTrade/fpml:swIndependentAmount/fpml:paymentAmount/fpml:swIAPercentage"/>
+<xsl:value-of select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swExtendedTradeDetails/fpml:swIndependentAmountPercentage/fpml:swIAPercentage"/>
+</IndependentAmountPercentage>
+</IndependentAmount2>
+<xsl:apply-templates select="fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:otherPartyPayment"/>
+<NotionalFutureValue/>
+<NotionalSchedule/>
+<SendForPublishing/>
+<SubscriberId/>
+<ModifiedEquityDelivery/>
+<SettledEntityMatrixSource/>
+<SettledEntityMatrixDate/>
+<AdditionalTerms/>
+<NovationInitiatedBy>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation">
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovationInitiatorReference/@href = /fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferor/@href">Transferor</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovationInitiatorReference/@href = /fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferee/@href">Transferee</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovationInitiatorReference/@href = /fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:remainingParty/@href">RemainingParty</xsl:when>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swNovationInitiatorReference/@href = /fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:otherRemainingParty/@href">RemainingParty</xsl:when>
+<xsl:otherwise>Transferor</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+</NovationInitiatedBy>
+<ReportingData>
+<PriorUSI/>
+<UPI/>
+</ReportingData>
+<xsl:call-template name="outputCommonReportingFields">
+<xsl:with-param name="reportingData" select="$reportingData"/>
+</xsl:call-template>
+<xsl:for-each select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:swBusinessConductDetails/fpml:swMidMarketPrice">
+<xsl:choose>
+<xsl:when test="fpml:swUnit | fpml:swAmount | fpml:swCurrency">
+<MidMarketPriceType>
+<xsl:value-of select="fpml:swUnit"/>
+</MidMarketPriceType>
+<MidMarketPriceValue>
+<xsl:value-of select="fpml:swAmount"/>
+</MidMarketPriceValue>
+<xsl:choose>
+<xsl:when test="fpml:swUnit='Price'">
+<MidMarketPriceCurrency>
+<xsl:value-of select="fpml:swCurrency"/>
+</MidMarketPriceCurrency>
+</xsl:when>
+<xsl:otherwise>
+<IntentToBlankMidMarketCurrency>true</IntentToBlankMidMarketCurrency>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise>
+<IntentToBlankMidMarketPrice>true</IntentToBlankMidMarketPrice>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+<xsl:for-each select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:swBusinessConductDetails/fpml:swMidMarketPrice">
+<xsl:choose>
+<xsl:when test="fpml:swUnit | fpml:swAmount | fpml:swCurrency">
+<NovationFeeMidMarketPriceType>
+<xsl:value-of select="fpml:swUnit"/>
+</NovationFeeMidMarketPriceType>
+<NovationFeeMidMarketPriceValue>
+<xsl:value-of select="fpml:swAmount"/>
+</NovationFeeMidMarketPriceValue>
+<xsl:choose>
+<xsl:when test="fpml:swUnit='Price'">
+<NovationFeeMidMarketPriceCurrency>
+<xsl:value-of select="fpml:swCurrency"/>
+</NovationFeeMidMarketPriceCurrency>
+</xsl:when>
+<xsl:otherwise>
+<NovationFeeIntentToBlankMidMarketCurrency>true</NovationFeeIntentToBlankMidMarketCurrency>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:when>
+<xsl:otherwise>
+<NovationFeeIntentToBlankMidMarketPrice>true</NovationFeeIntentToBlankMidMarketPrice>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+<DFEmbeddedOptionType/>
+<GenProdPrimaryAssetClass/>
+<GenProdSecondaryAssetClass/>
+<ProductId/>
+<OptionDirectionA/>
+<OptionPremium/>
+<OptionPremiumCurrency/>
+<OptionStrike/>
+<OptionStrikeType/>
+<FirstExerciseDate/>
+<FloatingDayCountConvention/>
+<DayCountConvention/>
+<GenProdUnderlyer>
+<UnderlyerType/>
+<UnderlyerDescription/>
+<UnderlyerDirectionA/>
+<UnderlyerFixedRate/>
+<UnderlyerIDCode/>
+<UnderlyerIDType/>
+<UnderlyerReferenceCurrency/>
+<UnderlyerFXCurrency/>
+</GenProdUnderlyer>
+<GenProdNotional>
+<NotionalCurrency/>
+<NotionalUnit/>
+<Notional/>
+</GenProdNotional>
+<ResetFrequency/>
+<DayCountFraction>
+<Schema/>
+<Fraction/>
+</DayCountFraction>
+<xsl:if test="boolean($swOrderDetails)">
+<OrderDetails>
+<xsl:if test="boolean($swOrderDetails/fpml:swTypeOfOrder)">
+<TypeOfOrder>
+<xsl:value-of select="$swOrderDetails/fpml:swTypeOfOrder"/>
+</TypeOfOrder>
+</xsl:if>
+<xsl:if test="boolean($swOrderDetails/fpml:swTotalConsideration)">
+<TotalConsideration>
+<xsl:value-of select="$swOrderDetails/fpml:swTotalConsideration"/>
+</TotalConsideration>
+</xsl:if>
+<xsl:if test="boolean($swOrderDetails/fpml:swRateOfExchange)">
+<RateOfExchange>
+<xsl:value-of select="$swOrderDetails/fpml:swRateOfExchange"/>
+</RateOfExchange>
+</xsl:if>
+<xsl:if test="boolean($swOrderDetails/fpml:swClientCounterparty)">
+<ClientCounterparty>
+<xsl:value-of select="$swOrderDetails/fpml:swClientCounterparty"/>
+</ClientCounterparty>
+</xsl:if>
+<xsl:if test="boolean($swOrderDetails/fpml:swTotalCommissionAndExpenses)">
+<TotalCommissionAndExpenses>
+<xsl:value-of select="$swOrderDetails/fpml:swTotalCommissionAndExpenses"/>
+</TotalCommissionAndExpenses>
+</xsl:if>
+<xsl:if test="boolean($swOrderDetails/fpml:swClientSettlementResponsibilities)">
+<ClientSettlementResponsibilities>
+<xsl:value-of select="$swOrderDetails/fpml:swClientSettlementResponsibilities"/>
+</ClientSettlementResponsibilities>
+</xsl:if>
+</OrderDetails>
+</xsl:if>
+<DurationType/>
+<RateCalcType/>
+<SecurityType/>
+<OpenRepoRate/>
+<OpenRepoSpread/>
+<OpenCashAmount/>
+<OpenDeliveryMethod/>
+<OpenSecurityNominal/>
+<OpenSecurityQuantity/>
+<CloseDeliveryMethod/>
+<CloseSecurityNominal/>
+<CloseSecurityQuantity/>
+<DayCountBasis/>
+<SecurityIDType/>
+<SecurityID/>
+<SecurityCurrency/>
+</SWDMLTrade>
+</xsl:template>
+<xsl:template match="fpml:swClearingDetails">
+<ClearingDetails>
+<ClearingStatus>
+<xsl:value-of select="fpml:swClearingStatus"/>
+</ClearingStatus>
+<ClearingHouseTradeID>
+<xsl:value-of select="fpml:swClearingHouseTradeID"/>
+</ClearingHouseTradeID>
+<ClearingHouseUpfrontFeeSettlementDate>
+<xsl:value-of select="fpml:swClearingHouseUpfrontFeeSettlementDate"/>
+</ClearingHouseUpfrontFeeSettlementDate>
+<ClearingHousePreferredISIN>
+<xsl:value-of select="fpml:swClearingHousePreferredISIN"/>
+</ClearingHousePreferredISIN>
+<ClearedTimestamp>
+<xsl:value-of select="fpml:swClearedTimestamp"/>
+</ClearedTimestamp>
+<ClearedUSINamespace>
+<xsl:value-of select="fpml:swClearedUSI/fpml:swIssuer"/>
+</ClearedUSINamespace>
+<ClearedUSI>
+<xsl:value-of select="fpml:swClearedUSI/fpml:swTradeId"/>
+</ClearedUSI>
+<ClearedUTINamespace>
+<xsl:value-of select="fpml:swClearedUTI/fpml:swIssuer"/>
+</ClearedUTINamespace>
+<ClearedUTI>
+<xsl:value-of select="fpml:swClearedUTI/fpml:swTradeId"/>
+</ClearedUTI>
+</ClearingDetails>
+</xsl:template>
+<xsl:template name="fpml:swAllocations">
+<xsl:apply-templates select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations/fpml:swAllocation"/>
+</xsl:template>
+<xsl:template match="fpml:swAllocation">
+<Allocation>
+<xsl:variable name="directionRev">
+<xsl:choose>
+<xsl:when test="@directionReversed">
+<xsl:value-of select="@directionReversed"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<DirectionReversed>
+<xsl:value-of select="$directionRev"/>
+</DirectionReversed>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations/fpml:swAllocation/fpml:payerPartyReference">
+<xsl:variable name="PayerRef" select="string(fpml:payerPartyReference/@href)"/>
+<xsl:variable name="ReceiverRef" select="string(fpml:receiverPartyReference/@href)"/>
+<xsl:variable name="PayerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$PayerRef]/fpml:partyId)"/>
+<xsl:variable name="ReceiverBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$ReceiverRef]/fpml:partyId)"/>
+<Payer>
+<xsl:value-of select="$PayerBIC"/>
+</Payer>
+<Receiver>
+<xsl:value-of select="$ReceiverBIC"/>
+</Receiver>
+</xsl:when>
+<xsl:otherwise>
+<xsl:variable name="BuyerRef" select="string(fpml:buyerPartyReference/@href)"/>
+<xsl:variable name="SellerRef" select="string(fpml:sellerPartyReference/@href)"/>
+<xsl:variable name="BuyerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$BuyerRef]/fpml:partyId)"/>
+<xsl:variable name="SellerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$SellerRef]/fpml:partyId)"/>
+<Buyer>
+<xsl:value-of select="$BuyerBIC"/>
+</Buyer>
+<Seller>
+<xsl:value-of select="$SellerBIC"/>
+</Seller>
+</xsl:otherwise>
+</xsl:choose>
+<xsl:variable name="allocatedNumberOfOptions" select="string(fpml:swAllocatedNumberOfOptions)"/>
+<xsl:if test="$allocatedNumberOfOptions != ''">
+<Amount>
+<xsl:value-of select="$allocatedNumberOfOptions"/>
+</Amount>
+</xsl:if>
+<xsl:variable name="allocatedVegaNotional" select="string(fpml:swAllocatedVegaNotional)"/>
+<xsl:if test="$allocatedVegaNotional != ''">
+<Amount>
+<xsl:value-of select="$allocatedVegaNotional"/>
+</Amount>
+</xsl:if>
+<xsl:variable name="allocatedVarianceAmount" select="string(fpml:swAllocatedVarianceAmount)"/>
+<xsl:if test="$allocatedVarianceAmount != ''">
+<AllocatedVarianceAmount>
+<xsl:value-of select="$allocatedVarianceAmount"/>
+</AllocatedVarianceAmount>
+</xsl:if>
+<xsl:variable name="allocatedUnits" select="string(fpml:swAllocatedUnits)"/>
+<xsl:if test="$allocatedUnits != ''">
+<Amount>
+<xsl:value-of select="$allocatedUnits"/>
+</Amount>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 and count(fpml:swUniqueTransactionId/fpml:swIssuer)=0]/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="globalUti" select="string(fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 and count(fpml:swUniqueTransactionId/fpml:swIssuer)=0]/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<GlobalUTI>
+<xsl:value-of select="$globalUti"/>
+</GlobalUTI>
+</xsl:if>
+<xsl:if test="fpml:independentAmount">
+<xsl:apply-templates select="fpml:independentAmount"/>
+</xsl:if>
+<xsl:if test="fpml:independentAmountPercentage">
+<xsl:apply-templates select="fpml:independentAmountPercentage"/>
+</xsl:if>
+<xsl:if test="fpml:swPrivateTradeId">
+<xsl:apply-templates select="fpml:swPrivateTradeId"/>
+</xsl:if>
+<xsl:if test="fpml:swSalesCredit">
+<xsl:apply-templates select="fpml:swSalesCredit"/>
+</xsl:if>
+<xsl:if test="fpml:swAdditionalField">
+<xsl:apply-templates select="fpml:swAdditionalField"/>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade//fpml:swAllocations/fpml:swAllocation/fpml:swClearingBroker/fpml:partyId">
+<xsl:variable name="clearingbroker" select="string(fpml:swClearingBroker/fpml:partyId)"/>
+<ClearingBrokerId>
+<xsl:value-of select="$clearingbroker"/>
+</ClearingBrokerId>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations/fpml:swAllocation/fpml:swNettingString">
+<xsl:variable name="nettingstring" select="string(fpml:swNettingString)"/>
+<NettingString>
+<xsl:value-of select="$nettingstring"/>
+</NettingString>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swObligatoryReporting">
+<ObligatoryReporting>
+<xsl:value-of select="fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swObligatoryReporting"/>
+</ObligatoryReporting>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swReportingCounterpartyReference/@href">
+<xsl:variable name="rcp" select="string(fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swReportingCounterpartyReference/@href)"/>
+<xsl:variable name="rcpBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$rcp]/fpml:partyId)"/>
+<ReportingCounterparty>
+<xsl:value-of select="$rcpBIC"/>
+</ReportingCounterparty>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="usinamespace" select="string(fpml:swAllocationReportingDetails[count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<USINamespace>
+<xsl:value-of select="$usinamespace"/>
+</USINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[(count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank') and count(fpml:swUniqueTransactionId/fpml:swIssuer)=1]/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="usi" select="string(fpml:swAllocationReportingDetails[(count(fpml:swJurisdiction)=0 or fpml:swJurisdiction='DoddFrank') and count(fpml:swUniqueTransactionId/fpml:swIssuer)=1]/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<USI>
+<xsl:value-of select="$usi"/>
+</USI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swObligatoryReporting">
+<SEObligatoryReporting>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swObligatoryReporting"/>
+</SEObligatoryReporting>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swReportingCounterpartyReference/@href">
+<xsl:variable name="rcp" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swReportingCounterpartyReference/@href)"/>
+<xsl:variable name="rcpBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$rcp]/fpml:partyId)"/>
+<SEReportingCounterparty>
+<xsl:value-of select="$rcpBIC"/>
+</SEReportingCounterparty>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="seutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<SEUTINamespace>
+<xsl:value-of select="$seutinamespace"/>
+</SEUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="seuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='SEC']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<SEUTI>
+<xsl:value-of select="$seuti"/>
+</SEUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="esutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<ESMAUTINamespace>
+<xsl:value-of select="$esutinamespace"/>
+</ESMAUTINamespace>
+<ESMAIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swIssuer and $esutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</ESMAIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="esuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<ESMAUTI>
+<xsl:value-of select="$esuti"/>
+</ESMAUTI>
+<ESMAIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swUniqueTransactionId/fpml:swTradeId and $esuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</ESMAIntentToBlankUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swReportForCounterparty">
+<ESMAReportForCpty>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ESMA']/fpml:swReportForCounterparty"/>
+</ESMAReportForCpty>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="fcautinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<FCAUTINamespace>
+<xsl:value-of select="$fcautinamespace"/>
+</FCAUTINamespace>
+<FCAIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swIssuer and $fcautinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</FCAIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="fcauti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<FCAUTI>
+<xsl:value-of select="$fcauti"/>
+</FCAUTI>
+<FCAIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swUniqueTransactionId/fpml:swTradeId and $fcauti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</FCAIntentToBlankUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swReportForCounterparty">
+<FCAReportForCpty>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='FCA']/fpml:swReportForCounterparty"/>
+</FCAReportForCpty>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="jfutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<JFSAUTINamespace>
+<xsl:value-of select="$jfutinamespace"/>
+</JFSAUTINamespace>
+<JFSAIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swIssuer and $jfutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</JFSAIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="jfuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<JFSAUTI>
+<xsl:value-of select="$jfuti"/>
+</JFSAUTI>
+<JFSAIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='JFSA']/fpml:swUniqueTransactionId/fpml:swTradeId and $jfuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</JFSAIntentToBlankUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="hkutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<HKMIUTINamespace>
+<xsl:value-of select="$hkutinamespace"/>
+</HKMIUTINamespace>
+<HKMAIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swIssuer and $hkutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</HKMAIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="hkuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<HKMIUTI>
+<xsl:value-of select="$hkuti"/>
+</HKMIUTI>
+<HKMAIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='HKMA']/fpml:swUniqueTransactionId/fpml:swTradeId and $hkuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</HKMAIntentToBlankUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swObligatoryReporting">
+<MIObligatoryReporting>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swObligatoryReporting"/>
+</MIObligatoryReporting>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swReportingCounterpartyReference/@href">
+<xsl:variable name="rcp" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swReportingCounterpartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$rcp = 'venue' or $rcp = '#venue'">
+<MIReportingCounterparty>
+<xsl:value-of select="'venue'"/>
+</MIReportingCounterparty>
+</xsl:when>
+<xsl:otherwise>
+<xsl:variable name="rcpBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$rcp]/fpml:partyId)"/>
+<MIReportingCounterparty>
+<xsl:value-of select="$rcpBIC"/>
+</MIReportingCounterparty>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swMIFIDTransactionIdentifier">
+<xsl:variable name="mitid" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swMIFIDTransactionIdentifier)"/>
+<MITID>
+<xsl:value-of select="$mitid"/>
+</MITID>
+<MIIntentToBlankTID>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swMIFIDTransactionIdentifier and $mitid ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</MIIntentToBlankTID>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swRegulatoryReportable">
+<MITransactionReportable>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swRegulatoryReportable"/>
+</MITransactionReportable>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swTransparencyReportable">
+<MITransparencyReportable>
+<xsl:value-of select="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MIFID']/fpml:swTransparencyReportable"/>
+</MITransparencyReportable>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="asutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<ASICUTINamespace>
+<xsl:value-of select="$asutinamespace"/>
+</ASICUTINamespace>
+<ASICIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swIssuer and $asutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</ASICIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="asuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<ASICUTI>
+<xsl:value-of select="$asuti"/>
+</ASICUTI>
+<ASICIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='ASIC']/fpml:swUniqueTransactionId/fpml:swTradeId and $asuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</ASICIntentToBlankUTI>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swIssuer">
+<xsl:variable name="masutinamespace" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swIssuer)"/>
+<MASUTINamespace>
+<xsl:value-of select="$masutinamespace"/>
+</MASUTINamespace>
+<MASIntentToBlankUTINamespace>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swIssuer and $masutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</MASIntentToBlankUTINamespace>
+</xsl:if>
+<xsl:if test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swTradeId">
+<xsl:variable name="masuti" select="string(fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swTradeId)"/>
+<MASUTI>
+<xsl:value-of select="$masuti"/>
+</MASUTI>
+<MASIntentToBlankUTI>
+<xsl:choose>
+<xsl:when test="fpml:swAllocationReportingDetails[fpml:swJurisdiction='MAS']/fpml:swUniqueTransactionId/fpml:swTradeId and $masuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</MASIntentToBlankUTI>
+</xsl:if>
+<xsl:apply-templates select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations/fpml:swAllocation/fpml:swClearingDetails"/>
+<xsl:if test="fpml:swIdentifiers">
+<PartyIdentifiers>
+<xsl:if test="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swCounterpartyLEI">
+<CounterpartyLEI><xsl:value-of select="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swCounterpartyLEI"/></CounterpartyLEI>
+</xsl:if>
+<xsl:if test="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swCounterpartyPLI">
+<CounterpartyPLI><xsl:value-of select="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swCounterpartyPLI"/></CounterpartyPLI>
+</xsl:if>
+<xsl:if test="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swDataMaskingFlag">
+<xsl:variable name="dataMaskingFlag" select="fpml:swIdentifiers/fpml:swPartyIdentifiers/fpml:swDataMaskingFlag"/>
+<DataMaskingFlag>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskCFTC">
+<MaskCFTC><xsl:value-of select="$dataMaskingFlag/fpml:swMaskCFTC"/></MaskCFTC>
+</xsl:if>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskJFSA">
+<MaskJFSA><xsl:value-of select="$dataMaskingFlag/fpml:swMaskJFSA"/></MaskJFSA>
+</xsl:if>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskCanada">
+<MaskCanada><xsl:value-of select="$dataMaskingFlag/fpml:swMaskCanada"/></MaskCanada>
+</xsl:if>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskHKMA">
+<MaskHKMA><xsl:value-of select="$dataMaskingFlag/fpml:swMaskHKMA"/></MaskHKMA>
+</xsl:if>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskASIC">
+<MaskASIC><xsl:value-of select="$dataMaskingFlag/fpml:swMaskASIC"/></MaskASIC>
+</xsl:if>
+<xsl:if test="$dataMaskingFlag/fpml:swMaskMAS">
+<MaskMAS><xsl:value-of select="$dataMaskingFlag/fpml:swMaskMAS"/></MaskMAS>
+</xsl:if>
+</DataMaskingFlag>
+</xsl:if>
+</PartyIdentifiers>
+</xsl:if>
+<xsl:if test="fpml:swNexusReportingDetails">
+<xsl:variable name="nexusParentNode.rtf">
+<xsl:apply-templates select="fpml:swNexusReportingDetails/node()" mode="mapReportingData"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="function-available('common:node-set')">
+<xsl:call-template name="AllocationNexusFields">
+<xsl:with-param name="nexusNode" select="common:node-set($nexusParentNode.rtf)"/>
+</xsl:call-template>
+</xsl:when>
+<xsl:otherwise>
+<xsl:call-template name="AllocationNexusFields">
+<xsl:with-param name="nexusNode" select="nexusParentNode.rtf"/>
+</xsl:call-template>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:if test="fpml:swCounterpartyCorporateSector">
+<CounterpartyCorporateSector>
+<xsl:value-of select="fpml:swCounterpartyCorporateSector"/>
+</CounterpartyCorporateSector>
+</xsl:if>
+</Allocation>
+</xsl:template>
+<xsl:template match="fpml:independentAmount">
+<IndependentAmount>
+<xsl:variable name="amount" select="string(fpml:paymentDetail/fpml:paymentAmount/fpml:amount)"/>
+<Amount>
+<xsl:value-of select="$amount"/>
+</Amount>
+</IndependentAmount>
+</xsl:template>
+<xsl:template match="fpml:independentAmountPercentage">
+<AllocationIndependentAmountPercentage>
+<xsl:choose>
+<xsl:when test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swAllocations/fpml:swAllocation/fpml:independentAmountPercentage/fpml:payerPartyReference">
+<xsl:variable name="PayerRef" select="string(fpml:payerPartyReference/@href)"/>
+<xsl:variable name="ReceiverRef" select="string(fpml:receiverPartyReference/@href)"/>
+<xsl:variable name="PayerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$PayerRef]/fpml:partyId)"/>
+<xsl:variable name="ReceiverBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$ReceiverRef]/fpml:partyId)"/>
+<Payer>
+<xsl:value-of select="$PayerBIC"/>
+</Payer>
+<Receiver>
+<xsl:value-of select="$ReceiverBIC"/>
+</Receiver>
+</xsl:when>
+<xsl:otherwise>
+<xsl:variable name="BuyerRef" select="string(fpml:buyerPartyReference/@href)"/>
+<xsl:variable name="SellerRef" select="string(fpml:sellerPartyReference/@href)"/>
+<xsl:variable name="BuyerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$BuyerRef]/fpml:partyId)"/>
+<xsl:variable name="SellerBIC" select="string(/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML//fpml:party[@id=$SellerRef]/fpml:partyId)"/>
+<Buyer>
+<xsl:value-of select="$BuyerBIC"/>
+</Buyer>
+<Seller>
+<xsl:value-of select="$SellerBIC"/>
+</Seller>
+</xsl:otherwise>
+</xsl:choose>
+<Currency>
+<xsl:value-of select="fpml:currency"/>
+</Currency>
+<xsl:variable name="percentage" select="string(fpml:swIAPercentage)"/>
+<Percentage>
+<xsl:value-of select="$percentage"/>
+</Percentage>
+</AllocationIndependentAmountPercentage>
+</xsl:template>
+<xsl:template match="fpml:payment|fpml:otherPartyPayment">
+<AdditionalPayment>
+<PaymentDirectionA>
+<xsl:variable name="payer" select="string(fpml:payerPartyReference/@href)"/>
+<xsl:choose>
+<xsl:when test="$payer=$partyA">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</PaymentDirectionA>
+<Reason>
+<xsl:choose>
+<xsl:when test="fpml:payment">Novation</xsl:when>
+<xsl:when test="fpml:otherPartyPayment">
+<xsl:variable name="PaymentReason">
+<xsl:value-of select="string(fpml:paymentType)"/>
+</xsl:variable>
+<xsl:if test="$PaymentReason != 'NovationExecutionFee'">
+</xsl:if>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:paymentType"/>
+</xsl:otherwise>
+</xsl:choose>
+</Reason>
+<Currency>
+<xsl:value-of select="fpml:paymentAmount/fpml:currency"/>
+</Currency>
+<Amount>
+<xsl:value-of select="fpml:paymentAmount/fpml:amount"/>
+</Amount>
+<Date>
+<xsl:if test="fpml:paymentDate">
+<xsl:call-template name="formatDate">
+<xsl:with-param name="date" select="string(fpml:paymentDate/fpml:unadjustedDate)"/>
+</xsl:call-template>
+</xsl:if>
+</Date>
+<Convention>
+<xsl:if test="fpml:paymentDate/fpml:dateAdjustments/fpml:businessDayConvention != 'NotApplicable'">
+<xsl:value-of select="substring(fpml:paymentDate/fpml:dateAdjustments/fpml:businessDayConvention,1,4)"/>
+</xsl:if>
+</Convention>
+<Holidays>
+<xsl:for-each select="fpml:paymentDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter">
+<xsl:value-of select="."/>
+<xsl:if test="position() != last()">; </xsl:if>
+</xsl:for-each>
+</Holidays>
+<LegalEntity>
+<xsl:choose>
+<xsl:when test="$partyE = $partyA">
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$partyF]/fpml:partyId"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id=$partyE]/fpml:partyId"/>
+</xsl:otherwise>
+</xsl:choose>
+</LegalEntity>
+</AdditionalPayment>
+</xsl:template>
+<xsl:template match="fpml:swPrivateTradeId">
+<InternalTradeId>
+<xsl:variable name="value" select="string(.)"/>
+<xsl:value-of select="$value"/>
+</InternalTradeId>
+</xsl:template>
+<xsl:template match="fpml:swSalesCredit">
+<SalesCredit>
+<xsl:variable name="amount" select="string(.)"/>
+<xsl:value-of select="$amount"/>
+</SalesCredit>
+</xsl:template>
+<xsl:template match="additionalPayment">
+<xsl:variable name="paymentType" select="string(fpml:paymentType)"/>
+<xsl:choose>
+<xsl:when test="$paymentType='Premium'">
+<xsl:call-template name="premium"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:apply-templates select="."/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template match="fpml:swRecipient">
+<Recipient>
+<Id>
+<xsl:value-of select="./@id"/>
+</Id>
+<xsl:variable name="party" select="string(fpml:partyReference/@href)"/>
+<Party>
+<xsl:choose>
+<xsl:when test="$party=$partyA">A</xsl:when>
+<xsl:when test="$party=$partyB">B</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</Party>
+<UserName>
+<xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:tradeHeader/fpml:partyTradeInformation[fpml:partyReference/@href=$party]/fpml:trader"/>
+</UserName>
+</Recipient>
+</xsl:template>
+<xsl:template name="premium"/>
+<xsl:template name="formatDate"><xsl:param name="date"/><xsl:variable name="month" select="string(substring($date,6,2))"/><xsl:value-of select="substring($date,9,2)"/>-<xsl:choose><xsl:when test="$month='01'">Jan</xsl:when><xsl:when test="$month='02'">Feb</xsl:when><xsl:when test="$month='03'">Mar</xsl:when><xsl:when test="$month='04'">Apr</xsl:when><xsl:when test="$month='05'">May</xsl:when><xsl:when test="$month='06'">Jun</xsl:when><xsl:when test="$month='07'">Jul</xsl:when><xsl:when test="$month='08'">Aug</xsl:when><xsl:when test="$month='09'">Sep</xsl:when><xsl:when test="$month='10'">Oct</xsl:when><xsl:when test="$month='11'">Nov</xsl:when><xsl:when test="$month='12'">Dec</xsl:when><xsl:otherwise>???</xsl:otherwise></xsl:choose>-<xsl:value-of select="substring($date,1,4)"/></xsl:template>
+<xsl:template name="formatTime">
+<xsl:param name="time"/>
+<xsl:choose>
+<xsl:when test="$time='09:00:00'">9am</xsl:when>
+<xsl:when test="$time='11:00:00'">11am</xsl:when>
+<xsl:when test="$time='12:00:00'">12noon</xsl:when>
+<xsl:when test="$time='12:30:00'">12.30pm</xsl:when>
+<xsl:when test="$time='15:00:00'">3pm</xsl:when>
+<xsl:when test="$time='00:00:00'">12midnight</xsl:when>
+<xsl:when test="$time='01:00:00'">1am</xsl:when>
+<xsl:when test="$time='02:00:00'">2am</xsl:when>
+<xsl:when test="$time='03:00:00'">3am</xsl:when>
+<xsl:when test="$time='04:00:00'">4am</xsl:when>
+<xsl:when test="$time='05:00:00'">5am</xsl:when>
+<xsl:when test="$time='06:00:00'">6am</xsl:when>
+<xsl:when test="$time='07:00:00'">7am</xsl:when>
+<xsl:when test="$time='08:00:00'">8am</xsl:when>
+<xsl:when test="$time='10:00:00'">10am</xsl:when>
+<xsl:when test="$time='11:30:00'">11.30am</xsl:when>
+<xsl:when test="$time='13:00:00'">1pm</xsl:when>
+<xsl:when test="$time='14:00:00'">2pm</xsl:when>
+<xsl:when test="$time='14:10:00'">2.10pm</xsl:when>
+<xsl:when test="$time='14:15:00'">2.15pm</xsl:when>
+<xsl:when test="$time='14:30:00'">2.30pm</xsl:when>
+<xsl:when test="$time='14:45:00'">2.45pm</xsl:when>
+<xsl:when test="$time='15:15:00'">3.15pm</xsl:when>
+<xsl:when test="$time='15:30:00'">3.30pm</xsl:when>
+<xsl:when test="$time='16:00:00'">4pm</xsl:when>
+<xsl:when test="$time='16:30:00'">4.30pm</xsl:when>
+<xsl:when test="$time='17:00:00'">5pm</xsl:when>
+<xsl:when test="$time='18:00:00'">6pm</xsl:when>
+<xsl:when test="$time='19:00:00'">7pm</xsl:when>
+<xsl:when test="$time='20:00:00'">8pm</xsl:when>
+<xsl:when test="$time='21:00:00'">9pm</xsl:when>
+<xsl:when test="$time='22:00:00'">10pm</xsl:when>
+<xsl:when test="$time='23:00:00'">11pm</xsl:when>
+<xsl:otherwise>???</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="calculateTenor">
+<xsl:param name="startDate"/>
+<xsl:param name="endDate"/>
+<xsl:variable name="startDateMonth" select="string(number(substring($startDate,6,2)))"/>
+<xsl:variable name="endDateMonth" select="string(number(substring($endDate,6,2)))"/>
+<xsl:variable name="startDateYear" select="string(number(substring($startDate,1,4)))"/>
+<xsl:variable name="endDateYear" select="string(number(substring($endDate,1,4)))"/>
+<xsl:variable name="tenorMultiplier" select="string((($endDateYear - $startDateYear)*12) + ($endDateMonth - $startDateMonth))"/>
+<xsl:choose>
+<xsl:when test="$tenorMultiplier &gt; 1">
+<xsl:value-of select="concat($tenorMultiplier,'M')"/>
+</xsl:when>
+<xsl:otherwise>1M</xsl:otherwise>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="periodToLowerCase">
+<xsl:param name="period"/>
+<xsl:choose>
+<xsl:when test="$period='D' ">d</xsl:when>
+<xsl:when test="$period='W' ">w</xsl:when>
+<xsl:when test="$period='M' ">m</xsl:when>
+<xsl:when test="$period='Y' ">y</xsl:when>
+<xsl:when test="$period='T' ">t</xsl:when>
+<xsl:otherwise/>
+</xsl:choose>
+</xsl:template>
+<xsl:template name="frontSettlement">
+<xsl:param name="position"/>
+<ObservationPeriod>
+<observationPeriodStartDate>
+<xsl:value-of select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod[position()= $position]/fpml:observationPeriodStartDate"/>
+</observationPeriodStartDate>
+<observationPeriodEndDate>
+<xsl:value-of select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod[position()= $position]/fpml:observationPeriodEndDate"/>
+</observationPeriodEndDate>
+<GuaranteedPeriod>
+<xsl:call-template name="changingboolean">
+<xsl:with-param name="condition" select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod[position()= $position]/fpml:swGuaranteedPeriod"/>
+</xsl:call-template>
+</GuaranteedPeriod>
+<UpFrontSettlement>
+<xsl:call-template name="changingboolean">
+<xsl:with-param name="condition" select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod[position()= $position]/fpml:swUpFrontSettlement"/>
+</xsl:call-template>
+</UpFrontSettlement>
+<ObservationPeriodSettlementDate>
+<xsl:value-of select="//fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:trade/fpml:swEquityAccumulatorForwardShort/fpml:swAccumulator/fpml:swObservationPeriod[position()= $position]/fpml:swObservationPeriodSettlementDate"/>
+</ObservationPeriodSettlementDate>
+</ObservationPeriod>
+</xsl:template>
+<xsl:template name="changingboolean">
+<xsl:param name="condition"/>
+<xsl:choose>
+<xsl:when test="$condition='true'">Yes</xsl:when>
+<xsl:when test="$condition='false'">No</xsl:when>
+</xsl:choose>
+</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930">
+<xsd:element name="PublishingResult">
+<xsd:annotation>
+<xsd:documentation>Root element for publishing eligibilty result.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Result">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Status">
+<xsd:annotation>
+<xsd:documentation>Enum Success/Failure</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Success"/>
+<xsd:enumeration value="Failure"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+<xsd:element name="Message" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Optional message, will always be present on Status= Failure</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="dvh" use="required">
+<xsd:annotation>
+<xsd:documentation>DVH of the deal to get Publishing eligibilty for</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>

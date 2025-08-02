@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:element name="Exit">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="ExitMsg" type="ExitMsgDataType"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:simpleType name="ExitMsgDataType">
+<xsd:annotation>
+<xsd:documentation> "1" Novation Outside DTCC "2" Partial Termination Outside DTCC "3"
+Additional Documents Outside DTCC "4" Other "7" Termination For Clearing </xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="1"/>
+<xsd:enumeration value="2"/>
+<xsd:enumeration value="3"/>
+<xsd:enumeration value="4"/>
+<xsd:enumeration value="7"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

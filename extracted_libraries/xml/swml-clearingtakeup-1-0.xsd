@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swml-reporting-1-0.xsd"/>
+<xsd:complexType name="SW_ClearingTakeupPartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the Clearing Party in a formal structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A party identifier, e.g. a S.W.I.F.T. bank identifier code (BIC).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the party. A free format string. FpML does not define usage rules for this element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade id related to this counterParty.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ClearingTakeup">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swClient" type="SW_ClearingTakeupPartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The client information related to the Clearing trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionSource" type="SW_ClearingTakeupPartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The information related to the EXecution Source related to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionSourceBetaTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The betTradeId of the clearing house to link trade division child trades between clearing house and MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCorrelationId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The correlationId of the clearing house to link trades between clearing house and MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingHouseTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The tradeId of the clearing house </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearedClearingHouseTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Clearing House' s TradeId of the cleared trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOriginatingEvent" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Determines if this is a Incoming or Outoing Position Transfer </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBlockTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">If the parent trade is a child of an allocation then this is the id of the block trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionDateTime" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date and Time the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRelatedTradeId" minOccurs="0" maxOccurs="unbounded">
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="SW_UniqueTradeIdentifier">
+<xsd:sequence>
+<xsd:element name="swRelationshipType">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swRelatedTradeRelationshipTypeScheme" default="http://www.markitwire.com/spec/2012/coding-scheme/trade-relationship-type"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swClearedTimeStamp" type="xsd:dateTime" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

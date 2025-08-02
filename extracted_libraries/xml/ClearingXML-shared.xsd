@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="HourMinuteTime">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a time specified in hh:mm:ss format where the second component must be '00', e.g. 11am would be represented as 11:00:00.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:time">
+<xsd:pattern value="[0-2][0-9]:[0-5][0-9]:00"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ClearingAction">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Clear"/>
+<xsd:enumeration value="Declear"/>
+<xsd:enumeration value="DeReclear"/>
+<xsd:enumeration value="TradeReplacedByCCPNovation"/>
+<xsd:enumeration value="NewTradeDueToCCPNovation"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_PartyOrAccountReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A reference to a party or an account.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_Reference"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_IdentifiedDate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A date which can be referenced elsewhere.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="xsd:date">
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_BusinessDayConventionEnum">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The convention for adjusting any relevant date if it would otherwise fall on a day that is not a valid business day. Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="FOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="FRN">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">Per 2000 ISDA Definitions, Section 4.11. FRN Convention; Eurodollar Convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MODFOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day unless that day falls in the next calendar month, in which case that date will be the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PRECEDING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business day will be adjusted to the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MODPRECEDING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first preceding day that is a business day unless that day falls in the previous calendar month, in which case that date will be the first following day that us a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NONE">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date will not be adjusted if it falls on a day that is not a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NotApplicable">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions are defined elsewhere, so it is not required to specify them here.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_BusinessCentersReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a set of financial business centers defined elsewhere in the document. </xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_Reference"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_BusinessCenter">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A code identifying a financial business center location. A business center is drawn from the list identified by the business center scheme.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="businessCenterScheme" type="xsd:anyURI" default="http://www.fpml.org/coding-scheme/business-center-6-0"/>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_BusinessCenters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining financial business centers used in determining whether a day is a business day or not. A list of business centers may be ordered in the document alphabetically based on business center code. An FpML document containing an unordered business center list is still regarded as a conformant document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="businessCenter" type="SW_BusinessCenter" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:group name="SW_BusinessCentersOrReference.model">
+<xsd:choice>
+<xsd:element name="businessCentersReference" type="SW_BusinessCentersReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a set of financial business centers defined elsewhere in the document. This set of business centers is used to determine whether a particular day is a business day or not.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="businessCenters" type="SW_BusinessCenters"/>
+</xsd:choice>
+</xsd:group>
+<xsd:complexType name="SW_BusinessDayAdjustments">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining the business day convention and financial business centers used for adjusting any relevant date if it would otherwise fall on a day that is not a business day in the specified business centers.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="businessDayConvention" type="SW_BusinessDayConventionEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The convention for adjusting a date if it would otherwise fall on a day that is not a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:group ref="SW_BusinessCentersOrReference.model" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="SW_AdjustableDate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining a date that shall be subject to adjustment if it would otherwise fall on a day that is not a business day in the specified business centers, together with the convention for adjusting the date.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="unadjustedDate" type="SW_IdentifiedDate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A date subject to adjustment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dateAdjustments" type="SW_BusinessDayAdjustments">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The business day convention and financial business centers used for adjusting the date if it would otherwise fall on a day that is not a business date in the specified business centers.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:simpleType name="SW_CompressionTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify per side Compression Type information.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Standard">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Standard Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="No Netting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">No Netting Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_PartyCompressionType">
+<xsd:annotation>
+<xsd:documentation>A component for defining the Compression Type for a party.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyReference" type="SW_PartyOrAccountReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference for the Compression Type below.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompressionType" type="SW_CompressionTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Compression Type for this side of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FxCutoffTime">
+<xsd:annotation>
+<xsd:documentation>A component for defining the Mark-To-Market fixing cut-off time for a Cross Currency Basis Swap or Cross Currency IRS.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="hourMinuteTime" type="HourMinuteTime">
+<xsd:annotation>
+<xsd:documentation>A time specified in hh:mm:ss format where the second component must be '00', e.g. 11am would be represented as 11:00:00.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Payment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional payments. This component is based on the FpML complex type Payment.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference" type="SW_PartyOrAccountReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A reference to the party responsible for making the payments defined by this structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference" type="SW_PartyOrAccountReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A reference to the party that receives the payments corresponding to this structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="SW_Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="SW_AdjustableDate" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The payment date. This date is subject to adjustment in accordance with any applicable business day convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentType" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A classification of the type of fee or additional payment, e.g. brokerage, upfront fee etc. The paymentType element will contain the literal string entered into the MarkitWire Trader additional payment 'reason' screen entry field, except in the case of a trade cancellation when it will contain the reserved literal value 'Cancellation'. If the 'reason' screen entry field is left empty then this element will not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="SW_InflationCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different ways of using inflation indexes in formulas</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Ratio">
+<xsd:annotation>
+<xsd:documentation>(Inflation Index Final / Inflation Index Base). Inflation Index Final is inflation index for Reference Month that is the Lag number of months prior to Payment Date (subject to interpolation). Inflation Index Base subject to the Calculation Style. Used in inflation asset swaps to calculate the inflation coupons and principal exchange.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Return">
+<xsd:annotation>
+<xsd:documentation>(Inflation Index Final / Inflation Index Base -1). Inflation Index Final is the inflation index for Reference Month that is the Lag number of months prior to Payment Date (subject to interp). Inflation Index Base subject to the Calculation Style. Used in market standard ZC Inflation swaps.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Spread">
+<xsd:annotation>
+<xsd:documentation>Inflation Index Final - Inflation Index Base). Inflation Index Final is Index for Ref month the Lag months prior to Payment Date (subject to interp). Inflation Index Base subject to the Calculation Style. Typically used for fixing locks.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_InflationCalculationStyleEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different styles of ways of calculation methods.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="YearOnYear">
+<xsd:annotation>
+<xsd:documentation>YearOnYear means Inflation Index Base is the inflation index for Reference Month that is 12 months prior to Inflation Index Final (subject to interpolation). Inflation Index Base is cashflow dependent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ZeroCoupon">
+<xsd:annotation>
+<xsd:documentation>ZeroCoupon means Inflation Index Base used in the CalculationMethod is the inflation index for the Reference Month that is the lag number of months prior to Effective Date in the case of a swap, or Bond Interest Accrual Date in the case of an Asset Swap (subject to interpolation). Inflation Index Base has the same value for each inflation cashflow and Principal Exchange calculation within the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_SpreadCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different methods of spread calculation.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="ParPar"/>
+<xsd:enumeration value="Proceeds"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a currency amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_MoneyBase">
+<xsd:sequence>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_MoneyBase" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Abstract base class for all money types.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="SW_Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="SW_Currency">
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swCurrencyScheme" default=" http://www.fpml.org/coding-scheme/external/iso4217"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_Scheme">
+<xsd:annotation>
+<xsd:documentation>The base class for all types which define coding schemes.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:normalizedString">
+<xsd:maxLength value="255"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_PartyReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Reference to a party.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_Reference"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_Reference" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The abstract base class for all types which define intra-document pointers.</xsd:documentation>
+</xsd:annotation>
+<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SW_ReportTo">
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference"/>
+<xsd:element name="swRoute" maxOccurs="unbounded">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swDestination" type="xsd:string"/>
+<xsd:element name="swDestinationId" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+<xsd:complexType name="SWB_GPTradeReportingDetails">
+<xsd:annotation>
+<xsd:documentation>A type defining trade broker/SEF reporting information for Generic Product. This information will be available to all the Legal Entities involved in the trade/contract</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SWB_TradeReportingDetails">
+<xsd:group ref="SWB_GPTradePriceNotation.Model"/>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SWB_GPTradeEventReportingDetails">
+<xsd:annotation>
+<xsd:documentation>A type wrapping around type SWB_GPTradeReportingDetails tp provide a layer of indirection</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SWB_GPTradeReportingDetails">
+<xsd:choice minOccurs="0">
+<xsd:element name="swbPBClientTradeReportingDetails" type="SWB_TradeReportingDetails">
+<xsd:annotation>
+<xsd:documentation>Present for the prime broker to view reporting details of his side of the trade with the Client.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SWB_GPPrivatePartyTradeEventReportingDetails">
+<xsd:annotation>
+<xsd:documentation>A type defining trade broker/SEF reporting information for Generic Product. This information is private to the broker and will not be available for the legal entities in the trade. This information can be used in regulator reports set to the supervisor</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SWB_PrivatePartyTradeEventReportingDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ReportableProduct">
+<xsd:sequence>
+<xsd:element name="swPrimaryAssetClass" type="SW_AssetClass" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>GRT3: Primary Asset Class
+only output for Generic Template products</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSecondaryAssetClass" type="SW_AssetClass" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>CRT13 GRT9: Secondary Asset Class
+only output for Generic Template and Equity products</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swProductId" type="SW_ProductId" maxOccurs="4">
+<xsd:annotation>
+<xsd:documentation>CRT29 GRT2: Product Id Value
+ISDA Taxonomy, with UPI to come</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEmbeddedOptionOnSwap" type="SW_EmbeddedOptionOnSwap" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>CRT17: Embedded Option</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:group name="SWB_GPTradePriceNotation.Model">
+<xsd:annotation>
+<xsd:documentation>GT support mutliple price and additional price notations </xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbPriceNotation" type="SWB_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Structure to contain Price Notation information.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAdditionalPriceNotation" type="SWB_PriceNotation" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Contains Additional Price Notation information.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:group>
+</xsd:schema>

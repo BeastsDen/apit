@@ -1,0 +1,32 @@
+<!ELEMENT ClearingXML (swTradeId,
+                       swContractState,
+                       swClearingHouseId,
+                       swClearingAction,
+                       swClearedTradeId?,
+                       swClearedContractVersion?,
+                       swClearingHouseTradeId?,
+                       swHasBeenCleared?,
+                       swPartyClearingBroker?,
+                       swGroupId?,
+                       swExecutingBroker?,
+                       swClient?,
+                       FpML)>
+
+<!ELEMENT swTradeId (#PCDATA)>
+<!ELEMENT swContractState (#PCDATA)>
+<!ELEMENT swClearingHouseId (#PCDATA)>
+<!ELEMENT swClearingAction (#PCDATA)>
+<!ELEMENT swClearedTradeId (#PCDATA)>
+<!ELEMENT swClearedContractVersion (#PCDATA)>
+<!ELEMENT swClearingHouseTradeId (#PCDATA)>
+<!ELEMENT swHasBeenCleared (#PCDATA)>
+<!ELEMENT swPartyClearingBroker (partyReference, swClearingBroker, swFuturesCommissionMerchant?)>
+<!ELEMENT swGroupId (#PCDATA)> 
+<!ELEMENT swExecutingBroker (partyId, partyName)> 
+<!ELEMENT swClient (partyId, partyName)> 
+<!ELEMENT swFuturesCommissionMerchant (#PCDATA)>
+<!ELEMENT swClearingBroker (swParty)>
+<!ELEMENT swParty (partyId, partyName)>
+
+<!ENTITY % fpml_dtd SYSTEM "fpml-dtd-2-1-2003-05-05.dtd">
+%fpml_dtd;

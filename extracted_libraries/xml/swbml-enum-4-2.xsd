@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SWB_MasterAgreementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AFB/FBF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Française des Banques.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DERV">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag für Finanztermingeschäfte (also known as the German master).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ISDA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_CompressionTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify per side Compression Type information.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Standard">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Standard Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="No Netting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">No Netting Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_ExecutionMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify per side Excecution Method information.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Voice">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Voice Execution Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Electronic">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Electronic Execution Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_ReplacementReasonEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify trade id replacement reasons.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="IndexTransitionReplacedTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR transition Replaced Trade ref</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexTransitionReplacedByTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR transition Replaced by Trade ref</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_TradeIdTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify replacement trade id  type </xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="MarkitWireId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">MarkitWire ID"</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="OtherId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Other ID</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

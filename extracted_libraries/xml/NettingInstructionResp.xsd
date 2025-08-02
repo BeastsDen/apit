@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.markitserv.com/2015/NettingInstructionResp1-0" targetNamespace="http://www.markitserv.com/2015/NettingInstructionResp1-0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:element name="NettingInstructionResp">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Header">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="CorrelationId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Correlation ID to match back to the originating message</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="NettingBatchId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The Netting Batch ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ClearingHouse" type="PartyDetails">
+<xsd:annotation>
+<xsd:documentation>Name of the Clearing House that conducted the Netting Activity</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="LegalEntity" type="PartyDetails">
+<xsd:annotation>
+<xsd:documentation>Name of the Legal Entity the Netting run occured on</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="TradeStatusInformation" maxOccurs="unbounded">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="NettingInstructionType" type="NettingInstructionTypeEnum">
+<xsd:annotation>
+<xsd:documentation>Type of Netting Instruction i.e. Termination or New Position</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ClearingBroker" type="PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element to provide information of the Clearing Broker on the trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="MarkitWireTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The MarkitWire Trade ID. Only populated if the trade exists in MarkitWire</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ClearingHouseTradeId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The Clearing House Trade ID</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Status" type="StatusEnum">
+<xsd:annotation>
+<xsd:documentation>Status of the trade. Created, Cancelled or Error</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="ErrorText" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>If the status is Error then an error reason will be supplied here</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="PartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for party id and party name.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party Id</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party Name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="StatusEnum">
+<xsd:restriction base="xsd:normalizedString">
+<xsd:enumeration value="Created"/>
+<xsd:enumeration value="Cancelled"/>
+<xsd:enumeration value="Error"/>
+<xsd:enumeration value="Off-MarkitWire"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="NettingInstructionTypeEnum">
+<xsd:restriction base="xsd:normalizedString">
+<xsd:enumeration value="Termination"/>
+<xsd:enumeration value="New Position"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

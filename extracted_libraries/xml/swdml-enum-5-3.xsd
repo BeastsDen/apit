@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.markitserv.com/swml" xmlns:fpml="http://www.fpml.org/FpML-5/confirmation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.markitserv.com/swml" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_BreakCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of Cap/Floor.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="ISDA Standard Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by ISDA IRD working group in 2006. Calculated as calendar dates from trade date as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Adjust To Coupon Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as trade date plus spot days and then shifting to the first payment date for fixed and floating legs prior or on the date indicated by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Straight Calendar Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as calendar dates from trade date plus spot days as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_MasterAgreementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AFB/FBF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Francaise des Banques.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DERV">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag fur Finanztermingeschafte (also known as the German master).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ISDA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_OptionStyleEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Option exercise style</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="European">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">European style option</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="American">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">American style option</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Bermuda">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Bermudan style option</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Asian">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Asian style option</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_AmendmentTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The reason for a given bilateral amendment.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Amendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A general bilateral amendment.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Increase">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade resulting in the number of options increasing with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IncreaseAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Increase.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Decrease">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade resulting in the number of options decreasing with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DecreaseAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Decrease.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment reflecting the partial exercise of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialExAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Partial Exercise.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CorporateAction">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in an adjustment to an equity share option trade as a result of a corporate action.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Termination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in the full termination of a swap trade potentially with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in a partial termination of a swap trade potentially with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="TerminationAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Termination - full or partial.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexCancelAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade where the index leg has previously been cancelled.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexLegCancelled">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed trade resulting in the cancellation of the index leg.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ErrorCorrection">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Bilateral amendment to an affirmed trade, to correct an error in deal ticket</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_SettlementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Shows how the transaction is to be settled when it is exercised.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Cash">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The intrinsic value of the option will be delivered by way of a cash settlement amount determined, (i) by reference to the differential between the strike price and the settlement price; or (ii) in accordance with a bilateral agreement between the parties</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Physical">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The securities underlying the transaction will be delivered by (i) in the case of a call, the seller to the buyer, or (ii) in the case of a put, the buyer to the seller versus a settlement amount equivalent to the strike price per share</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Election">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Allow Election of either Cash or Physical settlement</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CashOrPhysical">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Allow use of either Cash or Physical settlement without prior Election</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_CBTradeTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The product type is the top level categorization for MarkitWire templates.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="NonMember-CB">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This represents the CB trade facing the non-member.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CB-CCP">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This represents the CB trade facing the Clearing House.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ReplacementReasonEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify trade id replacement reasons.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="IndexTransitionReplacedTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR transition Replaced Trade ref</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexTransitionReplacedByTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR transition Replaced by Trade ref</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_TradeIdTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify replacement trade id  type </xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="MarkitWireId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">MarkitWire ID"</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="OtherId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Other ID</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

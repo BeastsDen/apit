@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_NettingTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The allowable Netting Types.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Netting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Standard Netting / Compression runs</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Default">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Default management</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PortfolioTransfer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Portfolio Transfers</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="TradeAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Post clearing trade amendments</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IBOR Compensation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR Compensation trades</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Transition">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Transition</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Other">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Other</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ClearingModelEnum">
+<xsd:restriction base="xsd:normalizedString">
+<xsd:enumeration value="Agency"/>
+<xsd:enumeration value="Principal"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

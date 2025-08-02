@@ -1,0 +1,3 @@
+<!ELEMENT TransferRecipient (GroupId* , UserId*)>
+<!ELEMENT GroupId (#PCDATA)>
+<!ELEMENT UserId (#PCDATA)>

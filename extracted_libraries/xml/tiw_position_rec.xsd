@@ -1,0 +1,449 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:element name="TiwCsvMessage">
+<xs:complexType>
+<xs:all>
+<xs:element ref="SINGLE_PYMT_AMT_PREM_PYMT_AMT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INIT_PYMT_AMT_PREM_PYMT_AMT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ACTIVE_STATUS" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="PRODUCT_TYPE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="DTCC_ACCOUNT_NUMBER" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="TRADE_REFERENCE_ID" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="TRADE_REFERENCE_ID_SUPPLEMENT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_ACCOUNT_NUMBER" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="CTPY_TRADE_REFERENCE_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DTCC_TRADE_REFERENCE_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SUBMIT_DT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SUBMIT_TIME" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="TRANSACTION_TYPE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="STATUS" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="TRADE_CONFIRMATION_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="POST_TRADE_CONFIRMATION_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NOTIONAL_FILE_CREATION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NOTIONAL_FILE_CREATION_CCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WHSE_CURR_STATE_NOTIONAL_AMT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WHSE_CURR_STATE_NOTIONAL_CCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WHSE_STATUS" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="WHSE_STATUS_REASON" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WHSE_CURR_STATE_NOTIONAL_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="AFF_NOTIONAL_AMT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="AFF_NOTIONAL_CCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="AFF_NOTIONAL_TRANSACTION_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BACK_LOAD_EFFECTIVE_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WHSE_INSERT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADE_DT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="EFFECTIVE_DT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SCHED_TERM_DT_EXPIRATION_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="FIRST_PYMT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REFERENCE_OBLIGATION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REFERENCE_ENTITY_NAME" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="REFERENCE_ENTITY_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MDTT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="MASTER_CONFIRM_AGREEMENT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="FXD_RATE_PAYER_SWAPTION_BUYER" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="BUYER_NAME" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="FLT_RATE_PAYER_SWAPTION_SELLER" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SELLER_NAME" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="FXD_RATE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="FLT_RATE_CCY" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="PYMT_FREQUENCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PYMT_MULTIPLIER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="RESTRUCTURING_EVENT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ADD_TERMS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXCLUDED_DELIVERABLES" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INDEPENDENT_PAYER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INDEPENDENT_RECEIVER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INDEPENDENT_PERCENT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SINGLE_PYMT_DT_PREM_PYMT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SINGLE_PYMT_CCY_PREM_PYMT_CCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CALC_AGT_BUSINESS_CENTER_CODE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CALC_AGT_BUSINESS_CENTER_NAME" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INIT_PYMT_PAYER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INIT_PYMT_RECEIVER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INIT_PYMT_CCY_PREM_PYMT_CCY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MASTER_CONFIRM_ANNEX_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DOCUMENTATION_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CALC_AGT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ADD_PROVISIONS_FOR_MONOLINE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MASTER_AGREEMENT_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MASTER_AGREEMENT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ATTACHMENT_POINT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXHAUSTION_POINT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MODIFIED_EQUITY_DELIVERY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SETTLED_ENTITY_MATRIX_SOURCE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SETTLED_ENTITY_MATRIX_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SUPER_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DESK_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DESIGNATED_PARTY_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="E_TRADING_TRN" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BROKER_NAME" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CMNT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_SUPER_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_DESK_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_DESIGNATED_PARTY_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_E_TRADING_TRN" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CTPY_BROKER_NAME" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="VENDOR_REFERENCE_NUMBER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="VENDOR_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PUSH_STATUS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="LINK_STATUS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MASTER_CONFIRM_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MATRIX_TRANSACTION_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="STANDARD_TERMS_SUPPLEMENT_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="UNCONFIRMED_NOTIONAL" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BUSINESS_DAY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REFERENCE_POLICY_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REFERENCE_PRICE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="FXD_AMT_PYMT_DELAY_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INT_SHORTFALL_CAP_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INT_SHORTFALL_CAP_BASIS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INT_SHORTFALL_COMP_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="RATE_SOURCE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="OPTIONAL_EARLY_TERM_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BLOOMBERG_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="INSURER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="LEGAL_FINAL_MATURITY_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ORIG_PRINCIPAL_AMT" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="INIT_FACTOR" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="STEP_UP_PROVISIONS_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="WAC_CAP_INT_PROVISION_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="FACILITY_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NAME_OF_BORROWER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DESIGNATED_PRIORITY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SECURED_LIST_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NEW_SECURED_LIST_APP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ORIG_TRADE_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ORIG_EFFECTIVE_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CALC_FLAG" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="CURR_FACTOR" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NEW_REFERENCE_ENTITY_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NEW_REFERENCE_ENTITY_NAME" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CASH_SETTLEMENT_ONLY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DELIVERY_OF_COMMITMENTS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CONTINUITY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="FIRST_PYMT_PERIOD_ACC_START_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ORIG_FIRST_FXD_RATE_PYMT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ORIG_FIRST_PERIOD_ACC_START_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CONTRAPARTY_FIRM_ACCOUNT_NAME" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="UNDER_SCHED_TERM_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="UNDER_FXD_RATE_PAYER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="UNDER_FLT_RATE_PAYER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="QUOTING_STYLE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="OPTION_STYLE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="STRIKE_PRICE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SWAPTION_SETTLEMENT_STYLE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="UNDER_MDTT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="UNDER_MASTER_DOCUMENT_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXERCISE_EVENT_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXERCISE_DT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="RECOVERY_PRICE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="FXD_SETTLEMENT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SUB_PRODUCT" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="USI_UTI_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="USI_UTI_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REPORTING_CTPY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CFTC_REPORTING_JURISDICTION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CCP_FOR_UNDER_SWAP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BRANCH_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MID_MARKET_PRICE_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MID_MARKET_PRICE_VALUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="COUNTER_BRANCH_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="COUNTER_MID_MARKET_PRICE_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="COUNTER_MID_MARKET_PRICE_VALUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EVENT_PROCESSING_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXECUTION_TIMESTAMP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXECUTION_VENUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CLEARING_DCO" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ADD_PRICE_NOTATION_PRICE_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ADD_PRICE_NOTATION_PRICE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NONSTANDARD_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="OFF_PLATFORM_VERIFICATION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PARTICIPANT_UCI_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CONTRA_UCI_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SWAP_INSTRUMENT_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REPORTING_DESK_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DESK_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="COLLATERALIZED" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="REPORTING_BROKER_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BROKER_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADER_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADER_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SALES_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SALES_LOC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRIOR_USI_UTI_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRIOR_USI_UTI_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BLOCK_USI_UTI_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="BLOCK_USI_UTI" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRODUCT_ID_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRODUCT_ID" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CLEARING_EXCEPTION_PARTY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRICE_FORMING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRICE_NOTATION_PRICE_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRICE_NOTATION_PRICE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NOVATION_FEE_USI_UTI_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="NOVATION_FEE_USI_UTI" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="SUBMITTED_FOR" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXECUTION_AGT_PARTY_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="EXECUTION_AGT_PARTY_VALUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ALLOC_INDICATOR" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADE_PARTY1_VALUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADE_PARTY1_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADE_PARTY2_VALUE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="TRADE_PARTY2_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CFTC_NONDISCLOSURE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CFTC_CLEARING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="JFSA_REPORTING_JURISDICTION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="JFSA_NONDISCLOSURE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="JFSA_CLEARING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="DATA_SUBMITTER_PREFIX" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="DATA_SUBMITTER" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="PRIMARY_ASSETCLASS" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="SECONDARY_ASSETCLASS" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="CONFIRMATION_TYPE" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="OPTION_TYPE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CLEARING_STATUS" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CLEARING_TIMESTAMP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="JFSA_BRANCH_BIC" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_REPORTING_JURISDICTION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_NONDISCLOSURE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_CLEARING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_BEN_PREFIX" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_BEN_PARTY_TO_THE_TRADE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_COLLATERAL_PORTFOLIO_CODE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_COMPRESSION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_COMM_ACT_TREASURY_FIN" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_INTRAGROUP" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_TRADING_CAPACITY" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ESMA_BRANCH_LOC_COUNTRY_CODE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ASIC_REPORTING_JURISDICTION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ASIC_NONDISCLOSURE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="ASIC_CLEARING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MAS_REPORTING_JURISDICTION" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MAS_NONDISCLOSURE" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="MAS_CLEARING_FLAG" minOccurs="0" maxOccurs="1"/>
+<xs:element ref="CONTRACTUAL_DEFINITION" minOccurs="1" maxOccurs="1"/>
+<xs:element ref="VALUE_DATE" minOccurs="1" maxOccurs="1"/>
+</xs:all>
+</xs:complexType>
+</xs:element>
+<xs:element name="SINGLE_PYMT_AMT_PREM_PYMT_AMT" type="xs:string"/>
+<xs:element name="INIT_PYMT_AMT_PREM_PYMT_AMT" type="xs:string"/>
+<xs:element name="ACTIVE_STATUS" type="xs:string"/>
+<xs:element name="PRODUCT_TYPE" type="xs:string"/>
+<xs:element name="DTCC_ACCOUNT_NUMBER" type="xs:string"/>
+<xs:element name="TRADE_REFERENCE_ID" type="xs:string"/>
+<xs:element name="TRADE_REFERENCE_ID_SUPPLEMENT" type="xs:string"/>
+<xs:element name="CTPY_ACCOUNT_NUMBER" type="xs:string"/>
+<xs:element name="CTPY_TRADE_REFERENCE_ID" type="xs:string"/>
+<xs:element name="DTCC_TRADE_REFERENCE_ID" type="xs:string"/>
+<xs:element name="SUBMIT_DT" type="xs:string"/>
+<xs:element name="SUBMIT_TIME" type="xs:string"/>
+<xs:element name="TRANSACTION_TYPE" type="xs:string"/>
+<xs:element name="STATUS" type="xs:string"/>
+<xs:element name="TRADE_CONFIRMATION_DT" type="xs:string"/>
+<xs:element name="POST_TRADE_CONFIRMATION_DT" type="xs:string"/>
+<xs:element name="NOTIONAL_FILE_CREATION" type="xs:string"/>
+<xs:element name="NOTIONAL_FILE_CREATION_CCY" type="xs:string"/>
+<xs:element name="WHSE_CURR_STATE_NOTIONAL_AMT" type="xs:string"/>
+<xs:element name="WHSE_CURR_STATE_NOTIONAL_CCY" type="xs:string"/>
+<xs:element name="WHSE_STATUS" type="xs:string"/>
+<xs:element name="WHSE_STATUS_REASON" type="xs:string"/>
+<xs:element name="WHSE_CURR_STATE_NOTIONAL_DT" type="xs:string"/>
+<xs:element name="AFF_NOTIONAL_AMT" type="xs:string"/>
+<xs:element name="AFF_NOTIONAL_CCY" type="xs:string"/>
+<xs:element name="AFF_NOTIONAL_TRANSACTION_TYPE" type="xs:string"/>
+<xs:element name="BACK_LOAD_EFFECTIVE_DT" type="xs:string"/>
+<xs:element name="WHSE_INSERT_DT" type="xs:string"/>
+<xs:element name="TRADE_DT" type="xs:string"/>
+<xs:element name="EFFECTIVE_DT" type="xs:string"/>
+<xs:element name="SCHED_TERM_DT_EXPIRATION_DT" type="xs:string"/>
+<xs:element name="FIRST_PYMT_DT" type="xs:string"/>
+<xs:element name="REFERENCE_OBLIGATION" type="xs:string"/>
+<xs:element name="REFERENCE_ENTITY_NAME" type="xs:string"/>
+<xs:element name="REFERENCE_ENTITY_ID" type="xs:string"/>
+<xs:element name="MDTT" type="xs:string"/>
+<xs:element name="MASTER_CONFIRM_AGREEMENT_DT" type="xs:string"/>
+<xs:element name="FXD_RATE_PAYER_SWAPTION_BUYER" type="xs:string"/>
+<xs:element name="BUYER_NAME" type="xs:string"/>
+<xs:element name="FLT_RATE_PAYER_SWAPTION_SELLER" type="xs:string"/>
+<xs:element name="SELLER_NAME" type="xs:string"/>
+<xs:element name="FXD_RATE" type="xs:string"/>
+<xs:element name="FLT_RATE_CCY" type="xs:string"/>
+<xs:element name="PYMT_FREQUENCY" type="xs:string"/>
+<xs:element name="PYMT_MULTIPLIER" type="xs:string"/>
+<xs:element name="RESTRUCTURING_EVENT" type="xs:string"/>
+<xs:element name="ADD_TERMS" type="xs:string"/>
+<xs:element name="EXCLUDED_DELIVERABLES" type="xs:string"/>
+<xs:element name="INDEPENDENT_PAYER" type="xs:string"/>
+<xs:element name="INDEPENDENT_RECEIVER" type="xs:string"/>
+<xs:element name="INDEPENDENT_PERCENT" type="xs:string"/>
+<xs:element name="SINGLE_PYMT_DT_PREM_PYMT_DT" type="xs:string"/>
+<xs:element name="SINGLE_PYMT_CCY_PREM_PYMT_CCY" type="xs:string"/>
+<xs:element name="CALC_AGT_BUSINESS_CENTER_CODE" type="xs:string"/>
+<xs:element name="CALC_AGT_BUSINESS_CENTER_NAME" type="xs:string"/>
+<xs:element name="INIT_PYMT_PAYER" type="xs:string"/>
+<xs:element name="INIT_PYMT_RECEIVER" type="xs:string"/>
+<xs:element name="INIT_PYMT_CCY_PREM_PYMT_CCY" type="xs:string"/>
+<xs:element name="MASTER_CONFIRM_ANNEX_DT" type="xs:string"/>
+<xs:element name="DOCUMENTATION_TYPE" type="xs:string"/>
+<xs:element name="CALC_AGT" type="xs:string"/>
+<xs:element name="ADD_PROVISIONS_FOR_MONOLINE" type="xs:string"/>
+<xs:element name="MASTER_AGREEMENT_TYPE" type="xs:string"/>
+<xs:element name="MASTER_AGREEMENT_DT" type="xs:string"/>
+<xs:element name="ATTACHMENT_POINT" type="xs:string"/>
+<xs:element name="EXHAUSTION_POINT" type="xs:string"/>
+<xs:element name="MODIFIED_EQUITY_DELIVERY" type="xs:string"/>
+<xs:element name="SETTLED_ENTITY_MATRIX_SOURCE" type="xs:string"/>
+<xs:element name="SETTLED_ENTITY_MATRIX_DT" type="xs:string"/>
+<xs:element name="SUPER_ID" type="xs:string"/>
+<xs:element name="DESK_ID" type="xs:string"/>
+<xs:element name="DESIGNATED_PARTY_ID" type="xs:string"/>
+<xs:element name="E_TRADING_TRN" type="xs:string"/>
+<xs:element name="BROKER_NAME" type="xs:string"/>
+<xs:element name="CMNT" type="xs:string"/>
+<xs:element name="CTPY_SUPER_ID" type="xs:string"/>
+<xs:element name="CTPY_DESK_ID" type="xs:string"/>
+<xs:element name="CTPY_DESIGNATED_PARTY_ID" type="xs:string"/>
+<xs:element name="CTPY_E_TRADING_TRN" type="xs:string"/>
+<xs:element name="CTPY_BROKER_NAME" type="xs:string"/>
+<xs:element name="VENDOR_REFERENCE_NUMBER" type="xs:string"/>
+<xs:element name="VENDOR_ID" type="xs:string"/>
+<xs:element name="PUSH_STATUS" type="xs:string"/>
+<xs:element name="LINK_STATUS" type="xs:string"/>
+<xs:element name="MASTER_CONFIRM_TYPE" type="xs:string"/>
+<xs:element name="MATRIX_TRANSACTION_TYPE" type="xs:string"/>
+<xs:element name="STANDARD_TERMS_SUPPLEMENT_TYPE" type="xs:string"/>
+<xs:element name="UNCONFIRMED_NOTIONAL" type="xs:string"/>
+<xs:element name="BUSINESS_DAY" type="xs:string"/>
+<xs:element name="REFERENCE_POLICY_APP" type="xs:string"/>
+<xs:element name="REFERENCE_PRICE" type="xs:string"/>
+<xs:element name="FXD_AMT_PYMT_DELAY_APP" type="xs:string"/>
+<xs:element name="INT_SHORTFALL_CAP_APP" type="xs:string"/>
+<xs:element name="INT_SHORTFALL_CAP_BASIS" type="xs:string"/>
+<xs:element name="INT_SHORTFALL_COMP_APP" type="xs:string"/>
+<xs:element name="RATE_SOURCE" type="xs:string"/>
+<xs:element name="OPTIONAL_EARLY_TERM_APP" type="xs:string"/>
+<xs:element name="BLOOMBERG_ID" type="xs:string"/>
+<xs:element name="INSURER" type="xs:string"/>
+<xs:element name="LEGAL_FINAL_MATURITY_DT" type="xs:string"/>
+<xs:element name="ORIG_PRINCIPAL_AMT" type="xs:string"/>
+<xs:element name="INIT_FACTOR" type="xs:string"/>
+<xs:element name="STEP_UP_PROVISIONS_APP" type="xs:string"/>
+<xs:element name="WAC_CAP_INT_PROVISION_APP" type="xs:string"/>
+<xs:element name="FACILITY_TYPE" type="xs:string"/>
+<xs:element name="NAME_OF_BORROWER" type="xs:string"/>
+<xs:element name="DESIGNATED_PRIORITY" type="xs:string"/>
+<xs:element name="SECURED_LIST_APP" type="xs:string"/>
+<xs:element name="NEW_SECURED_LIST_APP" type="xs:string"/>
+<xs:element name="ORIG_TRADE_DT" type="xs:string"/>
+<xs:element name="ORIG_EFFECTIVE_DT" type="xs:string"/>
+<xs:element name="CALC_FLAG" type="xs:string"/>
+<xs:element name="CURR_FACTOR" type="xs:string"/>
+<xs:element name="NEW_REFERENCE_ENTITY_ID" type="xs:string"/>
+<xs:element name="NEW_REFERENCE_ENTITY_NAME" type="xs:string"/>
+<xs:element name="CASH_SETTLEMENT_ONLY" type="xs:string"/>
+<xs:element name="DELIVERY_OF_COMMITMENTS" type="xs:string"/>
+<xs:element name="CONTINUITY" type="xs:string"/>
+<xs:element name="FIRST_PYMT_PERIOD_ACC_START_DT" type="xs:string"/>
+<xs:element name="ORIG_FIRST_FXD_RATE_PYMT_DT" type="xs:string"/>
+<xs:element name="ORIG_FIRST_PERIOD_ACC_START_DT" type="xs:string"/>
+<xs:element name="CONTRAPARTY_FIRM_ACCOUNT_NAME" type="xs:string"/>
+<xs:element name="UNDER_SCHED_TERM_DT" type="xs:string"/>
+<xs:element name="UNDER_FXD_RATE_PAYER" type="xs:string"/>
+<xs:element name="UNDER_FLT_RATE_PAYER" type="xs:string"/>
+<xs:element name="QUOTING_STYLE" type="xs:string"/>
+<xs:element name="OPTION_STYLE" type="xs:string"/>
+<xs:element name="STRIKE_PRICE" type="xs:string"/>
+<xs:element name="SWAPTION_SETTLEMENT_STYLE" type="xs:string"/>
+<xs:element name="UNDER_MDTT" type="xs:string"/>
+<xs:element name="UNDER_MASTER_DOCUMENT_DT" type="xs:string"/>
+<xs:element name="EXERCISE_EVENT_TYPE" type="xs:string"/>
+<xs:element name="EXERCISE_DT" type="xs:string"/>
+<xs:element name="RECOVERY_PRICE" type="xs:string"/>
+<xs:element name="FXD_SETTLEMENT" type="xs:string"/>
+<xs:element name="SUB_PRODUCT" type="xs:string"/>
+<xs:element name="USI_UTI_ID" type="xs:string"/>
+<xs:element name="USI_UTI_PREFIX" type="xs:string"/>
+<xs:element name="REPORTING_CTPY" type="xs:string"/>
+<xs:element name="CFTC_REPORTING_JURISDICTION" type="xs:string"/>
+<xs:element name="CCP_FOR_UNDER_SWAP" type="xs:string"/>
+<xs:element name="BRANCH_LOC" type="xs:string"/>
+<xs:element name="MID_MARKET_PRICE_TYPE" type="xs:string"/>
+<xs:element name="MID_MARKET_PRICE_VALUE" type="xs:string"/>
+<xs:element name="COUNTER_BRANCH_LOC" type="xs:string"/>
+<xs:element name="COUNTER_MID_MARKET_PRICE_TYPE" type="xs:string"/>
+<xs:element name="COUNTER_MID_MARKET_PRICE_VALUE" type="xs:string"/>
+<xs:element name="EVENT_PROCESSING_ID" type="xs:string"/>
+<xs:element name="EXECUTION_TIMESTAMP" type="xs:string"/>
+<xs:element name="EXECUTION_VENUE" type="xs:string"/>
+<xs:element name="CLEARING_DCO" type="xs:string"/>
+<xs:element name="ADD_PRICE_NOTATION_PRICE_TYPE" type="xs:string"/>
+<xs:element name="ADD_PRICE_NOTATION_PRICE" type="xs:string"/>
+<xs:element name="NONSTANDARD_FLAG" type="xs:string"/>
+<xs:element name="OFF_PLATFORM_VERIFICATION" type="xs:string"/>
+<xs:element name="PARTICIPANT_UCI_ID" type="xs:string"/>
+<xs:element name="CONTRA_UCI_ID" type="xs:string"/>
+<xs:element name="SWAP_INSTRUMENT_ID" type="xs:string"/>
+<xs:element name="REPORTING_DESK_ID" type="xs:string"/>
+<xs:element name="DESK_LOC" type="xs:string"/>
+<xs:element name="COLLATERALIZED" type="xs:string"/>
+<xs:element name="REPORTING_BROKER_ID" type="xs:string"/>
+<xs:element name="BROKER_LOC" type="xs:string"/>
+<xs:element name="TRADER_ID" type="xs:string"/>
+<xs:element name="TRADER_LOC" type="xs:string"/>
+<xs:element name="SALES_ID" type="xs:string"/>
+<xs:element name="SALES_LOC" type="xs:string"/>
+<xs:element name="PRIOR_USI_UTI_PREFIX" type="xs:string"/>
+<xs:element name="PRIOR_USI_UTI_ID" type="xs:string"/>
+<xs:element name="BLOCK_USI_UTI_PREFIX" type="xs:string"/>
+<xs:element name="BLOCK_USI_UTI" type="xs:string"/>
+<xs:element name="PRODUCT_ID_PREFIX" type="xs:string"/>
+<xs:element name="PRODUCT_ID" type="xs:string"/>
+<xs:element name="CLEARING_EXCEPTION_PARTY" type="xs:string"/>
+<xs:element name="PRICE_FORMING_FLAG" type="xs:string"/>
+<xs:element name="PRICE_NOTATION_PRICE_TYPE" type="xs:string"/>
+<xs:element name="PRICE_NOTATION_PRICE" type="xs:string"/>
+<xs:element name="NOVATION_FEE_USI_UTI_PREFIX" type="xs:string"/>
+<xs:element name="NOVATION_FEE_USI_UTI" type="xs:string"/>
+<xs:element name="SUBMITTED_FOR" type="xs:string"/>
+<xs:element name="EXECUTION_AGT_PARTY_PREFIX" type="xs:string"/>
+<xs:element name="EXECUTION_AGT_PARTY_VALUE" type="xs:string"/>
+<xs:element name="ALLOC_INDICATOR" type="xs:string"/>
+<xs:element name="TRADE_PARTY1_VALUE" type="xs:string"/>
+<xs:element name="TRADE_PARTY1_PREFIX" type="xs:string"/>
+<xs:element name="TRADE_PARTY2_VALUE" type="xs:string"/>
+<xs:element name="TRADE_PARTY2_PREFIX" type="xs:string"/>
+<xs:element name="CFTC_NONDISCLOSURE" type="xs:string"/>
+<xs:element name="CFTC_CLEARING_FLAG" type="xs:string"/>
+<xs:element name="JFSA_REPORTING_JURISDICTION" type="xs:string"/>
+<xs:element name="JFSA_NONDISCLOSURE" type="xs:string"/>
+<xs:element name="JFSA_CLEARING_FLAG" type="xs:string"/>
+<xs:element name="DATA_SUBMITTER_PREFIX" type="xs:string"/>
+<xs:element name="DATA_SUBMITTER" type="xs:string"/>
+<xs:element name="PRIMARY_ASSETCLASS" type="xs:string"/>
+<xs:element name="SECONDARY_ASSETCLASS" type="xs:string"/>
+<xs:element name="CONFIRMATION_TYPE" type="xs:string"/>
+<xs:element name="OPTION_TYPE" type="xs:string"/>
+<xs:element name="CLEARING_STATUS" type="xs:string"/>
+<xs:element name="CLEARING_TIMESTAMP" type="xs:string"/>
+<xs:element name="JFSA_BRANCH_BIC" type="xs:string"/>
+<xs:element name="ESMA_REPORTING_JURISDICTION" type="xs:string"/>
+<xs:element name="ESMA_NONDISCLOSURE" type="xs:string"/>
+<xs:element name="ESMA_CLEARING_FLAG" type="xs:string"/>
+<xs:element name="ESMA_BEN_PREFIX" type="xs:string"/>
+<xs:element name="ESMA_BEN_PARTY_TO_THE_TRADE" type="xs:string"/>
+<xs:element name="ESMA_COLLATERAL_PORTFOLIO_CODE" type="xs:string"/>
+<xs:element name="ESMA_COMPRESSION" type="xs:string"/>
+<xs:element name="ESMA_COMM_ACT_TREASURY_FIN" type="xs:string"/>
+<xs:element name="ESMA_INTRAGROUP" type="xs:string"/>
+<xs:element name="ESMA_TRADING_CAPACITY" type="xs:string"/>
+<xs:element name="ESMA_BRANCH_LOC_COUNTRY_CODE" type="xs:string"/>
+<xs:element name="ASIC_REPORTING_JURISDICTION" type="xs:string"/>
+<xs:element name="ASIC_NONDISCLOSURE" type="xs:string"/>
+<xs:element name="ASIC_CLEARING_FLAG" type="xs:string"/>
+<xs:element name="MAS_REPORTING_JURISDICTION" type="xs:string"/>
+<xs:element name="MAS_NONDISCLOSURE" type="xs:string"/>
+<xs:element name="MAS_CLEARING_FLAG" type="xs:string"/>
+<xs:element name="CONTRACTUAL_DEFINITION" type="xs:string"/>
+<xs:element name="VALUE_DATE" type="xs:string"/>
+</xs:schema>

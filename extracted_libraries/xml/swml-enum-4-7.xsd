@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-7" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_AmendmentTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Equity option specific: the reason for a given bilateral amendment.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Amendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A general bilateral amendment.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Increase">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade resulting in the number of options increasing with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IncreaseAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Increase.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Decrease">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade resulting in the number of options decreasing with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DecreaseAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Decrease.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment reflecting the partial exercise of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialExAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Partial Exercise.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CorporateAction">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in an adjustment to an equity share option trade as a result of a corporate action.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Exit">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in the trade confirmation being taken off the MarkitWire platform, with the understanding that it is being confirmed elsewhere.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Termination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in the full termination of a swap trade potentially with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PartialTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment resulting in a partial termination of a swap trade potentially with a corresponding exchange of premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="TerminationAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed Termination - full or partial.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexCancelAmendment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a trade where the index leg has previously been cancelled.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="IndexLegCancelled">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral amendment to a previously affirmed trade resulting in the cancellation of the index leg.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_BreakCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of Cap/Floor.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="ISDA Standard Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by ISDA IRD working group in 2006. Calculated as calendar dates from trade date as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Adjust To Coupon Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as trade date plus spot days and then shifting to the first payment date for fixed and floating legs prior or on the date indicated by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Straight Calendar Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as calendar dates from trade date plus spot days as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_MasterAgreementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AFB/FBF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Fran栩se des Banques.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DERV">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag f�anztermingesch㥴e (also known as the German master).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ISDA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_MessageStatusEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A conversation message status.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Accepted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer has accepted with broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Affirm">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer has affirmed to counterparty.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Chat">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stateless chat message.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ClearingInitiated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer has requested clearing for this trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ClearingStatusUpdated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearance system, e.g. LCH.Clearnet SwapClear, has updated status information relating to the clearing process.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ClearingRegistered">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearance system, e.g. LCH.Clearnet SwapClear, has registered the trade for clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ClearingRejected">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearance system, e.g. LCH.Clearnet SwapClear, has rejected the trade for clearing. The associated message text contains the reason for rejection.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ClearingReportingUpdated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearance system, e.g. LCH.Clearnet SwapClear, has updated reporting status information relating to the clearing process.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Consent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Consent notification for when Remaining party early affirms novations.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Consent Pulled">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Consent notification for when Remaining party cancels an early affirm novation.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Done">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Done notification.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Live">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Live proposal.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Novation Fee Agreed">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Novation fee has been agreed between outgoing party and incoming party in a novation.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Pickup">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Pickup notification.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PrimaryAgree">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">PB agrees notification.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Recall">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Trade is pulled back by dealer or broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Ref">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Ref (non-Live) proposal.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Released">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Released notification.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Rejected">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer has rejected with broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Requested Revision">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer has requested revision with broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Resubmitted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Broker resubmitted trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Submitted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Dealer or Broker submitted trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Transfer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Transfer notification.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Withdrawn">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Trade is withdrawn by dealer or broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PreAgreed">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">PreAgreed deal.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SettlementInitiated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Deal sent to Settlement Agent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SettlementAccepted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Deal accepted by Settlement Agent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SettlementRejected">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Deal rejected by Settlement Agent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SettlementParked">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Deal parked by Settlement Agent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_PrivateProcessStateEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A unilateral (private) process state associated with a trade. The process state is set by the SwapsWire System. Note that the states of 'Pending', 'Withdrawn' and 'Done' are 'bilateral' states in as much as both sides (parties) to the trade see the trade in one of these three states at the same time . The 'Released' state is a 'private' state in that the both sides are able to release a trade indpendently of each other once the trade has reached a state of 'Done'.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Pending">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A 'Pending' process state (a pre-Done state).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Withdrawn">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A 'Withdrawn' process state (a terminal pre-Done state).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Done">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A 'Done' process state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Released">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A 'Released' process state (a post-Done state).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_TradeSourceEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The source of the trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="SwapsWireOffline">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Trade entered as a 'direct' trade into the SwapsWire Trader application or via the Dealer API.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="BrokerLoad">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Broker Trade originating from a voice broker via the BrokerLoad API.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="FRA-Cross">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Pre-Accepted Broker Trade originating from ICAP's FRA-Cross system.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="TPMatch">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Pre-Accepted Broker Trade originating from Tullett's TPMatch system.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SwitchFix">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Pre-Accepted Broker Trade originating from Tradition's SwitchFix system.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SEF - Pre-accepted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Pre-Accepted Broker Trade originating from a Swap Execution Facility.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_TradeStatusEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A bilateral trade status. This state is an attribute of the trade itself and is therefore common to both parties involved in the trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="New">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a new trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Amended">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for an amended trade. An amended contract state can follow a previous new trade contract state or another amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Amended-Allocated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for amended block of an allocated trade. An amended block state can follow another amended block contract state or a partial novation block contract state</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cancelled">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a cancelled trade. A cancelled contract state can follow a previous new trade contract state or an amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Exit">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a trade which the parties have mutually indicated their intention to terminate or modify the terms thereof outside of the SwapsWire system. For example, a corporate action may require an adjustment to a share option transaction that cannot be accurately represented in the SwapsWire system. An exit contract state can follow a previous new trade contract state or an amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Exercised">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for an American style equity option that has been recorded as fully exercised prior to the expiration date (early exercise). An exercised contract state can follow a previous new trade contract state or an amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Exercised-Physical">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a physically exercised European swaption. An exercised contract state can follow a previous new trade contract state or an amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Exercised-Cash">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a cash exercised European swaption. An exercised contract state can follow a previous new trade contract state or an amended contract state.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Novated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a Novated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Novated-Partial">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a partial novated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-Novated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a trade resulting from a Novation.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Allocated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a Allocated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Novated-Allocated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for novated block of an allocated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Novated-Partial-Allocated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a block trade resulting from a block partial novation of an allocated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-Novated-Allocated">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a trade resulting from a block Novation of an Allocated trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-Allocation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a trade that is part of an allocation.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PrimeBrokered">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a PrimeBrokered trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-PrimeBrokered">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a PrimeBrokered trade between PB and EU or PB and executing broker.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-OutsideNovation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for an Outside Novation trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-OutsideNovation-Match">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for an Outside Novation matching trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Clearing-Takeup">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for an Clearing Takeup trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-Clearing">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a Divided Child trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Amended-Clearing">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a bilateral amendment on a Divided Child trade. This contract state is only applicable for post-Trade  Division workflow</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="New-Position">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a new Position trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cancelled-Position">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The contract state for a cancelled Position trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_AssociatedTradesEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Trade association type for trades linked to each other. E.g. Parent - Child trade following Trade Division post Clearing. This can be extended and generalized for other association types</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AlphaCleared">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Alpha pre divided trade</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="BetaCleared">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Beta and Gamma divided trades</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NettedParent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">When netted - a link to the parent trades involved in Netting</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NettedResidual">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">If partially netted - the list of residual trades</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="BlockParent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Bunched Orders block trade</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="AllocatedChild">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Bunched Orders allocation child trades</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PortfolioTransfer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Beta is spawned as part of a Portfolio Transfer event</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

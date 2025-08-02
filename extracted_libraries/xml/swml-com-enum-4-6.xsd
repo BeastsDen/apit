@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_ComClearingVenue">
+<xsd:annotation>
+<xsd:documentation>The Clearing Venue at which the trade has been/will be cleared</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="CME ClearPort">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is CME ClearPort</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ICE Clear Europe">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is ICE Clear Europe</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ICE Clear U.S.">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is ICE Clear U.S.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NOS Clearing">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is NOS Clearing</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="LCH.Clearnet EnClear">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is LCH.Clearnet EnClear</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SGX AsiaClear">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is SGX AsiaClear</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NGX">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clearing venue for the trade is NGX</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="None">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade is not cleared.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ComProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The product type is the top level categorization for SwapsWire templates.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Commodity Forward">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Commodity Forward.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Commodity Option">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Commodity Option.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Commodity Swap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Commodity Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Commodity Spread">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Commodity Spread (a.k.a. commodity basis swap or commodity differential).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ElectricityLoadShapeEnum">
+<xsd:annotation>
+<xsd:documentation>The name of the load shape for an electricity trade where a MarkitWire-defined load shape is in use.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Base">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Base load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Peak">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Peak load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Off-peak">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Off-peak load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Overnight">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Overnight load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Super-peak">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Super-peak load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Peak (Old)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The old definition of a Peak load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Off-peak (Old)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The old definition of an Off-peak load for the relevant market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

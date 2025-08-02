@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.fpml.org/2010/FpML-4-9" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swdml-eqd-main-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:element name="swEventNotification" type="SW_EventNotification"/>
+<xsd:complexType name="SW_EventNotification">
+<xsd:sequence>
+<xsd:element name="swTradeDate" type="xsd:date"/>
+<xsd:element name="swEventType" type="SW_EventType"/>
+<xsd:element name="swEquityEvents">
+<xsd:complexType>
+<xsd:choice>
+<xsd:element name="swKnockIn" type="SW_TriggerRateObservation">
+<xsd:annotation>
+<xsd:documentation>A structure describing a barrier knock in
+event</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swKnockOut" type="SW_KnockOutRateObservation">
+<xsd:annotation>
+<xsd:documentation>A structure describing a barrier knock out
+event</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBarrierKnockOut" type="SW_BarrierKnockOut">
+<xsd:annotation>
+<xsd:documentation>Event for Knock Out of barrier option.  Includes elements for payment type and payment lag.
+Specify Immediate payment and lag for payment upon knock out date plus the lag period.  Specify Delayed payment for payment upon expiration date.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAccumulatorKnockOut" type="SW_AccumulatorKnockOut">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_TriggerRateObservation">
+<xsd:annotation>
+<xsd:documentation>Should this really be expressed in terms of barrier
+rate?</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swObservationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The date on which the rate observation occurred, in order to
+trigger the barrier event.observationDate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTriggerPrice" type="PositiveMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The price value (level) which was attained/breached, in order to trigger the barrier event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swObservedPrice" type="PositiveMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The observed price value which triggered the barrier event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTriggerCondition" type="TriggerConditionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The side of the trigger rate/price (level) on which a rate
+observation occurred, in order to trigger the barrier
+event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_KnockOutRateObservation">
+<xsd:annotation>
+<xsd:documentation>Describes an observation that caused a barrier knock out to
+trigger</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_TriggerRateObservation">
+<xsd:sequence minOccurs="0">
+<xsd:element name="swEventPayment" type="SW_EventPayment" minOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Any rebate payable as a result of the knock
+out</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_AccumulatorKnockOut">
+<xsd:complexContent>
+<xsd:extension base="SW_KnockOutRateObservation">
+<xsd:sequence minOccurs="0">
+<xsd:element name="swTotalNumberOfShares" type="xsd:decimal"/>
+<xsd:element name="swAccruedDays" type="xsd:positiveInteger" minOccurs="0"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_BarrierKnockOut">
+<xsd:complexContent>
+<xsd:extension base="SW_KnockOutRateObservation">
+<xsd:sequence minOccurs="0">
+<xsd:element name="swRebatePaymentDateType" type="SW_RebatePaymentDateType"/>
+<xsd:element name="swRebatePaymentLag" type="Period" minOccurs="0"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EventPayment">
+<xsd:sequence>
+<xsd:element name="swPayerPartyId" type="SW_PartyDetails"/>
+<xsd:element name="swReceiverPartyId" type="SW_PartyDetails"/>
+<xsd:element name="swPayment" type="Money"/>
+<xsd:element name="swPaymentDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="swPaymentType" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="SW_EventType">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="KnockIn"/>
+<xsd:enumeration value="KnockOut"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_RebatePaymentDateType">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Immediate"/>
+<xsd:enumeration value="Delayed"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

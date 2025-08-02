@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.dtcc.com/2010/ReportingStatusXML-1-0" xmlns:pml="http://www.markitserv.com/2010/PublishingStatusXML-1-0" targetNamespace="http://www.dtcc.com/2010/ReportingStatusXML-1-0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:import namespace="http://www.markitserv.com/2010/PublishingStatusXML-1-0" schemaLocation="PublishingStatus.xsd"/>
+<xs:element name="DSMatchReportingData" substitutionGroup="pml:Update">
+<xs:annotation>
+<xs:documentation>Contains USI and UPI from Reporting Venue, eg. DDTC/GTR</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="USI">
+<xs:annotation>
+<xs:documentation>Unique Swap Identifier, 40 char alphanumeric string, a combination of USI namespace and the USI value</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="UPI">
+<xs:annotation>
+<xs:documentation>Unique Product Identifier contains Credit Taxonomy value, which is very similar to MDTT</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

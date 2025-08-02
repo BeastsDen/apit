@@ -1,0 +1,334 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-6" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-6" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swml-shared-4-6.xsd"/>
+<xsd:include schemaLocation="swml-com-enum-4-6.xsd"/>
+<xsd:element name="SWML" type="SWML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SWML root element forms the root for any conforming SWML instance document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="SWML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in an SWML document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swHeader" type="SW_Header">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade's id and version, source of the trade, status of the trade and the parties involved in the conversation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAllocations" type="SW_Allocations" minOccurs="0"/>
+<xsd:element name="swStructuredTradeDetails" type="SW_ComStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNegotiation" type="SW_Negotiation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The set of conversation dialogs recording the conversation that took place on the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPrivateData" type="SW_PrivateData" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Data which is private to an individual party. The private data consists of a mixture of process state information and private data entered through the SwapsWire Trader application, e.g. trading book identifier. Note that the element will not be present in SWML extracted via the Dealer API prior to that side picking up the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="version" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="4-6"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="SW_ComExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTradeHeader" type="SW_ComTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional bilateral non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExitReason" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will hold the reason for any exit events. It will not be displayed if there has been no exit.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice minOccurs="0">
+<xsd:element name="swCommodityOptionDetails" type="SW_CommodityOptionDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Option' product.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommoditySpreadDetails" type="SW_CommoditySpreadDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Spread' product.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommoditySwapDetails" type="SW_CommoditySwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Swap' product.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommodityForwardDetails" type="SW_CommodityForwardDetails">
+<xsd:annotation>
+<xsd:documentation>Additional trade details specific to the 'Commodity Forward' product.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ComStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductType" type="SW_ComProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTemplateName" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the SwapsWire template associated with the trade. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="FpML" type="DataDocument">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The FpML 4.6 compliant sub-tree that describes the Transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExtendedTradeDetails" type="SW_ComExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommodityForwardDetails">
+<xsd:annotation>
+<xsd:documentation>Additional trade details specific to the 'Commodity Forward' product.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swElectricityLoadShape" type="SW_ElectricityLegLoadShape" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The load-shape for a power forward where a MarkitWire-defined load shape has been specified. If a custom or Commodity Reference Price-specific load shape has been used, this element will not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swGasRelevantSystem" type="SW_RelevantSystem" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Relevant System for a gas forward traded under an EFET master agreement.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommodityOptionDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:choice minOccurs="0">
+<xsd:element name="swCommodityOptionTermination" type="SW_CommodityOptionTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A structure to hold the details of a termination on a commodity option transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommodityOptionIncrease" type="SW_CommodityOptionIncrease">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A structure to hold the details of an increase on a commodity option transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swCommodityLotSize" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The lot size of the listed contract referenced by the Commodity Reference Price. The applicable units are specified within the unit element within the commodity element in the FpML payload.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommodityOptionIncrease">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type allowing an increase to be recorded on a commodity option deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date"/>
+<xsd:element name="commodityPremium" type="CommodityPremium"/>
+<xsd:choice>
+<xsd:sequence>
+<xsd:element name="swIncreaseNotionalQuantitySchedule" type="CommodityNotionalQuantitySchedule"/>
+<xsd:element name="swPreviousNotionalQuantitySchedule" type="CommodityNotionalQuantitySchedule"/>
+</xsd:sequence>
+<xsd:sequence>
+<xsd:element name="swIncreaseNotionalQuantity" type="CommodityNotionalQuantity"/>
+<xsd:element name="swPreviousNotionalQuantity" type="CommodityNotionalQuantity"/>
+</xsd:sequence>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommodityOptionTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type allowing a termination to be recorded on a commodity option deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date"/>
+<xsd:element name="commodityPremium" type="CommodityPremium"/>
+<xsd:choice>
+<xsd:sequence>
+<xsd:element name="swTerminationNotionalQuantitySchedule" type="CommodityNotionalQuantitySchedule"/>
+<xsd:element name="swPreviousNotionalQuantitySchedule" type="CommodityNotionalQuantitySchedule"/>
+</xsd:sequence>
+<xsd:sequence>
+<xsd:element name="swTerminationNotionalQuantity" type="CommodityNotionalQuantity"/>
+<xsd:element name="swPreviousNotionalQuantity" type="CommodityNotionalQuantity"/>
+</xsd:sequence>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommoditySpreadDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Spread' product.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swCommoditySpreadTermination" type="SW_CommoditySwapTermination" minOccurs="0"/>
+<xsd:element name="swElectricityLoadShape" type="SW_ElectricityLegLoadShape" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>The load-shape for a leg of a spread where a MarkitWire-defined load shape has been specified. If a custom or Commodity Reference Price-specific load shape has been used, this element will not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommoditySwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Commodity Swap' product.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swBulletIndicator" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether this trade is a bullet swap or strip of bullets.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommoditySwapTermination" type="SW_CommoditySwapTermination" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A structure to hold the details of a termination on a commodity swap transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCommodityLotSize" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The lot size of the listed contract referenced by the Commodity Reference Price. The applicable units are specified within the unit element within the commodity element in the FpML payload.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swElectricityLoadShape" type="SW_ElectricityLegLoadShape" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The load-shape for a swap where a MarkitWire-defined load shape has been specified. If a custom or Commodity Reference Price-specific load shape has been used, this element will not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CommoditySwapTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold the details of a full or partial termination performed on a commodity swap or commodity spread trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party paying the premium resulting from the termination event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party receiving the premium resulting from the termination.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTerminationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The termination date.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTerminationPremium" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The termination premium amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTerminationPremiumCurrency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The termination premium currency.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTerminationPremiumSettlementDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The payment due date of termination premium.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:sequence maxOccurs="2">
+<xsd:element name="swTerminationNotionalQuantitySchedule">
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="CommodityNotionalQuantitySchedule"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swPreviousNotionalQuantitySchedule">
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="CommodityNotionalQuantitySchedule"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+<xsd:sequence maxOccurs="2">
+<xsd:element name="swTerminationNotionalQuantity" type="CommodityNotionalQuantity"/>
+<xsd:element name="swPreviousNotionalQuantity" type="CommodityNotionalQuantity"/>
+</xsd:sequence>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ComTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swManualConfirmationRequired" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether a follow-up manual confirmation is required.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingVenue" type="SW_ComClearingVenue" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Clearing Venue at which the trade has been/will be cleared</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNettingDetails" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swNettingBatchId" minOccurs="0" type="xsd:normalizedString"/>
+<xsd:element name="swNettingInstructionType" minOccurs="0" type="xsd:normalizedString"/>
+<xsd:element name="swSubCategory" minOccurs="0" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ElectricityLegLoadShape">
+<xsd:annotation>
+<xsd:documentation>The load shape for an electricity trade where a MarkitWire-defined load shape is in use along with a reference to leg to which the load shape applies.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swLegReference" type="SW_LegReference"/>
+<xsd:element name="swLoadShape" type="SW_ElectricityLoadShapeEnum"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RelevantSystem">
+<xsd:annotation>
+<xsd:documentation>The Relevant System for a gas forward traded under an EFET master agreement.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="Scheme">
+<xsd:attribute name="relevantSystemScheme" type="xsd:anyURI" default="http://www.markit.com/spec/2009/relevant-system"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:schema>

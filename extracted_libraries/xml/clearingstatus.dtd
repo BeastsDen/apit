@@ -1,0 +1,87 @@
+<!ELEMENT SCML ((StatusUpdate |
+Accept+ |
+Reject+ |
+AcceptDeclear |
+RejectDeclear |
+AcceptDereclear |
+RejectDereclear |
+RegulatoryReportingUpdate |
+MiniBlockDefinition),
+MatchingService,
+(MatchingServiceTradeReference | MiniBlockReference))>
+<!ATTLIST SCML version CDATA  #IMPLIED >
+<!ELEMENT StatusUpdate ((LchMatchedTradeReference |
+ClearingServiceTradeReference |
+(ClearingServicePartyATradeReference, ClearingServicePartyBTradeReference) |
+ClearingServiceLETradeReference*),
+(ClearingServiceStatusUpdate |
+(ClearingServicePartyAStatusUpdate, ClearingServicePartyBStatusUpdate) |
+ClearingServiceLEStatusUpdate*),
+BlockClearing?)>
+<!ELEMENT Accept ((LchMatchedTradeReference |
+ClearingServiceTradeReference |
+(ClearingServicePartyATradeReference, ClearingServicePartyBTradeReference) |
+(ClearingServiceLETradeReference*)),
+ClearingHouseUpfrontFeeSettlementDate?,
+ClearingHousePreferredISIN?,
+ClearingServiceLEStatusUpdate*,
+RegulatoryReportingUpdate?,
+ClearingPartiesUpdate?,
+AcceptText?,
+MatchingServiceTradeReference?)>
+<!ELEMENT Reject (RejectReason+,
+MatchingServiceTradeReference?)>
+<!ELEMENT AcceptDeclear (#PCDATA)>
+<!ELEMENT RejectDeclear (RejectReason+)>
+<!ELEMENT AcceptDereclear ((LchMatchedTradeReference |
+ClearingServiceTradeReference |
+(ClearingServicePartyATradeReference, ClearingServicePartyBTradeReference) |
+(ClearingServiceLETradeReference*)),
+RegulatoryReportingUpdate?,
+AcceptText?)>
+<!ELEMENT RegulatoryReportingUpdate ((ClearingServicePartyUpdate, ClearingServicePartyUpdate?))>
+<!ELEMENT ClearingServicePartyUpdate (LegalEntityID, ((ClearedTradeUSI | ClearedTradeUTI) | (ClearedTradeUSI, ClearedTradeUTI))?, ClearedTradeID*, ClearedTradeTimestamp?, ReportingRegime*)>
+<!ELEMENT ReportingRegime (Jurisdiction, ReportTo?)>
+<!ELEMENT Jurisdiction (#PCDATA)>
+<!ELEMENT ReportTo (DestinationID)>
+<!ELEMENT DestinationID (#PCDATA)>
+<!ELEMENT RejectDereclear (RejectReason+)>
+<!ELEMENT LchMatchedTradeReference (#PCDATA)>
+<!ELEMENT ClearingServiceTradeReference (#PCDATA)>
+<!ELEMENT ClearingServicePartyATradeReference (#PCDATA)>
+<!ELEMENT ClearingServicePartyBTradeReference (#PCDATA)>
+<!ELEMENT ClearingServiceLETradeReference (LegalEntityID, TradeReference)>
+<!ELEMENT LegalEntityID (#PCDATA)>
+<!ATTLIST LegalEntityID side (partyA | partyB ) #IMPLIED>
+<!ELEMENT TradeReference (#PCDATA)>
+<!ELEMENT ClearingServiceStatusUpdate (#PCDATA)>
+<!ELEMENT ClearingServicePartyAStatusUpdate (#PCDATA)>
+<!ELEMENT ClearingServicePartyBStatusUpdate (#PCDATA)>
+<!ELEMENT ClearingServiceLEStatusUpdate (LegalEntityID, StatusMessage)>
+<!ELEMENT BlockClearing (#PCDATA)>
+<!ELEMENT StatusMessage (#PCDATA)>
+<!ELEMENT ClearingHouseUpfrontFeeSettlementDate (#PCDATA)>
+<!ELEMENT ClearingHousePreferredISIN (#PCDATA)>
+<!ELEMENT AcceptText (#PCDATA)>
+<!ELEMENT RejectReason (ReasonCode , ReasonText)>
+<!ELEMENT ReasonCode (#PCDATA)>
+<!ELEMENT ReasonText (#PCDATA)>
+<!ELEMENT MatchingService (#PCDATA)>
+<!ELEMENT MatchingServiceTradeReference (#PCDATA)>
+<!ELEMENT ClearedTradeUSI (Issuer, TradeID)>
+<!ELEMENT ClearedTradeUTI (Issuer, TradeID)>
+<!ELEMENT TradeID (#PCDATA)>
+<!ATTLIST TradeID tradeIdScheme CDATA "http://www.fpml.org/coding-scheme/external/unique-transaction-identifier">
+<!ELEMENT Issuer (#PCDATA)>
+<!ATTLIST Issuer issuerIdScheme CDATA "http://www.fpml.org/coding-scheme/external/cftc/issuer-identifier">
+<!ELEMENT ClearedTradeTimestamp (#PCDATA)>
+<!ELEMENT MiniBlockReference (#PCDATA)>
+<!ELEMENT MiniBlockDefinition (Components, MiniBlockCount, Notional)>
+<!ELEMENT MiniBlockCount (#PCDATA)>
+<!ELEMENT Notional (#PCDATA)>
+<!ELEMENT Components (MatchingServiceTradeReference+)>
+<!ELEMENT ClearedTradeID (Issuer?, TradeID, IDType)>
+<!ELEMENT IDType (#PCDATA)>
+<!ELEMENT ClearingHouseProductID (#PCDATA)>
+<!ELEMENT PartyUpdate (LegalEntityID, ClearingHouseProductID?)>
+<!ELEMENT ClearingPartiesUpdate (PartyUpdate, PartyUpdate?)>

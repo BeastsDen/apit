@@ -1,0 +1,2609 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swdml-shared-4-2.xsd"/>
+<xsd:include schemaLocation="swdml-ird-enum-4-2.xsd"/>
+<xsd:include schemaLocation="fpml-main-4-2.xsd"/>
+<xsd:include schemaLocation="fpml-doc-4-2.xsd"/>
+<xsd:include schemaLocation="fpml-ird-4-2.xsd"/>
+<xsd:include schemaLocation="swdml-reporting-df-ird-1-0.xsd"/>
+<xsd:element name="SWDML">
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="SWDML"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="SWDML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in an SWDML document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:choice>
+<xsd:element name="swShortFormTrade" type="SW_ShortFormTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The container for a short form SWDML trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swLongFormTrade" type="SW_LongFormTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This container for a long form SWDML trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swTradeEventReportingDetails" type="SW_IrdTradeEventReportingDetails" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="version" type="SW_Version" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SW_LongFormTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This container for a long form SWDML trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swOriginatorPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swGiveUp" type="SW_GiveUp" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of the give up relationships for a prime brokered transaction. This element will be present if the trade has a trade status of PrimeBrokered.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swReplacementTradeId" type="SW_ReplacementTradeId" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="novation" type="SW_ConfirmedNovationAgreement" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Novation Agreement details and any related fee associated with the transfer of the trade. This element will be present if the trade has a trade status of 'Novated' or 'New-Novated'. This is an FpML 4.2 element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAllocations" type="SW_Allocations" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of allocation splits that will be applied to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStructuredTradeDetails" type="SW_IrdStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_IrdStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductType" type="SW_IrdProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The product type is the top level categorization for SwapsWire templates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTemplateName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the SwapsWire template associated with the trade. This will be populated by the SwapsWire system.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swParticipantSupplement" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of an applicable participant supplement template that was applied to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="FpML" type="DataDocument">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The FpML compliant sub-tree that describes the transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOfflineTrade" type="SW_OfflineTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The component that describes the details of a rates offline trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swExtendedTradeDetails" type="SW_IrdExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBusinessConductDetails" type="SW_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not 	captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_OfflineTrade">
+<xsd:annotation>
+<xsd:documentation>A component for defining details of a rates offline product.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swOfflineProductType" minOccurs="0"/>
+<xsd:element name="swTradeDate" type="xsd:date"/>
+<xsd:element name="swLegDetails" type="SW_LegDetails" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Details of each leg.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOptionType" minOccurs="0"/>
+<xsd:element name="expirationDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="effectiveDate" type="xsd:date"/>
+<xsd:element name="terminationDate" type="xsd:date"/>
+<xsd:element name="swAdditionalDetails" minOccurs="0"/>
+<xsd:element name="swOriginalTradeReferences" type="SW_OriginalTradeReferences" minOccurs="0"/>
+<xsd:element name="party" type="Party" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_LegDetails">
+<xsd:sequence>
+<xsd:choice minOccurs="0">
+<xsd:sequence minOccurs="0">
+<xsd:element name="payerPartyReference" type="PartyReference"/>
+<xsd:element name="receiverPartyReference" type="PartyReference"/>
+</xsd:sequence>
+<xsd:sequence minOccurs="0">
+<xsd:element name="buyerPartyReference" type="PartyReference"/>
+<xsd:element name="sellerPartyReference" type="PartyReference"/>
+</xsd:sequence>
+</xsd:choice>
+<xsd:element name="notional" type="Money"/>
+<xsd:element name="fixedRate" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="floatingRateIndex" type="FloatingRateIndex" minOccurs="0"/>
+<xsd:element name="indexTenor" type="Interval" minOccurs="0"/>
+<xsd:element name="paymentFrequency" type="Interval" minOccurs="0"/>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="SW_OriginalTradeReferences">
+<xsd:sequence>
+<xsd:element name="swOriginalTradeReference" maxOccurs="2">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyReference"/>
+<xsd:element name="swTradeReference" minOccurs="0"/>
+<xsd:element name="swTradeDesk" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ShortFormTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This container for a short form SWDML trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swOriginatorPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swParticipantSupplement" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Participant supplement enforced on the trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swCapFloorParameters" type="SW_CapFloorParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form CapFloor trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFraParameters" type="SW_FraParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form FRA trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIrsParameters" type="SW_IrsParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form IRS trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOisParameters" type="SW_OisParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form OIS trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwaptionParameters" type="SW_SwaptionParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form Swaption trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swZCInflationSwapParameters" type="SW_ZCInflationSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form ZCInflationSwap trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBasisSwapParameters" type="SW_BasisSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form Basis Swap trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCrossCurrencyIrsParameters" type="SW_CrossCurrencyIrsParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form IRS trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCrossCurrencyBasisSwapParameters" type="SW_CrossCurrencyBasisSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form Basis Swap trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedFixedParameters" type="SW_FixedFixedParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a short form Fixed Fixed Swap trade message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swBackLoadingFlag" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A flag to identify backloaded trades.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingHouse" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The BIC of the Clearing House at which the trade is intended to clear.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="contractualDefinitions" type="ContractualDefinitions" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The definitions (such as those published by ISDA) published by ISDA that will define the terms of the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CapFloorParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form CapFloor trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="buyerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPremium" type="SW_Premium" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swaption premium</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOptionType" type="SW_CapFloorTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">CapFloor type as 'Cap', 'Floor' or 'Cap Floor Straddle'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStrikeRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The CapFloor strike rate.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="indexTenor" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA Designated Maturity, i.e. the tenor of the floating rate.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The frequency at which regular payment dates occur. If the payment frequency is equal to the frequency defined in the calculation period dates component then one calculation period contributes to each payment amount. If the payment frequency is less frequent than the frequency defined in the calculation period dates component then more than one calculation period will contribute to e payment amount. A payment frequency more frequent than the calculation period frequency or one that is not a multiple of the calculation period frequency is invalid.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FraParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form FRA trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEffectiveDateTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Forward date tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTerminationDateTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Forward date tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="buyerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_IrsParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form IRS trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductSubType" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To suppert Product Subtypes such as "ZeroCouponFixed"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRollFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Roll fequencny</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Float Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Paymentl fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompoundingMethod" type="CompoundingMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Compounding Method</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the fixed leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFloatStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the floating leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swStubIndexTenor" type="Interval" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub Index Tenors</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancelableProvision" type="SW_CancelableProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cancelable provision information relating to the Swap Transaction. Note that this element should not be present for a FRA, Swaption or CapFloor trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAssociatedBonds" type="SW_AssociatedBonds" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The underlying bond details if the swap price was negotiated as a spread over underlying bond reference instruments. Note that this element should not be present for a FRA, OIS, CapFloor or Swaption trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Amount for a ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="initialRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First fixing</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="additionalTerms" type="SW_AdditionalTerms" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional terms relating to participant supplements</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="nonDeliverable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ZCInflationSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining a short form ZCInflationSwap trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Amount for a ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swInflationRateCalculation" type="SW_InflationRateCalculation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The inflation swap details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAdditionalBondDetails" type="SW_AdditionalBondDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Bond related details in case of a Sandard coupon inflation swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_SCInflationSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining a short form ZCInflationSwap trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Amount for a ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swInflationRateCalculation" type="SW_InflationRateCalculation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The inflation swap details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_OisParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form OIS trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductSubType" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To support Product Subtypes such as "ZeroCouponFixed"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRollFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Roll fequencny</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Float Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Paymentl fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the floating leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFixedStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the fixed leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancelableProvision" type="SW_CancelableProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cancelable provision information relating to the Swap Transaction. Note that this element should not be present for a FRA, Swaption or CapFloor trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAssociatedBonds" type="SW_AssociatedBonds" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The underlying bond details if the swap price was negotiated as a spread over underlying bond reference instruments. Note that this element should not be present for a FRA,CapFloor or Swaption trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Amount for a ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="additionalTerms" type="SW_AdditionalTerms" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional terms relating to participant supplements</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="nonDeliverable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="calculationParameters" type="CalculationParameters" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A parameters to specify a rate calculated using an averaging or compounding formula</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_SwaptionParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form Swaption trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="buyerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPremium" type="SW_Premium" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swaption premium</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swEuropeanExercise" type="SW_EuropeanExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swaption european date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swaptionStraddle" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swaption straddle indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCashSettlement" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cash settlelment indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRollFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Roll fequencny </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Float Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Paymentl fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompoundingMethod" type="CompoundingMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Compounding Method</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the fixed leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFloatStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the floating leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swStubIndexTenor" type="Interval" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub Index Tenors</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified.  For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="initialRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First fixing</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_BasisSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form Basis Swap trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatingRateCalculation" type="SW_FloatingRateCalculation" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the floating rate calculation details for basis swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CrossCurrencyIrsParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form Cross Currency IRS trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductSubType" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To suppert Product Subtypes such as "ZeroCouponFixed"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRollFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Roll fequencny</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Float Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Paymentl fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompoundingMethod" type="CompoundingMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Compounding Method</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the fixed leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFloatStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the floating leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swStubIndexTenor" type="Interval" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub Index Tenors</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSendToCLS" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether the message is eligible for the settlement at CLS.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swSettlementLegEligibility" minOccurs="1" maxOccurs="2">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:boolean">
+<xsd:attribute name="swSettlementLeg" type="SW_SettlementLegEnum"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNotional2" type="SW_Money" minOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional for leg (2), or Initial Notional for leg (2) when Mark-To-Market</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="indexTenor" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA Designated Maturity, i.e. the tenor of the floating rate.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="initialRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First fixing</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="principalExchanges" type="PrincipalExchanges" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The true/false flags indicating whether initial, intermediate or final exchanges of principal should occur.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="nonDeliverable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="calculationParameters" type="CalculationParameters" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A parameters to specify a rate calculated using an averaging or compounding formula</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CrossCurrencyBasisSwapParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form Cross Currency Basis Swap trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSendToCLS" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether the message is eligible for the settlement at CLS.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swSettlementLegEligibility" minOccurs="1" maxOccurs="2">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:boolean">
+<xsd:attribute name="swSettlementLeg" type="SW_SettlementLegEnum"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatingRateCalculation" type="SW_FloatingRateCalculation" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the floating rate calculation details for basis swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="nonDeliverable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FixedFixedParameters">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining a short form Fixed Fixed Swap trade message.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductSubType" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To suppert Product Subtypes such as "ZeroCouponFixed" or "ZeroCouponFixed2" or "ZeroCouponFixedFixed2"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Date the trade was executed</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapTermTenor" type="Interval">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Swap tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="adjustedEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Adjusted start date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnadjustedTerminationDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Unadjusted end date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="rollConvention" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The roll convention</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixed2PaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed leg 2 Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub position as "Start" or "End"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFixedStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the Fixed leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFixed2StubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the Fixed leg 2. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swFixedAmounts" type="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNotional2" type="SW_Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional for leg (2), or Initial Notional for leg (2) when Mark-To-Market</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="fixedRate" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Fixed Amount for a ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:choice>
+<xsd:element name="fixedRate2" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Fixed Rate on leg 2. 0.05 is 5%</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fixedAmount2" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Fixed Amount for leg 2  on ZC swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="initialRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First fixing</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="principalExchanges" type="PrincipalExchanges" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The true/false flags indicating whether initial, intermediate or final exchanges of principal should occur.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Party identifier of the buyer or seller</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement details for a non deliverable currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence>
+<xsd:element name="nonDeliverable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="nonDeliverable2" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Non-Deliverable Indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FloatingRateCalculation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the floating rate calculation details for basis swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatPaymentFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Float Payment fequency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="SW_Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="floatingRateIndex" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Floating rate index code</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="indexTenor" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The designated maturity</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatingRateMultiplier" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The floating rate multiplier</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompoundingMethod" type="CompoundingMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Compounding Method</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="initialRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First fixing</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFloatStubLength" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element links the corresponding stub to the floating leg. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swStubIndexTenor" type="Interval" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub Index Tenors</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="principalExchanges" type="PrincipalExchanges" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The true/false flags indicating whether initial, intermediate or final exchanges of principal should occur.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="calculationParameters" type="CalculationParameters" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A parameters to specify a rate calculated using an averaging or compounding formula</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SW_IrdExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTradeHeader" type="SW_IrdTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional bilateral non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStub" type="SW_Stub" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Stub details.  This optional element will have two instances if both front and back stubs apply, the first instance applies to the front stubs and the back instance applies to the back stubs; otherwise this element will only occur once where applicable.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEarlyTerminationProvision" type="SW_EarlyTerminationProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Early termination provision information relating to the Swap Transaction. Either Mandatory or Optional Early Termination can be specified. Note that this element should not be present for a FRA or CapFloor trade. For a Swaption trade the early termination is assumed to apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAssociatedBonds" type="SW_AssociatedBonds" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The underlying bond details if the swap price was negotiated as a spread over underlying bond reference instruments. Note that this element should not be present for a FRA, OIS, CapFloor or Swaption trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="additionalPayment" type="SW_Payment" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional payment between the principal parties involved in the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExitReason" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will optionally be present if the trade has a trade status of Exit and will contain any reason text entered through the SwapsWire Trader field labeled Exit Reason.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAmendmentType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be presernt if a partial termination is affected, or if a trade has been corrected and contains the value of 'PartialTermination' or 'ErrorCorrection'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancellationType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if a cancellation is affected for a trade which was booked in error and contains the value 'BookedInError'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swForwardPremium" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Boolean element indicates if the Swaption premium payment amount is live or the payment has been settled at the time of cancellation event.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementProvision" type="SW_SettlementProvision" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">definining the details for settlement of a non deliverable currency.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInflationSwapDetails" type="SW_InflationSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will be present if the trade is an Inflation Swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFutureValue" type="SW_FutureValue" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will be present if the trade is a BRL-CDI non deliverable swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swModificationTradeDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if the trade has a trade status of Exit or Amended and will contain a date entered through the MarkitWire field labeled Transaction Date on Processing tab. The date corresponds to the trade date of the transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swModificationEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if the trade has a trade status of Exit or Amended and will contain any reason text entered through the SwapsWire Trader field labeled Effective Date on Processing tab.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRatesTermination" type="SW_RatesTermination" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Full Termination (Cancelation/unwind) or Partial Termination details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOutsideNovation" type="SW_OutsideNovation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Novation details where the novation happens outside of MarkitWire</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFxCutoffTime" type="SW_FxCutoffTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Mark-To-Market fixing cut-off time for a Cross Currency Basis Swap or Cross Currency IRS.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCrossCurrencyMethod" type="CashPriceMethod" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined settlement method used for the determination of the applicable cash settlement amount. The method is defined in Supplement 23, ISDA 2006 Definitions, Section 18.3 Cash Settlement Methods, paragraph (f).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCollateralizedCashPrice" type="YieldCurveMethod" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined settlement method used for the determination of the applicable cash settlement amount. The method is defined in Supplement 28, ISDA 2006 Definitions, Section 18.3 Cash Settlement Methods, paragraph (g).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementAgent" type="SW_SettlementAgent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of a designated Settlement Agent to process settlement and collateral payments on behalf of both counterpartyies to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOrderDetails" type="SW_OrderDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A requirement under MIFID 2, to capture bilateral details related to transmission of orders.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCapFloorDetails" type="SW_CapFloorDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A placeholder to capture additional details related to CMS One Look Product</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAgreedDiscountRate" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>As a result of the CCPs moving from over night rates to risk free rates,this field, on a swaption template, captures the rate that was used to value the underlying swap when the trade was originally booked</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEconomicAmendmentType" type="SW_EconomicAmendmentTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A flag to identify if the trade is a part of an economic amendment e.g Transition from IBOR to RFRs </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEconomicAmendmentReason" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A field capturing the reason for economic amendment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="calculationAgent" type="CalculationAgent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Calculation agent party details for products for which calculationAgent structure is not supported by FpML 4.2 schema</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSwapRateFallbacksAmendment" type="SW_FallbacksSupplementEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates the type of swaprate fallbacks amendment applicable to the novation of a trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_AdditionalTerms">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional details regarding participant supplements</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="conditionPrecedentBond" type="SW_Bond">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional terms relating to condition precedent bonds</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_AssociatedBonds">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">For some markets, e.g. U.S. Dollar and Canadian Dollar, it is usual practice to quote swap prices in terms of a spread over an underlying reference bond instrument(s) and in most cases these underlying instruments are exchanged at time of trade. This entity allows specification of the negotiated spread rate and the associated bonds themselves, including whether or not they will be exchanged.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swNegotiatedSpreadRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The negotiated swap spread rate. A positive 10 basis point (0.1 percent) spread would be represented as 0.001.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBondDetails" type="SW_BondDetails" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Details of the associated bond(s) if the swap was negotiated as a spread over these underlying instruments. This element should occur a maximum of two times.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_BondDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining bond details. By convention, the Fixed Rate Payer on the Swap Transaction buys the bonds from the Floating Rate Payer.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swBondId" type="SW_BondIdEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An identifier for the bond instrument. This element should not be present if the broker is unable to map a SwapsWire defined Scheme value in this field.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBondName" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A free format description of the bond instrument. The description should not exceed 40 characters in length. If the swBondId element is present then this should represent a textual description of the identifier. Note that if the ampersand character "&amp;" and the left and right angle brackets are entered as part of the description they should be escaped using the strings "&amp;", "&lt;" and "&gt;" respectively in the character data of the element content (see http://www.w3.org/TR/2000/REC-xml-20001006#syntax for further explanation).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBondQuantity" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The bond face amount expressed as a percentage of the notional amount of the swap. 50 percent would be represented as 0.5.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBondFaceAmount" type="xsd:nonNegativeInteger">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The face amount of the bond.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPriceType" type="SW_PriceTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A classification of the format used to express the bond price and hence how the value in the swBondPrice element should be interpreted. For example, whether the price is in a decimal format or whether the fractional part is expressed in 32nds of 1% of par value etc.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBondPrice" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The clean bond price expressed in a format consistent with the price type specified by the swPriceType element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FxCutoffTime">
+<xsd:annotation>
+<xsd:documentation>A component for defining the Mark-To-Market fixing cut-off time for a Cross Currency Basis Swap or Cross Currency IRS.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="hourMinuteTime" type="HourMinuteTime">
+<xsd:annotation>
+<xsd:documentation>A time specified in hh:mm:ss format where the second component must be '00', e.g. 11am would be represented as 11:00:00.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_InflationRateCalculation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional details regrading inflation swaps that are not held in the FpML structure</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swFloatingRateIndex" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Underlying Floating Index</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInitialIndexLevel" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Initial Index Level</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInflationLag" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Inflation Lag Period</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIndexSource" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Index Source </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInterpolationMethod" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Interpolation method as "None" or "Zero"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRelatedBond" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Optional Related Bond</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAdditionalBondDetails" type="SW_AdditionalBondDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Bond related details in case of a Sandard coupon inflation swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_EuropeanExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional details regrading a european exercise</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swExpirationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The European exercise date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FixedAmounts">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A container for the payer and receiver in a swap transaction</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the SWDML document. The party referenced is the party that entered the trade into the SwapsWire systemI.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_FutureValue">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Details regarding the Future Value of the fixed leg of the trade</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="calculationPeriodNumberOfDays" type="xsd:positiveInteger">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The number of days from the adjusted effective / start date to the adjusted termination / end date calculated in accordance with the applicable day count fraction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNotionalFutureValue" type="SW_NotionalFutureValue">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The future value of the notional amount of the fixed leg</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_InflationSwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional details regrading inflation swaps that are not held in the FpML structure</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swIndexInitial" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The index initial given in month and year</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIndexFinal" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The index final given in month and year.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swfallbackBondApplicable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The applicability of a fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8. Omission of this element imples a value of true.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCalculationMethod" type="SW_InflationCalculationMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates how to use the inflation index to calculate the payment (e.g. Ratio, Return, Spread).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCalculationStyle" type="SW_InflationCalculationStyleEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates the style of how the inflation index calculates the payment (e.g. YearOnYear, ZeroCoupon).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFinalPrincipalExchangeCalculation" type="SW_FinalPrincipalExchangeCalculation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To be specified only for inflation products that embed a redemption payment, e.g. inflation linked asset swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSpreadCalculationMethod" type="SW_SpreadCalculationMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Code values for different methods of spread calculation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="SW_InflationCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different ways of using inflation indexes in formulas</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Ratio">
+<xsd:annotation>
+<xsd:documentation>(Inflation Index Final / Inflation Index Base). Inflation Index Final is inflation index for Reference Month that is the Lag number of months prior to Payment Date (subject to interpolation). Inflation Index Base subject to the Calculation Style. Used in inflation asset swaps to calculate the inflation coupons and principal exchange.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Return">
+<xsd:annotation>
+<xsd:documentation>(Inflation Index Final / Inflation Index Base -1). Inflation Index Final is the inflation index for Reference Month that is the Lag number of months prior to Payment Date (subject to interp). Inflation Index Base subject to the Calculation Style. Used in market standard ZC Inflation swaps.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Spread">
+<xsd:annotation>
+<xsd:documentation>Inflation Index Final - Inflation Index Base). Inflation Index Final is Index for Ref month the Lag months prior to Payment Date (subject to interp). Inflation Index Base subject to the Calculation Style. Typically used for fixing locks.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_InflationCalculationStyleEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different styles of ways of calculation methods.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="YearOnYear">
+<xsd:annotation>
+<xsd:documentation>YearOnYear means Inflation Index Base is the inflation index for Reference Month that is 12 months prior to Inflation Index Final (subject to interpolation). Inflation Index Base is cashflow dependent.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ZeroCoupon">
+<xsd:annotation>
+<xsd:documentation>ZeroCoupon means Inflation Index Base used in the CalculationMethod is the inflation index for the Reference Month that is the lag number of months prior to Effective Date in the case of a swap, or Bond Interest Accrual Date in the case of an Asset Swap (subject to interpolation). Inflation Index Base has the same value for each inflation cashflow and Principal Exchange calculation within the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_FinalPrincipalExchangeCalculation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether the Principal Exchange on the inflation leg is floored or not. If TRUE, Principal Exchange takes the form: Inflation Notional Amount * Max(1, Index Final/ Index Base). If FALSE, the Principal Exchange takes the form: Inflation Notional Amount * Index Final / Index Base.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swFloored" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">If TRUE, Principal Exchange takes the form: Inflation Notional Amount * Max(1, Index Final/ Index Base). If FALSE, the Principal Exchange takes the form: Inflation Notional Amount * Index Final / Index Base.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="SW_SpreadCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation>Code values for different methods of spread calculation.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="ParPar"/>
+<xsd:enumeration value="Proceeds"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:complexType name="SW_IrdTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swManualConfirmationRequired" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether a follow-up manual confirmation is required. This element will always contain a value of true for a SwapsWire Single Sided Deal</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNovationExecution" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade is a novation execution trade or not. This element will be true for Novation Execution trade</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingNotRequired" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade needs to be excluded from clearing through a central clearing house or clearing system.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStandardSettlementInstructions" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether standard settlement instructions are applicable. Note that the corresponding SwapsWire Trader checkbox field label is Non-Standard Settlement Instructions, i.e. a checked screen field corresponds to an element value of false.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInteroperable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the trade should be considered interoperable and tested against the interoperability eligibilty criteria. Note that this flag only applies when the recipient participant's primary platform is not MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExternalInteropabilityId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A field which allows users to provide their Unique ID to be used when trade is interopable.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swInteropNettingString" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A field which allows users to provide their Interop Netting String to be used when trade is interopable.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNormalised" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether any of the trade data (trade date, effective date or termination date) was normalised as part of the submission process to SwapsWire. This element will only be present for a normalised trade. Currently, normalisation only has applicability for trades with a product type of 'SingleCurrencyInterestRateSwap' submitted to SwapsWire for backloading into LCH.Clearnet's SwapClear service.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAutoSendForClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the tradeshould be automatically sent for clearing if it satisfies the eligibility criteria.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCBClearedTimestamp" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearing requirement. When this trade was cleared as provided by the Clearing Broker</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCBTradeType" type="SW_CBTradeTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Allows user to indicate the type of CB trade as either non-member-CB or CB-CCP.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swMandatoryClearing" type="SW_MandatoryClearing" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Element to provide details of Mandatory Clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClientClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the tradeis a client clearing trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingHouse" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The BIC of the Clearing House at which the trade is intended to clear.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the details for a trade being cleared outside MW</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swClearingHouseUpfrontFeeSettlementDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Upfront Fee Settlement Date is allocated by the ICE Clearing House on successful acceptance of a trade sent for clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingHousePreferredISIN" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cleared House Prefferd ISIN is the updated ISIN by Clearing House for the ISIN submitted by the trade.This preferred ISIN is allocated by the ICE Clearing House on successful acceptance of a trade sent for clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearedTimestamp" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearing requirement. When this trade was cleared as provided by the Clearing House</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearedUSI" type="SW_UniqueTradeIdentifier" minOccurs="0"/>
+<xsd:element name="swClearedUTI" type="SW_UniqueTradeIdentifier" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swClearingBroker" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The BIC of the Clearing Broker - this should only be submitted currently for client clearing deals.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swDataMigrationId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A field capturing the Sell side's internal trade ID as a bilateral field</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearedPhysicalSettlement" type="xsd:boolean" fixed="true" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A flag which can only contain the value 'true', which if present indicates that the underlying swap is to be cleared.  This should only be submitted for physical settlement of swaptions.  This property is defined in Supplement 28, ISDA 2006 Definitions, Section 15.2 Cleared Physical Settlement.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPredeterminedClearerForUnderlyingSwap" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The expected clearer of the underlying swap upon exercise of the swaption, as agreed at execution of the swaption</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingTakeup" type="SW_ClearingTakeup" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A ClearingTakeup trade indicator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBackLoadingFlag" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A flag to identify backloaded trades.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBulkAction" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to identify trades created or amended as part of a bulk process.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAssociatedTrades" type="SW_AssociatedTrades" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Trade association type for trades linked to each other.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOriginatingEvent" type="SW_OriginatingEvent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The reason a trade is created such as Bunched Order Block, Bunched Order Allocation, Backload. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSendToCLS" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether the message is eligible for the settlement at CLS.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swSettlementLegEligibility" minOccurs="1" maxOccurs="2">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:boolean">
+<xsd:attribute name="swSettlementLeg" type="SW_SettlementLegEnum"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swESMAFrontloading" type="SW_FrontloadEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Field to specify the Frontloading category under EMIR regulation</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swESMAClearingExemption" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This field is used to capture exemption from mandatory clearing under ESMA</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPricedToClearCCP" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The BIC of the Clearing House at which the trade was priced to clear</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swUnderlyingSwapDetails" type="SW_UnderlyingSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Details related to IRS trade resulting from exercise on a swaption contract </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAutoCreateAffirmReleaseSwap" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swConvertUnderlyingSwapToRFR" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_OriginatingEvent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the type of business event that triggered the origination of this trade.  This is used to provide additional detail about how or why a trade originatated, particularly when this is not self-evident.  For example, it can indicated that the trade was created as a result original bunched order or allocation.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="swOriginatingEventScheme" type="xsd:anyURI" fixed="http://www.markitwire.com/spec/2013/coding-scheme/originating-event"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_SettlementProvision">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the details for settlement of a non deliverable currency.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swSettlementCurrency" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Notional amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNonDeliverableSettlement" type="SW_NonDeliverableSettlement">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Rate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Stub">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the details for settlement of a non deliverable currency.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swStubPosition" type="SW_StubPositionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a start (front) or end (back) stub. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStubLength" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of whether an applicable stub is a short or long stub. This element carries an href attribute that identifies the leg to which the stub corresponds. Note that this element should not be present for a FRA trade. For a Swaption trade the stub would apply to the underlying swap.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="SW_StubLengthEnum">
+<xsd:attribute name="href" type="xsd:string" use="required"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_NonDeliverableSettlement">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining the details for converting a non deliverable currency.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swReferenceCurrency" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Reference currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFxFixingSchedule" type="AdjustableDate" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Valuation date, Typically for a non deliverable BRL interest rate swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementRateOption">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">FX Rate source</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="swSettlementRateOptionScheme" type="xsd:anyURI" default="http://www.fpml.org/coding-scheme/settlement-rate-option-1-0"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_NotionalFutureValue">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The future value of the notional amount of the fixed leg.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Currency of Notional Future Value amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Amount of Notional Future Value.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" type="xsd:IDREF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Pointer to the Present Value notional amount for this Future Value </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="SW_OutsideNovation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the details of a Novation which happened outside of MarkitWire.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTransferor" type="SW_Transferor">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Outgoing Party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="transferee" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Incoming Party Reference</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="remainingParty" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Remaining Party Reference</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="novationDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Effective Date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="novationTradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Trade Date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="fullFirstCalculationPeriod" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether Full First Calculation Period is applicable to the New Transaction arising from a novation. Full First Calculation Period relates to initial cashflow accruals for payment by each party on the first Payment Date following a novation and is defined in the 2004 ISDA Novation Definitions. ISDA 2004 Novation Term: Full First Calculation Period.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFirstFixedPeriodStartDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First Fixed Period Start Date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFirstFloatPeriodStartDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">First Float Period Start Date</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RatesTermination">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional details regarding a Full Termination (Cancelation/unwind) or Partial Termination</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPreviousNotional1" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The previous notional amount. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPreviousNotional2" type="Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The previous notional amount. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNotionalDecrease1" type="Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The previous notional amount. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNotionalDecrease2" type="Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The previous notional amount. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Transferor">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the details of a Transferor, i.e. the Outgoing Party of a novation.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Outgoing Party Id</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Outside Novation Outgoing Party Name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ClearingTakeupPartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the ClearingTakeup Party in a formal structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A party identifier, e.g. a S.W.I.F.T. bank identifier code (BIC).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the party. A free format string. FpML does not define usage rules for this element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tradeId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade id related to this counterParty.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ClearingTakeupTokenDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Element which defines the unilateral credit acceptance token for a party.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swCreditIssuer" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the credit token issuer.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swToken" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The value of the credit token.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ClearingTakeupVenueId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type to define the venue identifier issuer. The Venue Id Scheme is used to identify the source of the Id and determines the Issuer/Id values used for Clearing and Reporting.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString">
+<xsd:attribute name="swVenueIdScheme" type="xsd:anyURI"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_ClearingTakeup">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swClient" type="SW_ClearingTakeupPartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The client information related to the ClearingTakeup trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionSource" type="SW_ClearingTakeupPartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The information related to the EXecution Source related to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCorrelationId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The correlationId of the clearing house to link trades between clearing house and MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingHouseTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The tradeId of the clearing house </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOriginatingEvent" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Determines if this is a Incoming or Outoing Position Transfer </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBlockTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">If the parent trade is a child of an allocation then this is the id of the block trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSentBy" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Name of the execution source that has sent this Clearing Take Up trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCreditAcceptanceToken" type="SW_ClearingTakeupTokenDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The credit token information related to the party on the Clearing Takeup trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingStatus" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearing status of the Clearing Take Up trade. This will be used when a trade has been pre-accepted by the Clearing House.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swVenueId" type="SW_ClearingTakeupVenueId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The venue Identifier e.g. Pre-LEI</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CancelableProvision">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining limited cancelable provision information relating to the Swap Transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swCancelableBuyerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancelableFirstExerciseDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancelableExerciseFrequency" type="Interval" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_UnderlyingSwapDetails">
+<xsd:annotation>
+<xsd:documentation>A type defining details related to IRS trade resulting from exercise on a swaption contract</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swClientClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether the IRS trade resulting from swaption exercise is a client clearing trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAutoSendForClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A true/false flag to indicate whether the trade should be automatically sent for clearing if satisfies the eligibility criteria.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_SettlementAgent">
+<xsd:annotation>
+<xsd:documentation> A type defining details of a specified Settlement Agent to the trade</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="1">
+<xsd:element name="swSettlementAgency" type="SW_SAPartyRef" minOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The reference to the Party details contained in the FpML for the specified Settlement Agency.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementAgencyModel" type="xsd:normalizedString" minOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Settlement Agency Model, either CTM (Collateralised To Market) or STM (Settle To Market)</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_SAPartyRef">
+<xsd:annotation>
+<xsd:documentation>The specified Settlement Agency party details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement Agency Party Id</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement Agency Party Name</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_OrderDetails">
+<xsd:sequence>
+<xsd:element name="swTypeOfOrder" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the type of order, as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTotalConsideration" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the total consideration towards the order as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRateOfExchange" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the rate of exchange towards the order as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClientCounterparty" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate where the client's counterparty was the investment firm itself or any person in the investment firm's group or another client of the investment firm, the fact that this was the case unless the order was executed through a trading system that facilitates anonymous trading. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTotalCommissionAndExpenses" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise total sum of the commissions and expenses charged and, where the client so requests, an itemised breakdown including, where relevant, the amount of any mark-up or mark-down imposed where the transaction was executed by an investment firm when dealing on own account, and the investment firm owes a duty of best execution to the client.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClientSettlementResponsibilities" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would constitute client's responsibilities in relation to the settlement of the transaction, including the time limit for payment or delivery as well as the appropriate account details where these details and responsibilities have not previously been notified to the client.  </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_CapFloorDetails">
+<xsd:sequence minOccurs="0">
+<xsd:element name="swFloatingRateFixingDate" minOccurs="0">
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="AdjustableDate"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="calculationAgent" type="CalculationAgent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A placeholder to capture additional details related to CMS One Look Product</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_AdditionalBondDetails">
+<xsd:annotation>
+<xsd:documentation>Additional bond details for a standard coupon Inflation Swap</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swCouponRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Specifies the coupon rate (expressed in percentage) of a fixed income security or convertible bond.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swMaturity" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The date when the principal amount of a security becomes due and payable.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swfallbackBondApplicable" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The applicability of a fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8. Omission of this element imples a value of true.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCalculationMethod" type="SW_InflationCalculationMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates how to use the inflation index to calculate the payment (e.g. Ratio, Return, Spread).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCalculationStyle" type="SW_InflationCalculationStyleEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates the style of how the inflation index calculates the payment (e.g. YearOnYear, ZeroCoupon).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFinalPrincipalExchangeCalculation" type="SW_FinalPrincipalExchangeCalculation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">To be specified only for inflation products that embed a redemption payment, e.g. inflation linked asset swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSpreadCalculationMethod" type="SW_SpreadCalculationMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Code values for different methods of spread calculation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ReplacementTradeId">
+<xsd:annotation>
+<xsd:documentation>Details of trade Ids replaced as a result of specific events e.g. IBOR transition</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTradeId">
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:normalizedString"/>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swTradeIdType" type="SW_TradeIdTypeEnum"/>
+<xsd:element name="swReplacementReason" type="SW_ReplacementReasonEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Money">
+<xsd:annotation>
+<xsd:documentation>Replica of FpML structure 'Money'  with exception of 'amount' being optional for subsequent legs in cross currency Products submissions via short form</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="amount" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id"/>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,687 @@
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:fpml="http://www.fpml.org/FpML-5/confirmation"
+xmlns:swml="http://www.markitserv.com/swml"
+xmlns:tx="http://www.markitserv.com/detail/SWDMLTrade.xsl">
+<xsl:import href="SWDMLTrade.xsl"/>
+<xsl:import href="swdml-extract-reporting.xsl"/>
+<xsl:output method="xml" indent="yes"/>
+<xsl:variable name="SWDML" 		      select="/swml:SWDML"/>
+<xsl:variable name="swLongFormTrade" 	      select="$SWDML/swml:swLongFormTrade"/>
+<xsl:variable name="ReplacementTradeId"       select="$swLongFormTrade/swml:swReplacementTradeId"/>
+<xsl:variable name="swStructuredTradeDetails" select="$swLongFormTrade/swml:swStructuredTradeDetails"/>
+<xsl:variable name="dataDocument" 	      select="$swStructuredTradeDetails/fpml:dataDocument"/>
+<xsl:variable name="trade" 		      select="$dataDocument/fpml:trade"/>
+<xsl:variable name="swGenericProduct" 	      select="$trade/swml:swGenericProduct"/>
+<xsl:variable name="swExtendedTradeDetails"   select="$swStructuredTradeDetails/swml:swExtendedTradeDetails"/>
+<xsl:variable name="swBusinessConductDetails"   select="$swStructuredTradeDetails/swml:swBusinessConductDetails"/>
+<xsl:variable name="swOrderDetails"    select="$swExtendedTradeDetails/swml:swOrderDetails"/>
+<xsl:variable name="partyA" 		      select="$swLongFormTrade/swml:swOriginatorPartyReference/@href"/>
+<xsl:variable name="novation" 		      select="$swLongFormTrade/swml:novation"/>
+<xsl:variable name="swNovationBusinessConductDetails"   select="$novation/swml:swBusinessConductDetails"/>
+<xsl:variable name="partyB">
+<xsl:choose>
+<xsl:when test="($swLongFormTrade//fpml:swAllocations or $swLongFormTrade/fpml:swGiveUp)">
+<xsl:for-each select="$trade//fpml:tradeHeader/fpml:partyTradeIdentifier">
+<xsl:variable name="party">
+<xsl:choose>
+<xsl:when test="starts-with(/fpml:partyReference/@href,'#')">
+<xsl:value-of select="substring-after(/fpml:partyReference/@href,'#')"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="fpml:partyReference/@href"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:if test="$party!=$partyA">
+<xsl:value-of select="$party"/>
+</xsl:if>
+</xsl:for-each>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$dataDocument/fpml:party[@id!=$partyA]/@id"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:variable>
+<xsl:variable name="premium" 		      select="$swGenericProduct/fpml:premium"/>
+<xsl:variable name="partyC"/>
+<xsl:variable name="partyD"/>
+<xsl:variable name="reportingData.rtf">
+<xsl:apply-templates select="/swml:SWDML/swml:swTradeEventReportingDetails/node()" mode="mapReportingData"/>
+<productType><xsl:value-of select="string(/swml:SWDML/swml:swLongFormTrade/swml:swStructuredTradeDetails/swml:swProductType)"/></productType>
+<partyRoles>
+<transferor><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferor/@href"/></transferor>
+<transferee><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:transferee/@href"/></transferee>
+<remainingParty><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:remainingParty/@href"/></remainingParty>
+<otherRemainingParty><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:novation/fpml:otherRemainingParty/@href"/></otherRemainingParty>
+</partyRoles>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId">
+<branch1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId/@partyIdScheme"/></branch1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId">
+<branch1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch1']/fpml:partyId"/></branch1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId">
+<branch2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId/@partyIdScheme"/></branch2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId">
+<branch2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'branch2']/fpml:partyId"/></branch2>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId">
+<indirCpty1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId/@partyIdScheme"/></indirCpty1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId">
+<indirCpty1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty1']/fpml:partyId"/></indirCpty1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId">
+<indirCpty2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId/@partyIdScheme"/></indirCpty2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId">
+<indirCpty2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'indirectCounterparty2']/fpml:partyId"/></indirCpty2>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId">
+<arrangingBroker1prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId/@partyIdScheme"/></arrangingBroker1prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId">
+<arrangingBroker1><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker1']/fpml:partyId"/></arrangingBroker1>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId">
+<arrangingBroker2prefix><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId/@partyIdScheme"/></arrangingBroker2prefix>
+</xsl:if>
+<xsl:if test="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId">
+<arrangingBroker2><xsl:value-of select="/fpml:SWDML/fpml:swLongFormTrade/fpml:swStructuredTradeDetails/fpml:FpML/fpml:party[@id = 'arrangingBroker2']/fpml:partyId"/></arrangingBroker2>
+</xsl:if>
+</xsl:variable>
+<xsl:template match="/swml:SWDML">
+<xsl:param name="reportingData"/>
+<xsl:call-template name="tx:SWDMLTrade">
+<xsl:with-param name="SWDMLVersion" select="$SWDML/@version"/>
+<xsl:with-param name="ReplacementTradeId" select="$ReplacementTradeId/swml:swTradeId"/>
+<xsl:with-param name="ReplacementTradeIdType" select="$ReplacementTradeId/swml:swTradeIdType"/>
+<xsl:with-param name="ReplacementReason" select="$ReplacementTradeId/swml:swReplacementReason"/>
+<xsl:with-param name="version" select="'5-3'"/>
+<xsl:with-param name="ProductType" select="'Generic Product'"/>
+<xsl:with-param name="ShortFormInput" select="false()"/>
+<xsl:with-param name="Novation" select="boolean($swLongFormTrade/novation)"/>
+<xsl:with-param name="AllocatedTrade" select="boolean($swLongFormTrade/swml:swAllocations)"/>
+<xsl:with-param name="PartyAId">
+<xsl:call-template name="tx:SWDMLTrade.PartyAId">
+<xsl:with-param name="id" select="$dataDocument/fpml:party[1]/@id"/>
+<xsl:with-param name="content" select="$dataDocument/fpml:party[1]/fpml:partyId"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="PartyAIdType" select="$dataDocument/fpml:party[1]/fpml:partyId/@partyIdScheme"/>
+<xsl:with-param name="PartyBId">
+<xsl:call-template name="tx:SWDMLTrade.PartyBId">
+<xsl:with-param name="id" select="$dataDocument/fpml:party[2]/@id"/>
+<xsl:with-param name="content" select="$dataDocument/fpml:party[2]/fpml:partyId"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="PartyBIdType" select="$dataDocument/fpml:party[2]/fpml:partyId/@partyIdScheme"/>
+<xsl:with-param name="Allocation">
+<xsl:for-each select="$swLongFormTrade/swml:swAllocations/swml:swAllocation">
+<xsl:variable name="allocationAmount">
+<xsl:value-of select="swml:allocatedNotional/fpml:amount"/>
+<xsl:value-of select="swml:swAllocatedUnits"/>
+</xsl:variable>
+<xsl:call-template name="tx:SWDMLTrade.Allocation">
+<xsl:with-param name="DirectionReversed" select="boolean(@directionReversed)"/>
+<xsl:with-param name="Payer">
+<xsl:variable name="PayerRef" select="string(swml:payerPartyReference/@href)"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$PayerRef]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="Receiver">
+<xsl:variable name="ReceiverRef" select="string(swml:receiverPartyReference/@href)"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$ReceiverRef]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="Buyer">
+<xsl:variable name="BuyerRef" select="string(swml:buyerPartyReference/@href)"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$BuyerRef]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="Seller">
+<xsl:variable name="SellerRef" select="string(swml:sellerPartyReference/@href)"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$SellerRef]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="Amount" select="$allocationAmount"/>
+<xsl:with-param name="Currency" select="swml:allocatedNotional/fpml:currency"/>
+<xsl:with-param name="AllocatedVarianceAmount" select="swml:swAllocatedVarianceAmount"/>
+<xsl:with-param name="IAExpected" select="swml:swIAExpected"/>
+<xsl:with-param name="GlobalUTI" select="swml:swAllocationReportingDetails[count(swml:swJurisdiction)=0 and count(swml:swUniqueTransactionId/swml:swIssuer)=0]/swml:swUniqueTransactionId/swml:swTradeId"/>
+<xsl:with-param name="IndependentAmount">
+<xsl:call-template name="tx:SWDMLTrade.Allocation.IndependentAmount">
+<xsl:with-param name="Amount" select="swml:independentAmount/fpml:paymentDetail/fpml:paymentAmount/fpml:amount" />
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="AllocationIndependentAmountPercentage" select="swml:swAllocationIndependentAmountPercentage"/>
+<xsl:with-param name="AllocAdditionalPayment">
+<xsl:if test="swml:additionalPayment/swml:paymentAmount/fpml:currency">
+<xsl:call-template name="tx:SWDMLTrade.Allocation.AllocAdditionalPayment">
+<xsl:with-param name="AddPaySequence" select="swml:additionalPayment/@seq"/>
+<xsl:with-param name="DirectionReversed" select="swml:additionalPayment/@directionReversed"/>
+<xsl:with-param name="Amount" select="swml:additionalPayment/swml:paymentAmount/fpml:amount"/>
+</xsl:call-template>
+</xsl:if>
+</xsl:with-param>
+<xsl:with-param name="InternalTradeId" select="swml:swPrivateTradeId"/>
+<xsl:with-param name="SalesCredit" select="swml:swSalesCredit"/>
+<xsl:with-param name="AdditionalField">
+<xsl:if test="swml:swAdditionalField">
+<xsl:call-template name="tx:SWDMLTrade.Allocation.AdditionalField">
+<xsl:with-param name="Name" select="string(swml:swAdditionalField/@fieldName)" />
+<xsl:with-param name="Sequence" select="string(swml:swAdditionalField/@sequence)" />
+<xsl:with-param name="Value" select="string(swml:swAdditionalField)" />
+</xsl:call-template>
+</xsl:if>
+</xsl:with-param>
+<xsl:with-param name="ClearingBrokerId" select="swml:swClearingBroker/swml:partyId"/>
+<xsl:with-param name="NettingString" select="swml:swNettingString"/>
+<xsl:with-param name="ObligatoryReporting" select="swml:swAllocationReportingDetails[count(swml:swJurisdiction)=0 or swml:swJurisdiction='DoddFrank']/swml:swObligatoryReporting"/>
+<xsl:with-param name="ReportingCounterparty">
+<xsl:variable name="rcp" select="swml:swAllocationReportingDetails[count(swml:swJurisdiction)=0 or swml:swJurisdiction='DoddFrank']/swml:swReportingCounterpartyReference/@href"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$rcp]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="USINamespace" select="swml:swAllocationReportingDetails[count(swml:swJurisdiction)=0 or swml:swJurisdiction='DoddFrank']/swml:swUniqueTransactionId/swml:swIssuer"/>
+<xsl:with-param name="USI" select="swml:swAllocationReportingDetails[(count(swml:swJurisdiction)=0 or swml:swJurisdiction='DoddFrank') and count(swml:swUniqueTransactionId/swml:swIssuer)=1]/swml:swUniqueTransactionId/swml:swTradeId"/>
+<xsl:with-param name="ESMAUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="ESMAIntentToBlankUTINamespace">
+<xsl:variable name="esutinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swIssuer and $esutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="ESMAUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="ESMAIntentToBlankUTI">
+<xsl:variable name="esuti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swUniqueTransactionId/swml:swIssuer and $esuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="ESMAReportForCpty" select="swml:swAllocationReportingDetails[swml:swJurisdiction='ESMA']/swml:swReportForCounterparty"/>
+<xsl:with-param name="FCAUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="FCAIntentToBlankUTINamespace">
+<xsl:variable name="fcautinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swIssuer and $fcautinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="FCAUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="FCAIntentToBlankUTI">
+<xsl:variable name="fcauti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swUniqueTransactionId/swml:swIssuer and $fcauti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="FCAReportForCpty" select="swml:swAllocationReportingDetails[swml:swJurisdiction='FCA']/swml:swReportForCounterparty"/>
+<xsl:with-param name="JFSAUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="JFSAIntentToBlankUTINamespace">
+<xsl:variable name="jfutinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swIssuer and $jfutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="JFSAUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="JFSAIntentToBlankUTI">
+<xsl:variable name="jfuti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='JFSA']/swml:swUniqueTransactionId/swml:swIssuer and $jfuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="HKMAUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="HKMAIntentToBlankUTINamespace">
+<xsl:variable name="hkutinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swIssuer and $hkutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="HKMAUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="HKMAIntentToBlankUTI">
+<xsl:variable name="hkuti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='HKMA']/swml:swUniqueTransactionId/swml:swIssuer and $hkuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="CAObligatoryReporting" select="swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swObligatoryReporting"/>
+<xsl:with-param name="CAReportingCounterparty">
+<xsl:variable name="rcp" select="swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swReportingCounterpartyReference/@href"/>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$rcp]/fpml:partyId"/>
+</xsl:with-param>
+<xsl:with-param name="CAUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="CAIntentToBlankUTINamespace">
+<xsl:variable name="cautinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swIssuer and $cautinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="CAUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="CAIntentToBlankUTI">
+<xsl:variable name="cauti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='CAN']/swml:swUniqueTransactionId/swml:swIssuer and $cauti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="MIObligatoryReporting" select="swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swObligatoryReporting"/>
+<xsl:with-param name="MIReportingCounterparty">
+<xsl:variable name="rcp" select="swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swReportingCounterpartyReference/@href"/>
+<xsl:choose>
+<xsl:when test="$rcp = 'venue' or $rcp = '#venue'">
+<xsl:value-of select="'venue'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$dataDocument/fpml:party[@id=$rcp]/fpml:partyId"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="MITID" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swMIFIDTransactionIdentifier)"/>
+<xsl:with-param name="MIIntentToBlankTID">
+<xsl:variable name="mitid" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swMIFIDTransactionIdentifier)"/>
+<xsl:choose>
+<xsl:when test="mitid ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="MITransactionReportable" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swRegulatoryReportable)"/>
+<xsl:with-param name="MITransparencyReportable" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MIFID']/swml:swTransparencyReportable)"/>
+<xsl:with-param name="ASICUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="ASICIntentToBlankUTINamespace">
+<xsl:variable name="asutinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swIssuer and $asutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="ASICUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="ASICIntentToBlankUTI">
+<xsl:variable name="asuti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='ASIC']/swml:swUniqueTransactionId/swml:swIssuer and $asuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="MASUTINamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:with-param name="MASIntentToBlankUTINamespace">
+<xsl:variable name="masutinamespace" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swIssuer)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swIssuer and $masutinamespace ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="MASUTI" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:with-param name="MASIntentToBlankUTI">
+<xsl:variable name="masuti" select="string(swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swTradeId)"/>
+<xsl:choose>
+<xsl:when test="swml:swAllocationReportingDetails[swml:swJurisdiction='MAS']/swml:swUniqueTransactionId/swml:swIssuer and $masuti ='' ">
+<xsl:value-of select="'true'"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="'false'"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="PartyIdentifiers">
+<xsl:call-template name="tx:SWDMLTrade.Allocation.PartyIdentifiers">
+<xsl:with-param name="CounterpartyLEI" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swCounterpartyLEI"/>
+<xsl:with-param name="CounterpartyPLI" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swCounterpartyPLI"/>
+<xsl:with-param name="DataMaskingFlag">
+<xsl:call-template name="tx:SWDMLTrade.Allocation.PartyIdentifiers.DataMaskingFlag">
+<xsl:with-param name="MaskCFTC" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskCFTC"/>
+<xsl:with-param name="MaskJFSA" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskJFSA"/>
+<xsl:with-param name="MaskCanada" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskCanada"/>
+<xsl:with-param name="MaskHKMA" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskHKMA"/>
+<xsl:with-param name="MaskASIC" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskASIC"/>
+<xsl:with-param name="MaskMAS" select="swml:swIdentifiers/swml:swPartyIdentifiers/swml:swDataMaskingFlag/swml:swMaskMAS"/>
+</xsl:call-template>
+</xsl:with-param>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="NexusReportingDetails">
+<xsl:variable name="nexusNode" select="swml:swNexusReportingDetails"/>
+<xsl:call-template name="tx:SWDMLTrade.Allocation.NexusReportingDetails">
+<xsl:with-param name="ExecutingTraderName" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='Trader']/swml:swPersonReference/@href]/swml:swName"/>
+<xsl:with-param name="SalesTraderName" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='Sales']/swml:swPersonReference/@href]/swml:swName"/>
+<xsl:with-param name="InvestFirmName" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='InvestmentDecisionMaker']/swml:swPersonReference/@href]/swml:swName"/>
+<xsl:with-param name="BranchLocation" select="$nexusNode/swml:swPartyExtension/swml:swBusinessUnit[@id=$nexusNode/swml:swRelatedBusinessUnit[swml:swRole='Branch']/swml:swBusinessUnitReference/@href]/swml:swCountry"/>
+<xsl:with-param name="DeskLocation" select="$nexusNode/swml:swPartyExtension/swml:swBusinessUnit[@id=$nexusNode/swml:swRelatedBusinessUnit[swml:swRole='Trader']/swml:swBusinessUnitReference/@href]/swml:swCountry"/>
+<xsl:with-param name="ExecutingTraderLocation" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='Trader']/swml:swPersonReference/@href]/swml:swCountry"/>
+<xsl:with-param name="SalesTraderLocation" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='Sales']/swml:swPersonReference/@href]/swml:swCountry"/>
+<xsl:with-param name="InvestFirmLocation" select="$nexusNode/swml:swPartyExtension/swml:swReferencedPerson[@id=$nexusNode/swml:swRelatedPerson[swml:swRole='InvestmentDecisionMaker']/swml:swPersonReference/@href]/swml:swCountry"/>
+<xsl:with-param name="BrokerLocation" select="$nexusNode/swml:swAdditionalParty[@id=$nexusNode/swml:swRelatedParty[swml:swRole='ExecutingBroker']/swml:swPartyReference/@href]/swml:swCountry"/>
+<xsl:with-param name="ArrBrokerLocation" select="$nexusNode/swml:swAdditionalParty[@id=$nexusNode/swml:swRelatedParty[swml:swRole='ArrangingBroker']/swml:swPartyReference/@href]/swml:swCountry"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="CounterpartyCorporateSector" select="swml:swCounterpartyCorporateSector"/>
+</xsl:call-template>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="PrimeBrokerTrade" select="boolean($swLongFormTrade//fpml:swGiveUp)"/>
+<xsl:with-param name="TradeDate" select="$trade/fpml:tradeHeader/fpml:tradeDate"/>
+<xsl:with-param name="ManualConfirm" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swManualConfirmationRequired"/>
+<xsl:with-param name="NovationExecution" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swNovationExecution"/>
+<xsl:with-param name="BackLoadingFlag" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swBackLoadingFlag"/>
+<xsl:with-param name="ExitReason" select="$swExtendedTradeDetails/swml:swExitReason"/>
+<xsl:with-param name="GenProdPrimaryAssetClass" select="$swGenericProduct/fpml:primaryAssetClass"/>
+<xsl:with-param name="GenProdSecondaryAssetClass">
+<xsl:for-each select="$swGenericProduct/fpml:secondaryAssetClass">
+<xsl:value-of select="text()"/>
+<xsl:choose>
+<xsl:when test="position() != count($swGenericProduct/fpml:secondaryAssetClass)">
+<xsl:text>; </xsl:text>
+</xsl:when>
+</xsl:choose>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="ProductId">
+<xsl:for-each select="$swGenericProduct/fpml:productId">
+<xsl:value-of select="text()"/>
+<xsl:choose>
+<xsl:when test="position() != count($swGenericProduct/fpml:productId)">
+<xsl:text>; </xsl:text>
+</xsl:when>
+</xsl:choose>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="OptionDirectionA">
+<xsl:choose>
+<xsl:when test="$swGenericProduct/fpml:buyerPartyReference/@href = $partyA">We</xsl:when>
+<xsl:when test="$swGenericProduct/fpml:sellerPartyReference/@href = $partyA">Cpty</xsl:when>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="OptionPremium" select="$premium/fpml:paymentAmount/fpml:amount"/>
+<xsl:with-param name="OptionPremiumCurrency" select="$premium/fpml:paymentAmount/fpml:currency"/>
+<xsl:with-param name="EffectiveDate" select="$swGenericProduct/fpml:effectiveDate/fpml:unadjustedDate"/>
+<xsl:with-param name="OptionExpirationDate" select="$swGenericProduct/fpml:expirationDate/fpml:unadjustedDate"/>
+<xsl:with-param name="TerminationDate" select="$swGenericProduct/fpml:terminationDate/fpml:unadjustedDate"/>
+<xsl:with-param name="GenProdUnderlyer">
+<xsl:for-each select="$swGenericProduct/fpml:underlyer">
+<xsl:call-template name="tx:SWDMLTrade.GenProdUnderlyer">
+<xsl:with-param name="UnderlyerType" select="local-name(*)"/>
+<xsl:with-param name="UnderlyerDescription">
+<xsl:value-of select="*/fpml:description"/>
+<xsl:value-of select="*/fpml:floatingRateIndex"/>
+<xsl:value-of select="*/fpml:entityName"/>
+<xsl:value-of select="*/fpml:quoteBasis"/>
+</xsl:with-param>
+<xsl:with-param name="UnderlyerDirectionA">
+<xsl:choose>
+<xsl:when test="fpml:payerPartyReference/@href = $partyA">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="UnderlyerFixedRate" select="*/fpml:initialValue"/>
+<xsl:with-param name="UnderlyerIDCode">
+<xsl:value-of select="*/fpml:instrumentId"/>
+<xsl:value-of select="*/fpml:entityId"/>
+</xsl:with-param>
+<xsl:with-param name="UnderlyerIDType">
+<xsl:value-of select="*/fpml:instrumentId/@instrumentIdScheme"/>
+<xsl:value-of select="*/fpml:entityId/@entityIdScheme"/>
+</xsl:with-param>
+<xsl:with-param name="UnderlyerReferenceCurrency">
+<xsl:value-of select="*/fpml:currency"/>
+<xsl:value-of select="*/fpml:currency1"/>
+</xsl:with-param>
+<xsl:with-param name="UnderlyerFXCurrency" select="*/fpml:currency2"/>
+</xsl:call-template>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="GenProdNotional">
+<xsl:for-each select="$swGenericProduct/fpml:notional">
+<xsl:call-template name="tx:SWDMLTrade.GenProdNotional">
+<xsl:with-param name="NotionalCurrency" select="fpml:currency"/>
+<xsl:with-param name="NotionalUnit" select="fpml:units"/>
+<xsl:with-param name="Notional" select="fpml:amount"/>
+</xsl:call-template>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="OptionType" select="$swGenericProduct/fpml:optionType"/>
+<xsl:with-param name="SettlementCurrency">
+<xsl:for-each select="$swGenericProduct/fpml:settlementCurrency">
+<xsl:value-of select="text()"/>
+<xsl:choose>
+<xsl:when test="position() != count($swGenericProduct/fpml:settlementCurrency)">
+<xsl:text>; </xsl:text>
+</xsl:when>
+</xsl:choose>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="OptionStrike">
+<xsl:variable name="swOptionStrike" select="$swGenericProduct/swml:swOptionStrike"/>
+<xsl:choose>
+<xsl:when test="string-length($swOptionStrike/swml:swStrikePrice) != 0">
+<xsl:value-of select="$swOptionStrike/swml:swStrikePrice"/>
+</xsl:when>
+<xsl:when test="string-length($swOptionStrike/swml:swStrikeRate) != 0">
+<xsl:value-of select="$swOptionStrike/swml:swStrikeRate"/>
+</xsl:when>
+<xsl:when test="string-length($swOptionStrike/swml:swStrikePercentage) != 0">
+<xsl:value-of select="$swOptionStrike/swml:swStrikePercentage"/>
+</xsl:when>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="OptionStrikeType" select="$swGenericProduct/swml:swOptionStrike/swml:swStrikeUnits" />
+<xsl:with-param name="OptionStrikeCurrency" select="$swGenericProduct/swml:swOptionStrike/swml:swStrikeCurrency" />
+<xsl:with-param name="OptionStyle" select="$swGenericProduct/swml:swOptionStyle"/>
+<xsl:with-param name="FirstExerciseDate" select="$swGenericProduct/swml:swOptionFirstExerciseDate"/>
+<xsl:with-param name="PaymentFrequency">
+<xsl:variable name="Underlyer_count" select="count($swGenericProduct/fpml:underlyer)"/>
+<xsl:for-each select="$swGenericProduct/fpml:underlyer">
+<xsl:value-of select="$swGenericProduct/swml:swPaymentFrequency[swml:underlyerReference/@href=current()/@id]/fpml:periodMultiplier"/>
+<xsl:value-of select="$swGenericProduct/swml:swPaymentFrequency[swml:underlyerReference/@href=current()/@id]/fpml:period"/>
+<xsl:if test="position() != $Underlyer_count">
+<xsl:text>; </xsl:text>
+</xsl:if>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="ResetFrequency">
+<xsl:variable name="Underlyer_count" select="count($swGenericProduct/fpml:underlyer)"/>
+<xsl:for-each select="$swGenericProduct/fpml:underlyer">
+<xsl:value-of select="$swGenericProduct/swml:swResetFrequency[swml:underlyerReference/@href=current()/@id]/fpml:periodMultiplier"/>
+<xsl:value-of select="$swGenericProduct/swml:swResetFrequency[swml:underlyerReference/@href=current()/@id]/fpml:period"/>
+<xsl:if test="position() != $Underlyer_count">
+<xsl:text>; </xsl:text>
+</xsl:if>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="DayCountFraction">
+<xsl:variable name="Underlyer_count" select="count($swGenericProduct/fpml:underlyer)"/>
+<xsl:for-each select="$swGenericProduct/fpml:underlyer">
+<xsl:choose>
+<xsl:when test="count($swGenericProduct/swml:swDayCountFraction/swml:underlyerReference[@href=current()/@id]) = 1">
+<xsl:variable name="thisDCC" select="$swGenericProduct/swml:swDayCountFraction[swml:underlyerReference/@href=current()/@id]/swml:dayCountFraction"/>
+<xsl:call-template name="tx:SWDMLTrade.DayCountFraction">
+<xsl:with-param name="Schema">
+<xsl:choose>
+<xsl:when test="contains($thisDCC/@dayCountFractionScheme,'FLOAT')">FLOAT</xsl:when>
+<xsl:otherwise>FIX</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="Fraction" select="$thisDCC/text()"/>
+</xsl:call-template>
+</xsl:when>
+<xsl:otherwise>
+<xsl:call-template name="tx:SWDMLTrade.DayCountFraction">
+<xsl:with-param name="Schema" />
+<xsl:with-param name="Fraction" />
+</xsl:call-template>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="OrderDetails">
+<xsl:call-template name="tx:SWDMLTrade.OrderDetails">
+<xsl:with-param name="TypeOfOrder" select="$swOrderDetails/swml:swTypeOfOrder"/>
+<xsl:with-param name="TotalConsideration" select="$swOrderDetails/swml:swTotalConsideration"/>
+<xsl:with-param name="RateOfExchange" select="$swOrderDetails/swml:swRateOfExchange"/>
+<xsl:with-param name="ClientCounterparty" select="$swOrderDetails/swml:swClientCounterparty"/>
+<xsl:with-param name="TotalCommissionAndExpenses" select="$swOrderDetails/swml:swTotalCommissionAndExpenses"/>
+<xsl:with-param name="ClientSettlementResponsibilities" select="$swOrderDetails/swml:swClientSettlementResponsibilities"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="IndependentAmount2">
+<xsl:variable name="IndependentAmount2" select="  $trade/fpml:collateral/fpml:independentAmount"/>
+<xsl:call-template name="tx:SWDMLTrade.IndependentAmount2">
+<xsl:with-param name="Payer">
+<xsl:choose>
+<xsl:when test="$IndependentAmount2/fpml:payerPartyReference/@href = $partyA">Pay</xsl:when>
+<xsl:otherwise>Rec</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="Amount" select="$IndependentAmount2/fpml:paymentDetail/fpml:paymentAmount/fpml:amount"/>
+<xsl:with-param name="Currency" select="$IndependentAmount2/fpml:paymentDetail/fpml:paymentAmount/fpml:currency"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="AdditionalPayment">
+<xsl:variable name="AdditionalPayment" select="$swGenericProduct/swml:swAdditionalPayment"/>
+<xsl:for-each select="$AdditionalPayment">
+<xsl:call-template name="tx:SWDMLTrade.AdditionalPayment">
+<xsl:with-param name="PaymentDirectionA">
+<xsl:choose>
+<xsl:when test="fpml:payerPartyReference/@href = $partyA">Pay</xsl:when>
+<xsl:when test="fpml:receiverPartyReference/@href = $partyA">Rec</xsl:when>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="Reason" select="fpml:paymentType"/>
+<xsl:with-param name="Currency" select="fpml:paymentAmount/fpml:currency"/>
+<xsl:with-param name="Amount" select="fpml:paymentAmount/fpml:amount"/>
+<xsl:with-param name="Date" select="fpml:paymentDate/fpml:adjustedDate"/>
+<xsl:with-param name="Convention" select="fpml:paymentDate/fpml:dateAdjustments/fpml:businessDayConvention"/>
+<xsl:with-param name="Holidays" select="fpml:paymentDate/fpml:dateAdjustments/fpml:businessCenters/fpml:businessCenter"/>
+</xsl:call-template>
+</xsl:for-each>
+</xsl:with-param>
+<xsl:with-param name="DFEmbeddedOptionType" select="$swGenericProduct/fpml:embeddedOptionType"/>
+<xsl:with-param name="DFData">
+<xsl:call-template name="outputCommonReportingFields">
+<xsl:with-param name="reportingData" select="$reportingData"/>
+</xsl:call-template>
+</xsl:with-param>
+<xsl:with-param name="AmendmentType">
+<xsl:variable name="amendmentType">
+<xsl:value-of select="$swExtendedTradeDetails/swml:swAmendmentType"/>
+</xsl:variable>
+<xsl:choose>
+<xsl:when test="$amendmentType='PartialTermination' ">
+<xsl:text>Partial Termination</xsl:text>
+</xsl:when>
+<xsl:when test="$amendmentType='ErrorCorrection' ">
+<xsl:text>Error Correction</xsl:text>
+</xsl:when>
+<xsl:otherwise>
+<xsl:value-of select="$amendmentType"/>
+</xsl:otherwise>
+</xsl:choose>
+</xsl:with-param>
+<xsl:with-param name="CancellationType" select="$swExtendedTradeDetails/swml:swCancellationType"/>
+<xsl:with-param name="MidMarketPriceType" select="$swBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit"/>
+<xsl:with-param name="MidMarketPriceValue" select="$swBusinessConductDetails/swml:swMidMarketPrice/swml:swAmount"/>
+<xsl:with-param name="MidMarketPriceCurrency" select="$swBusinessConductDetails/swml:swMidMarketPrice/swml:swCurrency"/>
+<xsl:with-param name="IntentToBlankMidMarketCurrency" select="boolean($swBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit != ' '  and not($swBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit = 'Price'))"/>
+<xsl:with-param name="IntentToBlankMidMarketPrice" select="boolean(not(normalize-space($swBusinessConductDetails/swml:swMidMarketPrice[node()]))) "/>
+<xsl:with-param name="NovationFeeMidMarketPriceType" select="$swNovationBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit"/>
+<xsl:with-param name="NovationFeeMidMarketPriceValue" select="$swNovationBusinessConductDetails/swml:swMidMarketPrice/swml:swAmount"/>
+<xsl:with-param name="NovationFeeMidMarketPriceCurrency" select="$swNovationBusinessConductDetails/swml:swMidMarketPrice/swml:swCurrency"/>
+<xsl:with-param name="NovationFeeIntentToBlankMidMarketCurrency" select="boolean($swNovationBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit != ' '  and not($swNovationBusinessConductDetails/swml:swMidMarketPrice/swml:swUnit = 'Price'))"/>
+<xsl:with-param name="NovationFeeIntentToBlankMidMarketPrice" select="boolean(not(normalize-space($swNovationBusinessConductDetails/swml:swMidMarketPrice[node()]))) "/>
+<xsl:with-param name="SettlementDate" select="$swGenericProduct/swml:swSettlementDate"/>
+<xsl:with-param name="SettlementType" select="$swGenericProduct/swml:swSettlementType"/>
+<xsl:with-param name="MasterAgreement" select="$trade/fpml:documentation/fpml:masterAgreement/fpml:masterAgreementType"/>
+<xsl:with-param name="MasterAgreementVersion" select="$trade/fpml:documentation/fpml:masterAgreement/fpml:masterAgreementVersion"/>
+<xsl:with-param name="MasterAgreementDate" select="$trade/fpml:documentation/fpml:masterAgreement/fpml:masterAgreementDate"/>
+<xsl:with-param name="ASICMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ASIC']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="CANMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='CAN']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="CANClearingExemptIndicator1PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='CAN' ]/swml:swPartyExemption[1]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="CANClearingExemptIndicator1Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='CAN']/swml:swPartyExemption[1]/swml:swExemption"/>
+<xsl:with-param name="CANClearingExemptIndicator2PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='CAN' ]/swml:swPartyExemption[2]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="CANClearingExemptIndicator2Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='CAN']/swml:swPartyExemption[2]/swml:swExemption"/>
+<xsl:with-param name="ESMAMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ESMA']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="ESMAClearingExemptIndicator1PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ESMA' ]/swml:swPartyExemption[1]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="ESMAClearingExemptIndicator1Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ESMA']/swml:swPartyExemption[1]/swml:swExemption"/>
+<xsl:with-param name="ESMAClearingExemptIndicator2PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ESMA' ]/swml:swPartyExemption[2]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="ESMAClearingExemptIndicator2Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='ESMA']/swml:swPartyExemption[2]/swml:swExemption"/>
+<xsl:with-param name="FCAMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='FCA']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="FCAClearingExemptIndicator1PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='FCA' ]/swml:swPartyExemption[1]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="FCAClearingExemptIndicator1Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='FCA']/swml:swPartyExemption[1]/swml:swExemption"/>
+<xsl:with-param name="FCAClearingExemptIndicator2PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='FCA' ]/swml:swPartyExemption[2]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="FCAClearingExemptIndicator2Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='FCA']/swml:swPartyExemption[2]/swml:swExemption"/>
+<xsl:with-param name="HKMAMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='HKMA']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="HKMAClearingExemptIndicator1PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='HKMA' ]/swml:swPartyExemption[1]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="HKMAClearingExemptIndicator1Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='HKMA']/swml:swPartyExemption[1]/swml:swExemption"/>
+<xsl:with-param name="HKMAClearingExemptIndicator2PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='HKMA' ]/swml:swPartyExemption[2]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="HKMAClearingExemptIndicator2Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='HKMA']/swml:swPartyExemption[2]/swml:swExemption"/>
+<xsl:with-param name="JFSAMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='JFSA']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="MASMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='MAS']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="CFTCMandatoryClearingIndicator" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank']/swml:swMandatoryClearingIndicator"/>
+<xsl:with-param name="CFTCClearingExemptIndicator1PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank' ]/swml:swPartyExemption[1]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="CFTCClearingExemptIndicator1Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank']/swml:swPartyExemption[1]/swml:swExemption"/>
+<xsl:with-param name="CFTCClearingExemptIndicator2PartyId" select="$swStructuredTradeDetails/fpml:dataDocument/fpml:party[@id=$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank' ]/swml:swPartyExemption[2]/swml:swPartyReference/@href]/fpml:partyId"/>
+<xsl:with-param name="CFTCClearingExemptIndicator2Value" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank']/swml:swPartyExemption[2]/swml:swExemption"/>
+<xsl:with-param name="CFTCInterAffiliateExemption" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swMandatoryClearing[swml:swJurisdiction='DoddFrank']/swml:swInterAffiliateExemption"/>
+<xsl:with-param name="ESMAClearingExemption" select="$swExtendedTradeDetails/swml:swTradeHeader/swml:swESMAClearingExemption"/>
+</xsl:call-template>
+</xsl:template>
+</xsl:stylesheet>

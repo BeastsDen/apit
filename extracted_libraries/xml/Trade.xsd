@@ -1,0 +1,2425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:group name="DFData">
+<xs:sequence>
+<xs:element name="ExecutionType" minOccurs="0"/>
+<xs:element name="PriceNotationType" minOccurs="0"/>
+<xs:element name="PriceNotationValue" minOccurs="0"/>
+<xs:element name="PriceNotation" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PriceNotationType"/>
+<xs:element name="PriceNotationValue"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="AdditionalPriceNotationType" minOccurs="0"/>
+<xs:element name="AdditionalPriceNotationValue" minOccurs="0"/>
+<xs:element name="AdditionalPriceNotation" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="AdditionalPriceNotationType"/>
+<xs:element name="AdditionalPriceNotationValue"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="GlobalUTI" minOccurs="0"/>
+<xs:element name="IntentToBlankGlobalUTI" minOccurs="0"/>
+<xs:element name="DFDataPresent" minOccurs="0"/>
+<xs:element name="DFRegulatorType" minOccurs="0"/>
+<xs:element name="Route1Destination" minOccurs="0"/>
+<xs:element name="Route1Intermediary" minOccurs="0"/>
+<xs:element name="USINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankUSINamespace" minOccurs="0"/>
+<xs:element name="USINamespacePrefix" minOccurs="0"/>
+<xs:element name="USI" minOccurs="0"/>
+<xs:element name="IntentToBlankUSI" minOccurs="0"/>
+<xs:element name="ObligatoryReporting" minOccurs="0"/>
+<xs:element name="SecondaryAssetClass" minOccurs="0"/>
+<xs:element name="ReportingCounterparty" minOccurs="0"/>
+<xs:element name="DFClearingMandatory" minOccurs="0"/>
+<xs:element name="SEDataPresent" minOccurs="0"/>
+<xs:element name="SERegulatorType" minOccurs="0"/>
+<xs:element name="SERoute1Destination" minOccurs="0"/>
+<xs:element name="SERoute1Intermediary" minOccurs="0"/>
+<xs:element name="SEUTINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankSEUTINamespace" minOccurs="0"/>
+<xs:element name="SEUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="SEUTI" minOccurs="0"/>
+<xs:element name="IntentToBlankSEUTI" minOccurs="0"/>
+<xs:element name="SEObligatoryReporting" minOccurs="0"/>
+<xs:element name="SEReportingCounterparty" minOccurs="0"/>
+<xs:element name="ISIN" minOccurs="0"/>
+<xs:element name="CFI" minOccurs="0"/>
+<xs:element name="FullName" minOccurs="0"/>
+<xs:element name="DFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="PartyADFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="PartyBDFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="BlockUSINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="BlockUSI" minOccurs="0"/>
+<xs:element name="IntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="ClearingException" minOccurs="0"/>
+<xs:element name="Collateralized" minOccurs="0"/>
+<xs:element name="ConfirmationTime" minOccurs="0"/>
+<xs:element name="EmbeddedOption" minOccurs="0"/>
+<xs:element name="ExecutionTime" minOccurs="0"/>
+<xs:element name="Compression" minOccurs="0"/>
+<xs:element name="ExecutionVenue" minOccurs="0"/>
+<xs:element name="GTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="NonStandardFlag" minOccurs="0"/>
+<xs:element name="GlobalPriorUTI" minOccurs="0"/>
+<xs:element name="GlobalBlockUTI" minOccurs="0"/>
+<xs:element name="OffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="OffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="ComplexTradeIdA" minOccurs="0"/>
+<xs:element name="ComplexTradeIdB" minOccurs="0"/>
+<xs:element name="ComplexPriceA" minOccurs="0"/>
+<xs:element name="ComplexPriceB" minOccurs="0"/>
+<xs:element name="ComplexPriceTypeA" minOccurs="0"/>
+<xs:element name="ComplexPriceTypeB" minOccurs="0"/>
+<xs:element name="ComplexPriceCCYA" minOccurs="0"/>
+<xs:element name="ComplexPriceCCYB" minOccurs="0"/>
+<xs:element name="PriceFormingEvent" minOccurs="0"/>
+<xs:element name="PrimaryAssetClass" minOccurs="0"/>
+<xs:element name="PriorUSINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PriorUSI" minOccurs="0"/>
+<xs:element name="IntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="ProductIDType" minOccurs="0"/>
+<xs:element name="ProductIDValue" minOccurs="0"/>
+<xs:element name="ReportRT" minOccurs="0"/>
+<xs:element name="ReportPET" minOccurs="0"/>
+<xs:element name="ReportCONF" minOccurs="0"/>
+<xs:element name="PartyABlockUSINamespace" minOccurs="0"/>
+<xs:element name="PartyAIntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PartyABlockUSI" minOccurs="0"/>
+<xs:element name="PartyAIntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="PartyAClearingException" minOccurs="0"/>
+<xs:element name="PartyAClearingExceptionReason" minOccurs="0"/>
+<xs:element name="PartyACollateralized" minOccurs="0"/>
+<xs:element name="PartyAConfirmationTime" minOccurs="0"/>
+<xs:element name="PartyAEmbeddedOption" minOccurs="0"/>
+<xs:element name="PartyAExecutionTime" minOccurs="0"/>
+<xs:element name="PartyAExecutionVenue" minOccurs="0"/>
+<xs:element name="PartyAGTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="PartyANonStandardFlag" minOccurs="0"/>
+<xs:element name="PartyAOffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="PartyAOffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="PartyAPriceFormingEvent" minOccurs="0"/>
+<xs:element name="PartyAPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="PartyAPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PartyAIntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PartyAPriorUSI" minOccurs="0"/>
+<xs:element name="PartyAIntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="PartyAProductIDType" minOccurs="0"/>
+<xs:element name="PartyAProductIDValue" minOccurs="0"/>
+<xs:element name="PartyBBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PartyBIntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PartyBBlockUSI" minOccurs="0"/>
+<xs:element name="PartyBIntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="PartyBClearingException" minOccurs="0"/>
+<xs:element name="PartyBClearingExceptionReason" minOccurs="0"/>
+<xs:element name="PartyBCollateralized" minOccurs="0"/>
+<xs:element name="PartyBConfirmationTime" minOccurs="0"/>
+<xs:element name="PartyBEmbeddedOption" minOccurs="0"/>
+<xs:element name="PartyBExecutionTime" minOccurs="0"/>
+<xs:element name="PartyBExecutionVenue" minOccurs="0"/>
+<xs:element name="PartyBGTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="PartyBNonStandardFlag" minOccurs="0"/>
+<xs:element name="PartyBOffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="PartyBOffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="PartyBPriceFormingEvent" minOccurs="0"/>
+<xs:element name="PartyBPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="PartyBPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PartyBIntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PartyBPriorUSI" minOccurs="0"/>
+<xs:element name="PartyBIntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="PartyBProductIDType" minOccurs="0"/>
+<xs:element name="PartyBProductIDValue" minOccurs="0"/>
+<xs:element name="PBClientExecutionType" minOccurs="0"/>
+<xs:element name="PBClientPriceNotationType" minOccurs="0"/>
+<xs:element name="PBClientPriceNotationValue" minOccurs="0"/>
+<xs:element name="PBClientAdditionalPriceNotationType" minOccurs="0"/>
+<xs:element name="PBClientAdditionalPriceNotationValue" minOccurs="0"/>
+<xs:element name="PBClientDFDataPresent" minOccurs="0"/>
+<xs:element name="PBClientDFRegulatorType" minOccurs="0"/>
+<xs:element name="PBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="PBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="PBClientUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientIntentToBlankUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientUSINamespacePrefix" minOccurs="0"/>
+<xs:element name="PBClientUSI" minOccurs="0"/>
+<xs:element name="PBClientIntentToBlankUSI" minOccurs="0"/>
+<xs:element name="PBClientObligatoryReporting" minOccurs="0"/>
+<xs:element name="PBClientSecondaryAssetClass" minOccurs="0"/>
+<xs:element name="PBClientReportingCounterparty" minOccurs="0"/>
+<xs:element name="PBClientDFClearingMandatory" minOccurs="0"/>
+<xs:element name="PBClientDFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="PartyAPBClientDFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="PartyBPBClientDFLargeSizeTrade" minOccurs="0"/>
+<xs:element name="PBClientBrokerBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientBrokerIntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientBrokerBlockUSI" minOccurs="0"/>
+<xs:element name="PBClientBrokerIntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="PBClientBrokerClearingException" minOccurs="0"/>
+<xs:element name="PBClientBrokerCollateralized" minOccurs="0"/>
+<xs:element name="PBClientBrokerConfirmationTime" minOccurs="0"/>
+<xs:element name="PBClientBrokerEmbeddedOption" minOccurs="0"/>
+<xs:element name="PBClientBrokerExecutionTime" minOccurs="0"/>
+<xs:element name="PBClientBrokerExecutionVenue" minOccurs="0"/>
+<xs:element name="PBClientBrokerGTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="PBClientBrokerNonStandardFlag" minOccurs="0"/>
+<xs:element name="PBClientBrokerOffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="PBClientBrokerOffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="PBClientBrokerPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="PBClientBrokerPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientBrokerIntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PBClientBrokerPriorUSI" minOccurs="0"/>
+<xs:element name="PBClientBrokerIntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="PBClientBrokerProductIDType" minOccurs="0"/>
+<xs:element name="PBClientBrokerProductIDValue" minOccurs="0"/>
+<xs:element name="PBClientBrokerReportPET" minOccurs="0"/>
+<xs:element name="PBClientBrokerReportCONF" minOccurs="0"/>
+<xs:element name="PBBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PBIntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="PBBlockUSI" minOccurs="0"/>
+<xs:element name="PBIntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="PBClearingException" minOccurs="0"/>
+<xs:element name="PBCollateralized" minOccurs="0"/>
+<xs:element name="PBConfirmationTime" minOccurs="0"/>
+<xs:element name="PBEmbeddedOption" minOccurs="0"/>
+<xs:element name="PBExecutionTime" minOccurs="0"/>
+<xs:element name="PBExecutionVenue" minOccurs="0"/>
+<xs:element name="PBGTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="PBNonStandardFlag" minOccurs="0"/>
+<xs:element name="PBOffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="PBOffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="PBPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="PBPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PBIntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="PBPriorUSI" minOccurs="0"/>
+<xs:element name="PBIntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="PBProductIDType" minOccurs="0"/>
+<xs:element name="PBProductIDValue" minOccurs="0"/>
+<xs:element name="ClientBlockUSINamespace" minOccurs="0"/>
+<xs:element name="ClientIntentToBlankBlockUSINamespace" minOccurs="0"/>
+<xs:element name="ClientBlockUSI" minOccurs="0"/>
+<xs:element name="ClientIntentToBlankBlockUSI" minOccurs="0"/>
+<xs:element name="ClientClearingException" minOccurs="0"/>
+<xs:element name="ClientCollateralized" minOccurs="0"/>
+<xs:element name="ClientConfirmationTime" minOccurs="0"/>
+<xs:element name="ClientEmbeddedOption" minOccurs="0"/>
+<xs:element name="ClientExecutionTime" minOccurs="0"/>
+<xs:element name="ClientExecutionVenue" minOccurs="0"/>
+<xs:element name="ClientGTRBulkProcessingID" minOccurs="0"/>
+<xs:element name="ClientNonStandardFlag" minOccurs="0"/>
+<xs:element name="ClientOffPlatformConfirmationType" minOccurs="0"/>
+<xs:element name="ClientOffPlatformVerificationType" minOccurs="0"/>
+<xs:element name="ClientPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="ClientPriorUSINamespace" minOccurs="0"/>
+<xs:element name="ClientIntentToBlankPriorUSINamespace" minOccurs="0"/>
+<xs:element name="ClientPriorUSI" minOccurs="0"/>
+<xs:element name="ClientIntentToBlankPriorUSI" minOccurs="0"/>
+<xs:element name="ClientProductIDType" minOccurs="0"/>
+<xs:element name="ClientProductIDValue" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="JFSAData">
+<xs:sequence>
+<xs:element name="JFSADataPresent" minOccurs="0"/>
+<xs:element name="JFSARegulatorType" minOccurs="0"/>
+<xs:element name="JFSARoute1Destination" minOccurs="0"/>
+<xs:element name="JFSARoute1Intermediary" minOccurs="0"/>
+<xs:element name="JFSAUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="JFSAUTI" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="JFSABlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSABlockUTI" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAClearingException" minOccurs="0"/>
+<xs:element name="JFSAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyABlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyAClearingException" minOccurs="0"/>
+<xs:element name="JFSAPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyBClearingException" minOccurs="0"/>
+<xs:element name="JFSAPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientDataPresent" minOccurs="0"/>
+<xs:element name="JFSAPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="JFSAPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="JFSAPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="JFSAPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="JFSAPBClientUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAPBPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAClientBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="JFSAClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="JFSAClientPriorUTI" minOccurs="0"/>
+<xs:element name="JFSAClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="ESMAData">
+<xs:sequence>
+<xs:element name="ESMADataPresent" minOccurs="0"/>
+<xs:element name="ESMARegulatorType" minOccurs="0"/>
+<xs:element name="ESMARoute1Destination" minOccurs="0"/>
+<xs:element name="ESMARoute1Intermediary" minOccurs="0"/>
+<xs:element name="ESMAUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="ESMAUTI" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="ESMABlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMABlockUTI" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAClearingException" minOccurs="0"/>
+<xs:element name="ESMAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyABlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyAClearingException" minOccurs="0"/>
+<xs:element name="ESMAPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyBClearingException" minOccurs="0"/>
+<xs:element name="ESMAPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientDataPresent" minOccurs="0"/>
+<xs:element name="ESMAPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="ESMAPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="ESMAPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="ESMAPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="ESMAPBClientUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAPBPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAClientBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ESMAClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAClientPriorUTI" minOccurs="0"/>
+<xs:element name="ESMAClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="FCAData">
+<xs:sequence>
+<xs:element name="FCADataPresent" minOccurs="0"/>
+<xs:element name="FCARegulatorType" minOccurs="0"/>
+<xs:element name="FCARoute1Destination" minOccurs="0"/>
+<xs:element name="FCARoute1Intermediary" minOccurs="0"/>
+<xs:element name="FCAUTINamespace" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="FCAUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="FCAUTI" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="FCABlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCABlockUTI" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAClearingException" minOccurs="0"/>
+<xs:element name="FCAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPriorUTI" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyABlockUTI" minOccurs="0"/>
+<xs:element name="FCAPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPartyAClearingException" minOccurs="0"/>
+<xs:element name="FCAPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPartyBClearingException" minOccurs="0"/>
+<xs:element name="FCAPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientDataPresent" minOccurs="0"/>
+<xs:element name="FCAPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="FCAPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="FCAPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="FCAPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="FCAPBClientUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAPBPriorUTI" minOccurs="0"/>
+<xs:element name="FCAPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="FCAClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="FCAClientBlockUTI" minOccurs="0"/>
+<xs:element name="FCAClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="FCAClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="FCAClientPriorUTI" minOccurs="0"/>
+<xs:element name="FCAClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="CAData">
+<xs:sequence>
+<xs:element name="CADataPresent" minOccurs="0"/>
+<xs:element name="CAObligatoryReporting" minOccurs="0"/>
+<xs:element name="CAReportingCounterparty" minOccurs="0"/>
+<xs:element name="CARegulatorType" minOccurs="0"/>
+<xs:element name="CARoute1Destination" minOccurs="0"/>
+<xs:element name="CARoute1Intermediary" minOccurs="0"/>
+<xs:element name="CAUTINamespace" minOccurs="0"/>
+<xs:element name="CAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="CAUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="CAUTI" minOccurs="0"/>
+<xs:element name="CAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="CABlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CABlockUTI" minOccurs="0"/>
+<xs:element name="CAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAClearingException" minOccurs="0"/>
+<xs:element name="CAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPriorUTI" minOccurs="0"/>
+<xs:element name="CAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="CAPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyABlockUTI" minOccurs="0"/>
+<xs:element name="CAPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAPartyAClearingException" minOccurs="0"/>
+<xs:element name="CAPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="CAPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="CAPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="CAPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAPartyBClearingException" minOccurs="0"/>
+<xs:element name="CAPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="CAPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="CAPBClientDataPresent" minOccurs="0"/>
+<xs:element name="CAPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="CAPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="CAPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="CAPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="CAPBClientUTI" minOccurs="0"/>
+<xs:element name="CAPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="CAPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="CAPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBBlockUTI" minOccurs="0"/>
+<xs:element name="CAPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAPBPriorUTI" minOccurs="0"/>
+<xs:element name="CAPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="CAClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="CAClientBlockUTI" minOccurs="0"/>
+<xs:element name="CAClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="CAClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="CAClientPriorUTI" minOccurs="0"/>
+<xs:element name="CAClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="HKMAData">
+<xs:sequence>
+<xs:element name="HKMADataPresent" minOccurs="0"/>
+<xs:element name="HKMARegulatorType" minOccurs="0"/>
+<xs:element name="HKMARoute1Destination" minOccurs="0"/>
+<xs:element name="HKMARoute1Intermediary" minOccurs="0"/>
+<xs:element name="HKMAUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="HKMAUTI" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="HKMABlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMABlockUTI" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAClearingException" minOccurs="0"/>
+<xs:element name="HKMAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyABlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyAClearingException" minOccurs="0"/>
+<xs:element name="HKMAPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyBClearingException" minOccurs="0"/>
+<xs:element name="HKMAPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientDataPresent" minOccurs="0"/>
+<xs:element name="HKMAPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="HKMAPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="HKMAPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="HKMAPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="HKMAPBClientUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAPBPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAClientBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="HKMAClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="HKMAClientPriorUTI" minOccurs="0"/>
+<xs:element name="HKMAClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="ASICData">
+<xs:sequence>
+<xs:element name="ASICDataPresent" minOccurs="0"/>
+<xs:element name="ASICRegulatorType" minOccurs="0"/>
+<xs:element name="ASICRoute1Destination" minOccurs="0"/>
+<xs:element name="ASICRoute1Intermediary" minOccurs="0"/>
+<xs:element name="ASICUTINamespace" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="ASICUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="ASICUTI" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="ASICBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICBlockUTI" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICClearingException" minOccurs="0"/>
+<xs:element name="ASICPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPriorUTI" minOccurs="0"/>
+<xs:element name="ASICIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyABlockUTI" minOccurs="0"/>
+<xs:element name="ASICPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPartyAClearingException" minOccurs="0"/>
+<xs:element name="ASICPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPartyBClearingException" minOccurs="0"/>
+<xs:element name="ASICPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientDataPresent" minOccurs="0"/>
+<xs:element name="ASICPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="ASICPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="ASICPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="ASICPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="ASICPBClientUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICPBPriorUTI" minOccurs="0"/>
+<xs:element name="ASICPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="ASICClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="ASICClientBlockUTI" minOccurs="0"/>
+<xs:element name="ASICClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="ASICClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="ASICClientPriorUTI" minOccurs="0"/>
+<xs:element name="ASICClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="MASData">
+<xs:sequence>
+<xs:element name="MASDataPresent" minOccurs="0"/>
+<xs:element name="MASRegulatorType" minOccurs="0"/>
+<xs:element name="MASRoute1Destination" minOccurs="0"/>
+<xs:element name="MASRoute1Intermediary" minOccurs="0"/>
+<xs:element name="MASUTINamespace" minOccurs="0"/>
+<xs:element name="MASIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="MASUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="MASUTI" minOccurs="0"/>
+<xs:element name="MASIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="MASBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASBlockUTI" minOccurs="0"/>
+<xs:element name="MASIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASClearingException" minOccurs="0"/>
+<xs:element name="MASPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPriorUTI" minOccurs="0"/>
+<xs:element name="MASIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MASPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyABlockUTI" minOccurs="0"/>
+<xs:element name="MASPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASPartyAClearingException" minOccurs="0"/>
+<xs:element name="MASPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="MASPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MASPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="MASPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASPartyBClearingException" minOccurs="0"/>
+<xs:element name="MASPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="MASPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MASPBClientDataPresent" minOccurs="0"/>
+<xs:element name="MASPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="MASPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="MASPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="MASPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="MASPBClientUTI" minOccurs="0"/>
+<xs:element name="MASPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="MASPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MASPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBBlockUTI" minOccurs="0"/>
+<xs:element name="MASPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASPBPriorUTI" minOccurs="0"/>
+<xs:element name="MASPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MASClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MASClientBlockUTI" minOccurs="0"/>
+<xs:element name="MASClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MASClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MASClientPriorUTI" minOccurs="0"/>
+<xs:element name="MASClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="MIData">
+<xs:sequence>
+<xs:element name="MIDataPresent" minOccurs="0"/>
+<xs:element name="MIObligatoryReporting" minOccurs="0"/>
+<xs:element name="MIReportingCounterparty" minOccurs="0"/>
+<xs:element name="MIDestinationAPA" minOccurs="0"/>
+<xs:element name="MIDestinationARM" minOccurs="0"/>
+<xs:element name="MIUTINamespace" minOccurs="0"/>
+<xs:element name="MIIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="MIUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="MIUTI" minOccurs="0"/>
+<xs:element name="MIIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="MIBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIBlockUTI" minOccurs="0"/>
+<xs:element name="MIIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIClearingException" minOccurs="0"/>
+<xs:element name="MIPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPriorUTI" minOccurs="0"/>
+<xs:element name="MIIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MIToTV" minOccurs="0"/>
+<xs:element name="TransactionReportable" minOccurs="0"/>
+<xs:element name="TransparencyReportable" minOccurs="0"/>
+<xs:element name="TransactionReporting" minOccurs="0"/>
+<xs:element name="TransparencyReporting" minOccurs="0"/>
+<xs:element name="MITransactionID" minOccurs="0"/>
+<xs:element name="MIMIC" minOccurs="0"/>
+<xs:element name="MIShortSale" minOccurs="0"/>
+<xs:element name="MIOTCPostTradeIndicator" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Indicator" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIWaiver" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Waiver" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIShortSaleA" minOccurs="0"/>
+<xs:element name="MIOTCPostTradeIndicatorA" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Indicator" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIWaiverA" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Waiver" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIShortSaleB" minOccurs="0"/>
+<xs:element name="MIOTCPostTradeIndicatorB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Indicator" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIWaiverB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Waiver" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MIPartyABlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyAIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyABlockUTI" minOccurs="0"/>
+<xs:element name="MIPartyAIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIPartyAClearingException" minOccurs="0"/>
+<xs:element name="MIPartyAPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyAIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyAPriorUTI" minOccurs="0"/>
+<xs:element name="MIPartyAIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MIPartyBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyBBlockUTI" minOccurs="0"/>
+<xs:element name="MIPartyBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIPartyBClearingException" minOccurs="0"/>
+<xs:element name="MIPartyBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPartyBPriorUTI" minOccurs="0"/>
+<xs:element name="MIPartyBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MIPBClientDataPresent" minOccurs="0"/>
+<xs:element name="MIPBClientRegulatorType" minOccurs="0"/>
+<xs:element name="MIPBClientRoute1Destination" minOccurs="0"/>
+<xs:element name="MIPBClientRoute1Intermediary" minOccurs="0"/>
+<xs:element name="MIPBClientUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="MIPBClientUTI" minOccurs="0"/>
+<xs:element name="MIPBClientIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerBlockUTI" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerPriorUTI" minOccurs="0"/>
+<xs:element name="MIPBClientBrokerIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MIPBBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBBlockUTI" minOccurs="0"/>
+<xs:element name="MIPBIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIPBPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIPBPriorUTI" minOccurs="0"/>
+<xs:element name="MIPBIntentToBlankPriorUTI" minOccurs="0"/>
+<xs:element name="MIClientBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIClientIntentToBlankBlockUTINamespace" minOccurs="0"/>
+<xs:element name="MIClientBlockUTI" minOccurs="0"/>
+<xs:element name="MIClientIntentToBlankBlockUTI" minOccurs="0"/>
+<xs:element name="MIClientPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIClientIntentToBlankPriorUTINamespace" minOccurs="0"/>
+<xs:element name="MIClientPriorUTI" minOccurs="0"/>
+<xs:element name="MIClientIntentToBlankPriorUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:group>
+<xs:group name="ReportingAllocationData">
+<xs:sequence>
+<xs:element name="GlobalUTI" minOccurs="0"/>
+<xs:element name="IntentToBlankGlobalUTI" minOccurs="0"/>
+<xs:element name="DFDataPresent" minOccurs="0"/>
+<xs:element name="USINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankUSINamespace" minOccurs="0"/>
+<xs:element name="USINamespacePrefix" minOccurs="0"/>
+<xs:element name="USI" minOccurs="0"/>
+<xs:element name="IntentToBlankUSI" minOccurs="0"/>
+<xs:element name="ObligatoryReporting" minOccurs="0"/>
+<xs:element name="ReportingCounterparty" minOccurs="0"/>
+<xs:element name="Collateralized" minOccurs="0"/>
+<xs:element name="SEDataPresent" minOccurs="0"/>
+<xs:element name="SEUTINamespace" minOccurs="0"/>
+<xs:element name="IntentToBlankSEUTINamespace" minOccurs="0"/>
+<xs:element name="SEUTINamespacePrefix" minOccurs="0"/>
+<xs:element name="SEUTI" minOccurs="0"/>
+<xs:element name="IntentToBlankSEUTI" minOccurs="0"/>
+<xs:element name="SEObligatoryReporting" minOccurs="0"/>
+<xs:element name="SEReportingCounterparty" minOccurs="0"/>
+<xs:element name="MIObligatoryReporting" minOccurs="0"/>
+<xs:element name="MIReportingCounterparty" minOccurs="0"/>
+<xs:element name="MITID" minOccurs="0"/>
+<xs:element name="MIIntentToBlankTID" minOccurs="0"/>
+<xs:element name="MITransactionReportable" minOccurs="0"/>
+<xs:element name="MITransparencyReportable" minOccurs="0"/>
+<xs:element name="ESMAUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="ESMAUTI" minOccurs="0"/>
+<xs:element name="ESMAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="FCAUTINamespace" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankUTINamespace" minOccurs="0"/>
+<xs:element name="FCAUTI" minOccurs="0"/>
+<xs:element name="FCAIntentToBlankUTI" minOccurs="0"/>
+<xs:element name="NexusReportingDetailsPartyA" minOccurs="0" maxOccurs="1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ExecutingTraderName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="SalesTraderName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="InvestFirmName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="BranchLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="DeskLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="ExecutingTraderLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="SalesTraderLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="InvestFirmLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="BokerLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="ArrBrokerLocation" minOccurs="0" maxOccurs="1"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="NexusReportingDetailsPartyB" minOccurs="0" maxOccurs="1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ExecutingTraderName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="SalesTraderName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="InvestFirmName" minOccurs="0" maxOccurs="1"/>
+<xs:element name="BranchLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="DeskLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="ExecutingTraderLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="SalesTraderLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="InvestFirmLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="BokerLocation" minOccurs="0" maxOccurs="1"/>
+<xs:element name="ArrBrokerLocation" minOccurs="0" maxOccurs="1"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:group>
+<xs:element name="Trade">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="SWBMLVersion"/>
+<xs:element name="BrokerSubmitted"/>
+<xs:element name="BrokerTradeId"/>
+<xs:element name="TotalLegs"/>
+<xs:element name="BrokerLegId"/>
+<xs:element name="ReplacementTradeId"/>
+<xs:element name="ReplacementTradeIdType"/>
+<xs:element name="ReplacementReason"/>
+<xs:element name="StrategyType"/>
+<xs:element name="StrategyComment"/>
+<xs:element name="BrokerTradeVersionId"/>
+<xs:element name="LinkedTradeId"/>
+<xs:element name="TradeSource"/>
+<xs:element name="VenueId" minOccurs="0"/>
+<xs:element name="VenueIdScheme" minOccurs="0"/>
+<xs:element name="MessageText"/>
+<xs:element name="SettlementAgency" minOccurs="0"/>
+<xs:element name="SettlementAgencyModel" minOccurs="0"/>
+<xs:element name="PBEBSettlementAgency" minOccurs="0"/>
+<xs:element name="PBEBSettlementAgencyModel" minOccurs="0"/>
+<xs:element name="PBClientSettlementAgency" minOccurs="0"/>
+<xs:element name="PBClientSettlementAgencyModel" minOccurs="0"/>
+<xs:element name="ConditionPrecedentBondId" minOccurs="0"/>
+<xs:element name="ConditionPrecedentBondMaturity" minOccurs="0"/>
+<xs:element name="ConditionPrecedentBondIdType" minOccurs="0"/>
+<xs:element name="ConditionPrecedentBond" minOccurs="0"/>
+<xs:element name="DiscrepancyClause" minOccurs="0"/>
+<xs:element name="AllocatedTrade"/>
+<xs:element name="Allocation" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:choice>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Receiver"/>
+</xs:sequence>
+<xs:sequence>
+<xs:element name="Buyer"/>
+<xs:element name="Seller"/>
+</xs:sequence>
+</xs:choice>
+<xs:element name="swbStreamReference"/>
+<xs:element name="AllocatedNotional" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AllocatedNumberOfOptions"/>
+<xs:element name="AllocatedVegaNotional"/>
+<xs:element name="AllocatedVarianceAmount"/>
+<xs:element name="AllocatedUnits"/>
+<xs:element name="AllocOpenSecurityNominal" minOccurs="0"/>
+<xs:element name="AllocOpenSecurityQuantity" minOccurs="0"/>
+<xs:element name="AllocGlobalUTI" minOccurs="0"/>
+<xs:element name="ContraAmount" minOccurs="0"/>
+<xs:element name="VariableAmount" minOccurs="0"/>
+<xs:element name="ZCAllocAmount" minOccurs="0"/>
+<xs:element name="ContraZCAllocAmount" minOccurs="0"/>
+<xs:element name="AllocationIndependentAmount" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="swbBrokerTradeId"/>
+<xs:element name="AllocationOtherPartyPayment" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Receiver"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AllocationClearingBroker" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ClientClearingBroker"/>
+<xs:element name="EBClearingBroker"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AllocationPartyAClearingBroker" minOccurs="0"/>
+<xs:element name="AllocationPartyBClearingBroker" minOccurs="0"/>
+<xs:element name="AllocationPayerClearingBroker" minOccurs="0"/>
+<xs:element name="AllocationReceiverClearingBroker" minOccurs="0"/>
+<xs:element name="AllocationNettingParty" minOccurs="0"/>
+<xs:element name="AllocationNettingString" minOccurs="0"/>
+<xs:element name="AllocationNettingParty_2" minOccurs="0"/>
+<xs:element name="AllocationNettingString_2" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceParty" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceIssuer" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceToken" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceParty_2" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceIssuer_2" minOccurs="0"/>
+<xs:element name="AllocationCreditAcceptanceToken_2" minOccurs="0"/>
+<xs:group ref="ReportingAllocationData"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EmptyBlockTrade"/>
+<xs:element name="PrimeBrokerTrade"/>
+<xs:element name="ReversePrimeBrokerLegalEntities"/>
+<xs:element name="Recipient" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Id"/>
+<xs:element name="Party"/>
+<xs:element name="UserName"/>
+<xs:element name="TradingBook"/>
+<xs:element name="ExecutionMode"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyAId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyAIdType" minOccurs="0"/>
+<xs:element name="PartyAName"/>
+<xs:element name="PartyBId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyBIdType" minOccurs="0"/>
+<xs:element name="PartyBName"/>
+<xs:element name="PartyCId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyCIdType" minOccurs="0"/>
+<xs:element name="PartyCName"/>
+<xs:element name="PartyDId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyDIdType" minOccurs="0"/>
+<xs:element name="PartyDName"/>
+<xs:element name="PartyGId">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyGIdType" minOccurs="0"/>
+<xs:element name="PartyGName"/>
+<xs:element name="PartyHId" minOccurs="0">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyHIdType" minOccurs="0"/>
+<xs:element name="PartyHName" minOccurs="0"/>
+<xs:element name="PartyTripartyAgentId" minOccurs="0">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:NMTOKEN"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyTripartyAgentIdType" minOccurs="0"/>
+<xs:element name="DeliveryByValue" minOccurs="0"/>
+<xs:element name="BrokerAId" minOccurs="0">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="BrokerBId" minOccurs="0">
+<xs:complexType mixed="true">
+<xs:attribute name="id" type="xs:anyURI" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="NominalTerm"/>
+<xs:element name="FixedRatePayer"/>
+<xs:element name="FloatingRatePayer"/>
+<xs:element name="OptionBuyer" minOccurs="0"/>
+<xs:element name="TradeDate"/>
+<xs:element name="StartDate"/>
+<xs:element name="FirstFixedPeriodStartDate"/>
+<xs:element name="FirstFixedPeriodStartDate_2" minOccurs="0"/>
+<xs:element name="FirstFloatPeriodStartDate"/>
+<xs:element name="FirstFloatPeriodStartDate_2"/>
+<xs:element name="EndDate"/>
+<xs:element name="FixingDate" minOccurs="0"/>
+<xs:element name="TerminationDays" minOccurs="0"/>
+<xs:element name="FixedPaymentFreq"/>
+<xs:element name="FixedPaymentFreq_2" minOccurs="0"/>
+<xs:element name="FloatPaymentFreq"/>
+<xs:element name="FloatPaymentFreq_2"/>
+<xs:element name="FloatRollFreq"/>
+<xs:element name="FloatRollFreq_2"/>
+<xs:element name="RollsType"/>
+<xs:element name="RollsMethod"/>
+<xs:element name="RollDay"/>
+<xs:element name="MonthEndRolls"/>
+<xs:element name="FirstPeriodStartDate"/>
+<xs:element name="FirstPaymentDate"/>
+<xs:element name="LastRegularPaymentDate"/>
+<xs:element name="FixedRate"/>
+<xs:element name="FixedRate_2" minOccurs="0"/>
+<xs:element name="initialPoints"/>
+<xs:element name="quotationStyle"/>
+<xs:element name="RecoveryRate"/>
+<xs:element name="FixedSettlement"/>
+<xs:element name="Strike"/>
+<xs:element name="StrikePercentage"/>
+<xs:element name="StrikeDate"/>
+<xs:element name="Currency"/>
+<xs:element name="Currency_2"/>
+<xs:element name="Notional"/>
+<xs:element name="NotionalFloating" minOccurs="0"/>
+<xs:element name="Notional_2"/>
+<xs:element name="InitialNotional"/>
+<xs:element name="FinalExchangeAmount" minOccurs="0"/>
+<xs:element name="FixedAmount"/>
+<xs:element name="FixedAmount_2" minOccurs="0"/>
+<xs:element name="FixedAmountCurrency"/>
+<xs:element name="FixedAmountCurrency_2" minOccurs="0"/>
+<xs:element name="FixedDayBasis"/>
+<xs:element name="FixedDayBasis_2" minOccurs="0"/>
+<xs:element name="FloatDayBasis"/>
+<xs:element name="FloatDayBasis_2"/>
+<xs:element name="FixedConvention"/>
+<xs:element name="FixedConvention_2" minOccurs="0"/>
+<xs:element name="FixedCalcPeriodDatesConvention"/>
+<xs:element name="FixedCalcPeriodDatesConvention_2" minOccurs="0"/>
+<xs:element name="FixedTerminationDateConvention"/>
+<xs:element name="FixedTerminationDateConvention_2" minOccurs="0"/>
+<xs:element name="FloatConvention"/>
+<xs:element name="FloatCalcPeriodDatesConvention"/>
+<xs:element name="FloatTerminationDateConvention"/>
+<xs:element name="FloatConvention_2"/>
+<xs:element name="FloatTerminationDateConvention_2"/>
+<xs:element name="FloatingRateIndex"/>
+<xs:element name="FloatingRateIndexTenor" minOccurs="0"/>
+<xs:element name="FloatingRateIndex_2"/>
+<xs:element name="InflationLag"/>
+<xs:element name="IndexSource"/>
+<xs:element name="InterpolationMethod"/>
+<xs:element name="InitialIndexLevel"/>
+<xs:element name="RelatedBond"/>
+<xs:element name="IndexTenor1"/>
+<xs:element name="IndexTenor1_2" minOccurs="0"/>
+<xs:element name="LinearInterpolation"/>
+<xs:element name="LinearInterpolation_2" minOccurs="0"/>
+<xs:element name="NoStubLinearInterpolation"/>
+<xs:element name="NoStubLinearInterpolation2"/>
+<xs:element name="IndexTenor2"/>
+<xs:element name="IndexTenor2_2" minOccurs="0"/>
+<xs:element name="InitialInterpolationIndex" minOccurs="0"/>
+<xs:element name="InitialInterpolationIndex_2" minOccurs="0"/>
+<xs:element name="CMSCalcAgent" minOccurs="0"/>
+<xs:element name="CompoundingCalculationMethod" minOccurs="0"/>
+<xs:element name="CompoundingCalculationMethod_2" minOccurs="0"/>
+<xs:element name="ObservationMethod" minOccurs="0"/>
+<xs:element name="ObservationMethod_2" minOccurs="0"/>
+<xs:element name="OffsetDays" minOccurs="0"/>
+<xs:element name="OffsetDays_2" minOccurs="0"/>
+<xs:element name="ObservationPeriodDates" minOccurs="0"/>
+<xs:element name="ObservationPeriodDates_2" minOccurs="0"/>
+<xs:element name="ObservationAdditionalBusinessDays" minOccurs="0"/>
+<xs:element name="ObservationAdditionalBusinessDays_2" minOccurs="0"/>
+<xs:element name="ObservationHolidayCentre" minOccurs="0"/>
+<xs:element name="ObservationHolidayCentre_2" minOccurs="0"/>
+<xs:element name="CancelableCalcAgent" minOccurs="0"/>
+<xs:element name="SpreadOverIndex"/>
+<xs:element name="SpreadOverIndex_2"/>
+<xs:element name="FirstFixingRate"/>
+<xs:element name="FirstFixingRate_2"/>
+<xs:element name="FixingDaysOffset"/>
+<xs:element name="FixingDaysOffset_2"/>
+<xs:element name="FixingHolidayCentres"/>
+<xs:element name="FixingHolidayCentres_2"/>
+<xs:element name="ResetInArrears"/>
+<xs:element name="ResetInArrears_2"/>
+<xs:element name="FirstFixingDifferent"/>
+<xs:element name="FirstFixingDifferent_2"/>
+<xs:element name="FirstFixingDaysOffset"/>
+<xs:element name="FirstFixingDaysOffset_2"/>
+<xs:element name="FirstFixingHolidayCentres"/>
+<xs:element name="FirstFixingHolidayCentres_2"/>
+<xs:element name="PaymentHolidayCentres"/>
+<xs:element name="PaymentHolidayCentres_2"/>
+<xs:element name="PaymentLag"/>
+<xs:element name="PaymentLag_2"/>
+<xs:element name="RollHolidayCentres"/>
+<xs:element name="RollHolidayCentres_2"/>
+<xs:element name="AdjustFixedStartDate"/>
+<xs:element name="AdjustFixedStartDate_2" minOccurs="0"/>
+<xs:element name="AdjustFloatStartDate"/>
+<xs:element name="AdjustFloatStartDate_2"/>
+<xs:element name="AdjustRollEnd"/>
+<xs:element name="AdjustRollEnd_2" minOccurs="0"/>
+<xs:element name="AdjustFloatRollEnd"/>
+<xs:element name="AdjustFloatRollEnd_2"/>
+<xs:element name="AdjustFixedFinalRollEnd"/>
+<xs:element name="AdjustFixedFinalRollEnd_2" minOccurs="0"/>
+<xs:element name="AdjustFinalRollEnd"/>
+<xs:element name="AdjustFinalRollEnd_2" minOccurs="0"/>
+<xs:element name="CompoundingMethod"/>
+<xs:element name="CompoundingMethod_2" minOccurs="0"/>
+<xs:element name="AveragingMethod"/>
+<xs:element name="AveragingMethod_2" minOccurs="0"/>
+<xs:element name="FloatingRateMultiplier"/>
+<xs:element name="FloatingRateMultiplier_2"/>
+<xs:element name="DesignatedMaturity"/>
+<xs:element name="DesignatedMaturity_2" minOccurs="0"/>
+<xs:element name="ResetFreq"/>
+<xs:element name="ResetFreq_2" minOccurs="0"/>
+<xs:element name="WeeklyRollConvention"/>
+<xs:element name="WeeklyRollConvention_2" minOccurs="0"/>
+<xs:element name="RateCutOffDays"/>
+<xs:element name="RateCutOffDays_2" minOccurs="0"/>
+<xs:element name="InitialExchange"/>
+<xs:element name="FinalExchange"/>
+<xs:element name="MarkToMarket"/>
+<xs:element name="IntermediateExchange"/>
+<xs:element name="FallbackBondApplicable" minOccurs="0"/>
+<xs:element name="CalculationMethod" minOccurs="0"/>
+<xs:element name="CalculationStyle" minOccurs="0"/>
+<xs:element name="FinalPriceExchangeCalc" minOccurs="0"/>
+<xs:element name="SpreadCalculationMethod" minOccurs="0"/>
+<xs:element name="CouponRate" minOccurs="0"/>
+<xs:element name="Maturity" minOccurs="0"/>
+<xs:element name="RelatedBondValue" minOccurs="0"/>
+<xs:element name="RelatedBondID" minOccurs="0"/>
+<xs:element name="MTMRateSource"/>
+<xs:element name="MTMRateSourcePage"/>
+<xs:element name="MTMFixingDate"/>
+<xs:element name="MTMFixingHolidayCentres"/>
+<xs:element name="MTMFixingTime"/>
+<xs:element name="MTMLocation"/>
+<xs:element name="MTMCutoffTime"/>
+<xs:element name="CalculationPeriodDays"/>
+<xs:element name="FraDiscounting"/>
+<xs:element name="NoBreak"/>
+<xs:element name="HasBreak"/>
+<xs:element name="BreakType"/>
+<xs:element name="BreakFirstDate"/>
+<xs:element name="BreakFrequency"/>
+<xs:element name="BreakOverride"/>
+<xs:element name="BreakDate"/>
+<xs:element name="BreakEarliestTime" minOccurs="0"/>
+<xs:element name="BreakCalcAgentA" minOccurs="0"/>
+<xs:element name="BreakExpiryTime" minOccurs="0"/>
+<xs:element name="BreakLocation" minOccurs="0"/>
+<xs:element name="BreakHolidayCentre" minOccurs="0"/>
+<xs:element name="BreakSettlement" minOccurs="0"/>
+<xs:element name="BreakValuationDate" minOccurs="0"/>
+<xs:element name="BreakValuationTime" minOccurs="0"/>
+<xs:element name="BreakMMVApplicableCSA" minOccurs="0"/>
+<xs:element name="BreakPrescribedDocAdj" minOccurs="0"/>
+<xs:element name="ExchangeUnderlying"/>
+<xs:element name="SpreadCurrency"/>
+<xs:element name="SwapSpread"/>
+<xs:element name="BondId1"/>
+<xs:element name="BondName1"/>
+<xs:element name="BondAmount1"/>
+<xs:element name="BondPriceType1"/>
+<xs:element name="BondPrice1"/>
+<xs:element name="BondId2"/>
+<xs:element name="BondName2"/>
+<xs:element name="BondAmount2"/>
+<xs:element name="BondPriceType2"/>
+<xs:element name="BondPrice2"/>
+<xs:element name="StubAt"/>
+<xs:element name="FixedStub"/>
+<xs:element name="FixedStub_2" minOccurs="0"/>
+<xs:element name="FloatStub"/>
+<xs:element name="FloatStub_2"/>
+<xs:element name="FrontAndBackStubs" minOccurs="0"/>
+<xs:element name="FixedBackStub" minOccurs="0"/>
+<xs:element name="FloatBackStub" minOccurs="0"/>
+<xs:element name="BackStubIndexTenor1" minOccurs="0"/>
+<xs:element name="BackStubIndexTenor2" minOccurs="0"/>
+<xs:element name="BackStubLinearInterpolation" minOccurs="0"/>
+<xs:element name="BackStubInitialInterpIndex" minOccurs="0"/>
+<xs:element name="NoBackStubLinearInterpolation" minOccurs="0"/>
+<xs:element name="FirstFixedRegPdStartDate" minOccurs="0"/>
+<xs:element name="FirstFixedRegPdStartDate_2" minOccurs="0"/>
+<xs:element name="FirstFloatRegPdStartDate" minOccurs="0"/>
+<xs:element name="LastFixedRegPdEndDate" minOccurs="0"/>
+<xs:element name="LastFixedRegPdEndDate_2" minOccurs="0"/>
+<xs:element name="LastFloatRegPdEndDate" minOccurs="0"/>
+<xs:element name="MasterAgreement"/>
+<xs:element name="MasterAgreementDate" minOccurs="0"/>
+<xs:element name="MasterAgreementVersion" minOccurs="0"/>
+<xs:element name="ProductType"/>
+<xs:element name="ProductSubType" minOccurs="0"/>
+<xs:element name="OptionType"/>
+<xs:element name="OptionExpirationDate"/>
+<xs:element name="OptionExpirationDateConvention" minOccurs="0"/>
+<xs:element name="OptionHolidayCentres"/>
+<xs:element name="OptionEarliestTime"/>
+<xs:element name="OptionExpiryTime"/>
+<xs:element name="ValuationTime" minOccurs="0"/>
+<xs:element name="OptionSpecificExpiryTime"/>
+<xs:element name="OptionLocation"/>
+<xs:element name="OptionCalcAgent" minOccurs="0"/>
+<xs:element name="OptionAutomaticExercise"/>
+<xs:element name="OptionThreshold"/>
+<xs:element name="ManualExercise"/>
+<xs:element name="OptionWrittenExerciseConf"/>
+<xs:element name="OptionSettlement"/>
+<xs:element name="OptionCashSettlementMethod"/>
+<xs:element name="OptionCashSettlementQuotationRate"/>
+<xs:element name="OptionCashSettlementRateSource"/>
+<xs:element name="OptionCashSettlementReferenceBanks"/>
+<xs:element name="BarrierType" minOccurs="0"/>
+<xs:element name="KnockInTriggerType" minOccurs="0"/>
+<xs:element name="KnockInPrice" minOccurs="0"/>
+<xs:element name="KnockInPeriodStartDate" minOccurs="0"/>
+<xs:element name="KnockInPeriodEndDate" minOccurs="0"/>
+<xs:element name="KnockInValuationTime" minOccurs="0"/>
+<xs:element name="KnockOutTriggerType" minOccurs="0"/>
+<xs:element name="KnockOutPrice" minOccurs="0"/>
+<xs:element name="KnockOutPeriodStartDate" minOccurs="0"/>
+<xs:element name="KnockOutPeriodEndDate" minOccurs="0"/>
+<xs:element name="KnockOutValuationTime" minOccurs="0"/>
+<xs:element name="Rebate" minOccurs="0"/>
+<xs:element name="RebateAmount" minOccurs="0"/>
+<xs:element name="RebateAmountPaymentDate" minOccurs="0"/>
+<xs:element name="RebateAmountPaymentLag" minOccurs="0"/>
+<xs:element name="ClearedPhysicalSettlement"/>
+<xs:element name="UnderlyingSwapClearingHouse" minOccurs="0"/>
+<xs:element name="PricedToClearCCP" minOccurs="0"/>
+<xs:element name="AgreedDiscountRate" minOccurs="0"/>
+<xs:element name="Premium">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Currency" minOccurs="0"/>
+<xs:element name="Amount"/>
+<xs:element name="Date"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="PremiumHolidayCentres"/>
+<xs:element name="AssociatedFuture" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party"/>
+<xs:element name="AssociatedFutureName"/>
+<xs:element name="AssociatedFutureQuantity"/>
+<xs:element name="AssociatedFutureMaturity"/>
+<xs:element name="AssociatedFutureDescription"/>
+<xs:element name="AssociatedFuturePrice"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DocsType"/>
+<xs:element name="DocsSubType"/>
+<xs:element name="OptionsComponentSecurityIndexAnnex"/>
+<xs:element name="OptionHedgingDisruption"/>
+<xs:element name="OptionLossOfStockBorrow"/>
+<xs:element name="OptionMaximumStockLoanRate"/>
+<xs:element name="OptionIncreasedCostOfStockBorrow"/>
+<xs:element name="OptionInitialStockLoanRate"/>
+<xs:element name="OptionIncreasedCostOfHedging"/>
+<xs:element name="OptionForeignOwnershipEvent"/>
+<xs:element name="OptionEntitlement"/>
+<xs:element name="FxFeature" minOccurs="0"/>
+<xs:element name="ContractualDefinitions"/>
+<xs:element name="ContractualSupplement" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="RestructuringCreditEvent"/>
+<xs:element name="CalculationAgentCity"/>
+<xs:element name="CalculationAgent" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="CalculationAgentOccurrence" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="RefEntName"/>
+<xs:element name="RefEntStdId"/>
+<xs:element name="REROPairStdId"/>
+<xs:element name="RefOblRERole"/>
+<xs:element name="RefOblSecurityIdType"/>
+<xs:element name="RefOblSecurityId"/>
+<xs:element name="BloombergID"/>
+<xs:element name="RefOblMaturity"/>
+<xs:element name="RefOblCoupon"/>
+<xs:element name="RefOblPrimaryObligor"/>
+<xs:element name="BorrowerNames"/>
+<xs:element name="FacilityType"/>
+<xs:element name="CreditAgreementDate"/>
+<xs:element name="IsSecuredList"/>
+<xs:element name="CashSettlementOnly" minOccurs="0"/>
+<xs:element name="Continuity" minOccurs="0"/>
+<xs:element name="DeliveryOfCommitments" minOccurs="0"/>
+<xs:element name="DesignatedPriority"/>
+<xs:element name="LegalFinalMaturity" minOccurs="0"/>
+<xs:element name="OriginalPrincipalAmount" minOccurs="0"/>
+<xs:element name="CreditDateAdjustments" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Convention" minOccurs="0"/>
+<xs:element name="Holidays" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="OptionalEarlyTermination"/>
+<xs:element name="ReferencePrice"/>
+<xs:element name="ReferencePolicy"/>
+<xs:element name="PaymentDelay"/>
+<xs:element name="StepUpProvision"/>
+<xs:element name="WACCapInterestProvision"/>
+<xs:element name="InterestShortfallCapIndicator"/>
+<xs:element name="InterestShortfallCompounding"/>
+<xs:element name="InterestShortfallCapBasis"/>
+<xs:element name="InterestShortfallRateSource"/>
+<xs:element name="MortgagePaymentFrequency"/>
+<xs:element name="MortgageFinalMaturity"/>
+<xs:element name="MortgageOriginalAmount"/>
+<xs:element name="MortgageInitialFactor"/>
+<xs:element name="MortgageSector"/>
+<xs:element name="MortgageInsurer" minOccurs="0"/>
+<xs:element name="IndexName"/>
+<xs:element name="IndexId"/>
+<xs:element name="IndexSeries"/>
+<xs:element name="IndexVersion"/>
+<xs:element name="IndexAnnexDate"/>
+<xs:element name="IndexTradedRate"/>
+<xs:element name="UpfrontFee"/>
+<xs:element name="UpfrontFeeAmount"/>
+<xs:element name="UpfrontFeeCurrency" minOccurs="0"/>
+<xs:element name="UpfrontFeeDate"/>
+<xs:element name="UpfrontFeePayer"/>
+<xs:element name="AttachmentPoint"/>
+<xs:element name="ExhaustionPoint"/>
+<xs:element name="Cancelable" minOccurs="0"/>
+<xs:element name="CancelableDirectionA" minOccurs="0"/>
+<xs:element name="CancelableOptionStyle" minOccurs="0"/>
+<xs:element name="CancelableFirstExerciseDate" minOccurs="0"/>
+<xs:element name="CancelableExerciseFrequency" minOccurs="0"/>
+<xs:element name="CancelableEarliestTime" minOccurs="0"/>
+<xs:element name="CancelableExpiryTime" minOccurs="0"/>
+<xs:element name="CancelableExerciseLag" minOccurs="0"/>
+<xs:element name="CancelableHolidayCentre" minOccurs="0"/>
+<xs:element name="CancelableLocation" minOccurs="0"/>
+<xs:element name="CancelableConvention" minOccurs="0"/>
+<xs:element name="CancelableFUC" minOccurs="0"/>
+<xs:element name="CancelableDayType" minOccurs="0"/>
+<xs:element name="CancelableLagConvention" minOccurs="0"/>
+<xs:element name="CancelableRollCentres" minOccurs="0"/>
+<xs:element name="CancelablePremium" minOccurs="0" maxOccurs="1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PaymentDirectionA"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+<xs:element name="Date"/>
+<xs:element name="Convention"/>
+<xs:element name="Holidays"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AdditionalPayment" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Reason"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+<xs:element name="Date"/>
+<xs:element name="Convention"/>
+<xs:element name="Holidays"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EquityRic"/>
+<xs:element name="OptionQuantity"/>
+<xs:element name="OptionExpiryMonth"/>
+<xs:element name="OptionExpiryYear"/>
+<xs:element name="Price"/>
+<xs:element name="OptionStyle"/>
+<xs:element name="ExchangeLookAlike"/>
+<xs:element name="AdjustmentMethod"/>
+<xs:element name="RelatedExchange"/>
+<xs:element name="MasterConfirmationDate"/>
+<xs:element name="Multiplier"/>
+<xs:element name="SettlementCurrency"/>
+<xs:element name="SettlementCurrency_2"/>
+<xs:element name="SettlementDateOffset"/>
+<xs:element name="SettlementType"/>
+<xs:element name="SettlementDate" minOccurs="0"/>
+<xs:element name="FxDeterminationMethod"/>
+<xs:element name="ReferencePriceSource"/>
+<xs:element name="ReferencePricePage"/>
+<xs:element name="ReferencePriceTime"/>
+<xs:element name="ReferencePriceCity"/>
+<xs:element name="ReferenceCurrency"/>
+<xs:element name="ReferenceCurrency_2"/>
+<xs:element name="DcRequired"/>
+<xs:element name="DcEventTypeA"/>
+<xs:element name="DcRic"/>
+<xs:element name="DcDescription"/>
+<xs:element name="DcExpiryMonth"/>
+<xs:element name="DcExpiryYear"/>
+<xs:element name="DcQuantity"/>
+<xs:element name="DcPrice"/>
+<xs:element name="DcCurrency"/>
+<xs:element name="DcDelta"/>
+<xs:element name="DcExpiryDate"/>
+<xs:element name="DcFuturesCode"/>
+<xs:element name="DcOffshoreCross"/>
+<xs:element name="DcOffshoreCrossLocation"/>
+<xs:element name="DcExchangeID"/>
+<xs:element name="DcDeltaOptionQuantity"/>
+<xs:element name="AveragingInOut"/>
+<xs:element name="AveragingDateTimes">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="AveragingDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MarketDisruption"/>
+<xs:element name="AveragingFrequency"/>
+<xs:element name="AveragingStartDate"/>
+<xs:element name="AveragingEndDate"/>
+<xs:element name="ReferenceFXRate"/>
+<xs:element name="HedgeLevel"/>
+<xs:element name="Basis"/>
+<xs:element name="ImpliedLevel"/>
+<xs:element name="PremiumPercent"/>
+<xs:element name="StrikePercent"/>
+<xs:element name="BaseNotional"/>
+<xs:element name="BreakOutTrade"/>
+<xs:element name="SplitCollateral"/>
+<xs:element name="OpenUnits"/>
+<xs:element name="DeclaredCashDividendPercentage"/>
+<xs:element name="DeclaredCashEquivalentDividendPercentage"/>
+<xs:element name="DividendPayer"/>
+<xs:element name="DividendReceiver"/>
+<xs:element name="DividendPeriods">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DividendPeriod" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DividendPeriodId"/>
+<xs:element name="UnadjustedStartDate"/>
+<xs:element name="UnadjustedEndDate"/>
+<xs:element name="PaymentDateReference"/>
+<xs:element name="FixedStrike"/>
+<xs:element name="DividendValuationDateReference"/>
+<xs:element name="DividendValuationDate"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SpecialDividends"/>
+<xs:element name="MaterialDividend"/>
+<xs:element name="FixedPayer"/>
+<xs:element name="FixedReceiver"/>
+<xs:element name="FixedPeriods">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FixedPayment" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DivSwapFixedAmount"/>
+<xs:element name="DivSwapFixedDateOffset"/>
+<xs:element name="DivSwapFixedDateRelativeTo"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="VegaNotional"/>
+<xs:element name="ExpectedN"/>
+<xs:element name="ExpectedNOverride"/>
+<xs:element name="VarianceAmount"/>
+<xs:element name="VarianceStrikePrice"/>
+<xs:element name="VolatilityStrikePrice"/>
+<xs:element name="VarianceCapIndicator"/>
+<xs:element name="VolatilityCapIndicator" minOccurs="0"/>
+<xs:element name="VarianceCapFactor"/>
+<xs:element name="TotalVolatilityCap" minOccurs="0"/>
+<xs:element name="VolatilityCapFactor" minOccurs="0"/>
+<xs:element name="ObservationStartDate"/>
+<xs:element name="ValuationDate"/>
+<xs:element name="InitialSharePriceOrIndexLevel"/>
+<xs:element name="ClosingSharePriceOrClosingIndexLevelIndicator"/>
+<xs:element name="FuturesPriceValuation"/>
+<xs:element name="AllDividends"/>
+<xs:element name="SettlementCurrencyVegaNotional"/>
+<xs:element name="VegaFxRate"/>
+<xs:element name="HolidayDates" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="HolidayDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="IndependentAmount">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+<xs:element name="IndependentAmountPercentage" minOccurs="0"/>
+<xs:element name="Date" minOccurs="0"/>
+<xs:element name="Convention" minOccurs="0"/>
+<xs:element name="Holidays" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="Brokerage" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Payer"/>
+<xs:element name="Currency"/>
+<xs:element name="Amount"/>
+<xs:element name="Broker"/>
+<xs:element name="BrokerTradeId"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SettlementRateOption"/>
+<xs:element name="SettlementRateOption_2"/>
+<xs:element name="FxFixingAdjustableDate"/>
+<xs:element name="FxFixingPeriod"/>
+<xs:element name="FxFixingDayConvention"/>
+<xs:element name="FxFixingCentres"/>
+<xs:element name="ValuationDateType" minOccurs="0"/>
+<xs:element name="ValuationDateType_2" minOccurs="0"/>
+<xs:element name="FxFixingPeriod_2"/>
+<xs:element name="FxFixingDayConvention_2"/>
+<xs:element name="FxFixingCentres_2"/>
+<xs:element name="CalcAgentA"/>
+<xs:element name="DefaultSettlementMethod"/>
+<xs:element name="SettlementPriceDefaultElectionMethod"/>
+<xs:element name="SettlementMethodElectionDate"/>
+<xs:element name="SettlementMethodElectingParty"/>
+<xs:element name="NotionalFutureValue"/>
+<xs:element name="NotionalSchedule" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FixedLegNotionalStep" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FixedPaymentDates"/>
+<xs:element name="FixedNotionals"/>
+<xs:element name="FixedRates"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="FixedLegNotionalStep2" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FixedPaymentDates2"/>
+<xs:element name="FixedNotionals2"/>
+<xs:element name="FixedRates2"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="FloatLegNotionalStep" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FloatRollDates"/>
+<xs:element name="FloatNotionals"/>
+<xs:element name="FloatSpreads"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="FloatLegNotionalStep2" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="FloatRollDates2"/>
+<xs:element name="FloatNotionals2"/>
+<xs:element name="FloatSpreads2"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DispLegs">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DispLeg" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DispLegId"/>
+<xs:element name="DispLegVersionId"/>
+<xs:element name="DispLegPayer"/>
+<xs:element name="DispLegReceiver"/>
+<xs:element name="DispEquityRic"/>
+<xs:element name="DispEquityRelEx"/>
+<xs:element name="DispVegaNotional"/>
+<xs:element name="DispExpectedN"/>
+<xs:element name="DispSettlementDateOffset"/>
+<xs:element name="DispVarianceAmount"/>
+<xs:element name="DispShareVarCurrency"/>
+<xs:element name="DispVarianceStrikePrice"/>
+<xs:element name="DispVarianceCapIndicator"/>
+<xs:element name="DispVarianceCapFactor"/>
+<xs:element name="DispVegaNotionalAmount"/>
+<xs:element name="DispObservationStartDate"/>
+<xs:element name="DispValuationDate"/>
+<xs:element name="DispInitialLevel"/>
+<xs:element name="DispClosingLevelIndicator"/>
+<xs:element name="DispFuturesPriceValuation"/>
+<xs:element name="DispAllDividends"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DispLegsSW">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DispLegSW" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DispCorrespondingLeg"/>
+<xs:element name="DispVolatilityStrikePrice"/>
+<xs:element name="DispHolidayDates"/>
+<xs:element name="DispExpectedNOverride"/>
+<xs:element name="DispShareWeight"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="BalanceOfPeriod"/>
+<xs:element name="BulletIndicator"/>
+<xs:element name="BulletFirstContractMonth"/>
+<xs:element name="BulletLastContractMonth"/>
+<xs:element name="BulletContractYear"/>
+<xs:element name="BulletContractTradingDay"/>
+<xs:element name="ClearingVenue"/>
+<xs:element name="ClientClearing"/>
+<xs:element name="ExternalInteropabilityId"/>
+<xs:element name="InteropNettingString"/>
+<xs:element name="AutoSendForClearing"/>
+<xs:element name="ASICMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeASICMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeASICMandatoryClearingIndicator"/>
+<xs:element name="CANMandatoryClearingIndicator"/>
+<xs:element name="CANClearingExemptIndicator1PartyId"/>
+<xs:element name="CANClearingExemptIndicator1Value"/>
+<xs:element name="CANClearingExemptIndicator2PartyId"/>
+<xs:element name="CANClearingExemptIndicator2Value"/>
+<xs:element name="PBEBTradeCANMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeCANClearingExemptIndicator1PartyId"/>
+<xs:element name="PBEBTradeCANClearingExemptIndicator1Value"/>
+<xs:element name="PBEBTradeCANClearingExemptIndicator2PartyId"/>
+<xs:element name="PBEBTradeCANClearingExemptIndicator2Value"/>
+<xs:element name="PBClientTradeCANMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeCANClearingExemptIndicator1PartyId"/>
+<xs:element name="PBClientTradeCANClearingExemptIndicator1Value"/>
+<xs:element name="PBClientTradeCANClearingExemptIndicator2PartyId"/>
+<xs:element name="PBClientTradeCANClearingExemptIndicator2Value"/>
+<xs:element name="ESMAMandatoryClearingIndicator"/>
+<xs:element name="ESMAClearingExemptIndicator1PartyId"/>
+<xs:element name="ESMAClearingExemptIndicator1Value"/>
+<xs:element name="ESMAClearingExemptIndicator2PartyId"/>
+<xs:element name="ESMAClearingExemptIndicator2Value"/>
+<xs:element name="PBEBTradeESMAMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeESMAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBEBTradeESMAClearingExemptIndicator1Value"/>
+<xs:element name="PBEBTradeESMAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBEBTradeESMAClearingExemptIndicator2Value"/>
+<xs:element name="PBClientTradeESMAMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeESMAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBClientTradeESMAClearingExemptIndicator1Value"/>
+<xs:element name="PBClientTradeESMAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBClientTradeESMAClearingExemptIndicator2Value"/>
+<xs:element name="FCAMandatoryClearingIndicator"/>
+<xs:element name="FCAClearingExemptIndicator1PartyId"/>
+<xs:element name="FCAClearingExemptIndicator1Value"/>
+<xs:element name="FCAClearingExemptIndicator2PartyId"/>
+<xs:element name="FCAClearingExemptIndicator2Value"/>
+<xs:element name="PBEBTradeFCAMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeFCAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBEBTradeFCAClearingExemptIndicator1Value"/>
+<xs:element name="PBEBTradeFCAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBEBTradeFCAClearingExemptIndicator2Value"/>
+<xs:element name="PBClientTradeFCAMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeFCAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBClientTradeFCAClearingExemptIndicator1Value"/>
+<xs:element name="PBClientTradeFCAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBClientTradeFCAClearingExemptIndicator2Value"/>
+<xs:element name="HKMAMandatoryClearingIndicator"/>
+<xs:element name="HKMAClearingExemptIndicator1PartyId"/>
+<xs:element name="HKMAClearingExemptIndicator1Value"/>
+<xs:element name="HKMAClearingExemptIndicator2PartyId"/>
+<xs:element name="HKMAClearingExemptIndicator2Value"/>
+<xs:element name="PBEBTradeHKMAMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeHKMAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBEBTradeHKMAClearingExemptIndicator1Value"/>
+<xs:element name="PBEBTradeHKMAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBEBTradeHKMAClearingExemptIndicator2Value"/>
+<xs:element name="PBClientTradeHKMAMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeHKMAClearingExemptIndicator1PartyId"/>
+<xs:element name="PBClientTradeHKMAClearingExemptIndicator1Value"/>
+<xs:element name="PBClientTradeHKMAClearingExemptIndicator2PartyId"/>
+<xs:element name="PBClientTradeHKMAClearingExemptIndicator2Value"/>
+<xs:element name="JFSAMandatoryClearingIndicator"/>
+<xs:element name="CFTCMandatoryClearingIndicator"/>
+<xs:element name="CFTCClearingExemptIndicator1PartyId"/>
+<xs:element name="CFTCClearingExemptIndicator1Value"/>
+<xs:element name="CFTCClearingExemptIndicator2PartyId"/>
+<xs:element name="CFTCClearingExemptIndicator2Value"/>
+<xs:element name="CFTCInterAffiliateExemption" minOccurs="0"/>
+<xs:element name="PBEBTradeCFTCMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeJFSAMandatoryClearingIndicator" minOccurs="0"/>
+<xs:element name="PBEBTradeCFTCClearingExemptIndicator1PartyId"/>
+<xs:element name="PBEBTradeCFTCClearingExemptIndicator1Value"/>
+<xs:element name="PBEBTradeCFTCClearingExemptIndicator2PartyId"/>
+<xs:element name="PBEBTradeCFTCClearingExemptIndicator2Value"/>
+<xs:element name="PBEBTradeCFTCInterAffiliateExemption" minOccurs="0"/>
+<xs:element name="PBClientTradeCFTCMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeJFSAMandatoryClearingIndicator" minOccurs="0"/>
+<xs:element name="PBClientTradeCFTCClearingExemptIndicator1PartyId"/>
+<xs:element name="PBClientTradeCFTCClearingExemptIndicator1Value"/>
+<xs:element name="PBClientTradeCFTCClearingExemptIndicator2PartyId"/>
+<xs:element name="PBClientTradeCFTCClearingExemptIndicator2Value"/>
+<xs:element name="PBClientTradeCFTCInterAffiliateExemption" minOccurs="0"/>
+<xs:element name="MASMandatoryClearingIndicator"/>
+<xs:element name="PBEBTradeMASMandatoryClearingIndicator"/>
+<xs:element name="PBClientTradeMASMandatoryClearingIndicator"/>
+<xs:element name="ClearingHouseId"/>
+<xs:element name="IntendedClearingHouse"/>
+<xs:element name="TraderId"/>
+<xs:element name="TraderId_2"/>
+<xs:element name="ExecutingBroker" minOccurs="0"/>
+<xs:element name="ClearingClient" minOccurs="0"/>
+<xs:element name="ClientClearingBroker" minOccurs="0"/>
+<xs:element name="EBClearingBroker" minOccurs="0"/>
+<xs:element name="PartyAClearingBroker" minOccurs="0"/>
+<xs:element name="PartyBClearingBroker" minOccurs="0"/>
+<xs:element name="DisplayPartyLE_Party"/>
+<xs:element name="DisplayPartyLE_Value"/>
+<xs:element name="ClearingNettingParty"/>
+<xs:element name="ClearingNettingString"/>
+<xs:element name="ClearingNettingParty_2"/>
+<xs:element name="ClearingNettingString_2"/>
+<xs:element name="CreditAcceptanceParty" minOccurs="0"/>
+<xs:element name="CreditAcceptanceIssuer" minOccurs="0"/>
+<xs:element name="CreditAcceptanceToken" minOccurs="0"/>
+<xs:element name="CreditAcceptanceParty_2" minOccurs="0"/>
+<xs:element name="CreditAcceptanceIssuer_2" minOccurs="0"/>
+<xs:element name="CreditAcceptanceToken_2" minOccurs="0"/>
+<xs:element name="CommodityReferencePrice"/>
+<xs:element name="CommodityReferencePrice_2"/>
+<xs:element name="CommonPricing"/>
+<xs:element name="DeliveryDates"/>
+<xs:element name="DeliveryDates_2"/>
+<xs:element name="DeliveryLocation"/>
+<xs:element name="FloatCalculationFrequency"/>
+<xs:element name="FloatCalculationFrequency_2"/>
+<xs:element name="PhysicalCommodity"/>
+<xs:element name="PhysicalElectricityProduct"/>
+<xs:element name="PhysicalElectricityForceMajeure"/>
+<xs:element name="PhysicalGasDeliveryType"/>
+<xs:element name="ForwardUnderlyer"/>
+<xs:element name="FuturesRollConvention"/>
+<xs:element name="FuturesRollConvention_2"/>
+<xs:element name="LoadShape"/>
+<xs:element name="LoadShape_2"/>
+<xs:element name="NotionalLots"/>
+<xs:element name="NotionalQuantity"/>
+<xs:element name="NotionalQuantity_2"/>
+<xs:element name="PricingDayType"/>
+<xs:element name="PricingDayType_2"/>
+<xs:element name="PricingFrequency"/>
+<xs:element name="PricingFrequency_2"/>
+<xs:element name="PricingHolidayCentres"/>
+<xs:element name="PricingHolidayCentres_2"/>
+<xs:element name="PricingLagInterval"/>
+<xs:element name="PricingLagInterval_2"/>
+<xs:element name="PricingLagSkipInterval"/>
+<xs:element name="PricingLagSkipInterval_2"/>
+<xs:element name="PricingRange"/>
+<xs:element name="PricingRange_2"/>
+<xs:element name="SettlementDaysConvention"/>
+<xs:element name="SettlementDaysType"/>
+<xs:element name="SpecifiedPrice"/>
+<xs:element name="SpecifiedPrice_2"/>
+<xs:element name="UnitFrequency"/>
+<xs:element name="Units"/>
+<xs:element name="Units_2"/>
+<xs:element name="ValueDate"/>
+<xs:element name="ModifiedEquityDelivery"/>
+<xs:element name="SettledEntityMatrixSource"/>
+<xs:element name="SettledEntityMatrixDate"/>
+<xs:element name="AdditionalTerms"/>
+<xs:element name="Rule15A-6"/>
+<xs:group ref="DFData"/>
+<xs:group ref="JFSAData"/>
+<xs:group ref="ESMAData"/>
+<xs:group ref="FCAData"/>
+<xs:group ref="CAData"/>
+<xs:group ref="HKMAData"/>
+<xs:group ref="ASICData"/>
+<xs:group ref="MASData"/>
+<xs:group ref="MIData"/>
+<xs:element name="ExecTraderA" minOccurs="0"/>
+<xs:element name="ExecTraderB" minOccurs="0"/>
+<xs:element name="ExecTraderLocationA"  minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ExecTraderLocationB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ExecTraderSideAID" minOccurs="0"/>
+<xs:element name="ExecTraderSideBID" minOccurs="0"/>
+<xs:element name="SalesTraderA" minOccurs="0"/>
+<xs:element name="SalesTraderB" minOccurs="0"/>
+<xs:element name="SalesTraderLocationA" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SalesTraderLocationB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SalesTraderSideAID" minOccurs="0"/>
+<xs:element name="SalesTraderSideBID" minOccurs="0"/>
+<xs:element name="DeskLocationA" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DeskLocationB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DeskLocationSideAID" minOccurs="0"/>
+<xs:element name="DeskLocationSideBID" minOccurs="0"/>
+<xs:element name="CounterpartyCountryA" minOccurs="0"/>
+<xs:element name="CounterpartyCountryB" minOccurs="0"/>
+<xs:element name="InvestFirmNameA" minOccurs="0"/>
+<xs:element name="InvestFirmNameB" minOccurs="0"/>
+<xs:element name="InvestFirmLocA"  minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="InvestFirmLocB" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Country" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="LeiValueA" minOccurs="0"/>
+<xs:element name="LeiValueB" minOccurs="0"/>
+<xs:element name="UniqueTradeIdentifier" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party"/>
+<xs:element name="Jurisdiction"/>
+<xs:element name="Context"/>
+<xs:element name="RelationshipType"/>
+<xs:element name="UTINamespace"/>
+<xs:element name="UTI"/>
+<xs:element name="UTINamespacePrefix"/>
+<xs:element name="IntentToBlankUTINamespace"/>
+<xs:element name="IntentToBlankUTI"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MidMarketPriceType" minOccurs="0"/>
+<xs:element name="MidMarketPriceValue" minOccurs="0"/>
+<xs:element name="MidMarketPriceCurrency" minOccurs="0"/>
+<xs:element name="IntentToBlankMidMarketCurrency" minOccurs="0"/>
+<xs:element name="IntentToBlankMidMarketPrice" minOccurs="0"/>
+<xs:element name="EffectiveDate" minOccurs="0"/>
+<xs:element name="TerminationDate" minOccurs="0"/>
+<xs:element name="DFEmbeddedOptionType" minOccurs="0" maxOccurs="1"/>
+<xs:element name="GenProdPrimaryAssetClass" minOccurs="0"/>
+<xs:element name="GenProdSecondaryAssetClass" minOccurs="0"/>
+<xs:element name="ProductId" minOccurs="0"/>
+<xs:element name="OptionDirectionA" minOccurs="0"/>
+<xs:element name="OptionPremium" minOccurs="0"/>
+<xs:element name="OptionPremiumCurrency" minOccurs="0"/>
+<xs:element name="OptionStrike" minOccurs="0"/>
+<xs:element name="OptionStrikeType" minOccurs="0"/>
+<xs:element name="OptionStrikeCurrency" minOccurs="0"/>
+<xs:element name="FirstExerciseDate" minOccurs="0"/>
+<xs:element name="FloatingDayCountConvention" minOccurs="0"/>
+<xs:element name="DayCountConvention" minOccurs="0"/>
+<xs:element name="GenProdUnderlyer" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="UnderlyerType"/>
+<xs:element name="UnderlyerDescription"/>
+<xs:element name="UnderlyerDirectionA"/>
+<xs:element name="UnderlyerFixedRate"/>
+<xs:element name="UnderlyerIDCode"/>
+<xs:element name="UnderlyerIDType"/>
+<xs:element name="UnderlyerReferenceCurrency"/>
+<xs:element name="UnderlyerFXCurrency"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="GenProdNotional" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="NotionalCurrency"/>
+<xs:element name="NotionalUnit"/>
+<xs:element name="Notional"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ResetFrequency" minOccurs="0"/>
+<xs:element name="PaymentFrequency" minOccurs="0"/>
+<xs:element name="DayCountFraction" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Schema"/>
+<xs:element name="Fraction"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyAOrderDetails" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="TypeOfOrder"/>
+<xs:element name="TotalConsideration"/>
+<xs:element name="RateOfExchange"/>
+<xs:element name="ClientCounterparty"/>
+<xs:element name="TotalCommissionAndExpenses"/>
+<xs:element name="ClientSettlementResponsibilities"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyBOrderDetails" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="TypeOfOrder"/>
+<xs:element name="TotalConsideration"/>
+<xs:element name="RateOfExchange"/>
+<xs:element name="ClientCounterparty"/>
+<xs:element name="TotalCommissionAndExpenses"/>
+<xs:element name="ClientSettlementResponsibilities"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyAPackageDetails" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PackageId"/>
+<xs:element name="PackageSize"/>
+<xs:element name="RegReportAsPackage"/>
+<xs:element name="PackagePriceType"/>
+<xs:element name="PackagePriceValue"/>
+<xs:element name="PackagePriceNotation"/>
+<xs:element name="PackagePriceCurrency"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="PartyBPackageDetails" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PackageId"/>
+<xs:element name="PackageSize"/>
+<xs:element name="RegReportAsPackage"/>
+<xs:element name="PackagePriceType"/>
+<xs:element name="PackagePriceValue"/>
+<xs:element name="PackagePriceNotation"/>
+<xs:element name="PackagePriceCurrency"/>
+</xs:sequence>
+<xs:attribute name="id" type="xs:ID" use="optional"/>
+</xs:complexType>
+</xs:element>
+<xs:element name="AutoProcessing" minOccurs="0"/>
+<xs:element name="AnonymousTrade" minOccurs="0"/>
+<xs:element name="GCOffsettingID" minOccurs="0"/>
+<xs:element name="CompressionType" minOccurs="0"/>
+<xs:element name="GCExecutionMethodParty_1" minOccurs="0"/>
+<xs:element name="GCExecutionMethodToken_1" minOccurs="0"/>
+<xs:element name="GCExecutionMethodParty_2" minOccurs="0"/>
+<xs:element name="GCExecutionMethodToken_2" minOccurs="0"/>
+<xs:element name="OTVConfirmation" minOccurs="0"/>
+<xs:element name="IntroducingBroker" minOccurs="0"/>
+<xs:element name="IntroducingBroker_2" minOccurs="0"/>
+<xs:element name="OriginatingEvent" minOccurs="0"/>
+<xs:element name="PartyClearingDetails" minOccurs="0" maxOccurs="2">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party"/>
+<xs:element name="ClearingStatus" minOccurs="0"/>
+<xs:element name="ClearingHouseTradeID" minOccurs="0"/>
+<xs:element name="ClearingHouseUpfrontFeeSettlementDate" minOccurs="0"/>
+<xs:element name="ClearingHousePreferredISIN" minOccurs="0"/>
+<xs:element name="ClearedTimestamp" minOccurs="0"/>
+<xs:element name="ClearedUSINamespace" minOccurs="0"/>
+<xs:element name="ClearedUSI" minOccurs="0"/>
+<xs:element name="ClearedUTINamespace" minOccurs="0"/>
+<xs:element name="ClearedUTI" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="PackageIdentifierNamespace" minOccurs="0"/>
+<xs:element name="PackageIdentifierId" minOccurs="0"/>
+<xs:element name="PackageSize" minOccurs="0"/>
+<xs:element name="PackageCreditParty" minOccurs="0"/>
+<xs:element name="PackageCreditIssuer" minOccurs="0"/>
+<xs:element name="PackageCreditToken" minOccurs="0"/>
+<xs:element name="PackageCreditParty_2" minOccurs="0"/>
+<xs:element name="PackageCreditIssuer_2" minOccurs="0"/>
+<xs:element name="PackageCreditToken_2" minOccurs="0"/>
+<xs:element name="Tenor" minOccurs="0"/>
+<xs:element name="InterestLegDrivenIndicator" minOccurs="0"/>
+<xs:element name="EquityFrontStub" minOccurs="0"/>
+<xs:element name="EquityEndStub" minOccurs="0"/>
+<xs:element name="InterestFrontStub" minOccurs="0"/>
+<xs:element name="InterestEndStub" minOccurs="0"/>
+<xs:element name="FixedRateIndicator" minOccurs="0"/>
+<xs:element name="DividendPaymentDates" minOccurs="0"/>
+<xs:element name="DividendPaymentOffset" minOccurs="0"/>
+<xs:element name="EswDividendAmount" minOccurs="0"/>
+<xs:element name="EswDividendPeriod" minOccurs="0"/>
+<xs:element name="DividendPercentage" minOccurs="0"/>
+<xs:element name="DividendReinvestment" minOccurs="0"/>
+<xs:element name="EswDeclaredCashDividendPercentage" minOccurs="0"/>
+<xs:element name="EswDeclaredCashEquivalentDividendPercentage" minOccurs="0"/>
+<xs:element name="EswDividendSettlementCurrency" minOccurs="0"/>
+<xs:element name="EswNonCashDividendTreatment" minOccurs="0"/>
+<xs:element name="EswDividendComposition" minOccurs="0"/>
+<xs:element name="EswSpecialDividends" minOccurs="0"/>
+<xs:element name="EswDividendValuationOffset" minOccurs="0"/>
+<xs:element name="EswDividendValuationFrequency" minOccurs="0"/>
+<xs:element name="EswDividendInitialValuation" minOccurs="0"/>
+<xs:element name="EswDividendFinalValuation" minOccurs="0"/>
+<xs:element name="EswDividendValuationDay" minOccurs="0"/>
+<xs:element name="EswDividendValuationCustomDatesInterim" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswDividendValuationCustomDateInterim" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswDividendValuationCustomDateFinal" minOccurs="0"/>
+<xs:element name="EquityHolidayCentres" minOccurs="0"/>
+<xs:element name="OtherValuationBusinessCenters" minOccurs="0"/>
+<xs:element name="EswFuturesPriceValuation" minOccurs="0"/>
+<xs:element name="EswFpvFinalPriceElectionFallback" minOccurs="0"/>
+<xs:element name="EswDesignatedMaturity" minOccurs="0"/>
+<xs:element name="EswEquityValConvention" minOccurs="0"/>
+<xs:element name="EswInterestFloatConvention" minOccurs="0"/>
+<xs:element name="EswInterestFloatDayBasis" minOccurs="0"/>
+<xs:element name="EswInterestFloatingRateIndex" minOccurs="0"/>
+<xs:element name="EswInterestFixedRate" minOccurs="0"/>
+<xs:element name="EswInterestSpreadOverIndex" minOccurs="0"/>
+<xs:element name="EswInterestSpreadOverIndexStep" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswInterestSpreadOverIndexStepValue" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="EswInterestSpreadOverIndexStepDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswLocalJurisdiction" minOccurs="0"/>
+<xs:element name="EswReferencePriceSource" minOccurs="0"/>
+<xs:element name="EswReferencePricePage" minOccurs="0"/>
+<xs:element name="EswReferencePriceTime" minOccurs="0"/>
+<xs:element name="EswReferencePriceCity" minOccurs="0"/>
+<xs:element name="EswNotionalAmount" minOccurs="0"/>
+<xs:element name="EswNotionalCurrency" minOccurs="0"/>
+<xs:element name="EswOpenUnits" minOccurs="0"/>
+<xs:element name="EswInitialUnits" minOccurs="0"/>
+<xs:element name="FeeIn" minOccurs="0"/>
+<xs:element name="FeeInOutIndicator" minOccurs="0"/>
+<xs:element name="FeeOut" minOccurs="0"/>
+<xs:element name="FinalPriceDefaultElection" minOccurs="0"/>
+<xs:element name="FinalValuationDate" minOccurs="0"/>
+<xs:element name="FullyFundedAmount" minOccurs="0"/>
+<xs:element name="FullyFundedIndicator" minOccurs="0"/>
+<xs:element name="FullyFundedFixedRate" minOccurs="0"/>
+<xs:element name="FullyFundedDayCountFract" minOccurs="0"/>
+<xs:element name="InitialPrice" minOccurs="0"/>
+<xs:element name="InitialPriceElection" minOccurs="0"/>
+<xs:element name="EquityNotionalReset" minOccurs="0"/>
+<xs:element name="EswReferenceInitialPrice" minOccurs="0"/>
+<xs:element name="EswReferenceFXRate" minOccurs="0"/>
+<xs:element name="PaymentDateOffset" minOccurs="0"/>
+<xs:element name="EswPaymentHolidayCentres" minOccurs="0"/>
+<xs:element name="ReturnType" minOccurs="0"/>
+<xs:element name="Synthetic" minOccurs="0"/>
+<xs:element name="ValuationDay" minOccurs="0"/>
+<xs:element name="PaymentDay" minOccurs="0"/>
+<xs:element name="ValuationFrequency" minOccurs="0"/>
+<xs:element name="ValuationStartDate" minOccurs="0"/>
+<xs:element name="EswSchedulingMethod" minOccurs="0"/>
+<xs:element name="EswValuationDates" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswUnadjustedDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswInterestLegPaymentDates" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswUnadjustedDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswEquityLegPaymentDates" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswUnadjustedDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswCompoundingDates" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswUnadjustedDate" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswCompoundingMethod" minOccurs="0"/>
+<xs:element name="EswCompoundingFrequency" minOccurs="0"/>
+<xs:element name="EswCalculationMethod" minOccurs="0"/>
+<xs:element name="EswApplicableBusinessDays" minOccurs="0"/>
+<xs:element name="EswObservationMethod" minOccurs="0"/>
+<xs:element name="EswAdditionalBusinessDays" minOccurs="0"/>
+<xs:element name="EswOffsetDays" minOccurs="0"/>
+<xs:element name="EswObservationPeriod" minOccurs="0"/>
+<xs:element name="EswDailyCapRate" minOccurs="0"/>
+<xs:element name="EswDailyFloorRate" minOccurs="0"/>
+<xs:element name="EswInterpolationMethod" minOccurs="0"/>
+<xs:element name="EswInterpolationPeriod" minOccurs="0"/>
+<xs:element name="EswPaymentDaysOffset" minOccurs="0"/>
+<xs:element name="EswAveragingDatesIndicator" minOccurs="0"/>
+<xs:element name="EswADTVIndicator" minOccurs="0"/>
+<xs:element name="EswLimitationPercentage" minOccurs="0"/>
+<xs:element name="EswLimitationPeriod" minOccurs="0"/>
+<xs:element name="EswStockLoanRateIndicator" minOccurs="0"/>
+<xs:element name="EswMaximumStockLoanRate" minOccurs="0"/>
+<xs:element name="EswInitialStockLoanRate" minOccurs="0"/>
+<xs:element name="EswOptionalEarlyTermination" minOccurs="0"/>
+<xs:element name="EswBreakFundingRecovery" minOccurs="0"/>
+<xs:element name="EswBreakFeeElection" minOccurs="0"/>
+<xs:element name="EswBreakFeeRate" minOccurs="0"/>
+<xs:element name="EswFinalPriceFee" minOccurs="0"/>
+<xs:element name="EswFinalPriceFeeAmount" minOccurs="0"/>
+<xs:element name="EswFinalPriceFeeCurrency" minOccurs="0"/>
+<xs:element name="EswRightToIncrease" minOccurs="0"/>
+<xs:element name="EswGrossPrice" minOccurs="0"/>
+<xs:element name="EswApplicableRegion" minOccurs="0"/>
+<xs:element name="EswDividendComponent" minOccurs="0" maxOccurs="10">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DividendPercentageComponentShare" minOccurs="0"/>
+<xs:element name="DividendPercentageComponent" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="EswEarlyFinalValuationDateElection" minOccurs="0"/>
+<xs:element name="EswEarlyTerminationElectingParty" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="PartyOccurrence" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="NoticePeriodPtyA" minOccurs="0"/>
+<xs:element name="NoticePeriodPtyB" minOccurs="0"/>
+<xs:element name="EswInsolvencyFiling" minOccurs="0"/>
+<xs:element name="EswLossOfStockBorrow" minOccurs="0"/>
+<xs:element name="EswIncreasedCostOfStockBorrow" minOccurs="0"/>
+<xs:element name="EswBulletCompoundingSpread" minOccurs="0"/>
+<xs:element name="EswAdditionalDisruptionEventIndicator" minOccurs="0"/>
+<xs:element name="EswOverrideNotionalCalculation" minOccurs="0"/>
+<xs:element name="HedgingParty" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="HedgingPartyOccurrence" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DeterminingParty" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="DeterminingPartyOccurrence" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="MultipleExchangeIndexAnnex" minOccurs="0"/>
+<xs:element name="ComponentSecurityIndexAnnex" minOccurs="0"/>
+<xs:element name="EswSpecifiedExchange" minOccurs="0"/>
+<xs:element name="sw2021ISDADefs" minOccurs="0" maxOccurs="1"/>
+<xs:element name="EswChinaConnectFlag" minOccurs="0"/>
+<xs:element name="EswChinaConnect" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="EswShareDisqualification" minOccurs="0"/>
+<xs:element name="EswServiceTermination" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="DirectionComboLEA" minOccurs="0"/>
+<xs:element name="DurationType" minOccurs="0"/>
+<xs:element name="RateCalcType" minOccurs="0"/>
+<xs:element name="SecurityType" minOccurs="0"/>
+<xs:element name="OpenRepoRate" minOccurs="0"/>
+<xs:element name="OpenRepoSpread" minOccurs="0"/>
+<xs:element name="OpenCashAmount" minOccurs="0"/>
+<xs:element name="OpenDeliveryMethod" minOccurs="0"/>
+<xs:element name="OpenSecurityNominal" minOccurs="0"/>
+<xs:element name="OpenSecurityQuantity" minOccurs="0"/>
+<xs:element name="CloseCashAmount" minOccurs="0"/>
+<xs:element name="CloseDeliveryMethod" minOccurs="0"/>
+<xs:element name="CloseSecurityNominal" minOccurs="0"/>
+<xs:element name="CloseSecurityQuantity" minOccurs="0"/>
+<xs:element name="DayCountBasis" minOccurs="0"/>
+<xs:element name="Haircut" minOccurs="0"/>
+<xs:element name="InitialMargin" minOccurs="0"/>
+<xs:element name="SecurityIDType" minOccurs="0"/>
+<xs:element name="SecurityID" minOccurs="0"/>
+<xs:element name="SecurityDescription" minOccurs="0"/>
+<xs:element name="SecurityCurrency" minOccurs="0"/>
+<xs:element name="ExtensionStyle" minOccurs="0"/>
+<xs:element name="ExtensionPeriod" minOccurs="0"/>
+<xs:element name="ExtensionPeriodUnits" minOccurs="0"/>
+<xs:element name="CallingParty" minOccurs="0"/>
+<xs:element name="CallDate" minOccurs="0"/>
+<xs:element name="CallNoticePeriod" minOccurs="0"/>
+</xs:sequence>
+<xs:attribute name="version" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:NMTOKEN">
+<xs:enumeration value="5-11"/>
+<xs:enumeration value="5-3"/>
+<xs:enumeration value="4-0"/>
+<xs:enumeration value="4-1"/>
+<xs:enumeration value="4-2"/>
+<xs:enumeration value="4-3"/>
+<xs:enumeration value="4-4"/>
+<xs:enumeration value="4-5"/>
+<xs:enumeration value="4-6"/>
+<xs:enumeration value="4-7"/>
+<xs:enumeration value="3-0"/>
+<xs:enumeration value="4-9"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+</xs:schema>

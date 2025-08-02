@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2009/FpML-4-7" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2009/FpML-4-7" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_BreakCalculationMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of Cap/Floor.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="ISDA Standard Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by ISDA IRD working group in 2006. Calculated as calendar dates from trade date as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Adjust To Coupon Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as trade date plus spot days and then shifting to the first payment date for fixed and floating legs prior or on the date indicated by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Straight Calendar Dates">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The method agreed by Swapswire participants at the inception of the service. Calculated as calendar dates from trade date plus spot days as implied by the frequency tenor</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_MasterAgreementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AFB/FBF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Francaise des Banques.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DERV">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag fur Finanztermingeschafte (also known as the German master).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ISDA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_BusinessDayConventionEnum">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The convention for adjusting any relevant date if it would otherwise fall on a day that is not a valid business day. Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="FOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="FRN">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">Per 2000 ISDA Definitions, Section 4.11. FRN Convention; Eurodollar Convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MODFOLLOWING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first following day that is a business day unless that day falls in the next calendar month, in which case that date will be the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="PRECEDING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business day will be adjusted to the first preceding day that is a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MODPRECEDING">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the first preceding day that is a business day unless that day falls in the previous calendar month, in which case that date will be the first following day that us a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NEAREST">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The non-business date will be adjusted to the nearest day that is a business day - i.e. if the non-business day falls on any day other than a Sunday or a Monday, it will be the first preceding day that is a business day, and will be the first following business day if it falls on a Sunday or a Monday.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NONE">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date will not be adjusted if it falls on a day that is not a business day.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="NotApplicable">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions are defined elsewhere, so it is not required to specify them here.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="AsSpecifiedInMasterConfirmation">
+<xsd:annotation>
+<xsd:documentation source="http://www.FpML.org" xml:lang="en">The date adjustments conventions specified in the Master Confirmation applies.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

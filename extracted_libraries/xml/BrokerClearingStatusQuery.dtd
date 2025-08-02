@@ -1,0 +1,10 @@
+<!ELEMENT BrokerClearingStatusQuery (StartTimestamp?,
+EndTimestamp?,
+tradeId?,
+EndTradeId?,
+BrokerTradeId?)>
+<!ELEMENT StartTimestamp (#PCDATA)>
+<!ELEMENT EndTimestamp (#PCDATA)>
+<!ELEMENT tradeId (#PCDATA)>
+<!ELEMENT EndTradeId (#PCDATA)>
+<!ELEMENT BrokerTradeId (#PCDATA)>

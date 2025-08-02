@@ -1,0 +1,176 @@
+<!ELEMENT SinkQuery (ActivityStartDate?,
+ActivityEndDate?,
+NonDeliverable?,
+ClientClearing?,
+TradeEndDateStart?,
+TradeEndDateEnd?,
+ExpiryOptionStartDate?,
+ExpiryOptionEndDate?,
+ContractState?,
+LegalEntity?,
+CounterpartyLE?,
+AllVersions?,
+tradeId?,
+EndTradeId?,
+(ExtendedInfo|SelectExtendedInfo)?,
+activityType?,
+ResultBatchSize?,
+ResultBatchCount?,
+TradeIdType?,
+USI?,
+USINamespace?,
+PriorUSI?,
+PriorUSINamespace?,
+NetUSI?,
+NetUSINamespace?,
+BlockUSI?,
+BlockUSINamespace?,
+AssociatedTradeRelationship?,
+PackageId?,
+PackageNamespace?,
+ESMAFrontloading?,
+PricedToClearCCP?,
+SendToCLSIE?,
+SendToCLSFE?,
+MWMsgIdIE?,
+MWMsgIdFE?,
+SettlementStatusIE?,
+SettlementStatusFE?,
+swObligationToClear?,
+swOTVConfirmation?,
+swAutoProcessing?,
+swCancellationReason?,
+NettingBatchId?,
+NettingSubCategory?,
+NettingActivityType?,
+ProductType?,
+UTIInvalidTrade?,
+GateCheck?,
+swSettlementAgency?,
+swSettlementAgencyModel?,
+swSettlementAgencyStatus?,
+swSettlementAgencyTradeId?,
+swSettlementAgencyOffsetTradeId?,
+swPrivateData?,
+DeskLocations?,
+ExecutingTrader?,
+TraderLocations?,
+SalesTrader?,
+SalesLocations?,
+Knocked?,
+ClearingHouseId?,
+FixingDateStart?,
+FixingDateEnd?,
+TransactionID?,
+ISIN?,
+CFI?,
+ESMAUTIInvalidTrade?,
+FCAUTIInvalidTrade?,
+ReplacementTradeId?,
+ReplacementReason?)>
+<!ELEMENT swPrivateData (swPrivateProcessState?,
+swPrivateBookingState?,
+swPrivateTradeId?,
+swPrivateDealSinkConfirmation?,
+swBatchId?,
+swPrivatePendingPTI?)>
+<!ELEMENT ActivityStartDate (#PCDATA)>
+<!ELEMENT ActivityEndDate (#PCDATA)>
+<!ELEMENT NonDeliverable (#PCDATA)>
+<!ELEMENT ClientClearing (#PCDATA)>
+<!ELEMENT TradeEndDateStart (#PCDATA)>
+<!ELEMENT TradeEndDateEnd (#PCDATA)>
+<!ELEMENT ExpiryOptionStartDate (#PCDATA)>
+<!ELEMENT ExpiryOptionEndDate (#PCDATA)>
+<!ELEMENT ContractState (#PCDATA)>
+<!ELEMENT LegalEntity (#PCDATA)>
+<!ELEMENT CounterpartyLE (#PCDATA)>
+<!ELEMENT AllVersions (#PCDATA)>
+<!ELEMENT ExtendedInfo (#PCDATA)>
+<!ELEMENT SelectExtendedInfo (Column+)>
+<!ELEMENT Column (#PCDATA)>
+<!ELEMENT activityType (#PCDATA)>
+<!ELEMENT tradeId (#PCDATA)>
+<!ELEMENT EndTradeId (#PCDATA)>
+<!ELEMENT PackageId (#PCDATA)>
+<!ELEMENT PackageNamespace (#PCDATA)>
+<!ELEMENT SendToCLSIE (#PCDATA)>
+<!ELEMENT SendToCLSFE (#PCDATA)>
+<!ELEMENT MWMsgIdIE (#PCDATA)>
+<!ELEMENT MWMsgIdFE (#PCDATA)>
+<!ELEMENT SettlementStatusIE (#PCDATA)>
+<!ELEMENT SettlementStatusFE (#PCDATA)>
+<!ELEMENT ResultBatchCount (#PCDATA)>
+<!ELEMENT ResultBatchSize (#PCDATA)>
+<!ELEMENT TradeIdType (#PCDATA)>
+<!ELEMENT swObligationToClear (#PCDATA)>
+<!ELEMENT swPrivateTradeId (#PCDATA)>
+<!ELEMENT swPrivateProcessState (#PCDATA)>
+<!ELEMENT swPrivateBookingState (#PCDATA)>
+<!ELEMENT swPrivateDealSinkConfirmation (#PCDATA)>
+<!ELEMENT swBatchId (#PCDATA)>
+<!ELEMENT swPrivatePendingPTI (#PCDATA)>
+<!ELEMENT USI (#PCDATA)>
+<!ATTLIST USI match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT USINamespace (#PCDATA)>
+<!ATTLIST USINamespace match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT PriorUSI (#PCDATA)>
+<!ATTLIST PriorUSI match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT PriorUSINamespace (#PCDATA)>
+<!ATTLIST PriorUSINamespace match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT NetUSI (#PCDATA)>
+<!ATTLIST NetUSI match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT NetUSINamespace (#PCDATA)>
+<!ATTLIST NetUSINamespace match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT BlockUSI (#PCDATA)>
+<!ATTLIST BlockUSI match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT BlockUSINamespace (#PCDATA)>
+<!ATTLIST BlockUSINamespace match (is|prefix|suffix|contains|oneof) "is">
+<!ELEMENT swOTVConfirmation (#PCDATA)>
+<!ELEMENT swAutoProcessing (#PCDATA)>
+<!ELEMENT swCancellationReason (#PCDATA)>
+<!ELEMENT NettingBatchId (#PCDATA)>
+<!ELEMENT NettingSubCategory (#PCDATA)>
+<!ELEMENT NettingActivityType (#PCDATA)>
+<!ELEMENT UTIInvalidTrade (#PCDATA)>
+<!ELEMENT ProductType (#PCDATA)>
+<!ELEMENT AssociatedTradeRelationship (#PCDATA)>
+<!ELEMENT ESMAFrontloading (#PCDATA)>
+<!ATTLIST ESMAFrontloading
+type (Category1 | Category2 | NotApplicable) #IMPLIED
+>
+<!ELEMENT PricedToClearCCP (#PCDATA)>
+<!ELEMENT DeskLocations (DeskLocation,
+DeskLocationSearchType)>
+<!ELEMENT DeskLocation (#PCDATA)>
+<!ELEMENT DeskLocationSearchType (#PCDATA)>
+<!ELEMENT ExecutingTrader (#PCDATA)>
+<!ELEMENT TraderLocations (TraderLocation,
+TraderLocationSearchType)>
+<!ELEMENT TraderLocation (#PCDATA)>
+<!ELEMENT TraderLocationSearchType (#PCDATA)>
+<!ELEMENT SalesTrader (#PCDATA)>
+<!ELEMENT SalesLocations (SalesLocation,
+SalesLocationSearchType)>
+<!ELEMENT SalesLocation (#PCDATA)>
+<!ELEMENT SalesLocationSearchType (#PCDATA)>
+<!ELEMENT GateCheck (#PCDATA)>
+<!ELEMENT Knocked (#PCDATA)>
+<!ELEMENT ClearingHouseId (#PCDATA)>
+<!ELEMENT FixingDateStart (#PCDATA)>
+<!ELEMENT FixingDateEnd (#PCDATA)>
+<!ELEMENT TransactionID (#PCDATA)>
+<!ELEMENT ISIN (#PCDATA)>
+<!ELEMENT CFI (#PCDATA)>
+<!ELEMENT swSettlementAgency (#PCDATA)>
+<!ELEMENT swSettlementAgencyModel (#PCDATA)>
+<!ELEMENT swSettlementAgencyStatus (#PCDATA)>
+<!ELEMENT swSettlementAgencyTradeId (#PCDATA)>
+<!ELEMENT swSettlementAgencyOffsetTradeId (#PCDATA)>
+<!ELEMENT ESMAUTIInvalidTrade (#PCDATA)>
+<!ELEMENT FCAUTIInvalidTrade (#PCDATA)>
+<!ELEMENT ReplacementTradeId (#PCDATA)>
+<!ELEMENT ReplacementReason (#PCDATA)>
+<!ATTLIST ReplacementReason
+type (IndexTransition) #IMPLIED
+>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SWB_CdProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The product type is the top level categorization for MarkitWire templates.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="CDS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS Matrix">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap confirmed under the Matrix.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS Index">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap index.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS Index Swaption">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An option on a credit default swap index.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS Master">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap confirmed under Master Confirmation.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS on MBS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap confirmed under the ISDA single name Mortgage Backed Security (MBS) with Pay-As-You-Go or Physical Settlement</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="CDS on Loans">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A credit default swap confirmed under one of the ISDA single name loans confirmations</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_CdsProductSubTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The product sub type is the second level categorization for SwapsWire templates.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="CMBS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A North American CDS on Commercial MBS</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="RMBS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A North American CDS on Residential MBS</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ECMBS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A European CDS on Commercial MBS</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ERMBS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A European CDS on Residential MBS</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="LCDS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Syndicated Secured Loan CDS intended for the North American market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Bullet LCDS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Bullet syndicated secured loan standard CDS intended for the North American market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ELCDS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">CDS on Leveraged Loans intended for the European market</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.markitserv.com/2010/PublishingXML-1-0" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" version="SW_20_1_460930" targetNamespace="http://www.markitserv.com/2010/PublishingXML-1-0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:import namespace="http://www.fpml.org/2010/FpML-4-9" schemaLocation="swml-cd-main-4-9.xsd"/>
+<xsd:element name="PublishingXML" type="SW_PublishingXML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in a publishing XML document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="SW_PublishingXML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the structured details of a publishing trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swHeader" type="fpml:SW_Header">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A trade reference identifier allocated by MarkitWire.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStructuredTradeDetails" type="fpml:SW_CdsStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element ref="swPrivateData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="swPrivateData" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Data which is private to an individual party. The private data consists of a mixture of process state information and private data entered through the SwapsWire Trader application, e.g. trading book identifier. Note that the element will not be present in SWML extracted via the Dealer API prior to that side picking up the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swmlPrivateData" substitutionGroup="swPrivateData">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:any processContents="skip" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>

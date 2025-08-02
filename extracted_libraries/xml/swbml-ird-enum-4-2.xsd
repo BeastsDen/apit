@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SWB_BondIdEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A code for identification of underlying bond instruments.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="USD.OTR.4W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 4-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.8W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 8-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.13W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 13-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.17W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 17-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.26W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 26-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.52W">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's or "on-the-run", nominal 52-week note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.2Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's most recently auctioned, or "on-the-run", nominal 2-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.3Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 3-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.5Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 5-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.7Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 7-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.10Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 10-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.20Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 20-year note.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="USD.OTR.30Y">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The US Treasury's on-the-run nominal 30-year bond.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_IrdProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="CapFloor">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An interest rate cap or floor.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="FRA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A forward rate agreement.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="OIS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A self-compounding overnight interest rate swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="SingleCurrencyInterestRateSwap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A single currency interest rate swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Swaption">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A swap option.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ZC Inflation Swap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Zero Coupon inflation swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Single Currency Basis Swap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Single Currency Basis Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cross Currency Basis Swap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A Cross Currency Basis Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cross Currency IRS">
+<xsd:annotation>
+<xsd:documentation xml:lang="en"> A Cross Currency IRS.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Fixed Fixed Swap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Fixed Fixed Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_PriceTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A classification of the format used to express the bond price and hence how the price value should be interpreted.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="D5">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/100000th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}(.[0-9]{1,5})? i.e. 1 to 3 decimal digits to the left of a period decimal separator and 0 to 5 decimal digits to the right.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="F128">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/128th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}-(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31)[2+6]? i.e. 1 to 3 decimal digits to the left of a '-' fractional separator and 2 digits to the right in the decimal range 00-31 (representing 32nds) followed by an optional '2', '+' or '6' character.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="F256">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Price is expressed as a percentage of par value with price quotes allowable down to 1/256th of 1% of par value. The allowable format for this type can be described formally by the following regular expression: [0-9]{1,3}-(00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31)[13457]? i.e. 1 to 3 decimal digits to the left of a '-' fractional separator and 2 digits to the right in the decimal range 00-31 (representing 32nds) followed by an optional '0', '1','3', '4', '5' or '7' character.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_StubPositionEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of a stub position.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="End">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An end (back) stub.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Start">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A start (front) stub.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_StubLengthEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of a stub length.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Short">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A short stub.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Long">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A long stub.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_CashSettlementMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of cash settlement method used for the determination of the applicable cash settlement amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Cash Price">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA defined cash settlement method of Cash Price.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cash Price - Alternate Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA defined cash settlement method of Cash Price - Alternate Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Zero Coupon Yield - Adjusted">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA defined cash settlement method of Zero Coupon Yield - Adjusted.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Cross Currency Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The ISDA defined cash settlement method of Cross Currency Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Collateralized Cash Price"/>
+<xsd:enumeration value="Mid-market Valuation (Indicative Quotations)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined cash settlement method used for the determination of the applicable cash settlement amount. The method is defined in the 2021 ISDA Definitions</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Mid-market Valuation (Indicative Quotations) - Alternate Method">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined cash settlement method used for the determination of the applicable cash settlement amount. The method is defined in the 2021 ISDA Definitions</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Mid-market Valuation (Calculation Agent Determination)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined cash settlement method used for the determination of the applicable cash settlement amount. The method is defined in the 2021 ISDA Definitions</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Replacement Value (Firm Quotations)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined cash settlement method used for the determination of the applicable cash settlement amount. The method is defined in the 2021 ISDA Definitions</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Replacement Value (Calculation Agent Determination)">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An ISDA defined cash settlement method used for the determination of the applicable cash settlement amount. The method is defined in the 2021 ISDA Definitions</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

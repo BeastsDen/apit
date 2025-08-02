@@ -1,0 +1,10 @@
+<!ELEMENT DealInfoQuery (StartTimestamp?,
+EndTimestamp?,
+tradeId?,
+EndTradeId?,
+DealState?)>
+<!ELEMENT StartTimestamp (#PCDATA)>
+<!ELEMENT EndTimestamp (#PCDATA)>
+<!ELEMENT tradeId (#PCDATA)>
+<!ELEMENT EndTradeId (#PCDATA)>
+<!ELEMENT DealState (#PCDATA)>

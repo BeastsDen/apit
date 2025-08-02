@@ -1,0 +1,671 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fpml="http://www.fpml.org/2010/FpML-4-9" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swdml-shared-4-9.xsd"/>
+<xsd:include schemaLocation="swdml-eqd-enum-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-eq-shared-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-doc-4-9.xsd"/>
+<xsd:element name="PositionChange">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of a position update on a trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="tradeDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The trade date of the position update</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="positionChangeType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>Determines the type of position update.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="pcEntry" type="xsd:integer" minOccurs="0"/>
+<xsd:element name="equity">
+<xsd:annotation>
+<xsd:documentation>Defines details of equity position updates</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice>
+<xsd:element name="dividendSwap" type="fpml:dividendSwap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details specific to Dividend Swap position updates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="equityOption" type="fpml:equityOption">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details specific to Equity Option position updates</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="varianceSwap" type="fpml:varianceSwap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details specific to Variance Swap terminations</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="equitySwap" type="fpml:equitySwap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details specific to Equity Swap position updates</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="volatilitySwap" type="fpml:varianceSwap">
+<xsd:annotation>
+<xsd:documentation>Defines details specific to Volatility Swap terminations</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="Accumulator" type="fpml:Accumulator">
+<xsd:annotation>
+<xsd:documentation>Defines details specific to Equity Accumulator terminations</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="basketSwap" type="fpml:basketSwap">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details specific to Equity Basket Swap position updates</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="positionChangeIndependentAmount" type="fpml:positionChangeIndependentAmount" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the independent amount applicable</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBusinessConductDetails" type="fpml:SW_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="positionChangeIndependentAmount">
+<xsd:annotation>
+<xsd:documentation>Specifies the independent amount applicable</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:independentAmountAndPercentage">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A fixed payment and percentage amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="varianceSwap">
+<xsd:annotation>
+<xsd:documentation>Defines details of a position update on a Variance Swap</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="vegaNotionalAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Defines the position update amount of the Vega Notional</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newVegaNotionalAmount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Defines the Vega Notional Amount remaining after the termination event</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="terminationFee">
+<xsd:annotation>
+<xsd:documentation>Details of the termination Fee</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="equityOption">
+<xsd:annotation>
+<xsd:documentation>Defines details of a position update on an Equity Option</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="numberOfOptions" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of options to be changed in the update.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="numberOfShares" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="equityNotional" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The notional amount of the position update.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfOptions" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of options remaining after the position update occurring.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfShares" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="newEquityNotional" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of options remaining after the position update occurring.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="equityPremium" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="pricePerOption" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The amount of premium to be paid expressed as a function of the number of options.</xsd:documentation>
+<xsd:documentation xml:lang="de">Zahlbare Prämie in Abhängigkeit von der Anzahl der Optionen.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="notionalInput" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Defines parameters for percentage input trades.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="referenceFXRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For AEJ and Japanese Underlier Percentage input options FX can be input where the trade uses two currencies for valuation for an position update.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="premiumPercentage" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The percentage of the notional premium applicable to this trade position update.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="hedgeLevel" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Hedge Level of the Underlier for the position update. If basis/implied level not supplied this value will be used for all calculations requiring a spot value.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="basis" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For Index options, optional basis over cash level for the position update. Can be a positive or negative value.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="impliedLevel" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For Index options, the hedge level of the the underlier plus basis for the position update</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deltaCross" type="fpml:deltaCross" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Defines details of delta cross on a trade position update </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="positionChangeFee" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="optionStrategyDetails" type="fpml:OptionStrategyDetails" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="dividendSwap">
+<xsd:annotation>
+<xsd:documentation>Defines details of a position update on a Dividend Swap</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="numberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of tradable units to be updated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of tradable units remaining after the position update occurring.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="positionChangeFee" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="deltaCross">
+<xsd:annotation>
+<xsd:documentation>A type allowing delta cross updates to be recorded on a deal</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="buyerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The buying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The selling party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="equity">
+<xsd:annotation>
+<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="instrumentId" type="fpml:InstrumentId" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="future">
+<xsd:annotation>
+<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="maturity" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date when the future contract expires.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="instrumentId" type="fpml:InstrumentId" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="price" type="fpml:Money">
+<xsd:annotation>
+<xsd:documentation>The price of the underlying being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="quantity" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of underlying instruments being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="delta" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The percentage delta hedge achieved.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="equitySwap">
+<xsd:sequence>
+<xsd:element name="effectiveDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The effective date of the position update</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="numberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of tradable units to be updated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of tradable units remaining after the position update occurring.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="price" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The price of the underlying.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="currentNotional" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The current notional of the swap for the transaction submitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="strike" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="strikeDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="determinationMethod" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="referencePrice" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="referenceFXRate" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="positionChangeFee" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="deltaCross" type="fpml:deltaCross" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Defines details of delta cross on a trade position update </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swLinkedIA" type="fpml:linkedIAPercentage" minOccurs="0" maxOccurs="10"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="independentAmountAndPercentage">
+<xsd:annotation>
+<xsd:documentation>A container for elements associated with the Independent Amount.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="currency" type="fpml:Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an amount or percentage is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="amount" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The monetary quantity in currency units.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIAPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Independent Amount Percentage.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="linkedIAPercentage">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Contains Dividend Component information</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="1">
+<xsd:element name="linkedIAID" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the Share component of the Index Swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="linkedIAPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the percentage of the share component</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OptionStrategyDetails">
+<xsd:sequence>
+<xsd:element name="numberOfOptions" type="xsd:decimal"/>
+<xsd:element name="newNumberOfOptions" type="xsd:decimal"/>
+<xsd:element name="equityPremium">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="pricePerOption" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The amount of premium to be paid expressed as a function of the number of options.</xsd:documentation>
+<xsd:documentation xml:lang="de">Zahlbare Prämie in Abhängigkeit von der Anzahl der Optionen.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="premiumPercentage" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The percentage of the notional premium applicable to this trade position update for strategy trades.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="positionChangeFee" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Details of the termination Fee</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id"/>
+</xsd:complexType>
+<xsd:complexType name="Accumulator">
+<xsd:annotation>
+<xsd:documentation>Defines details of a position update on an accumulator</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="ChangeInNumberOfSharesPerDay" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Defines the position update Number Of Shares Per Day</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfSharesPerDay" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Defines the Number Of Shares Per Day remaining after the termination event</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="terminationFee">
+<xsd:annotation>
+<xsd:documentation>Details of the termination Fee</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference"/>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="basketSwap">
+<xsd:sequence>
+<xsd:element name="effectiveDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>The effective date of the position update</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="previousNumberOfUnits" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The total number of tradable units in the basket prior to position change.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="changeInNumberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of total tradable units in the basket being changed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="newNumberOfUnits" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The total number of tradable units in the basket remaining after the position update has occured</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="previousNotional" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Previous total notional of the basket for the transaction submitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="currentNotional" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The current total notional of the basket notional of the basket for the transaction submitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOverrideNotionalCalculation" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Specify if notional values should be system calculated or user submitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="strike" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="strikeDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="determinationMethod" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="positionChangeFee" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="payerPartyReference">
+<xsd:annotation>
+<xsd:documentation>The paying party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="receiverPartyReference">
+<xsd:annotation>
+<xsd:documentation>The receiving party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency amount of the payment.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="paymentDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The payment date of the equity payment</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:sequence>
+<xsd:element ref="fpml:basket" minOccurs="0"/>
+<xsd:element name="swReferencePrice" type="fpml:SW_ReferencePrice" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_ReferencePrice">
+<xsd:sequence>
+<xsd:element name="swReferenceCurrency"/>
+<xsd:element name="swReferenceAmount"/>
+<xsd:element name="swReferenceFXRate"/>
+</xsd:sequence>
+<xsd:attribute name="href"/>
+</xsd:complexType>
+</xsd:schema>

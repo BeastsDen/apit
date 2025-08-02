@@ -1,0 +1,24 @@
+<!ELEMENT ReportingStatusUpdate (deal+, atomicUpdate?)>
+<!ELEMENT deal (dvh, reportTo, reportRegime, regulator, requestType, messageType?, status, bicFrom, bicTo, idContext?, idValue?, reportType, transactionMode, transactionType, rcpESID?, tradeFacet?, initiatorESID?, verificationStatus?, eventId?, errorMsg?, externalErrorMsg?)>
+<!ELEMENT dvh (#PCDATA)>
+<!ELEMENT reportTo (#PCDATA)>
+<!ELEMENT reportRegime (#PCDATA)>
+<!ELEMENT regulator (#PCDATA)>
+<!ELEMENT requestType (#PCDATA)>
+<!ELEMENT messageType (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT bicFrom (#PCDATA)>
+<!ELEMENT bicTo (#PCDATA)>
+<!ELEMENT idContext (#PCDATA)>
+<!ELEMENT idValue (#PCDATA)>
+<!ELEMENT reportType (#PCDATA)>
+<!ELEMENT transactionMode (#PCDATA)>
+<!ELEMENT transactionType (#PCDATA)>
+<!ELEMENT rcpESID (#PCDATA)>
+<!ELEMENT tradeFacet (#PCDATA)>
+<!ELEMENT initiatorESID (#PCDATA)>
+<!ELEMENT verificationStatus (#PCDATA)>
+<!ELEMENT eventId (#PCDATA)>
+<!ELEMENT errorMsg (#PCDATA)>
+<!ELEMENT externalErrorMsg (#PCDATA)>
+<!ELEMENT atomicUpdate (#PCDATA)>

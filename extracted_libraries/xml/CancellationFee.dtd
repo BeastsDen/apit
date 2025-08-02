@@ -1,0 +1,30 @@
+<!ENTITY % FpML_Money "currency
+, amount">
+<!ENTITY % FpML_AdjustableDate "unadjustedDate
+, dateAdjustments">
+<!ENTITY % FpML_BusinessCenters "businessCenter+">
+<!ENTITY % FpML_BusinessDayAdjustments "businessDayConvention
+, businessCenters">
+<!ELEMENT cancellationFee (payReceiveDirection
+, paymentAmount
+, paymentDate)>
+<!ELEMENT amount  (#PCDATA)>
+<!ATTLIST amount  type NMTOKEN  #FIXED 'decimal'>
+<!ELEMENT businessCenter  (#PCDATA)>
+<!ATTLIST businessCenter  type NMTOKEN  #FIXED 'string'>
+<!ELEMENT businessCenters (%FpML_BusinessCenters;)>
+<!ATTLIST businessCenters  type NMTOKEN  #FIXED 'BusinessCenters'>
+<!ELEMENT businessDayConvention (#PCDATA)>
+<!ATTLIST businessDayConvention  type NMTOKEN  #FIXED 'string'>
+<!ELEMENT currency (#PCDATA)>
+<!ATTLIST currency type  NMTOKEN  #FIXED 'string'>
+<!ELEMENT dateAdjustments (%FpML_BusinessDayAdjustments;)>
+<!ATTLIST dateAdjustments type NMTOKEN  #FIXED 'BusinessDayAdjustments'>
+<!ELEMENT payReceiveDirection (#PCDATA)>
+<!ATTLIST payReceiveDirection type  NMTOKEN  #FIXED 'string'>
+<!ELEMENT paymentAmount (%FpML_Money;)>
+<!ATTLIST paymentAmount type NMTOKEN  #FIXED 'Money'>
+<!ELEMENT paymentDate (%FpML_AdjustableDate;)>
+<!ATTLIST paymentDate type NMTOKEN  #FIXED 'AdjustableDate'>
+<!ELEMENT unadjustedDate (#PCDATA)>
+<!ATTLIST unadjustedDate type NMTOKEN  #FIXED 'date'>

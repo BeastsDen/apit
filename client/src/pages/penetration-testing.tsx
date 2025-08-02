@@ -12,6 +12,8 @@ import { RequestBuilder } from "@/components/request-builder";
 import { ResponseViewer } from "@/components/response-viewer";
 import { SecurityAnalysis } from "@/components/security-analysis";
 import { LibraryManager } from "@/components/library-manager";
+import { MarkitWireConnection } from "@/components/markitwire-connection";
+import { AdvancedPentest } from "@/components/advanced-pentest";
 import { 
   Shield, 
   Download, 
@@ -35,6 +37,8 @@ export default function PenetrationTesting() {
     vulnerabilitiesFound: 0,
     sessionDuration: 0
   });
+  const [markitWireConnected, setMarkitWireConnected] = useState(false);
+  const [connectionSettings, setConnectionSettings] = useState<any>(null);
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -202,12 +206,27 @@ export default function PenetrationTesting() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Tab Navigation */}
-          <Tabs defaultValue="request-builder" className="flex-1 flex flex-col">
+          <Tabs defaultValue="markitwire-connection" className="flex-1 flex flex-col">
             <div className="bg-slate-800 border-b border-slate-700">
               <TabsList className="bg-transparent border-none">
                 <TabsTrigger 
-                  value="request-builder" 
+                  value="markitwire-connection" 
                   className="bg-slate-750 text-white border-b-2 border-blue-500 data-[state=active]:bg-slate-750 data-[state=active]:text-white"
+                >
+                  <Rocket className="h-4 w-4 mr-2" />
+                  MarkitWire API
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="advanced-pentest" 
+                  className="text-gray-400 hover:text-white hover:bg-slate-750"
+                  disabled={!markitWireConnected}
+                >
+                  <Shield className="h-4 w-4 mr-2" />
+                  Advanced PenTest
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="request-builder" 
+                  className="text-gray-400 hover:text-white hover:bg-slate-750"
                 >
                   <Settings className="h-4 w-4 mr-2" />
                   Request Builder
@@ -228,6 +247,38 @@ export default function PenetrationTesting() {
                 </TabsTrigger>
               </TabsList>
             </div>
+
+            <TabsContent value="markitwire-connection" className="flex-1 m-0 p-6 overflow-y-auto">
+              <MarkitWireConnection 
+                onConnectionSuccess={(settings) => {
+                  setMarkitWireConnected(true);
+                  setConnectionSettings(settings);
+                  toast({
+                    title: "MarkitWire Connected",
+                    description: "Successfully connected to MarkitWire API",
+                  });
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="advanced-pentest" className="flex-1 m-0 p-6 overflow-y-auto">
+              {markitWireConnected && connectionSettings ? (
+                <AdvancedPentest connectionSettings={connectionSettings} />
+              ) : (
+                <Card className="bg-slate-800 border-slate-700">
+                  <CardContent className="p-6 text-center">
+                    <Shield className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">MarkitWire Connection Required</h3>
+                    <p className="text-gray-400 mb-4">
+                      Please connect to MarkitWire API first before running advanced penetration tests.
+                    </p>
+                    <Button onClick={() => window.location.hash = '#markitwire-connection'}>
+                      Go to Connection
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+            </TabsContent>
 
             <TabsContent value="request-builder" className="flex-1 flex m-0">
               <div className="flex-1 flex">

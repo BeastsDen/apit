@@ -1,0 +1,3 @@
+<!ELEMENT ParticipantQuery (LegalEntity*)>
+<!ELEMENT LegalEntity (LegalEntityBIC+)>
+<!ELEMENT LegalEntityBIC (#PCDATA)>

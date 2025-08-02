@@ -1,0 +1,746 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.markitserv.com/swml-5-11" xmlns:fpml="http://www.fpml.org/FpML-5/confirmation" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.markitserv.com/swml-5-11" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swml-shared-5-11.xsd"/>
+<xsd:include schemaLocation="Rerate.xsd"/>
+<xsd:import namespace="http://www.fpml.org/FpML-5/confirmation" schemaLocation="fpml-shared-5-11.xsd"/>
+<xsd:element name="SWML" type="SWML">
+<xsd:annotation>
+<xsd:documentation>The SWML root element forms the root for any conforming SWML instance
+document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="SWML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in an SWML
+document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swHeader" type="SW_Header">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade's id and version, source of the
+trade, status of the trade and the parties involved in the
+conversation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swGiveUp" type="SW_GiveUp" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The swGiveUp element captures details specific
+to Prime Brokerage, and defines a tri-party agreement on the primary
+prime-brokered trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="novation" type="SW_ConfirmedNovationAgreement" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Novation Agreement details and any related
+fee associated with the transfer of the trade. This element will be present
+if the trade has a trade status of 'Novated' or 'New-Novated'. This is an
+FpML 4.1 element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAllocations" type="SW_RepoAllocations" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of allocation splits that will
+be applied to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swBlockAction" type="SW_BlockAction">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of a block action, e.g. a block cancel.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStructuredTradeDetails" type="SW_RepoStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a
+formal structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swNegotiation" type="SW_Negotiation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The set of conversation dialogs recording the
+conversation that took place on the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPrivateData" type="SW_PrivateData" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Data which is private to an individual party.
+The private data consists of a mixture of process state information and
+private data entered through the SwapsWire Trader application, e.g. trading
+book identifier. Note that the element will not be present in SWML extracted
+via the Dealer API prior to that side picking up the
+trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="version" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="5-11"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade
+details that are not captured within the FpML component of the
+document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTradeHeader" type="SW_RepoTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional bilateral
+non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExitReason" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element will hold the reason for any exit
+events. It will not be displayed if there has been no
+exit.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAmendmentType" type="SW_AmendmentTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if a partial
+termination is affected, or if a trade has been corrected and contains the
+value of 'PartialTermination' or 'ErrorCorrection'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCancellationType" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This element will optionally be present if a cancellation is
+affected for a trade which was booked in error and contains the value
+'BookedInError'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRepoRerate" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Re-rate lifecycle event for an Open Repo.  It provides the new Repo Spread / Repo Rate and it's Effective Date</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swStep" type="SW_Step" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The schedule of step date and value pairs. On each step date, the associated step value becomes effective. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoStructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the structured details of a
+SwapsWire trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTemplateName" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The name of the SwapsWire template associated
+with the trade. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element ref="fpml:dataDocument"/>
+<xsd:element name="swExtendedTradeDetails" type="SW_RepoExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional structured
+trade details that are not captured within the FpML component of the
+message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTradeEventReportingDetails" type="SW_TradeEventReportingDetails" minOccurs="0"/>
+<xsd:element name="swWorkFlowDetails" type="SW_WorkFlowDetails" minOccurs="0"/>
+<xsd:element name="swBusinessConductDetails" type="SW_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related
+to business conduct standards that are not captured within the FpML
+component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoTradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional non-economic trade
+details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swManualConfirmationRequired" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether a
+follow-up manual confirmation is required.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCBTradeType" type="SW_CBTradeTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Allows user to indicate the type of CB trade as
+either non-member-CB or CB-CCP.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClearingBroker" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>element to provide details of clearing broker involved in
+trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOffsettingTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Gate Check Offsetting Trade ID for
+internal reconciliation purposes.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompressionType" type="SW_CompressionTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Compression Type for this side of
+the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyExecutionMethod" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Execution Method per side of the trade. This information is also used to identify a Gate Checking trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="SW_PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference specifying if this is the party A or B corresponding to the Execution Method below.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swExecutionMethod" type="SW_ExecutionMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Execution Method for the specified party.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swExecutionMethod" type="SW_ExecutionMethodEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Execution Method for this side of the trade. This information is also used to identify a Gate Checking trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBackLoadingFlag" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Flag to identify backloaded trades</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swOriginatingEvent" type="SW_OriginatingEvent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The reason a trade is created such as Bunched Order Block, Bunched Order Allocation, Backload. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyTradeInformation" type="SW_RepoPartyTradeInformation" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade information that may be provided by each involved party.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type allowing ability to specifiy party id and party
+name.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="partyId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>The trade date of the termination.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="partyName" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The effective date of the termination.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_MandatoryClearing">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Element to provide details of Mandatory
+Clearing.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swJurisdiction" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Jurisdiction of where this product is mandatory
+clearable e.g. JFSA, CFC etc.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSupervisoryBodyCategory" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Categorisation of the supervisorybody.</xsd:documentation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:simpleContent>
+<xsd:extension base="xsd:string">
+<xsd:attribute name="swSupervisoryBodyCategoryScheme" type="SW_Scheme" default="http://www.markitwire.com/spec/2012/coding-scheme/supervisory-body-category">
+<xsd:annotation>
+<xsd:documentation>default="http://www.markitwire.com/spec/2012/coding-scheme/supervisory-body-category
+"BroadBased", "NarrowBased", "Mixed"</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swMandatoryClearingIndicator" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Whether the particular trade type in question
+is required by this regulator to be cleared.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyExemption" type="SW_PartyExemption" minOccurs="0" maxOccurs="2"/>
+<xsd:element name="swInterAffiliateExemption" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Indicates whether trading parties are
+affiliated and both have elected to invoke INter Affiliate Exemption under
+CFTC.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_PartyExemption">
+<xsd:annotation>
+<xsd:documentation>Element to provide details of a party exemption to mandatory
+clearing</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="SW_PartyReference"/>
+<xsd:element name="swExemption" type="xsd:boolean"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_OrderDetails">
+<xsd:annotation>
+<xsd:documentation>A structure to capture bilateral Order transmission details required
+under MIFID 2</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swTypeOfOrder" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the type of order, as per article 59 of
+MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTotalConsideration" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the total consideration towards the order
+as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRateOfExchange" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the rate of exchange towards the order as
+per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClientCounterparty" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate where the client's counterparty was the
+investment firm itself or any person in the investment firm's group or
+another client of the investment firm, the fact that this was the case
+unless the order was executed through a trading system that facilitates
+anonymous trading. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTotalCommissionAndExpenses" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise total sum of the commissions and expenses
+charged and, where the client so requests, an itemised breakdown including,
+where relevant, the amount of any mark-up or mark-down imposed where the
+transaction was executed by an investment firm when dealing on own account,
+and the investment firm owes a duty of best execution to the
+client.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swClientSettlementResponsibilities" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would constitute client's responsibilities in relation
+to the settlement of the transaction, including the time limit for payment
+or delivery as well as the appropriate account details where these details
+and responsibilities have not previously been notified to the client.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" type="xsd:IDREF"/>
+</xsd:complexType>
+<xsd:complexType name="SW_OriginatingEvent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the type of business event that triggered the origination of this trade.  This is used to provide additional detail about how or why a trade originatated, particularly when this is not self-evident.  For example, it can indicated that the trade was created as a result original bunched order or allocation.</xsd:documentation>
+</xsd:annotation>
+<xsd:simpleContent>
+<xsd:extension base="SW_Scheme">
+<xsd:attribute name="swOriginatingEventScheme" type="xsd:anyURI" fixed="http://www.markitwire.com/spec/2013/coding-scheme/originating-event"/>
+</xsd:extension>
+</xsd:simpleContent>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoAllocations">
+<xsd:sequence>
+<xsd:element name="swAllocation" type="SW_RepoAllocation" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoAllocation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An entity for defining details of an individual
+allocation split. This element may carry an information attribute
+tradeDirectionDeterminate that will have a value of 'false', when the product
+direction on the main trades is indeterminate. It flags allocation direction is
+invalid as block trade direction is indeterminate. The tradeDirectionDeterminate
+attribute will not otherwise be present.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swNearLeg" type="SW_RepoAllocationNearLeg">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A repo contract is modeled as two purchase/repurchase transactions which are called legs. This is the near leg, i.e. the transaction that will be executed on the near settlement date of the contract.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swFarLeg" type="SW_RepoAllocationFarLeg" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The far leg of the repo contract, i.e. the repurchase transaction. The BuyerSeller model in the far leg must be the exact opposite of the one found in the near leg.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPrivateTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade identifier allocated internally by
+the participant. This is the internal identifier that will be passed to a
+clearance system, e.g. LCH.Clearnet SwapClear.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSalesCredit" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The data captured through the SwapsWire Trader
+field labeled Sales Credit.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swAllocationReportingDetails" type="SW_AllocationReportingDetails" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="swIdentifiers" type="SW_Identifiers" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>"Identifiers" tab on the UI, used for populating cpty PLI and
+LEI and complex trade Id.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPartyTradeInformation" type="SW_RepoPartyTradeInformation" minOccurs="0" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade information that may be provided by each involved party.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementGateway" type="SW_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Set by the participant to indicate the settlement gateway service to
+be used by system to instruct bilateral settlement once a new deal and any subsequent lifecycle event is affirmed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="directionReversed" default="false">
+<xsd:simpleType>
+<xsd:restriction base="xsd:NMTOKEN">
+<xsd:enumeration value="true"/>
+<xsd:enumeration value="false"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+<xsd:attribute name="tradeDirectionDeterminate" default="true">
+<xsd:simpleType>
+<xsd:restriction base="xsd:NMTOKEN">
+<xsd:enumeration value="true"/>
+<xsd:enumeration value="false"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoAllocationNearLeg">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A transaction leg for a repo is equivalent to a single cash transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:group ref="fpml:BuyerSeller.model">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to the buyer and the seller of this leg of the repo contract.</xsd:documentation>
+</xsd:annotation>
+</xsd:group>
+<xsd:element name="settlementAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement Amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="collateral" type="fpml:CollateralValuation" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Collateral element is used to carry the quantity and price details that are required to ensure that a repo contract is executed at fair value, with the value of the collateral matching the cash amount of the repo. Collateral is declared as optional here, with multiple cardinalities, since there can be a repo "Multi", with multiple instruments specified, or a "Cash Borrow/Loan" and “TriPartyRepo” with no collateral. In general cases, however it should be specified. This element can be omitted in farLeg.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoAllocationFarLeg">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A transaction leg for a repo is equivalent to a single cash transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:group ref="fpml:BuyerSeller.model">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to the buyer and the seller of this leg of the repo contract.</xsd:documentation>
+</xsd:annotation>
+</xsd:group>
+<xsd:element name="settlementAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement Amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="collateral" type="fpml:CollateralValuation" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Collateral element is used to carry the quantity and price details that are required to ensure that a repo contract is executed at fair value, with the value of the collateral matching the cash amount of the repo. Collateral is declared as optional here, with multiple cardinalities, since there can be a repo "Multi", with multiple instruments specified, or a "Cash Borrow/Loan" and “TriPartyRepo” with no collateral. In general cases, however it should be specified. This element can be omitted in farLeg.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_Step">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a step date and step value pair. This step definitions are used to define varying rate or amount schedules, e.g. a notional amortization or a step-up coupon schedule.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_StepBase">
+<xsd:sequence>
+<xsd:element name="swStepValue" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Repo Rate / Repo Spread which becomes effective on the associated stepDate. A rate of 5% would be represented as 0.05.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_StepBase" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining a step date and step value pair. This step definitions are used to define varying rate or amount schedules, e.g. a notional amortization or a step-up coupon schedule.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swStepDate" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The date on which the associated stepValue becomes effective. This day may be subject to adjustment in accordance with a business day convention.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id" type="xsd:ID"/>
+</xsd:complexType>
+<xsd:complexType name="SW_BlockAction">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An entity for identifying summary information for trades involved in a block action.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product type e.g. Block Re-rate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTemplateName" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product template e.g. Block Re-rate Repurchase</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swBlockRerate" type="SW_BlockRerate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of a block re-rate</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="party" type="fpml:Party" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Parties of a Block Action</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_BlockRerate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An entity for identifying summary information for trades involved in a block re-rate</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swProductType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Product Type of the underlying deals.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRateCalcType" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">"Fixed" or "Floating"</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swStep" type="SW_Step" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Re-rate date and value pair. On each step date, the associated step value becomes effective. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swRepurchaseSummary" type="SW_RepurchaseSummary" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Details of the underlying deals to be re-rated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepurchaseSummary">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Summary details of a Repurchase trade in a block action.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="tradeId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A trade reference identifier allocated by SwapsWire. This is an FpML 2.0 element.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swBlockTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">If the parent trade is a child of an allocation then this is the id of the block trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swNearLeg" type="SW_RepurchaseSummaryNearLeg">
+<xsd:annotation>
+<xsd:documentation>The summary of Floating Leg 1</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swPrivateTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The trade identifier allocated internally by
+the participant. This is the internal identifier that will be passed to a
+clearance system, e.g. LCH.Clearnet SwapClear.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTradingBookId" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The data captured through the SwapsWire Trader field labeled Book or set via the Deal Sink API or Dealer API.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepurchaseSummaryNearLeg">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A transaction leg for a repo is equivalent to a single cash transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:group ref="fpml:BuyerSeller.model">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">References to the buyer and the seller of this leg of the repo contract.</xsd:documentation>
+</xsd:annotation>
+</xsd:group>
+<xsd:element name="settlementDate" type="fpml:AdjustableOrRelativeDate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement or Payment Date for the transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="settlementAmount" type="fpml:Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Settlement Amount</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoPartyTradeInformation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining party-specific additional information that may be recorded against a trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPartyReference" type="fpml:PartyReference" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>Identifies the party that the trade information relates to.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementInformation" type="SW_RepoSettlementInformation" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Standard Settlement Instruction (SSI) details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_RepoSettlementInformation">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Standard Settlement Instruction (SSI) details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swPlaceOfSettlement" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="fpml:PartyId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The receiving/delivering depositorywhere the settlement will occur (PSET).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swSettlementAgent" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="fpml:PartyId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The receiving/delivering party that interacts with the place of settlement (DEAG/REAG).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSafekeepingAccountId" type="fpml:AccountId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Account where securities are held.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swIntermediary1" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="fpml:PartyId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The receiving/delivering party that interacts with the settlement agent (REI1/DEI1).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSafekeepingAccountId" type="fpml:AccountId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Account where securities are held.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swCustodian" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="fpml:PartyId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The receiving/delivering party that interacts with the settlement agent unless an intermediary exists (RECU/DECU).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSafekeepingAccountId" type="fpml:AccountId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Account where securities are held.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swBuyerSeller" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPartyId" type="fpml:PartyId" minOccurs="1" maxOccurs="1">
+<xsd:annotation>
+<xsd:documentation>The party that receives/delivers the security (BUYR/SELL).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSafekeepingAccountId" type="fpml:AccountId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Account where securities are held.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

@@ -6,6 +6,7 @@ import { z } from "zod";
 import multer from "multer";
 import { extractZipFile } from "./services/zip-extractor";
 import { makeApiRequest } from "./services/markitwire-api";
+import { markitWireNativeAPI } from "./services/markitwire-native";
 
 const upload = multer({ dest: 'uploads/' });
 
@@ -214,6 +215,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ type, payloads });
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch payloads" });
+    }
+  });
+
+  // MarkitWire Native API Integration
+  app.post("/api/markitwire/connect", async (req, res) => {
+    try {
+      const { host, username, password } = req.body;
+      if (!host || !username || !password) {
+        return res.status(400).json({ error: "Host, username, and password are required" });
+      }
+
+      const result = await markitWireNativeAPI.testConnection(host, username, password);
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: "Connection test failed", details: error?.toString() });
+    }
+  });
+
+  app.get("/api/markitwire/commands", async (req, res) => {
+    try {
+      const commands = await markitWireNativeAPI.getAvailableCommands();
+      res.json({ commands });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch available commands" });
+    }
+  });
+
+  app.get("/api/markitwire/info", async (req, res) => {
+    try {
+      const info = await markitWireNativeAPI.getAPIInfo();
+      res.json(info);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch API information" });
+    }
+  });
+
+  app.post("/api/markitwire/execute", async (req, res) => {
+    try {
+      const { host, username, password, command, params, apiType = 'dealer' } = req.body;
+      
+      if (!host || !username || !password || !command) {
+        return res.status(400).json({ error: "Host, username, password, and command are required" });
+      }
+
+      let result;
+      if (apiType === 'dealsink') {
+        result = await markitWireNativeAPI.executeDealsinkCommand(host, username, password, command, params || []);
+      } else {
+        result = await markitWireNativeAPI.executeCommand(host, username, password, command, params || []);
+      }
+
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: "Command execution failed", details: error?.toString() });
+    }
+  });
+
+  app.post("/api/markitwire/pentest", async (req, res) => {
+    try {
+      const { host, username, password, command, payload, testType } = req.body;
+      
+      if (!host || !username || !password || !command || !payload || !testType) {
+        return res.status(400).json({ 
+          error: "Host, username, password, command, payload, and testType are required" 
+        });
+      }
+
+      const result = await markitWireNativeAPI.executePentestPayload(
+        host, username, password, command, payload, testType
+      );
+
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ error: "Penetration test failed", details: error?.toString() });
     }
   });
 

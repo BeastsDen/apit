@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="SW_20_1_460930" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swdml-reporting-1-0.xsd"/>
+<xsd:element name="swNewNovatedTradeReportingDetails" type="SW_EquityNewNovatedTradeReportingDetails"/>
+<xsd:element name="swNovatedTradeReportingDetails" type="SW_EquityNovatedTradeReportingDetails"/>
+<xsd:element name="swNovationFeeTradeReportingDetails" type="SW_EquityNovationFeeTradeReportingDetails"/>
+<xsd:element name="swTradeEventReportingDetails" type="SW_EquityTradeEventReportingDetails">
+<xsd:annotation>
+<xsd:documentation>global element, not used but its inclusion triggers DTD generation to create the necessary entities</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="SW_EquityNewNovatedTradeReportingDetails">
+<xsd:complexContent>
+<xsd:extension base="SW_EquityTradeReportingDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityNovatedTradeReportingDetails">
+<xsd:complexContent>
+<xsd:extension base="SW_EquityTradeReportingDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityNovationFeeTradeReportingDetails">
+<xsd:complexContent>
+<xsd:extension base="SW_EquityTradeReportingDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityTradeEventReportingDetails">
+<xsd:complexContent>
+<xsd:extension base="SW_EquityTradeReportingDetails">
+<xsd:sequence>
+<xsd:element ref="swNewNovatedTradeReportingDetails" minOccurs="0"/>
+<xsd:element ref="swNovatedTradeReportingDetails" minOccurs="0"/>
+<xsd:element ref="swNovationFeeTradeReportingDetails" minOccurs="0"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityTradeReportingDetails">
+<xsd:complexContent>
+<xsd:extension base="SW_TradeReportingDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fpml-annotation="http://www.fpml.org/annotation" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:complexType name="SW_EquityDerivativeBase" abstract="true">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining the common features of equity
+derivatives.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="Product">
+<xsd:sequence>
+<xsd:group ref="BuyerSeller.model"/>
+<xsd:choice>
+<xsd:element name="OptionType" type="OptionTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of option transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swForwardType" type="SW_ForwardTypeEnum"/>
+</xsd:choice>
+<xsd:element name="equityEffectiveDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Effective date for a forward starting
+option.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="underlyer" type="Underlyer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the underlying component, which can be
+either one or many and consists in either equity, index or convertible bond
+component, or a combination of these.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="notional" type="NonNegativeMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The notional amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swEquityExercise" type="SW_EquityExerciseValuationSettlement">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The parameters for defining how the equity option can
+be exercised, how it is valued and how it is settled.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:group ref="Feature.model" minOccurs="0"/>
+<xsd:element name="strategyFeature" type="StrategyFeature" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A equity option simple strategy
+feature.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityDerivativeLongFormBase">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining equity
+forwards.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_EquityDerivativeBase">
+<xsd:sequence>
+<xsd:element name="dividendConditions" type="DividendConditions" minOccurs="0"/>
+<xsd:element name="methodOfAdjustment" type="MethodOfAdjustmentEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines how adjustments will be made to
+the contract should one or more of the extraordinary events
+occur.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="extraordinaryEvents" type="ExtraordinaryEvents">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Where the underlying is shares,
+specifies events affecting the issuer of those shares that may
+require the terms of the transaction to be
+adjusted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="equityFeatures" type="OptionFeatures" minOccurs="0" fpml-annotation:deprecated="true" fpml-annotation:deprecatedReason="Option Features content is accessible in the complex type EquityDerivativeBase through the model group Feature.model">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">DEPRECATED This element will be removed
+in the next FpML major version. Use the "feature" element for option
+features such as asian, barrier, knock.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityExerciseValuationSettlement">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining exercise procedures for equity options.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="equityEuropeanExercise" type="EquityEuropeanExercise">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The parameters for defining the expiration date and time for a European style equity option.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="prePayment" type="PrePayment">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Prepayment features for Forward.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="settlementCurrency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which a cash settlement for non-deliverable forward and non-deliverable options.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swSettlementType" type="SW_SettlementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">How the option will be settled.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityForwardLong">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining equity
+forwards.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_EquityDerivativeLongFormBase">
+<xsd:sequence>
+<xsd:element name="spotPrice" type="NonNegativeMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The spot price per share, index or
+basket.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="forwardPrice" type="NonNegativeMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The forward price per share, index or
+basket.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityAccumulatorForwardLong">
+<xsd:annotation>
+<xsd:documentation>A type for defining equity Accumulator forwards.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_EquityForwardLong">
+<xsd:sequence>
+<xsd:element name="swAccumulator" type="SW_Accumulator"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_ForwardTypeEnum">
+<xsd:restriction base="Token60"/>
+</xsd:simpleType>
+<xsd:complexType name="SW_Accumulator">
+<xsd:annotation>
+<xsd:documentation xml:lang="en"/>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swSharesPerDay">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swPurchaseFrequency" type="Period"/>
+<xsd:element name="swNumberOfSharesPerDay" type="NonNegativeDecimal"/>
+<xsd:element name="swNoOfTradingDays" type="xsd:positiveInteger" minOccurs="0"/>
+<xsd:element name="swGearing" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swGearingFactor" type="xsd:decimal"/>
+<xsd:choice minOccurs="0">
+<xsd:element name="swLeverageTriggerPrice" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="swPriceReference" type="PricingStructureReference" minOccurs="0"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swObservationPeriod" maxOccurs="unbounded">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="observationPeriodStartDate" type="xsd:date"/>
+<xsd:element name="observationPeriodEndDate" type="xsd:date"/>
+<xsd:element name="swGuaranteedPeriod" type="xsd:boolean"/>
+<xsd:element name="swObservationPeriodSettlementDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="swUpFrontSettlement" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swNoOfScheduledTradingDays" type="xsd:positiveInteger" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swSettlementFrequency" type="Period" minOccurs="0"/>
+<xsd:element name="swNumberOfGuaranteedPeriods" type="xsd:nonNegativeInteger" minOccurs="0"/>
+<xsd:element name="swBonusAccumulator" minOccurs="0">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swHigherForwardPrice" type="xsd:decimal"/>
+<xsd:element name="swLowerForwardPrice" type="xsd:decimal"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swKnockOutParameters" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Additional container to capture specific knockout exercise event related details which are currently not being supported in the FPML knockout structure.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="swKnockOutCommencementDate" type="xsd:date" minOccurs="0"/>
+<xsd:element name="swKnockOutTrigger" type="SW_Trigger" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Trigger point at which knockout is effective.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swCustomDates" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swPaymentDateOffset" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>An element to hold an offset value between settlement and payment dates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="swEquityAccumulatorForwardLong" type="SW_EquityAccumulatorForwardLong"/>
+<xsd:complexType name="SW_EquityForwardShort">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type for defining equity forwards.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_EquityDerivativeBase">
+<xsd:sequence>
+<xsd:element name="spotPrice" type="NonNegativeMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The spot price per share, index or
+basket.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="forwardPrice" type="NonNegativeMoney" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The forward price per share, index or
+basket.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SW_EquityAccumulatorForwardShort">
+<xsd:annotation>
+<xsd:documentation>A type for defining equity Accumulator forwards.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SW_EquityForwardShort">
+<xsd:sequence>
+<xsd:element name="swAccumulator" type="SW_Accumulator"/>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:simpleType name="SW_SettlementTypeEnum">
+<xsd:union memberTypes="SettlementTypeEnum SW_SettlementTypeExtension"/>
+</xsd:simpleType>
+<xsd:simpleType name="SW_SettlementTypeExtension">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CashAndPhysical"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:element name="swEquityAccumulatorForwardShort" type="SW_EquityAccumulatorForwardShort" substitutionGroup="product"/>
+<xsd:complexType name="SW_Trigger">
+<xsd:annotation>
+<xsd:documentation>Trigger point at which knockout is effective.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:choice>
+<xsd:element name="swLevel" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The trigger level</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swLevelPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The trigger level percentage</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence>
+<xsd:element name="swTargetPerformance" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The target performance of the accumulator</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice minOccurs="0">
+<xsd:element name="swLevelPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The trigger level percentage</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swLevel" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The trigger level</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+</xsd:sequence>
+</xsd:choice>
+<xsd:element name="swTriggerType" type="TriggerTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Triggering condition.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swTriggerTimeType" type="TriggerTimeTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The valuation time type of knock condition.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>

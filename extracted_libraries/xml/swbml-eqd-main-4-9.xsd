@@ -1,0 +1,1154 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:include schemaLocation="swbml-shared-4-9.xsd"/>
+<xsd:include schemaLocation="swbml-eqd-enum-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-main-4-9.xsd"/>
+<xsd:include schemaLocation="fpml-doc-4-9.xsd"/>
+<xsd:include schemaLocation="swbml-reporting-1-0.xsd"/>
+<xsd:include schemaLocation="swxml-volatility-swaps-4-9.xsd"/>
+<xsd:element name="SWBML" type="SWBML">
+<xsd:annotation>
+<xsd:documentation>The SWBML root element forms the root for any conforming SWBML instance document.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:complexType name="SWBML">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The root element in an SWBML document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbHeader" type="SWB_Header">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining information about the transaction including the broker's trade id and version, source and information linking the message recipients to a particular side of the transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="swbBlockTrade" type="Empty" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Flag used to identify an allocation Block with empty split details</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAllocations" type="SWB_Allocations" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Defines details of allocation splits that will be applied to the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swbComplianceElection" type="SWB_ComplianceElection" minOccurs="0"/>
+<xsd:element name="swbStructuredTradeDetails" type="SWB_StructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of the transaction defined in a formal structure.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbTradeEventReportingDetails" type="SWB_TradeEventReportingDetails" minOccurs="0"/>
+<xsd:element name="swbPrivatePartyTradeEventReportingDetails" type="SWB_PrivatePartyTradeEventReportingDetails" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+<xsd:attribute name="version" use="required">
+<xsd:simpleType>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="4-9"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:attribute>
+</xsd:complexType>
+<xsd:complexType name="SWB_ComplianceElection">
+<xsd:annotation>
+<xsd:documentation>A component that holds a list of rules.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="rule15A-6" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_DeltaCross">
+<xsd:annotation>
+<xsd:documentation>A type allowing delta crosses to be recorded on a deal.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="buyerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation>A pointer style reference to a party identifier defined elsewhere in the SWBML document. The party referenced is the buyer.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="sellerPartyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation>A pointer style reference to a party identifier defined elsewhere in the SWBML document. The party referenced is the seller.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:choice>
+<xsd:element name="equity" type="EquityAsset">
+<xsd:annotation>
+<xsd:documentation>The underlying of the option trade, which is being crossed to hedge the deal.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="future" type="Future">
+<xsd:annotation>
+<xsd:documentation>A future which is crossed to hedge an equity index option trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="swbPrice" type="Money">
+<xsd:annotation>
+<xsd:documentation>The price of the underlying being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbQuantity" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>The number of underlying instruments being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDelta" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The percentage delta hedge achieved. A delta of 1% would be represented as 0.01.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbOffshoreCross" type="SWB_OffshoreCross" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Indicates that the delta on a trade has been executed in a location other than the one where the underlying is listed. For example, an option on a Hong Kong underlyer is crossed in London.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbCrossExchangeId" type="ExchangeId" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The exchange where the underlying share is being crossed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDeltaOptionQuantity" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The number of Options the delta cross is based upon for strategy trades.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_EquityOptionDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade dettails for an equity option</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbDefaultSettlementMethod" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The default settlement method i.e. Cash or Physical when the settlement type is Election.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbCashSettlementType" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="swbFxDeterminationMethod" type="SWB_FxDeterminationMethodEnum"/>
+<xsd:element name="swbFxSource" type="SWB_FxSource" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the methodology (reference source and, optionally, fixing time) to be used for determining a currency conversion rate.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:element name="swbReferenceFXRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The details of any FX Rate on an Equity Option Transaction (For % input trades).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbEquityOptionPercentInput" type="SWB_EquityOptionPercentInput" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional equity option details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAveragingDates" type="SWB_AveragingDates" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional equity option details for Averaging Dates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbSettlementPriceDefaultElection" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A component that specifies the Default Election for Settlement Price </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_EquitySwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Equity Share Swap' and 'Equity Index Swap' products.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:choice minOccurs="0">
+<xsd:element name="swbFullyFunded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold details of a fully funded synthetic future transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="Money">
+<xsd:sequence minOccurs="0">
+<xsd:element name="fixedRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Captures the fixed rate that applies</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dayCountFraction" type="DayCountFraction" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Captures the day count fraction that applies</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbSpreadDetails" type="SWB_SpreadInOut">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold details of a synthetic future transaction for which a spread applies to the Initial Price and to the Final Price.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="initialUnits" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The initial number of shares or index units</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbMultiplier" type="xsd:integer" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the contract multiplier that can be associated with a Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbBulletIndicator" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swbInterestLegDriven" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A Boolean to indicate interest leg driven scheduling where it is set to 'true'</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbSchedulingMethod" type="SWB_EqdSchedulingMethodEnum" minOccurs="0"/>
+<xsd:element name="swbScheduleFrequencies" type="SWB_ScheduleFrequencies" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A component to hold the schedule frequencies (optional entry) in a List Date Entry mode.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:element name="swbStubControl" type="SWB_StubControl" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A structure to hold the details of stub type overrides for schedule generation.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbEarlyFinalValuationDateElection" type="SWB_EarlyFinalValuationDateElectionEnum" minOccurs="0"/>
+<xsd:choice minOccurs="0">
+<xsd:element name="swbEarlyTerminationElectingParty" type="PartyOrTradeSideReference" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Optional Early Termination Electing Parties</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbEarlyTerminationElectingPartyMethod" type="SWB_ASIMCEnum">
+<xsd:annotation>
+<xsd:documentation>Optional Early Termination Electing Party Method</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:choice>
+<xsd:element name="noticePeriod" type="SWB_NoticePeriod" minOccurs="0" maxOccurs="2"/>
+</xsd:sequence>
+<xsd:element name="swbFixedRateIndicator" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>A Boolean to indicate whether the interest leg is fixed rate. If true, fixed rate.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbOtherValuationBusinessCenter" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>An element to hold additional holiday centres to be applied to the valuation schedule.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbReferenceInitialPrice" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Initial Price in the Reference Currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbReferenceFXRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>FX Rate between the reference currency and the selected initial price currency</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbNotionalCurrency" type="Currency" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Notional Currency. Should be present for Forward Starting Swaps where the notional is unknown.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbAveragingDatesIndicator" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swbAveragingDates2" type="SWB_AveragingDates2" minOccurs="0"/>
+</xsd:sequence>
+<xsd:element name="swbADTVIndicator" type="xsd:boolean" minOccurs="0"/>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbStockLoanRateIndicator" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swbStockLoanRate" type="SWB_StockLoanRate" minOccurs="0"/>
+</xsd:sequence>
+<xsd:element name="swbAdditionalDisruptionEventIndicator" type="xsd:boolean" minOccurs="0"/>
+<xsd:element name="swbFinalPriceFee" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>An element to hold Final Price Fee (%) in relation to Optional Early Termination.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbFinalPriceFeeAmount" type="Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>An element to hold Final Price Fee Amount.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbBulletCompoundingSpread" type="xsd:decimal" minOccurs="0"/>
+<xsd:element name="swbRightToIncrease" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specification if Right to Increase is applicable.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbGrossPrice" type="SWB_GrossPriceEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specification of the gross price using an enumeration.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbApplicableRegion" type="SWB_ApplicableRegionEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specification of the Applicable Region using an enumeration.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDividendPercentageComponent" type="SWB_DividendComponent" minOccurs="0" maxOccurs="10"/>
+<xsd:element name="swbOverrideNotionalCalculation" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specify if notional values should be system calculated or user submitted.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPaymentDaysOffset" type="SWB_PaymentDaysOffset" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>If early payment or delayed payment is required, specifies the number of days offset that the payment occurs relative to what would otherwise be the unadjusted payment date. The offset can be specified in terms of either calendar or business days. Even in the case of a calendar days offset, the resulting payment date, adjusted for the specified calendar days offset, will still be adjusted in accordance with the specified payment dates adjustments. This element should only be included if early or delayed payment is applicable, i.e. if the periodMultiplier element value is not equal to zero. An early payment would be indicated by a negative periodMultiplier element value and a delayed payment (or payment lag) would be indicated by a positive periodMultiplier element value.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_EqdExtendedTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for definining additional structured trade details that are not captured within the FpML component of the document.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbTradeHeader" type="SWB_TradeHeader" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional bilateral non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbProductTerm" type="Period" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The nominal term (tenor) of the credit default swap expressed as a number of months or years. This element must be included for a Credit Default Swap transaction, Equity Swap Transaction but excluded for a Credit Default Swap Index, Equity Share or Equity Index transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbMessageText" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A free format text message that will be displayed to both dealers alongside the structured trade details. The message should not exceed 200 characters in length.   Note that if the ampersand character (&amp;) and the left (&lt;) and right (&gt;) angle brackets are entered as part of the description they should be escaped using the strings "&amp;amp;", "&amp;lt;" and "&amp;gt;" respectively in the character data of the element content (see http://www.w3.org/TR/2000/REC-xml-20001006#syntax for further explanation).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDeltaCross" type="SWB_DeltaCross" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A structure to hold the details of a delta cross on an equity option transaction.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbIndependentAmountPercentage" type="SWB_IndependentAmountPercentage" minOccurs="0"/>
+<xsd:choice minOccurs="0">
+<xsd:element name="swbDividendSwapDetails" type="SWB_DividendSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Dividend Swap' and 'Index Dividend Swap' products.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbEquityOptionDetails" type="SWB_EquityOptionDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Equity Share Option' and 'Equity Index Option' products.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbEquitySwapDetails" type="SWB_EquitySwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Equity Share Swap' and 'Equity Index Swap' products.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbVarianceSwapDetails" type="SWB_VarianceSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Variance Swap' and 'Index Variance Swap' products.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDispersionVarianceSwapDetails" type="SWB_DispersionVarianceSwapDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Dispersion Variance Swap' product.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbVolatilitySwapDetails" type="SWB_VolatilitySwapDetails" minOccurs="0"/>
+</xsd:choice>
+<xsd:element name="swApplicableSideLetters" type="SW_ApplicableSideLetters" minOccurs="0"/>
+<xsd:element name="swbChinaConnect" type="SWB_ChinaConnect" minOccurs="0"/>
+<xsd:element name="swbOrderDetails" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>A requirement under MIFID 2, to capture bilateral details related to transmission of orders.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="SWB_OrderDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbPackageDetails" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Captures data related to Package Trades.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:complexContent>
+<xsd:extension base="SWB_PackageDetails"/>
+</xsd:complexContent>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_IndependentAmountPercentage">
+<xsd:annotation>
+<xsd:documentation>Holds the Independent Amount percentage details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:group ref="PayerReceiver.model"/>
+<xsd:element name="currency" type="Currency">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The currency in which an percentage amount is denominated.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swIAPercentage" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>Independent Amount Percentage.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_FxSource">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A type defining the source and time for an fx rate.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swRateSource" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An information source for obtaining a market rate. For example Bloomberg, Reuters, Telerate etc.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swRateSourcePage" type="xsd:string" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A specific page for the rate source for obtaining a market rate.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="hourMinuteTime" type="HourMinuteTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A time specified in hh:mm:ss format where the second component must be '00', e.g. 11am would be represented as 11:00:00.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="businessCenter" type="BusinessCenter" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_OffshoreCross">
+<xsd:annotation>
+<xsd:documentation>Indicates that the delta on a trade has been executed in a location other than the one where the underlying is listed. For example, an option on a Hong Kong underlyer is crossed in London.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbOffshoreCrossLocation" type="BusinessCenter">
+<xsd:annotation>
+<xsd:documentation>Captures the location of the Offshore Delta Cross</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_StructuredTradeDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining the structured details of a SwapsWire trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbProductType" type="SWB_EqdProductTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The SwapsWire product type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="FpML" type="DataDocument">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The FpML compliant sub-tree that describes the transaction. This sub-tree uses the FpML DataDocument type.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbExtendedTradeDetails" type="SWB_EqdExtendedTradeDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional structured trade details that are not captured within the FpML component of the message. This element should not be included if it has no populated child elements.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbBusinessConductDetails" type="SWB_BusinessConductDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining trade details related to business conduct standards that are not 	captured within the FpML component of the message.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_VarianceSwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Variance Swap' and 'Index Variance Swap' products.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="volatilityStrikePrice" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The volatility strike price. The volatility strike is the square root of the variance strike.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbExpectedNOverride" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A flag to indicate that the Expected N calculated by the SwapsWire system has been overridden by the broker. If this is the case then the Expected N submitted must be different from the SwapsWire Expected N.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbSettlementCurrencyVegaNotionalAmount" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Vega Notional Amount denominated in the Settlement Currency. This is an element designed for use with non-deliverable currencies. Where the Settlement Currency and the Reference Currency are the same, this element should not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbVegaFxSpotRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element holds the FX rate used to convert the Settlement Currency Vega Notional Amount into the Reference Currency. This is an element designed for use with non-deliverable currencies. Where the Settlement Currency and the Reference Currency are the same, this element should not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbFxDeterminationMethod" type="SWB_FxDeterminationMethodEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_EquityOptionPercentInput">
+<xsd:annotation>
+<xsd:documentation>Additional trade details specific to Japan and AEJ options using percentage style input</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbHedgeLevel" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation>For an Equity Share and Equity Index Option, the Hedge/Cash Level.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbBasis" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For an Equity Index Option, the basis used to calculate the implied level.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbImpliedLevel" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For an Equity Index Option, the implied level.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPremiumPercentage" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For an Equity Share Option or Equity Index Option, the Percentage (of notional) premium considered for the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbStrikePercentage" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>For an Equity Share Option or Equity Index Option, the strike as % of the hedge/implied level considered for the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbNotional" type="Money" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The Notional USD value.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_DividendSwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Share Dividend Swap' and 'Index Dividend Swap' products.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbBreakOutTrade" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">For a 'Share Dividend Swap' or 'Index Dividend Swap' product, a boolean true value indicates the periods on the trade should be broken out. Only applicable to trades with more than one period.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbSplitCollateral" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">For a 'Share Dividend Swap' or 'Index Dividend Swap' product, a boolean true value indicates that independent amount should be retained only on leg the first period child trade created during a break-out. Only applicable to trades with more than one period.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_AveragingDates">
+<xsd:annotation>
+<xsd:documentation>Additional trade details specific to US Equity Share and Index Options for averaging</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbAveragingFrequency" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation>For a US Equity Share and Equity Index Option, the convention for averaging dates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAveragingStart" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>For a US Equity Share and Equity Index Option, the start date for Averaging observations.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAveragingEnd" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>For a US Equity Share and Equity Index Option, the end date for Averaging observations.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_DispersionVarianceSwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Dispersion Variance Swap' product.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbShareComponentCount" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Provides a count of the number of share component legs associated with the Dispersion Variance Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbLegComponentDetails" type="SWB_LegComponentDetails" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation>Provides additional information related to each share component associated with the Dispersion Variance Swap.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_LegComponentDetails">
+<xsd:annotation>
+<xsd:documentation>A structure to hold the leg component details for a Dispersion Variance Swap transaction.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="volatilityStrikePrice" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The volatility strike price. The volatility strike is the square root of the variance strike.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbExpectedNOverride" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A flag to indicate that the Expected N calculated by the SwapsWire system has been overridden by the user. Please note that this will mean that any holiday dates recorded in the swVarianceSwapHolidayDate array will NOT necessarily reflect the final Expected N figure. Further comments as to why the N was overridden may have been recorded in the chat messages associated with this deal.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbComponentWeighting" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The weighting of the component as a portion of the overall Share position.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="id"/>
+</xsd:complexType>
+<xsd:complexType name="SWB_TradeHeader">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for defining additional non-economic trade details.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbAutoProcessing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This indicates whether MW should perform auto actions on behalf of both the parties on the MW or not.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbAutoSendForClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the tradeshould be automatically sent for clearing if it satisfies the eligibility criteria.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbMandatoryClearing" type="SWB_MandatoryClearing" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Element to provide details of Mandatory Clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClientClearing" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A true/false flag to indicate whether the tradeis a client clearing trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingHouse" type="SWB_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The BIC of the Clearing House - this should only be submitted currently for client clearing deals.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPartyClearingDetails" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the details for a trade being cleared outside MW</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference"/>
+<xsd:element name="swbClearingStatus" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Clearing Status text as provided by the Clearing House.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingHouseTradeID" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The CCP Trade ID as provided by the Clearing House</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingHouseUpfrontFeeSettlementDate" type="xsd:date" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Upfront Fee Settlement Date is allocated by the ICE Clearing House on successful acceptance of a trade sent for clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingHousePreferredISIN" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Cleared House Prefferd ISIN is the updated ISIN by Clearing House for the ISIN submitted by the trade.This preferred ISIN is allocated by the ICE Clearing House on successful acceptance of a trade sent for clearing.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearedTimestamp" type="xsd:dateTime" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Clearing requirement. When this trade was cleared as provided by the Clearing House</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearedUSI" type="SWB_UniqueTradeIdentifier" minOccurs="0"/>
+<xsd:element name="swbClearedUTI" type="SWB_UniqueTradeIdentifier" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbPartyClearingBroker" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>The BIC of the Clearing Broker</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference specifying if this is the EB or Client corresponding to the CB below.  This is for each allocation on the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingBroker" type="SWB_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Definition of Clearing Broker for each allocation</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbDisplayPartyLegalEntity" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Definition of dummy or fake LE which will be displayed to other party in case of clearing anonymity</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference for which display LE is specified.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbDisplayLE" type="SWB_PartyDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">BIC and Name of the LE which will be displayed to other side in case of clearing anonymity</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbExecutingBroker" type="PartyOrTradeSideReference" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The party reference of the Executing Broker</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClearingClient" type="PartyOrTradeSideReference" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The party reference of the Client</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClientFund" type="SWB_PartyDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The BIC of the private fund for the Client</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPartyNettingString" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the netting string for the Client and/or Executing Broker </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference"/>
+<xsd:element name="swbNettingString"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbPartyCreditAcceptanceToken" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the credit acecptance token for a party.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference"/>
+<xsd:element name="swbCreditIssuer" type="xsd:normalizedString"/>
+<xsd:element name="swbToken" type="xsd:normalizedString"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbAnonymousTrade" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Attribute to inform MW to anonymoise the Trade. MW will hide the identity of buyer and seller from eachother.   </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbOffsettingTradeId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Attribute to inform the CCP of the related trade that is to be offsett at their end.   </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbCompressionType" type="SWB_CompressionTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Compression Type per side of the trade. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPartyDeskId" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Desk Id for the Client and/or Executing Broker </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference"/>
+<xsd:element name="swbDeskId"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbPartyExecutionMethod" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>Element which defines the Execution Method per side of the trade. This information is also used to identify a Gate Checking trade. </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference"/>
+<xsd:element name="swbExecutionMethod" type="SWB_ExecutionMethodEnum"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="swbOTVConfirmation" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Attribute to indicate if SEF is using MW for OTV Confirmation</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPartyIntroducingBroker" minOccurs="0" maxOccurs="2">
+<xsd:annotation>
+<xsd:documentation>The BIC of the introducing Broker</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="partyReference" type="PartyOrTradeSideReference">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The party reference to the party for whom the IB is specified on the trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbIntroducingBroker" type="xsd:normalizedString">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A broker will submit either broker code or LE BIC in the field as the IB</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_SpreadInOut">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold details of a synthetic future transaction for which a spread applies to the Initial Price and to the Final Price.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbSpreadIn" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The spread applicable to the Initial Price of a synthetic future.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbSpreadOut" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The spread applicable to the Final Price of a synthetic future.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_StubControl">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold details of a synthetic future transaction for which a spread applies to the Initial Price and to the Final Price.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swbEquityFrontStub" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="swbEquityEndStub" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="swbInterestFrontStub" type="xsd:normalizedString" minOccurs="0"/>
+<xsd:element name="swbInterestEndStub" type="xsd:normalizedString" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_NoticePeriod">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component for specifying notice period for counterparties.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="noticeParty" type="PartyOrTradeSideReference"/>
+<xsd:element name="numberOfDays" type="DateOffset"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_AveragingDates2">
+<xsd:annotation>
+<xsd:documentation>Additional trade details specific to US Equity Share and Index Options for averaging</xsd:documentation>
+</xsd:annotation>
+<xsd:complexContent>
+<xsd:extension base="SWB_AveragingDates">
+<xsd:sequence>
+<xsd:element name="averagingInOut" type="AveragingInOutEnum"/>
+<xsd:element name="averagingDateTimes" type="DateTimeList" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Averaging DateTimes</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="marketDisruption" type="MarketDisruption">
+<xsd:annotation>
+<xsd:documentation>The market disruption event as defined by ISDA 2002 Definitions.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:complexType name="SWB_StockLoanRate">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Contains Stock Loan Rate information</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="maximumStockLoanRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the maximum stock loan rate for Loss of Stock Borrow</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="initialStockLoanRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the initial stock loan rate for Increased Cost of Stock Borrow</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_DividendComponent">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Contains Dividend Component information</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="dividendPercentageComponentShare" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the Share component of the Index Swap</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dividendPercentageComponent" type="xsd:decimal">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Specifies the percentage of the share component</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_ScheduleFrequencies">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold the optional schedule frequency details when in a list date entry mode.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="swValuationDate" type="SWB_Frequency" minOccurs="0"/>
+<xsd:element name="swPaymentDateOffset" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>An element to hold an offset value between valuation and payment dates.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swCompoundingDate" type="SWB_Frequency" minOccurs="0"/>
+<xsd:element name="swInterestLegPaymentDate" type="SWB_Frequency" minOccurs="0"/>
+<xsd:element name="rollConvention" type="SWB_rollConventionSwaps" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Used in conjunction with a frequency and the regular period start date of a calculation period, determines each calculation period end date within the regular part of a calculation period schedule.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_Frequency">
+<xsd:sequence>
+<xsd:element name="periodMultiplier" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A time period multiplier, e.g. 1, 2 or 3 etc. A negative value can be used when specifying an offset relative to another date, e.g. -2 days. If the period value is T (Term) then periodMultiplier must contain the value 1.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="period" type="PeriodExtendedEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A time period, e.g. a day, week, month, year or term of the stream. If the periodMultiplier value is 0 (zero) then period must contain the value D (day).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_rollConventionSwaps">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A component to hold details of roll Conventions used by the Return and Interest Legs of trade.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence minOccurs="0">
+<xsd:element name="returnLeg" type="RollConventionEnum" minOccurs="0"/>
+<xsd:element name="interestLeg" type="RollConventionEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_ChinaConnect">
+<xsd:sequence>
+<xsd:element name="swbShareDisqualification" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Indicates that on or after the Trade Date, the Shares ceased to be acceptable for the trading connection.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbServiceTermination" type="xsd:string">
+<xsd:annotation>
+<xsd:documentation>Indicates that on or after the Trade Date the trading connection was suspended or terminated, which affected the routing or holding of orders through the connection.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_VolatilitySwapDetails">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Additional trade details specific to the 'Volatility
+Swap' products.</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbExpectedNOverride" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A flag to indicate that the Expected N
+calculated by the SwapsWire system has been overridden by the user. Please
+note that this will mean that any holiday dates recorded in the
+swVarianceSwapHolidayDate array will NOT necessarily reflect the final
+Expected N figure. Further comments as to why the N was overridden may have
+been recorded in the chat messages associated with this
+deal.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbSettlementCurrencyVegaNotionalAmount" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Vega Notional Amount denominated in the
+Settlement Currency. This is an element designed for use with
+non-deliverable currencies. Where the Settlement Currency and the Reference
+Currency are the same, this element should not be
+present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbVegaFxSpotRate" type="xsd:decimal" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">This element holds the FX rate used to convert
+the Settlement Currency Vega Notional Amount into the Reference Currency.
+This is an element designed for use with non-deliverable currencies. Where
+the Settlement Currency and the Reference Currency are the same, this
+element should not be present.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbVolatilitySwapHolidayDate" type="xsd:date" minOccurs="0" maxOccurs="unbounded">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">An array of holidays for the exchange on which
+the underlyer trades that will occur during the term of the variance swap,
+agreed at the commencement of the trade, and used in the calculation of the
+Expected N.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbFxDeterminationMethod" type="SWB_FxDeterminationMethodEnum" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_OrderDetails">
+<xsd:annotation>
+<xsd:documentation>A structure to capture bilateral Order transmission details required under MIFID 2</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbTypeOfOrder" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the type of order, as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbTotalConsideration" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the total consideration towards the order as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbRateOfExchange" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise the rate of exchange towards the order as per article 59 of MIFID II.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClientCounterparty" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate where the client's counterparty was the investment firm itself or any person in the investment firm's group or another client of the investment firm, the fact that this was the case unless the order was executed through a trading system that facilitates anonymous trading. </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbTotalCommissionAndExpenses" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise total sum of the commissions and expenses charged and, where the client so requests, an itemised breakdown including, where relevant, the amount of any mark-up or mark-down imposed where the transaction was executed by an investment firm when dealing on own account, and the investment firm owes a duty of best execution to the client.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbClientSettlementResponsibilities" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would constitute client's responsibilities in relation to the settlement of the transaction, including the time limit for payment or delivery as well as the appropriate account details where these details and responsibilities have not previously been notified to the client.  </xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SW_ApplicableSideLetters">
+<xsd:sequence minOccurs="0">
+<xsd:element name="sw2021ISDADefs" type="xsd:boolean" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SWB_PaymentDaysOffset">
+<xsd:sequence>
+<xsd:element name="periodMultiplier" type="xsd:integer">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A time period multiplier, e.g. 1, 2 or 3 etc. A negative value can be used when specifying an offset relative to another date, e.g. -2 days.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="period" type="PeriodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">A time period, e.g. a day, week, month or year of the stream. If the periodMultiplier value is 0 (zero) then period must contain the value D (day).</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dayType" type="DayTypeEnum" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">In the case of an offset specified as a number of days, this element defines whether consideration is given as to whether a day is a good business day or not. If a day type of business days is specified then non-business days are ignored when calculating the offset. The financial business centers to use for determination of business days are implied by the context in which this element is used. This element must only be included when the offset is specified as a number of days. If the offset is zero days then the dayType element should not be included.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" use="optional"/>
+</xsd:complexType>
+<xsd:complexType name="SWB_PackageDetails">
+<xsd:annotation>
+<xsd:documentation>A structure to capture the Package Trade details associated with the trade party</xsd:documentation>
+</xsd:annotation>
+<xsd:sequence>
+<xsd:element name="swbPackageId" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate the identifier for the Package for the trade party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPackageSize" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate the number of trade available in the Package for the trade party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbRegReportAsPackage" type="xsd:boolean" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would indicate if the trade is part of a package for the trade party</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbPackagePriceDetails" type="SWB_PackagePriceDetails" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>This would comprise of the details related to Package Price</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="href" type="xsd:IDREF" use="required"/>
+</xsd:complexType>
+<xsd:complexType name="SWB_PackagePriceDetails">
+<xsd:sequence>
+<xsd:element name="swbType" type="SWB_PackagePriceType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Capture Type of Package,Price/Spread</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbValue" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Capture  Package Price/Spread</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbNotation" type="SWB_PackageNotationType" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Capture the Notation associated with the Package Price/Spread</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="swbCurrency" type="xsd:normalizedString" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>Capture the Currency associated with the Package Price/Spread</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="SWB_PackagePriceType">
+<xsd:annotation>
+<xsd:documentation xml:lang="en"/>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Spread"/>
+<xsd:enumeration value="Price"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_PackageNotationType">
+<xsd:annotation>
+<xsd:documentation xml:lang="en"/>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Amount"/>
+<xsd:enumeration value="Decimal"/>
+<xsd:enumeration value="BasisPoints"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT swbTradeEventReportingDetails (swbUniqueTransactionId?, swbReportingRegimeInformation*, swbReportableProduct?, swbBilateralPartyTradeInformation*, swbPrivateData?, swbPBClientTradeReportingDetails?)>
+<!ELEMENT swbPrivateData (swbExecutionDateTime?, swbDFReporting?)>
+<!ELEMENT swbExecutionDateTime (#PCDATA)>
+<!ELEMENT swbDFReporting (swbBlockUSI?, swbBlockUSINamespace?)>
+<!ELEMENT swbBlockUSI (#PCDATA)>
+<!ATTLIST swbBlockUSI
+tradeIdScheme CDATA "http://www.fpml.org/coding-scheme/external/unique-transaction-identifier"
+>
+<!ELEMENT swbBlockUSINamespace (#PCDATA)>
+<!ATTLIST swbBlockUSINamespace
+issuerIdScheme CDATA "http://www.fpml.org/coding-scheme/external/cftc/issuer-identifier"
+>
+<!ELEMENT swbPartyExtension (swbBusinessUnit*, swbReferencedPerson*)>
+<!ATTLIST swbPartyExtension
+href CDATA #REQUIRED
+>
+<!ELEMENT swbReportingRegimeInformation (((swbJurisdiction), (swbSupervisoryBodyCategory)?), (swbUniqueTransactionId?,swbObligatoryReporting?, swbReportingCounterpartyReference?, swbReportTo?,swbMandatoryClearingIndicator?, swbToTV?, (swRegulatoryReportable?, swTransparencyReportable?)?, swMIFIDTransactionIdentifier?)?)>
+<!ATTLIST swbReportingRegimeInformation
+id CDATA #IMPLIED
+>
+<!ELEMENT swbBilateralPartyTradeInformation (swbPartyReference, swbRelatedParty*, swbRelatedBusinessUnit*, swbRelatedPerson*, swbPartyExtension?)>
+<!ELEMENT swbPBClientTradeReportingDetails (swbReportingRegimeInformation*, swbReportableProduct?, swbPrivateData?)>
+<!ELEMENT swbPrivatePartyTradeEventReportingDetails (((swbPartyReference?, (swbPriceFormingEvent?, swbPartyTradeInformation?), swbPartyReportingRegimeInformation*)), (swbPBClientTradePrivateReportingDetails?), (swbRelatedBusinessUnit*, swbRelatedPerson*, swbPartyExtension?))>
+<!ELEMENT swbPriceFormingEvent (#PCDATA)>
+<!ELEMENT swbJurisdiction (#PCDATA)>
+<!ATTLIST swbJurisdiction
+swJurisdictionNameScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/jurisdicton-name"
+>
+<!ELEMENT swbSupervisoryBodyCategory (#PCDATA)>
+<!ATTLIST swbSupervisoryBodyCategory
+swSupervisoryBodyCategoryScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/supervisory-body-category"
+>
+<!ELEMENT swbRoute (swbMIFIDReportingPreference?, swbDestination, swbIntermediary?)>
+<!ELEMENT swbReportTo (swbPartyReference, swbRoute+)>
+<!ELEMENT swbUniqueTransactionId (swbIssuer?, swbTradeId)>
+<!ATTLIST swbUniqueTransactionId
+id CDATA #IMPLIED
+>
+<!ELEMENT swbTradeId (#PCDATA)>
+<!ATTLIST swbTradeId
+tradeIdScheme CDATA "http://www.fpml.org/coding-scheme/external/unique-transaction-identifier"
+>
+<!ELEMENT swbObligatoryReporting (#PCDATA)>
+<!ELEMENT swbReportingCounterpartyReference EMPTY>
+<!ATTLIST swbReportingCounterpartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT swbMandatoryClearingIndicator (#PCDATA)>
+<!ELEMENT swbLargeSizeTrade (#PCDATA)>
+<!ELEMENT swbEventIdentifier ANY>
+<!ATTLIST swEventIdentifier
+id CDATA #IMPLIED
+>
+<!ELEMENT swbBulkProcessingEventId ANY>
+<!ATTLIST swBulkProcessingEventId
+id CDATA #IMPLIED
+>
+<!ELEMENT swbIssuer (#PCDATA)>
+<!ATTLIST swbIssuer
+issuerIdScheme CDATA "http://www.fpml.org/coding-scheme/external/cftc/issuer-identifier"
+>
+<!ELEMENT swbDestination (#PCDATA)>
+<!ELEMENT swbIntermediary (#PCDATA)>
+<!ELEMENT swbReportingOption (#PCDATA)>
+<!ELEMENT swbPartyReference EMPTY>
+<!ATTLIST swbPartyReference
+href CDATA #REQUIRED
+>
+<!ELEMENT swbPartyReportingRegimeInformation (((swbJurisdiction), (swbSupervisoryBodyCategory)?), ((swbRegulatoryReportable?, swbTransparencyReportable?)?, swbEventId?, (swbRelatedTradeId*)?, swbEndUserException?, swbEndUserExceptionReason?, swbReportingSpecification*, swbReportTo?, swbLargeSizeTrade?, swbShortSale?, swbOTCPostTradeIndicator*, swbWaiver*, swbMIFIDTransactionIdentifier?)?)>
+<!ATTLIST swbPartyReportingRegimeInformation
+id CDATA #IMPLIED
+>
+<!ELEMENT swbPartyTradeInformation (swbRelatedParty*, swbTimestamps?, swbExecutionDateTime?, swbNonStandardTerms?, swbCollateralizationType?, swbExecutionVenueType?, swbVerificationMethod?, swbConfirmationMethod?, swbIdentifiers?, swbComplexTradeDetails?, swbExecutionVenueIdentifier?, swbRelatedTradeId?, swbToTV?)>
+<!ELEMENT swbRelatedParty (swbPartyReference, swbRole)>
+<!ELEMENT swbRelatedBusinessUnit (swbBusinessUnitReference, swbRole)>
+<!ELEMENT swbRelatedPerson (swbPersonReference, swbRole)>
+<!ELEMENT swRole (#PCDATA)>
+<!ATTLIST swRole
+partyRoleScheme CDATA "http://www.fpml.org/coding-scheme/party-role"
+>
+<!ELEMENT swbRole (#PCDATA)>
+<!ATTLIST swbRole
+partyRoleScheme CDATA "http://www.fpml.org/coding-scheme/party-role"
+>
+<!ELEMENT swbPersonId (#PCDATA)>
+<!ATTLIST swbPersonId
+personIdScheme CDATA #IMPLIED
+>
+<!ELEMENT swbBusinessUnitReference EMPTY>
+<!ATTLIST swbBusinessUnitReference
+href CDATA #REQUIRED
+>
+<!ELEMENT swbType (#PCDATA)>
+<!ATTLIST swbType
+partyRoleTypeScheme CDATA "http://www.fpml.org/coding-scheme/party-role-type"
+>
+<!ELEMENT swbPersonReference EMPTY>
+<!ATTLIST swbPersonReference
+href CDATA #REQUIRED
+>
+<!ELEMENT swbBusinessUnitId (#PCDATA)>
+<!ATTLIST swbBusinessUnitId
+swBusinessUnitIdScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/business-unit-type"
+>
+<!ELEMENT swbCountry (#PCDATA)>
+<!ATTLIST swbCountry
+countryScheme CDATA "http://www.fpml.org/ext/iso3166"
+>
+<!ELEMENT swbName (#PCDATA)>
+<!ELEMENT swbBusinessUnit (swbBusinessUnitId*, swbName?, swbCountry*)>
+<!ATTLIST swbBusinessUnit
+id CDATA #IMPLIED
+>
+<!ELEMENT swbPerson (swbPersonId*, swbBusinessUnitReference?, swbCountry?)>
+<!ATTLIST swbPerson
+id CDATA #IMPLIED
+>
+<!ELEMENT swbReferencedPerson (swbBusinessUnitReference?, swbPersonId?, swbName?, swbCountry*)>
+<!ATTLIST swbReferencedPerson
+id CDATA #IMPLIED
+>
+<!ELEMENT swbTimestamps (swbCleared?, swbConfirmed?)>
+<!ELEMENT swbCleared (#PCDATA)>
+<!ELEMENT swbConfirmed (#PCDATA)>
+<!ELEMENT swbNonStandardTerms (#PCDATA)>
+<!ELEMENT swbCollateralizationType (#PCDATA)>
+<!ATTLIST swbCollateralizationType
+collateralTypeScheme CDATA "http://www.fpml.org/coding-scheme/collateral-type"
+>
+<!ELEMENT swbExecutionVenueType (#PCDATA)>
+<!ATTLIST swbExecutionVenueType
+executionVenueTypeScheme CDATA "http://www.fpml.org/coding-scheme/execution-venue-type"
+>
+<!ELEMENT swbVerificationMethod (#PCDATA)>
+<!ATTLIST swbVerificationMethod
+confirmationMethodScheme CDATA "http://www.fpml.org/coding-scheme/confirmation-method"
+>
+<!ELEMENT swbConfirmationMethod (#PCDATA)>
+<!ATTLIST swbConfirmationMethod
+confirmationMethodScheme CDATA "http://www.fpml.org/coding-scheme/confirmation-method"
+>
+<!ELEMENT swbEventId (swbEventIdentifier?, swbBulkProcessingEventId?)>
+<!ATTLIST swbEventId
+id CDATA #IMPLIED
+>
+<!ELEMENT swbEndUserException (#PCDATA)>
+<!ELEMENT swbEndUserExceptionReason (#PCDATA)>
+<!ATTLIST swbEndUserExceptionReason
+clearingExceptionReasonScheme CDATA "http://www.fpml.org/coding-scheme/clearing-exception-reason"
+>
+<!ELEMENT swbReportingSpecification (swbReportingPurpose?, swbReportingInstruction?)>
+<!ELEMENT swbReportingPurpose (#PCDATA)>
+<!ATTLIST swbReportingPurpose
+swReportingPurposeScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/reporting-purpose"
+>
+<!ELEMENT swbReportingInstruction (#PCDATA)>
+<!ATTLIST swbReportingInstruction
+swReportingInstructionScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/reporting-specification"
+>
+<!ELEMENT swbRelatedTradeId ((swbIssuer?, swbTradeId), (swbRelationshipType))>
+<!ATTLIST swRelatedTradeId
+id CDATA #IMPLIED
+>
+<!ELEMENT swbRelationshipType (#PCDATA)>
+<!ATTLIST swRelationshipType
+swRelatedTradeRelationshipTypeScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/trade-relationship-type"
+>
+<!ELEMENT swbPBClientTradePrivateReportingDetails ((swbPartyReference?, (swbPriceFormingEvent?, swbPartyTradeInformation?), swbPartyReportingRegimeInformation*))>
+<!ELEMENT swbAllocationReportingDetails (swbUniqueTransactionId?, swbReportingRegimeInformation*, swbPartyTradeInformation?)>
+<!ELEMENT swbReportableProduct (swbPrimaryAssetClass?, swbSecondaryAssetClass*, (swbProductId, swbProductId?, swbProductId?, swbProductId?), swbProductFullName, swbEmbeddedOptionOnSwap?)>
+<!ELEMENT swbPrimaryAssetClass (#PCDATA)>
+<!ATTLIST swbPrimaryAssetClass
+assetClassScheme CDATA "http://www.fpml.org/coding-scheme/asset-class-simple"
+>
+<!ELEMENT swbSecondaryAssetClass (#PCDATA)>
+<!ATTLIST swbSecondaryAssetClass
+assetClassScheme CDATA "http://www.fpml.org/coding-scheme/asset-class-simple"
+>
+<!ELEMENT swbProductId (#PCDATA)>
+<!ATTLIST swbProductId
+productIdScheme CDATA "http://www.fpml.org/coding-scheme/product-taxonomy"
+>
+<!ELEMENT swbProductFullName (#PCDATA)>
+<!ELEMENT swbEmbeddedOptionOnSwap (#PCDATA)>
+<!ATTLIST swbEmbeddedOptionOnSwap
+optionTypeScheme CDATA #IMPLIED
+>
+<!ELEMENT swbToTV (#PCDATA)>
+<!ELEMENT swbMIFIDReportingPreference (#PCDATA)>
+<!ATTLIST swbMIFIDReportingPreference
+swReportingPurposeScheme CDATA "http://www.markitwire.com/spec/2012/coding-scheme/reporting-purpose"
+>
+<!ELEMENT swbRegulatoryReportable (#PCDATA)>
+<!ATTLIST swbRegulatoryReportable
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbTransparencyReportable (#PCDATA)>
+<!ATTLIST swbTransparencyReportable
+type NMTOKEN #FIXED "boolean"
+>
+<!ELEMENT swbShortSale (#PCDATA)>
+<!ELEMENT swbOTCPostTradeIndicator (#PCDATA)>
+<!ELEMENT swbWaiver (#PCDATA)>
+<!ELEMENT swbMIFIDTransactionIdentifier (#PCDATA)>
+<!ATTLIST swbMIFIDTransactionIdentifier
+swMIFIDTransactionIdentifierScheme CDATA "http://www.markitwire.com/spec/2017/coding-scheme/MIFIDTransactionIdentifier"
+>
+<!ELEMENT swbExecutionVenueIdentifier (#PCDATA)>
+<!ATTLIST swbExecutionVenueIdentifier
+ExchangeIdScheme CDATA "http://www.fpml.org/coding-scheme/external/mifir/extension-iso10383"
+>
+<!ELEMENT swbIdentifiers (swbPartyReference?, (swbPartyIdentifiers?)?)>
+<!ELEMENT swbPartyIdentifiers (swbCounterpartyLEI?)>
+<!ELEMENT swbCounterpartyLEI (#PCDATA)>
+<!ATTLIST swbCounterpartyLEI
+swPartyIdSchemeLEI CDATA "http://www.fpml.org/coding-scheme/external/iso17442"
+>
+<!ELEMENT swbComplexTradeDetails (swbComplexTradeId?, swbComplexPriceNotation?)>
+<!ELEMENT swbComplexPriceNotation (swbAmount?, swbUnit?, swbCurrency?)>
+<!ELEMENT swbComplexTradeId (#PCDATA)>
+<!ATTLIST swbComplexTradeId
+linkIdScheme CDATA "http://www.dtcc.com/coding-scheme/external/report-details/emir-complex-trade-component-id"
+>

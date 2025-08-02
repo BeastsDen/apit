@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:element name="BrokerClearingStatusXML">
+<xs:annotation>
+<xs:documentation>Comment describing your root element</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Deal" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="BrokerTradeId">
+<xs:annotation>
+<xs:documentation>ID the broker submitted for this trade.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="MarkitWireTradeId">
+<xs:annotation>
+<xs:documentation>The ID the trade has been assigned internally in MarkitWire.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="TradeSource">
+<xs:annotation>
+<xs:documentation>The TradeSource that this version of the deal was sent. </xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ContractVersion">
+<xs:annotation>
+<xs:documentation>The contractVersion of the deal. </xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="Version">
+<xs:annotation>
+<xs:documentation>The number of times the broker has re- submitted this deal to MarkitWire. An initial submission will have this set to zero (no re-submissions). For every contractVersion there can be many versions. </xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="DealState">
+<xs:annotation>
+<xs:documentation>The state of the deal. </xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="Party" type="SW_Party" minOccurs="2" maxOccurs="2"/>
+<xs:element name="NotionalAmount" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Refers to the original brokered trade amount.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="PrimeBrokeredTradeInfo" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="CustomerTransaction">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party" type="SW_Party" minOccurs="2" maxOccurs="2"/>
+<xs:element name="MarkitWireTradeId">
+<xs:annotation>
+<xs:documentation>The ID the trade has been assigned internally in MarkitWire.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="NotionalAmount" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Refers to the the primebrokered leg amount.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:choice minOccurs="0">
+<xs:element name="Clearing" type="SW_Clearing" minOccurs="0"/>
+<xs:element name="AllocationsInfo" type="SW_AllocationsInfo"/>
+</xs:choice>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="InterdealerTransaction">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party" type="SW_Party" minOccurs="2" maxOccurs="2"/>
+<xs:element name="MarkitWireTradeId"/>
+<xs:element name="NotionalAmount" minOccurs="0"/>
+<xs:choice minOccurs="0">
+<xs:element name="Clearing" type="SW_Clearing" minOccurs="0"/>
+<xs:element name="AllocationsInfo" type="SW_AllocationsInfo" minOccurs="0"/>
+</xs:choice>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="AllocationsInfo" type="SW_AllocationsInfo" minOccurs="0"/>
+<xs:element name="Clearing" type="SW_Clearing" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Clearing Details</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:complexType name="SW_Party">
+<xs:sequence>
+<xs:element name="PartyId">
+<xs:annotation>
+<xs:documentation>The MarkitWire BIC of the party. </xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="PartyInternalTradeId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>The internal trade reference number of the party</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ClearingBrokerId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Represent if the party has specified a clearing broker on a bilateral client clearing trade.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ClearingTradeId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Represent if the trdae id of the trade between the party and clearing house, given by the clearing house.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="BetaMarkitWireTradeId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Represents the MarkitWIRE trade ID of a Divided child trade sent to the Clearing House.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ClearedTradeUSI" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Represent if the USI of the trade between the party and clearing house, given by the clearing house.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Issuer" minOccurs="0">
+<xs:annotation>
+<xs:documentation>USI Namespace</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="issuerIdScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="TradeID">
+<xs:annotation>
+<xs:documentation>USI Identifier</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="tradeIdScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="ClearedTradeGlobalUTI" minOccurs="0">
+<xs:annotation>
+<xs:documentation>Represent Global UTI of the trade between the party and clearing house, given by the clearing house.</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Issuer" minOccurs="0">
+<xs:annotation>
+<xs:documentation>USI Namespace</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="issuerIdScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+<xs:element name="TradeID">
+<xs:annotation>
+<xs:documentation>USI Identifier</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute name="tradeIdScheme"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SW_AllocationsInfo">
+<xs:annotation>
+<xs:documentation>List the deatils of all the allocations.</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="AllocationInfo" minOccurs="0" maxOccurs="unbounded">
+<xs:annotation>
+<xs:documentation>Allocation Details</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence>
+<xs:element name="Party" type="SW_Party" minOccurs="2" maxOccurs="2">
+<xs:annotation>
+<xs:documentation>Party Details</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="BrokerTradeId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>ID the broker submitted for this trade.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="MarkitWireTradeId">
+<xs:annotation>
+<xs:documentation>The ID the trade has been assigned internally in MarkitWire.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="NotionalAmount">
+<xs:annotation>
+<xs:documentation>Refers to the allocation amount.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="Clearing" type="SW_Clearing" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SW_Clearing">
+<xs:annotation>
+<xs:documentation>Clearing Details</xs:documentation>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="ClearingState">
+<xs:annotation>
+<xs:documentation>This will have one of the following values; Pending, Released or Withdrawn where Pending means it has been Sent for Clearing, Released means it has been cleared and Withdrawn means that it has been rejected</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ClearingHouseId" minOccurs="0">
+<xs:annotation>
+<xs:documentation>the BIC of the clearing house.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="RejectReason" minOccurs="0">
+<xs:annotation>
+<xs:documentation>The rejection reason if the trade has been rejected from clearing and if the clearing house sent back a rejection reason.</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:element name="ClearedTimestamp" type="xs:dateTime" minOccurs="0">
+<xs:annotation>
+<xs:documentation>the time the clearing house accepted the trade.</xs:documentation>
+</xs:annotation>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

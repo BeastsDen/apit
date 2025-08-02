@@ -1,0 +1,11 @@
+<!ELEMENT ReportingStatusQuery (deals?,reportRegime?,regulator?,reportVenue?,reportId?,reportIdContext?,messageType?,queryType?)>
+<!ELEMENT deals (dvh*,tradeId*)>
+<!ELEMENT dvh (#PCDATA)>
+<!ELEMENT tradeId (#PCDATA)>
+<!ELEMENT reportRegime (#PCDATA)>
+<!ELEMENT regulator (#PCDATA)>
+<!ELEMENT reportVenue (#PCDATA)>
+<!ELEMENT reportId (#PCDATA)>
+<!ELEMENT reportIdContext (#PCDATA)>
+<!ELEMENT messageType (#PCDATA)>
+<!ELEMENT queryType (#PCDATA)>

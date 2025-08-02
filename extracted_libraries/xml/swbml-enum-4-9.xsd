@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2010/FpML-4-9" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2010/FpML-4-9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SWB_MasterAgreementTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The type of master agreement which will govern the transaction. For example, ISDA. If not specified, the SwapsWire default value will apply.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="AFB/FBF">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented according to the AFB Master Agreement Technical Schedules for Foreign Exchange and Derivatives Transactions as published by the Association Fran栩se des Banques.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="DERV">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under the Deutscher Rahmenvertrag f�anztermingesch㥴e (also known as the German master).</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="ISDA">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The Transaction will be documented under an ISDA master.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_CompressionTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify per side Compression Type information.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Standard">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Standard Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="No Netting">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">No Netting Compression Type.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SWB_ExecutionMethodEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify per side Excecution Method information.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Voice">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Voice Execution Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Electronic">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Electronic Execution Method.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.fpml.org/2005/FpML-4-2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="SW_20_1_460930" targetNamespace="http://www.fpml.org/2005/FpML-4-2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:simpleType name="SW_SettlementLegEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The specification of the settlement leg.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="Initial Exchange">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Near leg of the XCCY trade</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="Final Exchange">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Final leg of the XCCY trade.</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_ReplacementReasonEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify trade id replacement reasons.</xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="IndexTransitionReplacedByTrade">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">IBOR transition Replaced Trade ref</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SW_TradeIdTypeEnum">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">The values used to specify replacement trade id  type </xsd:documentation>
+</xsd:annotation>
+<xsd:restriction base="xsd:token">
+<xsd:enumeration value="MarkitWireId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">MarkitWire ID"</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="OtherId">
+<xsd:annotation>
+<xsd:documentation xml:lang="en">Other ID</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

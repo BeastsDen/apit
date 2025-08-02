@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:element name="Dispute" type="swNCDispute">
+<xs:annotation>
+<xs:documentation>Comment describing your root element</xs:documentation>
+</xs:annotation>
+</xs:element>
+<xs:simpleType name="SW_NCDisputeType">
+<xs:restriction base="xs:token">
+<xs:enumeration value="Fee"/>
+<xs:enumeration value="Novation"/>
+<xs:enumeration value="CCP"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="swNCDispute">
+<xs:sequence>
+<xs:element name="Type" type="SW_NCDisputeType"/>
+<xs:element name="Message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
