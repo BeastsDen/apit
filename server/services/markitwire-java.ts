@@ -33,6 +33,13 @@ class MarkitWireJavaService {
     const startTime = Date.now();
     
     try {
+      // Set SSL environment for HTTPS connections
+      const env = {
+        ...process.env,
+        LD_LIBRARY_PATH: this.libPath,
+        SW_TRACE_FILE: '/tmp/markitwire_trace.log'
+      };
+
       const args = [
         '-Djava.library.path=' + this.libPath,
         '-jar', 
@@ -228,7 +235,8 @@ public class ${className} {
         env: { 
           ...process.env, 
           LD_LIBRARY_PATH: `${this.libPath}:${process.env.LD_LIBRARY_PATH || ''}`,
-          JAVA_LIBRARY_PATH: this.libPath
+          JAVA_LIBRARY_PATH: this.libPath,
+          SW_TRACE_FILE: '/tmp/markitwire_trace.log'
         }
       });
 
