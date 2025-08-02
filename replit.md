@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a comprehensive penetration testing application specifically designed for security testing of MarkitWire APIs. The application provides a specialized interface for security professionals to conduct thorough API security assessments, including SQL injection testing, parameter fuzzing, authentication bypass attempts, and other security vulnerability detection techniques. Built as a full-stack web application, it combines a React-based frontend with an Express.js backend, utilizing PostgreSQL for data persistence and Drizzle ORM for database operations.
+This is a comprehensive MarkitWire API testing interface that provides a clean, user-friendly way to interact with MarkitWire APIs. The application offers a complete interface for testing real MarkitWire API functions, with parameter editing, Java code generation, and formatted response viewing. Since we're running on Linux with Windows DLL files, the system intelligently falls back to realistic simulation based on the official MarkitWire PDF documentation. Built as a full-stack web application, it combines a React-based frontend with an Express.js backend.
 
 ## User Preferences
 

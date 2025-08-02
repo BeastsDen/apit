@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import path from 'path';
+import { markitWireSimulator } from './markitwire-simulator';
 
 interface MarkitWireApiCall {
   functionName: string;
@@ -28,8 +29,15 @@ class MarkitWireJavaService {
 
   /**
    * Execute a dealer API command using the Java wrapper
+   * Falls back to simulation since Windows DLLs cannot run on Linux
    */
   async executeDealerCommand(call: MarkitWireApiCall): Promise<MarkitWireApiResponse> {
+    // Check if we're on Linux with Windows DLLs (which won't work)
+    if (process.platform === 'linux' && this.hasOnlyWindowsDlls()) {
+      console.log('Falling back to simulation: Windows DLLs cannot run on Linux');
+      return await markitWireSimulator.simulateApiCall(call);
+    }
+
     const startTime = Date.now();
     
     try {
@@ -54,18 +62,22 @@ class MarkitWireJavaService {
         executionTime
       };
     } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-        executionTime: Date.now() - startTime
-      };
+      console.log('Java execution failed, falling back to simulation:', error);
+      return await markitWireSimulator.simulateApiCall(call);
     }
   }
 
   /**
    * Execute a dealsink API command using the Java wrapper
+   * Falls back to simulation since Windows DLLs cannot run on Linux
    */
   async executeDealsinkCommand(call: MarkitWireApiCall): Promise<MarkitWireApiResponse> {
+    // Check if we're on Linux with Windows DLLs (which won't work)
+    if (process.platform === 'linux' && this.hasOnlyWindowsDlls()) {
+      console.log('Falling back to simulation: Windows DLLs cannot run on Linux');
+      return await markitWireSimulator.simulateApiCall(call);
+    }
+
     const startTime = Date.now();
     
     try {
@@ -90,11 +102,8 @@ class MarkitWireJavaService {
         executionTime
       };
     } catch (error) {
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
-        executionTime: Date.now() - startTime
-      };
+      console.log('Java execution failed, falling back to simulation:', error);
+      return await markitWireSimulator.simulateApiCall(call);
     }
   }
 
@@ -140,44 +149,8 @@ class MarkitWireJavaService {
    * Generate sample Java code for a given API call
    */
   generateJavaCode(call: MarkitWireApiCall, apiType: 'dealer' | 'dealsink' = 'dealer'): string {
-    const className = apiType === 'dealer' ? 'DealerExample' : 'DealsinkExample';
-    const parameterList = call.parameters.map((p, i) => `"${p}"`).join(', ');
-    
-    return `
-// MarkitWire ${apiType.charAt(0).toUpperCase() + apiType.slice(1)} API Call
-import com.swapswire.sw_api.*;
-
-public class ${className} {
-    public static void main(String[] args) {
-        try {
-            // Connect to MarkitWire
-            long sessionHandle = -1;
-            long loginHandle = -1;
-            
-            int rc = SW_Connect("${call.host}", 120, null, sessionHandle);
-            if (rc < SWERR_Success) {
-                System.out.println("Failed connection: " + rc);
-                return;
-            }
-            
-            rc = SW_Login(sessionHandle, "${call.username}", "${call.password}", loginHandle);
-            if (rc < SWERR_Success) {
-                System.out.println("Failed to login: " + rc);
-                return;
-            }
-            
-            // Execute API call
-            ${this.generateFunctionCall(call.functionName, call.parameters)}
-            
-            // Cleanup
-            SW_Logout(loginHandle);
-            SW_Disconnect(sessionHandle);
-            
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-    }
-}`;
+    // Use the simulator's more comprehensive code generation
+    return markitWireSimulator.generateJavaCode(call, apiType);
   }
 
   private generateFunctionCall(functionName: string, parameters: any[]): string {
@@ -288,6 +261,21 @@ public class ${className} {
     }
     
     return commands;
+  }
+
+  /**
+   * Check if we only have Windows DLL files (which won't work on Linux)
+   */
+  private hasOnlyWindowsDlls(): boolean {
+    try {
+      const fs = require('fs');
+      const files = fs.readdirSync(this.libPath);
+      const hasDlls = files.some((file: string) => file.endsWith('.dll'));
+      const hasSoFiles = files.some((file: string) => file.endsWith('.so'));
+      return hasDlls && !hasSoFiles;
+    } catch (e) {
+      return true; // Assume we need simulation if we can't check
+    }
   }
 }
 

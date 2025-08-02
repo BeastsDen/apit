@@ -10,8 +10,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Code, Play, Settings, Copy, CheckCircle, XCircle } from "lucide-react";
+import { Code, Play, Settings, Copy, CheckCircle, XCircle, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface MarkitWireApiEndpoint {
   name: string;
@@ -166,6 +167,16 @@ export default function MarkitWireApiPage() {
           </p>
         </div>
       </div>
+
+      <Alert>
+        <Info className="h-4 w-4" />
+        <AlertDescription>
+          <strong>Simulation Mode:</strong> Since we're running on Linux but have Windows DLL files, 
+          this interface simulates MarkitWire API responses based on the official PDF documentation. 
+          All functions and responses are realistic examples for testing and development purposes.
+          Try "demo" / "demo" as credentials for successful connection simulation.
+        </AlertDescription>
+      </Alert>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Connection Settings */}
