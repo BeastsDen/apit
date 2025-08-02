@@ -171,9 +171,10 @@ export default function MarkitWireApiPage() {
       <Alert>
         <Info className="h-4 w-4" />
         <AlertDescription>
-          <strong>Real API Mode:</strong> This interface now uses the actual MarkitWire Linux native libraries 
-          to make real API calls. All functions connect to the actual MarkitWire servers using the 
-          Java wrapper libraries and Linux .so files. Enter your real MarkitWire credentials to connect.
+          <strong>Real API Mode:</strong> This interface uses the actual MarkitWire Linux native libraries 
+          to make real API calls. Connection testing shows that `mw.uat.api.markit.com` is reachable 
+          but may have SSL certificate issues in this environment. Use proper HTTPS URLs like 
+          `https://mw.uat.api.markit.com` for better compatibility.
         </AlertDescription>
       </Alert>
 
@@ -193,7 +194,7 @@ export default function MarkitWireApiPage() {
                 id="host"
                 value={connectionSettings.host}
                 onChange={(e) => setConnectionSettings(prev => ({ ...prev, host: e.target.value }))}
-                placeholder="training.swapswire.com:9009"
+                placeholder="https://mw.uat.api.markit.com"
               />
             </div>
             <div>

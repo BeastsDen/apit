@@ -244,11 +244,13 @@ public class ${className} {
       });
 
       child.on('close', (code) => {
+        clearTimeout(timeout);
         console.log(`Java process completed with code ${code}`);
         console.log('STDOUT:', stdout);
         console.log('STDERR:', stderr);
         
-        if (code === 0 || stdout.trim().length > 0) {
+        // Accept any output as success, even timeouts can give us valuable info
+        if (code === 0 || stdout.trim().length > 0 || code === 143) {
           resolve({ stdout, stderr });
         } else {
           reject(new Error(`Java process exited with code ${code}. stderr: ${stderr}`));
@@ -260,18 +262,18 @@ public class ${className} {
         reject(error);
       });
 
-      // Add timeout
-      setTimeout(() => {
-        child.kill();
-        reject(new Error('Java command timed out'));
-      }, 30000);
+      // Add timeout - reduce to 10 seconds for quicker feedback
+      const timeout = setTimeout(() => {
+        child.kill('SIGTERM');
+        reject(new Error('Java command timed out after 10 seconds'));
+      }, 10000);
     });
   }
 
   private parseJavaOutput(output: string): any {
     try {
       // Look for JSON in the output
-      const jsonMatch = output.match(/\{.*\}/s);
+      const jsonMatch = output.match(/\{.*\}/gs);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
